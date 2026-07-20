@@ -1,0 +1,34 @@
+generated: '2026-07-19'
+method: searched
+source: openapi/kard-api-reference-openapi.yaml
+docs: https://docs.getkard.com/api/integration-guides/authentication
+summary:
+  types:
+  - oauth2
+  - http-bearer
+  oauth2_flows:
+  - clientCredentials
+  api_key_in: []
+flow:
+  grant_type: client_credentials
+  token_endpoint: https://{client-subdomain}.getkard.com/v2/auth/token
+  client_authentication: HTTP Basic with base64(client_id:client_secret) in the Authorization
+    header
+  request: grant_type=client_credentials in the request body
+  response: JSON with access_token used as a Bearer token on subsequent requests
+  token_lifetime_seconds: 3600
+  multi_issuer_header: X-Kard-Target-Issuer scopes the token to a specific issuer
+  deprecated: A legacy Amazon Cognito token endpoint exists but is being discontinued.
+schemes:
+- name: OAuthScheme
+  type: http
+  scheme: bearer
+  sources:
+  - openapi/kard-api-reference-openapi.yaml
+  notes: Bearer access token obtained via OAuth2 client_credentials at the /v2/auth/token
+    endpoint.
+- name: bearer
+  type: http
+  scheme: bearer
+  sources:
+  - openapi/kard-legacy-openapi.yaml
