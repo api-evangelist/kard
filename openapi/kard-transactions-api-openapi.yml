@@ -1,0 +1,1915 @@
+openapi: 3.1.0
+info:
+  title: API Reference attributions transactions API
+  version: 1.0.0
+servers:
+- url: https://rewards-api.getkard.com
+  description: Production
+- url: https://test-rewards-api.getkard.com
+  description: Sandbox
+tags:
+- name: transactions
+paths:
+  /v2/issuers/{organizationId}/transactions:
+    post:
+      operationId: create
+      summary: Create Incoming Transactions
+      description: 'Call this endpoint to send all transactions made by all your enrolled users in your rewards program. The request body will depend on the transaction type.<br/>
+
+        Please use the correct type when calling the endpoint:
+
+        - `transaction`: These incoming transactions will be processed and matched by the Kard system. Learn more about the [Transaction CLO Matching](https://github.com/kard-financial/kard-postman#c-transaction-clo-matching) flow here.
+
+        - `matchedTransaction`: For pre-matched transactions that need validation on match by the Kard system.
+
+        - `coreTransaction`: For transactions from core banking systems with limited card-level data.<br/>
+
+
+        <b>Required scopes:</b> `transaction:write`<br/>
+
+        <b>Note:</b> `Maximum of 500 transactions can be created per request`.'
+      tags:
+      - transactions
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:OrganizationId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '202':
+          description: Response with status 202
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_transactions:TransactionsResponse'
+        '207':
+          description: Error response with status 207
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_transactions:TransactionsMultiResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_transactions:TransactionsRequestBody'
+  /v2/issuers/{organizationId}/transactions/uploads:
+    post:
+      operationId: create-bulk-transactions-upload-url
+      summary: Create Bulk Transactions Upload URL
+      description: 'Generates up to 10 presigned PUT URLs for uploading JSONL transaction files (up to 5GB each) directly
+
+        to storage. Each URL is valid for 15 minutes. Use the returned URL to upload the file via an HTTP PUT request with the
+
+        binary file content as the body. If a URL expires before the upload completes, you must request a new one.
+
+        Files can be uploaded as plain JSONL or as a gzip-compressed file.
+
+        Supports both `incomingTransactionsFile` for daily transaction ingestion and `historicalTransactionsFile` for historical transaction ingestion. See the [Historical Transaction Uploads](/2024-10-01/api/integration-guides/historical-transaction-uploads) integration guide for details on the historical flow.
+
+        <b>Required scopes:</b> `files:write`'
+      tags:
+      - transactions
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:OrganizationId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Response with status 201
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_transactions:CreateFileUploadUrlResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_transactions:CreateFileUploadRequestBody'
+  /v2/issuers/{organizationId}/users/{userId}/audits:
+    post:
+      operationId: create-audits
+      summary: Create Audits
+      description: 'Call this endpoint to request that a particular transaction be audited further by the Kard system, in the event of a missing cashback claim, incorrect cashback amount claim or other mis-match claims.<br/>
+
+        <b>Required scopes:</b> `audit:write`'
+      tags:
+      - transactions
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:OrganizationId'
+      - name: userId
+        in: path
+        description: The ID of the user as defined on the issuers system
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Response with status 201
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_transactions:CreateAuditResponseBody'
+        '207':
+          description: Error response with status 207
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_transactions:CreateAuditMultiStatusResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_transactions:CreateAuditRequestBody'
+  /v2/issuers/{organizationId}/users/{userId}/earned-rewards:
+    get:
+      operationId: get-earned-rewards
+      summary: Get Earned Rewards
+      description: 'Retrieve rewarded transaction history for a specific user. By default this returns only SETTLED transactions within the last 12 months regardless of payment status. Pass `filter[paidInFullOnly]=true` to restrict the response to matched transactions that have been paid in full to the issuer (`paidToIssuer` is `PAID_IN_FULL`).
+
+        <br/>
+
+        <b>Required scopes:</b> `transaction:read`
+
+        <br/>
+
+        <b>Query Limit:</b> Maximum of 12 months of transaction data can be queried.'
+      tags:
+      - transactions
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:OrganizationId'
+      - name: userId
+        in: path
+        description: The ID of the user as defined on the issuers system
+        required: true
+        schema:
+          type: string
+      - name: page[after]
+        in: query
+        description: Cursor for next page (base64-encoded timestamp + transaction ID)
+        required: false
+        schema:
+          type: string
+      - name: page[before]
+        in: query
+        description: Cursor for previous page (base64-encoded timestamp + transaction ID)
+        required: false
+        schema:
+          type: string
+      - name: page[size]
+        in: query
+        description: Number of results per page
+        required: false
+        schema:
+          type: integer
+      - name: filter[status]
+        in: query
+        description: Filter by transaction status. Supported values are `APPROVED` and `SETTLED`. Defaults to `SETTLED` when omitted. When `APPROVED` is specified, only approved transactions that do not yet have a corresponding settled transaction are returned.
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_transactions:RewardedTransactionStatus'
+      - name: filter[paidInFullOnly]
+        in: query
+        description: When `true`, only return transactions that have been paid in full to the issuer (`paidToIssuer` is `PAID_IN_FULL`). By default (`false`), any matched transaction is returned regardless of payment status. This also controls whether unpaid transactions contribute to `lifetimeRewardsInCents`. Has no effect on `APPROVED` transactions, which are always returned when requested.
+        required: false
+        schema:
+          type: boolean
+      - name: include
+        in: query
+        description: Comma-separated list of related resources to include in the response. Supported values are `merchant` and `offer`.
+        required: false
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_transactions:GetEarnedRewardsResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+  /transactions/incoming:
+    post:
+      operationId: create-incoming-transaction
+      summary: Create Incoming Transaction
+      description: 'Call this endpoint to send all incoming transactions made by all enrolled users in your rewards program. These incoming transactions will be processed and matched by the Kard system. Learn more about the [Transaction CLO Matching](https://github.com/kard-financial/kard-postman#c-transaction-clo-matching) flow here.<br/>
+
+        <b>Required scopes:</b> `transaction:write`'
+      tags:
+      - transactions
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Response with status 201
+          content:
+            application/json:
+              schema:
+                type: string
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:InvalidRequestUnion'
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:UnauthorizedErrorBody'
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_transactions:CreateIncomingTransactionRequestBody'
+  /transactions/audit:
+    post:
+      operationId: create-audit
+      summary: Create Audit
+      description: 'Call this endpoint to request that a particular transaction be audited further by the Kard system, in the event of a missing cashback claim, incorrect cashback amount claim or other mis-match claims.<br/>
+
+        <b>Required scopes:</b> `audit:write`'
+      tags:
+      - transactions
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Response with status 201
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_transactions:CreateAuditResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:InvalidRequestUnion'
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:UnauthorizedErrorBody'
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_transactions:CreateAuditRequestBody_2'
+  /transactions/audit/{id}:
+    get:
+      operationId: get-audit-by-id
+      summary: Get Audit Status
+      description: 'Call this endpoint to retrieve an update on the status of a created transaction audit. Note, the resolutionCode, resolutionDescription and resolutionTimeStamp will not be available until the audit has a “CLOSED” status signifying its resolution. <br/>
+
+        <b>Required scopes:</b> `audit:read`'
+      tags:
+      - transactions
+      parameters:
+      - name: id
+        in: path
+        description: The audit ID provided by Kard's system
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_transactions:GetAuditByIdResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:InvalidRequestUnion'
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:UnauthorizedErrorBody'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: string
+components:
+  schemas:
+    type_commons:RelationshipData:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/type_commons:ResourceType'
+        id:
+          type: string
+          description: The ID of the related resource
+      required:
+      - type
+      - id
+      title: RelationshipData
+    type_commons:RequestValidationErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: string
+      required:
+      - errors
+      title: RequestValidationErrorResponse
+    type_transactions:DirectionType:
+      type: string
+      enum:
+      - DEBIT
+      - CREDIT
+      title: DirectionType
+    type_transactions:CreateFileUploadAttributes:
+      type: object
+      properties:
+        filename:
+          type: string
+          description: Name of the file to upload, including extension (e.g. "transaction_12345.jsonl")
+      required:
+      - filename
+      title: CreateFileUploadAttributes
+    type_transactions:CoreTransactionAttributes:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: The ID of the user as defined on the issuers system
+        transactionId:
+          type: string
+          description: The transaction ID from the core banking system
+        amount:
+          type: integer
+          description: Transaction amount in cents
+        currency:
+          type: string
+          description: Currency of transaction in ISO 4217 alpha-3 format
+        description:
+          type: string
+          description: Description of transaction - usually includes merchant and other key details on transaction
+        direction:
+          $ref: '#/components/schemas/type_transactions:DirectionType'
+          description: The direction in which the funds flow - DEBIT or CREDIT
+        status:
+          type: string
+          enum:
+          - SETTLED
+          description: Transaction status (always SETTLED for core transactions)
+        settledDate:
+          type: string
+          format: date-time
+          description: Timestamp when transaction was settled. Date string should be in ISO 8601 format i.e.'YYYY-MM-DDThh:mm:ss.sTZD' where TZD = time zone designator (Z or +hh:mm or -hh:mm) i.e. 1994-11-05T08:15:30-05:00 OR 1994-11-05T08:15:30Z
+        authorizationDate:
+          type: string
+          format: date-time
+          description: Timestamp for transaction authorization. Date string should be in ISO 8601 format i.e.'YYYY-MM-DDThh:mm:ss.sTZD' where TZD = time zone designator (Z or +hh:mm or -hh:mm) i.e. 1994-11-05T08:15:30-05:00 OR 1994-11-05T08:15:30Z
+        financialInstitutionName:
+          type: string
+          description: Deprecated. Use `financialInstitutionId` instead. Name of the financial institution.
+        financialInstitutionId:
+          type: string
+          description: Unique identifier of the financial institution
+        cardLastFours:
+          type: array
+          items:
+            type: string
+          description: Last four digits of the card(s) that may have been used for the transaction. When the issuer cannot determine which specific card was used, multiple values are provided as candidates.
+      required:
+      - userId
+      - transactionId
+      - amount
+      - currency
+      - description
+      - direction
+      - status
+      - settledDate
+      - authorizationDate
+      title: CoreTransactionAttributes
+    type_transactions:RewardedTransactionStatus:
+      type: string
+      enum:
+      - APPROVED
+      - SETTLED
+      title: RewardedTransactionStatus
+    type_transactions:CreateAuditResponseBody:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_transactions:CreateAuditResponseDataUnion'
+      required:
+      - data
+      title: CreateAuditResponseBody
+    type_transactions:AuditResponseAttributes:
+      type: object
+      properties:
+        transactionId:
+          type: string
+          description: Cardlinked Transaction ID
+      required:
+      - transactionId
+      title: AuditResponseAttributes
+    type_transactions:CreateIncomingTransactionRequestBody:
+      type: array
+      items:
+        $ref: '#/components/schemas/type_transactions:IncomingTransactionRequest'
+      title: CreateIncomingTransactionRequestBody
+    type_transactions:TransactionsResponseData:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/type_commons:ResourceType'
+        id:
+          type: string
+          description: The request id of the pending job
+        attributes:
+          $ref: '#/components/schemas/type_commons:Job'
+      required:
+      - type
+      - id
+      - attributes
+      title: TransactionsResponseData
+    type_transactions:FileUploadType:
+      type: string
+      enum:
+      - incomingTransactionsFile
+      - historicalTransactionsFile
+      description: Specifies the category of transaction file being uploaded. Use `incomingTransactionsFile` for new, real-time transactions that need to be processed and matched as they arrive. Use `historicalTransactionsFile` for historical transaction ingestion.
+      title: FileUploadType
+    type_transactions:IncomingTransactionRequest:
+      type: object
+      properties:
+        transactionId:
+          type: string
+          description: Transaction ID in issuer's system
+        referringPartnerUserId:
+          type: string
+          description: Referring partner user ID from issuer associated with transaction
+        amount:
+          type: integer
+          description: Transaction amount in cents
+        status:
+          $ref: '#/components/schemas/type_transactions:TransactionStatus'
+          description: Transaction status
+        currency:
+          type: string
+          description: Currency of transaction
+        description:
+          type: string
+          description: Description of transaction - usually includes merchant and other key details on transaction
+        description2:
+          type: string
+          description: Description2 of transaction — usually includes other merchant identifying information
+        mcc:
+          type: string
+          description: Merchant Category Code (usually a 4-digit numerical number). <b>Note, this field is REQUIRED for SOME national offers. We HIGHLY RECOMMEND sending this field as it will be required in the near future.</b>
+        coreProviderId:
+          type: string
+          description: Name of processor associated with transaction
+        transactionDate:
+          type: string
+          format: date-time
+          description: Timestamp for <b>REVERSED, RETURNED, DECLINED</b> transaction events; <b>REQUIRED</b> for transactions with <b>REVERSED, RETURNED, DECLINED</b> status. Date string should be in ISO format i.e.`'YYYY-MM-DDThh:mm:ss.sTZD'` where TZD = time zone designator (Z or +hh:mm or -hh:mm) i.e. `1994-11-05T08:15:30-05:00` OR `1994-11-05T08:15:30Z`
+        authorizationDate:
+          type: string
+          format: date-time
+          description: Timestamp for <b>APPROVED</b> transaction event; <b>REQUIRED</b> for transactions with <b>APPROVED</b> status, and <b>HIGHLY RECOMMENDED</b> to include for transactions with a <b>SETTLED</b> status. Date string should be in ISO format i.e.`'YYYY-MM-DDThh:mm:ss.sTZD'` where TZD = time zone designator (Z or +hh:mm or -hh:mm) i.e. `1994-11-05T08:15:30-05:00 OR 1994-11-05T08:15:30Z`
+        settledDate:
+          type: string
+          format: date-time
+          description: Timestamp for <b>SETTLED</b> transaction event, <b>REQUIRED</b> for transactions with <b>SETTLED</b> status. Date string should be in ISO format i.e.`'YYYY-MM-DDThh:mm:ss.sTZD'` where TZD = time zone designator (Z or +hh:mm or -hh:mm) i.e. `1994-11-05T08:15:30-05:00` OR `1994-11-05T08:15:30Z`
+        merchantId:
+          type: string
+          description: Acquirer Merchant Identification Number (MID) — usually a 15 digit numerical identifier code. <b>Note, this field is REQUIRED for local offers. We HIGHLY RECOMMEND sending this field as it will be required in the near future.</b>
+        merchantStoreId:
+          type: string
+          description: Merchant store ID where transaction originated from
+        cardPresence:
+          type: string
+          description: Whether card was present at time of transaction
+        merchantName:
+          type: string
+          description: Merchant name associated with transaction
+        merchantAddrCity:
+          type: string
+          description: Merchant address city associated with transaction. <b>We HIGHLY RECOMMEND sending this field as it may be required in the near future.</b>
+        merchantAddrState:
+          $ref: '#/components/schemas/type_commons:State'
+          description: Merchant address state associated with transaction. <b>We HIGHLY RECOMMEND sending this field as it may be required in the near future.</b>
+        merchantAddrZipcode:
+          type: string
+          description: Merchant address zip code associated with transaction. <b>We HIGHLY RECOMMEND sending this field as it may be required in the near future.</b>
+        merchantAddrCountry:
+          type: string
+          description: Merchant address country associated with transaction. <b>We HIGHLY RECOMMEND sending this field as it may be required in the near future.</b>
+        merchantAddrStreet:
+          type: string
+          description: Merchant street address associated with transaction. <b>We HIGHLY RECOMMEND sending this field as it may be required in the near future.</b>
+        merchantLat:
+          type: string
+          description: Merchant latitude geocoordinate associated with transaction. <b>We HIGHLY RECOMMEND sending this field as it may be required in the near future.</b>
+        merchantLong:
+          type: string
+          description: Merchant longitude geocoordinate associated with transaction. <b>We HIGHLY RECOMMEND sending this field as it may be required in the near future.</b>
+        panEntryMode:
+          type: string
+          description: PAN entry mode (usually a 2 digit numeric code)
+        cardBIN:
+          type: string
+          description: Bank identification number (BIN). Must be a valid BIN of 6 digits. If over 6 digits, please send first 6. <b>Note, this field is REQUIRED for matching purposes.</b>
+        cardLastFour:
+          type: string
+          description: Card last four digits. <b>Note, this field is REQUIRED for matching purposes.</b>
+        googleId:
+          type: string
+          description: Google Id
+        authorizationCode:
+          type: string
+          description: Transaction approval code
+        retrievalReferenceNumber:
+          type: string
+          description: Retrieval Reference Number
+        systemTraceAuditNumber:
+          type: string
+          description: System Trace Audit Number
+        acquirerReferenceNumber:
+          type: string
+          description: Acquirer Reference Number
+        isDeposit:
+          type: boolean
+          description: Transaction is a deposit
+      required:
+      - transactionId
+      - referringPartnerUserId
+      - amount
+      - status
+      - currency
+      - description
+      title: IncomingTransactionRequest
+    type_transactions:TransactionMerchantAttributes:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Merchant name
+        assets:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_transactions:MerchantAsset'
+          description: 'Tracked asset images for the merchant (logo, banner, etc.). Each asset
+
+            URL is signed for attribution tracking and should be loaded as-is by the
+
+            client.'
+      required:
+      - name
+      title: TransactionMerchantAttributes
+    type_transactions:RewardedTransactionRelationships:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/type_commons:RelationshipSingle'
+        merchant:
+          $ref: '#/components/schemas/type_commons:RelationshipSingle'
+        offer:
+          $ref: '#/components/schemas/type_commons:RelationshipSingle'
+      required:
+      - user
+      - merchant
+      - offer
+      title: RewardedTransactionRelationships
+    type_transactions:States:
+      type: string
+      enum:
+      - AL
+      - AK
+      - AS
+      - AZ
+      - AR
+      - CA
+      - CO
+      - CT
+      - DE
+      - DC
+      - FM
+      - FL
+      - GA
+      - GU
+      - HI
+      - ID
+      - IL
+      - IN
+      - IA
+      - KS
+      - KY
+      - LA
+      - ME
+      - MH
+      - MD
+      - MA
+      - MI
+      - MN
+      - MS
+      - MO
+      - MT
+      - NE
+      - NV
+      - NH
+      - NJ
+      - NM
+      - NY
+      - NC
+      - ND
+      - MP
+      - OH
+      - OK
+      - OR
+      - PW
+      - PA
+      - PR
+      - RI
+      - SC
+      - SD
+      - TN
+      - TX
+      - UT
+      - VT
+      - VI
+      - VA
+      - WA
+      - WV
+      - WI
+      - WY
+      title: States
+    type_transactions:CommissionEarnedDetails:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/type_commons:CommissionValue'
+      required:
+      - user
+      title: CommissionEarnedDetails
+    type_transactions:TransactionOfferAttributes:
+      type: object
+      properties:
+        purchaseChannel:
+          type: array
+          items:
+            type: string
+          description: Purchase channels
+      required:
+      - purchaseChannel
+      title: TransactionOfferAttributes
+    type_transactions:TransactionsMultiResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:ErrorObject'
+        data:
+          $ref: '#/components/schemas/type_transactions:TransactionsResponseData'
+      required:
+      - errors
+      - data
+      title: TransactionsMultiResponse
+    type_transactions:Transactions:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - transaction
+            description: 'Discriminator value: transaction'
+          id:
+            type: string
+            description: Unique identifier for the transaction event. This <b>must</b> be unique for each distinct event sent to the API.
+          attributes:
+            $ref: '#/components/schemas/type_transactions:TransactionsAttributes'
+        required:
+        - type
+        - id
+        - attributes
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - matchedTransaction
+            description: 'Discriminator value: matchedTransaction'
+          id:
+            type: string
+            description: Unique identifier for the transaction event. This <b>must</b> be unique for each distinct event sent to the API.
+          attributes:
+            $ref: '#/components/schemas/type_transactions:MatchedTransactionsAttributes'
+        required:
+        - type
+        - id
+        - attributes
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - coreTransaction
+            description: 'Discriminator value: coreTransaction'
+          id:
+            type: string
+            description: Unique identifier for the transaction event. This <b>must</b> be unique for each distinct event sent to the API.
+          attributes:
+            $ref: '#/components/schemas/type_transactions:CoreTransactionAttributes'
+        required:
+        - type
+        - id
+        - attributes
+      discriminator:
+        propertyName: type
+      title: Transactions
+    type_transactions:CreateAuditRequestBody_2:
+      type: object
+      properties:
+        transactionId:
+          type: string
+          description: Transaction ID from issuer to audit
+        auditCode:
+          type: integer
+          description: "Audit Code - Enum. Please submit the code that is most relevant to your audit request.\n  <ul>\n    <li>`3005` : Customer is claiming cashback is incorrect - INCORRECT CASHBACK CLAIM</li>\n    <li>`3006` : Transaction is missing the cashback award - MISSING CASHBACK AWARD</li>\n    <li>`8001` : Other - check audit description</li>\n  </ul>"
+        merchantName:
+          type: string
+          description: Merchant name related to the transaction audit
+        auditDescription:
+          type: string
+          description: Audit Description. Please provide more details around the audit
+        preferredContactEmail:
+          type: string
+          description: Preferred contact email to message to as audit is reviewed
+        issuer:
+          type: string
+          description: Issuer name
+        transactionAmountInCents:
+          type: integer
+          description: Transaction amount in cents
+        referringPartnerUserId:
+          type: string
+          description: Referring partner user ID associated with the transaction to audit
+        merchantId:
+          type: string
+          description: Related merchant ID in Kard's system associated to the transaction audit
+        submitterName:
+          type: string
+          description: Submitter name
+      required:
+      - transactionId
+      - auditCode
+      - merchantName
+      - auditDescription
+      - preferredContactEmail
+      - issuer
+      title: CreateAuditRequestBody
+    type_commons:RelationshipSingle:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_commons:RelationshipData'
+      required:
+      - data
+      title: RelationshipSingle
+    type_transactions:TransactionPaymentType:
+      type: string
+      enum:
+      - CARD
+      title: TransactionPaymentType
+    type_transactions:FileUploadUrlData:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/type_transactions:FileUploadType'
+        id:
+          type: string
+          description: Upload session ID for traceability
+        attributes:
+          $ref: '#/components/schemas/type_transactions:FileUploadUrlAttributes'
+      required:
+      - type
+      - id
+      - attributes
+      title: FileUploadUrlData
+    type_commons:ErrorObject:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Status code returned from the request
+        title:
+          type: string
+          description: Name of error
+        detail:
+          type: string
+          description: Description of the specific occurance of the error
+        source:
+          $ref: '#/components/schemas/type_commons:ErrorSource'
+          description: An object containing a reference to the primary source of the error
+        id:
+          type: string
+          description: The id of the resource which caused the error. Always returned for multi-status errors.
+      required:
+      - status
+      - title
+      - detail
+      title: ErrorObject
+    type_transactions:CreateFileUploadUrlResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_transactions:FileUploadUrlData'
+          description: List of created file upload sessions.
+      required:
+      - data
+      title: CreateFileUploadUrlResponse
+    type_transactions:ProcessorMid:
+      oneOf:
+      - type: object
+        properties:
+          processor:
+            type: string
+            enum:
+            - VISA
+            description: 'Discriminator value: VISA'
+          mids:
+            $ref: '#/components/schemas/type_transactions:VisaMidDetails'
+            description: Merchant ID (MID) associated with the processor
+        required:
+        - processor
+        - mids
+      discriminator:
+        propertyName: processor
+      title: ProcessorMid
+    type_commons:CommissionValueType:
+      type: string
+      enum:
+      - cents
+      description: The type of commission value
+      title: CommissionValueType
+    type_transactions:TransactionStatus:
+      type: string
+      enum:
+      - APPROVED
+      - SETTLED
+      - REVERSED
+      - RETURNED
+      - DECLINED
+      title: TransactionStatus
+    type_transactions:CreateFileUploadRequestBody:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_transactions:CreateFileUploadData'
+          description: List of file upload requests (1–10 items per request).
+      required:
+      - data
+      title: CreateFileUploadRequestBody
+    type_transactions:PaymentType:
+      type: string
+      enum:
+      - CARD
+      - CASH
+      - UNKNOWN
+      title: PaymentType
+    type_commons:InvalidRequestUnion:
+      oneOf:
+      - $ref: '#/components/schemas/type_commons:RequestValidationErrorResponse'
+      - type: string
+      title: InvalidRequestUnion
+    type_transactions:CreateAuditMultiStatusResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:ErrorObject'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_transactions:CreateAuditResponseDataUnion'
+      required:
+      - errors
+      title: CreateAuditMultiStatusResponse
+    type_commons:CardNetwork:
+      type: string
+      enum:
+      - VISA
+      - MASTERCARD
+      - AMERICANEXPRESS
+      - DISCOVER
+      description: Supported card networks
+      title: CardNetwork
+    type_transactions:MerchantAssetType:
+      type: string
+      enum:
+      - IMG_VIEW
+      - BANNER_VIEW
+      title: MerchantAssetType
+    type_commons:Job:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/type_commons:JobStatus'
+        message:
+          type: string
+          description: Message regarding the status of the job request
+      required:
+      - status
+      - message
+      title: Job
+    type_transactions:AuditStatus:
+      type: string
+      enum:
+      - NEW
+      - IN_PROGRESS
+      - CLOSED
+      title: AuditStatus
+    type_transactions:RewardedTransactionUnion:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - rewardedTransaction
+            description: 'Discriminator value: rewardedTransaction'
+          id:
+            type: string
+            description: Unique transaction identifier
+          attributes:
+            $ref: '#/components/schemas/type_transactions:RewardedTransactionAttributes'
+          relationships:
+            $ref: '#/components/schemas/type_transactions:RewardedTransactionRelationships'
+        required:
+        - type
+        - id
+        - attributes
+        - relationships
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - approvedTransaction
+            description: 'Discriminator value: approvedTransaction'
+          id:
+            type: string
+            description: Unique transaction identifier
+          attributes:
+            $ref: '#/components/schemas/type_transactions:ApprovedTransactionAttributes'
+          relationships:
+            $ref: '#/components/schemas/type_transactions:RewardedTransactionRelationships'
+        required:
+        - type
+        - id
+        - attributes
+        - relationships
+      discriminator:
+        propertyName: type
+      title: RewardedTransactionUnion
+    type_commons:ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:ErrorObject'
+      required:
+      - errors
+      title: ErrorResponse
+    type_transactions:CreateAuditResponse:
+      type: object
+      properties:
+        _id:
+          $ref: '#/components/schemas/type_commons:MongoId'
+          description: Audit Request ID
+        transactionId:
+          type: string
+          description: Cardlinked Transaction ID
+        auditCode:
+          type: integer
+          description: "Audit Code - Enum \n  <ul>\n    <li>`3005` : Customer is claiming cashback is incorrect - INCORRECT CASHBACK CLAIM</li>\n    <li>`3006` : Transaction is missing the cashback award - MISSING CASHBACK AWARD</li>\n    <li>`8001` : Other - check audit description</li>\n  </ul>"
+        merchantName:
+          type: string
+          description: Merchant name
+        auditDescription:
+          type: string
+          description: Audit Description
+        preferredContactEmail:
+          type: string
+          description: Preferred Contact Email
+        transactionAmountInCents:
+          type: integer
+          description: Transaction amount in cents
+        referringPartnerUserId:
+          type: string
+          description: User ID
+        merchantId:
+          $ref: '#/components/schemas/type_commons:MongoId'
+          description: Internal Kard Merchant ID
+        submitterName:
+          type: string
+          description: Submitter Name
+        status:
+          $ref: '#/components/schemas/type_transactions:AuditStatus'
+          description: Status of Audit
+      required:
+      - _id
+      - transactionId
+      - auditCode
+      - merchantName
+      - auditDescription
+      - preferredContactEmail
+      - status
+      title: CreateAuditResponse
+    type_transactions:RewardedTransactionAttributes:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - SETTLED
+          description: Status of the rewarded transaction
+        transactionId:
+          type: string
+          description: The transaction identifier
+        transactionAmountInCents:
+          type: integer
+          description: Transaction amount in cents
+        transactionTimestamp:
+          type: string
+          format: date-time
+          description: Timestamp of the transaction in ISO 8601 format
+        paidToIssuer:
+          $ref: '#/components/schemas/type_transactions:PaymentStatus'
+          description: Payment status to issuer
+        commissionEarned:
+          $ref: '#/components/schemas/type_transactions:CommissionEarnedDetails'
+        payoutTimestamp:
+          type: string
+          format: date-time
+          description: Timestamp representing the month when the transaction has been paid out to issuer
+      required:
+      - status
+      - transactionId
+      - transactionAmountInCents
+      - transactionTimestamp
+      - paidToIssuer
+      - commissionEarned
+      title: RewardedTransactionAttributes
+    type_transactions:ApprovedTransactionAttributes:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - APPROVED
+          description: Status of the approved transaction
+        transactionId:
+          type: string
+          description: The transaction identifier
+        transactionAmountInCents:
+          type: integer
+          description: Transaction amount in cents
+        transactionTimestamp:
+          type: string
+          format: date-time
+          description: Timestamp of the transaction in ISO 8601 format
+      required:
+      - status
+      - transactionId
+      - transactionAmountInCents
+      - transactionTimestamp
+      title: ApprovedTransactionAttributes
+    type_transactions:AuditAttributes:
+      type: object
+      properties:
+        auditCode:
+          type: integer
+          description: "Audit Code - Enum. Please submit the code that is most relevant to your audit request.\n            <ul>\n              <li>`3005` : Customer is claiming cashback is incorrect - INCORRECT CASHBACK CLAIM</li>\n              <li>`3006` : Transaction is missing the cashback award - MISSING CASHBACK AWARD</li>\n              <li>`8001` : Other - check audit description</li>\n            </ul>"
+        merchantName:
+          type: string
+          description: Merchant name related to the transaction audit
+        auditDescription:
+          type: string
+          description: Audit Description. Please provide more details around the audit
+        transactionId:
+          type: string
+          description: Transaction ID from issuer to audit
+      required:
+      - auditCode
+      - merchantName
+      - auditDescription
+      - transactionId
+      title: AuditAttributes
+    type_transactions:GetEarnedRewardsMeta:
+      type: object
+      properties:
+        lifetimeRewardsInCents:
+          type: integer
+          description: Lifetime rewards earned by the user across matched transactions in cents. By default all matched transactions are included regardless of payment status; pass `filter[paidInFullOnly]=true` to restrict the total to transactions paid in full to the issuer (`paidToIssuer` is `PAID_IN_FULL`).
+      required:
+      - lifetimeRewardsInCents
+      title: GetEarnedRewardsMeta
+    type_transactions:FileUploadUrlAttributes:
+      type: object
+      properties:
+        url:
+          type: string
+          description: 'Presigned PUT URL for uploading the file directly to storage.
+
+            Use HTTP PUT with binary body. Expires after 15 minutes.'
+        expiresIn:
+          type: integer
+          description: Time in seconds until the presigned URL expires (900)
+      required:
+      - url
+      - expiresIn
+      title: FileUploadUrlAttributes
+    type_commons:JobStatus:
+      type: string
+      enum:
+      - queued
+      description: Status of the job
+      title: JobStatus
+    type_transactions:TransactionIncludedResource:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - merchant
+            description: 'Discriminator value: merchant'
+          id:
+            type: string
+            description: Merchant identifier
+          attributes:
+            $ref: '#/components/schemas/type_transactions:TransactionMerchantAttributes'
+            description: Merchant attributes
+        required:
+        - type
+        - id
+        - attributes
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - offer
+            description: 'Discriminator value: offer'
+          id:
+            type: string
+            description: Offer identifier
+          attributes:
+            $ref: '#/components/schemas/type_transactions:TransactionOfferAttributes'
+            description: Offer attributes
+        required:
+        - type
+        - id
+        - attributes
+      discriminator:
+        propertyName: type
+      title: TransactionIncludedResource
+    type_commons:MongoId:
+      type: string
+      description: The unique identifier for a document in the database
+      title: MongoId
+    type_transactions:GetEarnedRewardsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_transactions:RewardedTransactionUnion'
+        links:
+          $ref: '#/components/schemas/type_commons:Links'
+        meta:
+          $ref: '#/components/schemas/type_transactions:GetEarnedRewardsMeta'
+          description: Additional metadata for the earned rewards response.
+        included:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_transactions:TransactionIncludedResource'
+          description: Additional resources referenced in the response
+      required:
+      - data
+      - links
+      - meta
+      title: GetEarnedRewardsResponse
+    type_transactions:PaymentStatus:
+      type: string
+      enum:
+      - UNPAID
+      - PAID_IN_FULL
+      title: PaymentStatus
+    type_transactions:TransactionsResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_transactions:TransactionsResponseData'
+      required:
+      - data
+      title: TransactionsResponse
+    type_transactions:TransactionsAttributes:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: The ID of the user as defined on the issuers system
+        amount:
+          type: integer
+          description: Transaction amount in cents
+        subtotal:
+          type: integer
+          description: The base amount in cents excluding additional charges (such as tips, taxes, and other fees).
+        status:
+          $ref: '#/components/schemas/type_transactions:TransactionStatus'
+          description: Transaction status
+        currency:
+          type: string
+          description: Currency of transaction
+        description:
+          type: string
+          description: Description of transaction - usually includes merchant and other key details on transaction
+        description2:
+          type: string
+          description: Description2 of transaction — usually includes other merchant identifying information
+        mcc:
+          type: string
+          description: Merchant Category Code (usually a 4-digit numerical number). <b>Note, this field is REQUIRED for SOME national offers. We HIGHLY RECOMMEND sending this field as it will be required in the near future.</b>
+        coreProviderId:
+          type: string
+          description: Name of processor associated with transaction
+        transactionDate:
+          type: string
+          format: date-time
+          description: Timestamp for <b>REVERSED, RETURNED, DECLINED</b> transaction events; <b>REQUIRED</b> for transactions with <b>REVERSED, RETURNED, DECLINED</b> status. Date string should be in ISO 8601 format i.e.`'YYYY-MM-DDThh:mm:ss.sTZD'` where TZD = time zone designator (Z or +hh:mm or -hh:mm) i.e. `1994-11-05T08:15:30-05:00` OR `1994-11-05T08:15:30Z`
+        authorizationDate:
+          type: string
+          format: date-time
+          description: Timestamp for <b>APPROVED</b> transaction event; <b>REQUIRED</b> for transactions with <b>APPROVED</b> status, and <b>HIGHLY RECOMMENDED</b> to include for transactions with a <b>SETTLED</b> status. Date string should be in ISO 8601 format i.e.`'YYYY-MM-DDThh:mm:ss.sTZD'` where TZD = time zone designator (Z or +hh:mm or -hh:mm) i.e. `1994-11-05T08:15:30-05:00 OR 1994-11-05T08:15:30Z`
+        settledDate:
+          type: string
+          format: date-time
+          description: Timestamp for <b>SETTLED</b> transaction event, <b>REQUIRED</b> for transactions with <b>SETTLED</b> status. Date string should be in ISO 8601 format i.e.`'YYYY-MM-DDThh:mm:ss.sTZD'` where TZD = time zone designator (Z or +hh:mm or -hh:mm) i.e. `1994-11-05T08:15:30-05:00` OR `1994-11-05T08:15:30Z`
+        merchant:
+          $ref: '#/components/schemas/type_transactions:Merchant'
+          description: Merchant details
+        cardPresence:
+          type: string
+          description: Whether card was present at time of transaction
+        panEntryMode:
+          type: string
+          description: PAN entry mode
+        cardBIN:
+          type: string
+          description: Bank identification number (BIN). Must be a valid BIN of 6 digits. If over 6 digits, please send first 6.
+        cardLastFour:
+          type: string
+          description: Card last four digits.
+        authorizationCode:
+          type: string
+          description: Transaction approval code
+        retrievalReferenceNumber:
+          type: string
+          description: Retrieval Reference Number
+        systemTraceAuditNumber:
+          type: string
+          description: System Trace Audit Number
+        acquirerReferenceNumber:
+          type: string
+          description: Acquirer Reference Number
+        direction:
+          $ref: '#/components/schemas/type_transactions:DirectionType'
+          description: The direction in which the funds flow - DEBIT or CREDIT
+        paymentType:
+          $ref: '#/components/schemas/type_transactions:TransactionPaymentType'
+          description: The type of payment involved in the transaction.
+        cardNetwork:
+          $ref: '#/components/schemas/type_commons:CardNetwork'
+          description: The card network associated with the transaction
+        transactionId:
+          type: string
+          description: The transaction ID
+        cardProductId:
+          type: string
+          description: The card product ID associated with the transaction
+        userZipCode:
+          type: string
+          description: The zip code of the user who made the transaction
+        processorMids:
+          $ref: '#/components/schemas/type_transactions:ProcessorMid'
+          description: Network specific merchant IDs (MIDs) associated with the transaction
+        accountId:
+          type: string
+          description: An account identifier associated to transaction
+      required:
+      - userId
+      - amount
+      - status
+      - currency
+      - description
+      - cardBIN
+      - cardLastFour
+      - direction
+      - paymentType
+      - transactionId
+      title: TransactionsAttributes
+    type_transactions:VisaMidDetails:
+      type: object
+      properties:
+        vmid:
+          type: string
+          description: Visa Merchant ID (VMID) associated with the transaction
+        vsid:
+          type: string
+          description: Visa Store ID (VSID) associated with the transaction
+      required:
+      - vmid
+      - vsid
+      title: VisaMidDetails
+    type_transactions:MatchedTransactionsAttributes:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: The ID of the user as defined on the issuers system
+        amount:
+          type: integer
+          description: Transaction amount in cents
+        subtotal:
+          type: integer
+          description: The base amount in cents excluding additional charges (such as tips, taxes, and other fees).
+        description:
+          type: string
+          description: Description of transaction - usually includes merchant and other key details on transaction
+        authorizationDate:
+          type: string
+          format: date-time
+          description: Timestamp for transaction event. Date string should be in ISO 8601 format i.e.`'YYYY-MM-DDThh:mm:ss.sTZD'` where TZD = time zone designator (Z or +hh:mm or -hh:mm) i.e. `1994-11-05T08:15:30-05:00 OR 1994-11-05T08:15:30Z`
+        matchedOfferId:
+          type: string
+          description: The ID of the Kard offer to which the transaction was matched. If this field is omitted, the transaction will be considered unmatched to any Kard offer. This field **must** be omitted when the `paymentType` is `UNKNOWN` and neither an orderId nor a `cardLastFour` is supplied.
+        matchedLocationId:
+          type: string
+          description: The unique Kard location ID where the transaction took place. This field **must** be omitted  when `paymentType` is `UNKNOWN`.
+        merchant:
+          $ref: '#/components/schemas/type_transactions:Merchant'
+          description: Merchant details
+        paymentType:
+          $ref: '#/components/schemas/type_transactions:PaymentType'
+          description: The type of payment involved in the transaction.
+        cardBIN:
+          type: string
+          description: Bank identification number (BIN). Must be a valid BIN of 6 digits. If over 6 digits, please send first 6. This field **must** be omitted when `paymentType` is `CASH` or `UNKNOWN`.
+        cardLastFour:
+          type: string
+          description: Card last four digits. This field is **required** when `paymentType` is `CARD` and `matchedOfferId` is provided. It **must** be omitted when `paymentType` is `CASH`.
+        authorizationCode:
+          type: string
+          description: Transaction approval code
+        retrievalReferenceNumber:
+          type: string
+          description: Retrieval Reference Number
+        systemTraceAuditNumber:
+          type: string
+          description: System Trace Audit Number
+        acquirerReferenceNumber:
+          type: string
+          description: Acquirer Reference Number
+        direction:
+          $ref: '#/components/schemas/type_transactions:DirectionType'
+          description: The direction in which the funds flow - DEBIT or CREDIT
+        cardNetwork:
+          $ref: '#/components/schemas/type_commons:CardNetwork'
+          description: The card network associated with the transaction. This field **must** be omitted when `paymentType` is `CASH` or `UNKNOWN`.
+        transactionId:
+          type: string
+          description: The transaction ID
+        cardProductId:
+          type: string
+          description: The card product ID associated with the transaction. This field **must** be omitted when `paymentType` is `CASH` or `UNKNOWN`.
+        orderId:
+          type: string
+          description: The unique identifier for an online order linked to this transaction.
+        receiptMedium:
+          $ref: '#/components/schemas/type_transactions:ReceiptMediumType'
+          description: Indicates the format of the receipt from which the transaction is derived.
+      required:
+      - userId
+      - amount
+      - description
+      - authorizationDate
+      - paymentType
+      - direction
+      - transactionId
+      title: MatchedTransactionsAttributes
+    type_commons:State:
+      type: string
+      enum:
+      - AL
+      - AK
+      - AS
+      - AZ
+      - AR
+      - CA
+      - CO
+      - CT
+      - DE
+      - DC
+      - FM
+      - FL
+      - GA
+      - GU
+      - HI
+      - ID
+      - IL
+      - IN
+      - IA
+      - KS
+      - KY
+      - LA
+      - ME
+      - MH
+      - MD
+      - MA
+      - MI
+      - MN
+      - MS
+      - MO
+      - MT
+      - NE
+      - NV
+      - NH
+      - NJ
+      - NM
+      - NY
+      - NC
+      - ND
+      - MP
+      - OH
+      - OK
+      - OR
+      - PW
+      - PA
+      - PR
+      - RI
+      - SC
+      - SD
+      - TN
+      - TX
+      - UT
+      - VT
+      - VI
+      - VA
+      - WA
+      - WV
+      - WI
+      - WY
+      title: State
+    type_transactions:CreateAuditRequestDataUnion:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - audit
+            description: 'Discriminator value: audit'
+          attributes:
+            $ref: '#/components/schemas/type_transactions:AuditAttributes'
+        required:
+        - type
+        - attributes
+      discriminator:
+        propertyName: type
+      title: CreateAuditRequestDataUnion
+    type_commons:Links:
+      type: object
+      properties:
+        self:
+          type: string
+        prev:
+          type: string
+        next:
+          type: string
+      required:
+      - self
+      description: Related links to the API call
+      title: Links
+    type_transactions:ReceiptMediumType:
+      type: string
+      enum:
+      - ELECTRONIC
+      - PHYSICAL
+      title: ReceiptMediumType
+    type_commons:ErrorSource:
+      type: object
+      properties:
+        pointer:
+          type: string
+          description: A JSON pointer to the value in the request document that caused the error
+        parameter:
+          type: string
+          description: A string indicating which URI query parameter caused the error
+        header:
+          type: string
+          description: A string indicating the name of a single request header which caused the error
+      title: ErrorSource
+    type_commons:CommissionValue:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/type_commons:CommissionValueType'
+          description: The type of commission
+        value:
+          type: integer
+          description: The commission value.
+      required:
+      - type
+      - value
+      title: CommissionValue
+    type_transactions:GetAuditByIdResponse:
+      type: object
+      properties:
+        _id:
+          $ref: '#/components/schemas/type_commons:MongoId'
+          description: The audit ID provided by Kard's system
+        transactionId:
+          type: string
+          description: Transaction ID associated with audit
+        auditCode:
+          type: integer
+          description: "Audit Code - Enum. Code to define audit.\n  <ul>\n    <li>`3005` : Customer is claiming cashback is incorrect - INCORRECT CASHBACK CLAIM</li>\n    <li>`3006` : Transaction is missing the cashback award - MISSING CASHBACK AWARD</li>\n    <li>`8001` : Other - check audit description</li>\n  </ul>"
+        merchantName:
+          type: string
+          description: Merchant name related to the transaction audit
+        auditDescription:
+          type: string
+          description: Audit Description. More details around the audit
+        preferredContactEmail:
+          type: string
+          description: Preferred contact email to message to as audit is reviewed
+        transactionAmountInCents:
+          type: integer
+          description: Transaction amount in cents
+        referringPartnerUserId:
+          type: string
+          description: Referring partner user ID associated with the transaction to audit
+        merchantId:
+          $ref: '#/components/schemas/type_commons:MongoId'
+          description: Related merchant ID in Kard's system associated to the transaction audit
+        submitterName:
+          type: string
+          description: Submitter name
+        status:
+          $ref: '#/components/schemas/type_transactions:AuditStatus'
+          description: Status of audit
+        resolutionCode:
+          type: integer
+          description: "Resolution Code - Enum. field is available when audit is status CLOSED.\n<ul>\n  <li>`5001` : Transaction will be deleted</li>\n  <li>`5002` : Settlement amount will be adjusted</li>\n  <li>`5003` : Return amount will be adjusted</li>\n  <li>`5004` : Reward dispute resolved</li>\n  <li>`5005` : Transaction will be marked for writeoff</li>\n  <li>`5006` : Transaction will be marked as rejected</li>\n  <li>`5007` : Transaction will be resent through webhook</li>\n  <li>`5008` : Transaction will be resent through daily file</li>\n  <li>`5009` : No change needed</li>\n  <li>`9001` : Ineligible item in purchase</li>\n  <li>`9002` : Return was made</li>\n  <li>`9003` : User ineligible for offer (usually because of participation through another program)</li>\n  <li>`9004` : Redemption limit hit (if offer has a set number of redemptions and it isn't handled programmatically)</li>\n  <li>`9005` : Transaction not captured</li>\n</ul>"
+        resolutionDescription:
+          type: string
+          description: Resolution Description; field is available when audit is status CLOSED
+        resolutionTimeStamp:
+          type: string
+          format: date-time
+          description: Resolution timestamp of when the audit was marked as status CLOSED in ISO format; available when audit is closed.
+      required:
+      - _id
+      - transactionId
+      - auditCode
+      - merchantName
+      - auditDescription
+      - preferredContactEmail
+      - status
+      title: GetAuditByIdResponse
+    type_commons:OrganizationId:
+      type: string
+      description: Your issuer organization ID, provided by Kard
+      title: OrganizationId
+    type_transactions:CreateAuditResponseDataUnion:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - audit
+            description: 'Discriminator value: audit'
+          id:
+            type: string
+            description: Audit Request ID
+          attributes:
+            $ref: '#/components/schemas/type_transactions:AuditResponseAttributes'
+        required:
+        - type
+        - id
+        - attributes
+      discriminator:
+        propertyName: type
+      title: CreateAuditResponseDataUnion
+    type_transactions:MerchantAsset:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/type_transactions:MerchantAssetType'
+          description: The type of asset being tracked.
+        url:
+          type: string
+          description: Attribution-signed URL for loading the asset.
+        alt:
+          type: string
+          description: Alt text describing the asset for accessibility.
+      required:
+      - type
+      - url
+      title: MerchantAsset
+    type_transactions:CreateFileUploadData:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/type_transactions:FileUploadType'
+        attributes:
+          $ref: '#/components/schemas/type_transactions:CreateFileUploadAttributes'
+      required:
+      - type
+      - attributes
+      title: CreateFileUploadData
+    type_transactions:TransactionsRequestBody:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_transactions:Transactions'
+          description: 'Discriminated union representing the request body for submitting a transaction.
+
+            Use `type` to distinguish between the two:
+
+            - `transaction`: For transactions requiring processing and matching by the Kard system.
+
+            - `matchedTransaction`: For pre-matched transactions that need validation on match by the Kard system.
+
+            - `coreTransaction`: For transactions from core banking systems with limited card-level data.'
+      required:
+      - data
+      title: TransactionsRequestBody
+    type_commons:UnauthorizedErrorBody:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: UnauthorizedErrorBody
+    type_transactions:CreateAuditRequestBody:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_transactions:CreateAuditRequestDataUnion'
+      required:
+      - data
+      title: CreateAuditRequestBody
+    type_transactions:Merchant:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Acquirer Merchant Identification Number (MID) — usually a 15 digit numerical identifier code. <b>Note, this field is REQUIRED for local offers. We HIGHLY RECOMMEND sending this field as it will be required in the near future.</b>
+        name:
+          type: string
+          description: Merchant name associated with transaction
+        addrStreet:
+          type: string
+          description: Merchant street address associated with transaction.
+        addrCity:
+          type: string
+          description: Merchant address city associated with transaction.
+        addrState:
+          $ref: '#/components/schemas/type_transactions:States'
+          description: Merchant address state associated with transaction.
+        addrZipcode:
+          type: string
+          description: Merchant address zip code associated with transaction.
+        addrCountry:
+          type: string
+          description: Merchant address country associated with transaction.
+        latitude:
+          type: string
+          description: Merchant latitude geocoordinate associated with transaction.
+        longitude:
+          type: string
+          description: Merchant longitude geocoordinate associated with transaction.
+        storeId:
+          type: string
+          description: Merchant store ID where transaction originated from
+      required:
+      - name
+      title: Merchant
+    type_commons:ResourceType:
+      type: string
+      description: Type of document returned
+      title: ResourceType
+  securitySchemes:
+    OAuthScheme:
+      type: http
+      scheme: bearer

@@ -1,0 +1,421 @@
+openapi: 3.1.0
+info:
+  title: API Reference attributions users > Rewards API
+  version: 1.0.0
+servers:
+- url: https://rewards-api.getkard.com
+  description: Production
+- url: https://test-rewards-api.getkard.com
+  description: Sandbox
+tags:
+- name: users > Rewards
+paths:
+  /v2/issuers/{organizationId}/users/{userId}/offers:
+    get:
+      operationId: offers
+      summary: Get Offers By User
+      description: 'Retrieve national brand offers that a specified user is eligible for. Call this endpoint to build out your
+
+        [targeted offers UX experience](/2024-10-01/api/getting-started#b-discover-a-lapsed-customer-clo). Local offers details
+
+        can be found by calling the [Get Eligible Locations](/2024-10-01/api/rewards/locations).<br/>
+
+        <b>Required scopes:</b> `rewards:read`'
+      tags:
+      - users > Rewards
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:OrganizationId'
+      - name: userId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:UserId'
+      - name: page[size]
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: page[after]
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: page[before]
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: filter[search]
+        in: query
+        description: Case-insensitive substring search. Returns offers whose offer name or category name contains the search string.
+        required: false
+        schema:
+          type: string
+      - name: filter[purchaseChannel]
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:PurchaseChannel'
+      - name: filter[category]
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:CategoryOption'
+      - name: filter[isTargeted]
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: sort
+        in: query
+        description: If provided, response will be sorted by the specified fields
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_users/rewards:OfferSortOptions'
+      - name: include
+        in: query
+        description: CSV list of included resources in the response (e.g "categories"). Allowed value is `categories`.
+        required: false
+        schema:
+          type: string
+      - name: supportedComponents
+        in: query
+        description: UI component types to include in the response.
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_users/rewards:ComponentType'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_users/rewards:OffersResponseObject'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+  /v2/issuers/{organizationId}/users/{userId}/locations:
+    get:
+      operationId: locations
+      summary: Get Locations By User
+      description: 'Retrieve national and local geographic locations that a specified user has eligible in-store offers at. Use this endpoint to build
+
+        out your [map-specific UX experiences](/2024-10-01/api/getting-started#c-discover-clos-near-you-map-view). Please note
+
+        that Longitude and Latitude fields are prioritized over State, City and Zipcode and are the recommended search
+
+        pattern.<br/>
+
+        <br/>
+
+        <b>Required scopes:</b> `rewards:read`'
+      tags:
+      - users > Rewards
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:OrganizationId'
+      - name: userId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:UserId'
+      - name: page[size]
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: page[after]
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: page[before]
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: filter[name]
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: filter[city]
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: filter[zipCode]
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: filter[state]
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:State'
+      - name: filter[category]
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:CategoryOption'
+      - name: filter[longitude]
+        in: query
+        required: false
+        schema:
+          type: number
+          format: double
+      - name: filter[latitude]
+        in: query
+        required: false
+        schema:
+          type: number
+          format: double
+      - name: filter[radius]
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: sort
+        in: query
+        description: If provided, response will be sorted by the specified fields
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_users/rewards:LocationSortOptions'
+      - name: include
+        in: query
+        description: CSV list of included resources in the response (e.g "offers,categories"). Allowed values are `offers` and `categories`.
+        required: false
+        schema:
+          type: string
+      - name: supportedComponents
+        in: query
+        description: UI component types to include in included offers.
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_users/rewards:ComponentType'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_users/rewards:LocationsResponseObject'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+components:
+  schemas:
+    type_commons:ErrorSource:
+      type: object
+      properties:
+        pointer:
+          type: string
+          description: A JSON pointer to the value in the request document that caused the error
+        parameter:
+          type: string
+          description: A string indicating which URI query parameter caused the error
+        header:
+          type: string
+          description: A string indicating the name of a single request header which caused the error
+      title: ErrorSource
+    type_commons:PurchaseChannel:
+      type: string
+      enum:
+      - INSTORE
+      - ONLINE
+      description: Purchase channel of offer
+      title: PurchaseChannel
+    type_commons:OrganizationId:
+      type: string
+      description: Your issuer organization ID, provided by Kard
+      title: OrganizationId
+    type_commons:ErrorObject:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Status code returned from the request
+        title:
+          type: string
+          description: Name of error
+        detail:
+          type: string
+          description: Description of the specific occurance of the error
+        source:
+          $ref: '#/components/schemas/type_commons:ErrorSource'
+          description: An object containing a reference to the primary source of the error
+        id:
+          type: string
+          description: The id of the resource which caused the error. Always returned for multi-status errors.
+      required:
+      - status
+      - title
+      - detail
+      title: ErrorObject
+    type_commons:CategoryOption:
+      type: string
+      enum:
+      - Arts & Entertainment
+      - Baby, Kids & Toys
+      - Books & Digital Media
+      - Clothing, Shoes & Accessories
+      - Computers, Electronics & Software
+      - Convenience
+      - Gas
+      - Department Stores
+      - Food & Beverage
+      - Health & Beauty
+      - Home & Garden
+      - Miscellaneous
+      - Occasions & Gifts
+      - Pets
+      - Sports & Outdoors
+      - Supplies & Services
+      - Travel
+      description: Category of merchant. Please use URL Encode for non single word categories. (Food & Beverage should be Food%20%26%20Beverage)
+      title: CategoryOption
+    type_commons:UserId:
+      type: string
+      description: The ID of the user as defined on the issuers system
+      title: UserId
+    type_commons:State:
+      type: string
+      enum:
+      - AL
+      - AK
+      - AS
+      - AZ
+      - AR
+      - CA
+      - CO
+      - CT
+      - DE
+      - DC
+      - FM
+      - FL
+      - GA
+      - GU
+      - HI
+      - ID
+      - IL
+      - IN
+      - IA
+      - KS
+      - KY
+      - LA
+      - ME
+      - MH
+      - MD
+      - MA
+      - MI
+      - MN
+      - MS
+      - MO
+      - MT
+      - NE
+      - NV
+      - NH
+      - NJ
+      - NM
+      - NY
+      - NC
+      - ND
+      - MP
+      - OH
+      - OK
+      - OR
+      - PW
+      - PA
+      - PR
+      - RI
+      - SC
+      - SD
+      - TN
+      - TX
+      - UT
+      - VT
+      - VI
+      - VA
+      - WA
+      - WV
+      - WI
+      - WY
+      title: State
+    type_commons:ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:ErrorObject'
+      required:
+      - errors
+      title: ErrorResponse
+  securitySchemes:
+    OAuthScheme:
+      type: http
+      scheme: bearer

@@ -1,0 +1,430 @@
+openapi: 3.1.0
+info:
+  title: API Reference attributions Organizations > ContentStrategies API
+  version: 1.0.0
+servers:
+- url: https://rewards-api.getkard.com
+  description: Production
+- url: https://test-rewards-api.getkard.com
+  description: Sandbox
+tags:
+- name: Organizations > ContentStrategies
+paths:
+  /v2/issuers/{organizationId}/contentStrategies:
+    post:
+      operationId: create
+      summary: Create
+      description: Create a content strategy for the organization. The strategy name must be unique within the organization.
+      tags:
+      - Organizations > ContentStrategies
+      parameters:
+      - name: organizationId
+        in: path
+        description: Unique identifier of the organization
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Created content strategy resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_organizations/contentStrategies:ContentStrategyResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+      requestBody:
+        description: Content strategy data for creation
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_organizations/contentStrategies:CreateContentStrategyRequestBody'
+    get:
+      operationId: list
+      summary: List
+      description: List content strategies belonging to the authenticated organization
+      tags:
+      - Organizations > ContentStrategies
+      parameters:
+      - name: organizationId
+        in: path
+        description: Unique identifier of the organization
+        required: true
+        schema:
+          type: string
+      - name: filter[name]
+        in: query
+        description: Filter by exact content strategy name (unique within an organization)
+        required: false
+        schema:
+          type: string
+      - name: page[after]
+        in: query
+        description: Cursor value for the next page of results
+        required: false
+        schema:
+          type: string
+      - name: page[size]
+        in: query
+        description: Maximum number of records to return [1 - 200] (default = 200)
+        required: false
+        schema:
+          type: integer
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Paginated list of content strategies
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_organizations/contentStrategies:ContentStrategyListResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+  /v2/issuers/{organizationId}/contentStrategies/{contentStrategyId}:
+    get:
+      operationId: get
+      summary: Get
+      description: Retrieve a specific content strategy
+      tags:
+      - Organizations > ContentStrategies
+      parameters:
+      - name: organizationId
+        in: path
+        description: Unique identifier of the organization
+        required: true
+        schema:
+          type: string
+      - name: contentStrategyId
+        in: path
+        description: Unique identifier of the content strategy (UUID v7)
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Content strategy resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_organizations/contentStrategies:ContentStrategyResponse'
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+    put:
+      operationId: update
+      summary: Update
+      description: Replace a content strategy. All fields must be provided; any omitted attribute is treated as cleared.
+      tags:
+      - Organizations > ContentStrategies
+      parameters:
+      - name: organizationId
+        in: path
+        description: Unique identifier of the organization
+        required: true
+        schema:
+          type: string
+      - name: contentStrategyId
+        in: path
+        description: Unique identifier of the content strategy (UUID v7)
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Updated content strategy resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_organizations/contentStrategies:ContentStrategyResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+      requestBody:
+        description: Content strategy data for update
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_organizations/contentStrategies:UpdateContentStrategyRequestBody'
+    delete:
+      operationId: delete
+      summary: Delete
+      description: Delete a content strategy. Returns 409 if the strategy is still referenced by another resource.
+      tags:
+      - Organizations > ContentStrategies
+      parameters:
+      - name: organizationId
+        in: path
+        description: Unique identifier of the organization
+        required: true
+        schema:
+          type: string
+      - name: contentStrategyId
+        in: path
+        description: Unique identifier of the content strategy (UUID v7)
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_internal-organizations:DeleteResourceResponse'
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '403':
+          description: Error response with status 403
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+components:
+  schemas:
+    type_commons:ErrorSource:
+      type: object
+      properties:
+        pointer:
+          type: string
+          description: A JSON pointer to the value in the request document that caused the error
+        parameter:
+          type: string
+          description: A string indicating which URI query parameter caused the error
+        header:
+          type: string
+          description: A string indicating the name of a single request header which caused the error
+      title: ErrorSource
+    type_commons:ErrorObject:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Status code returned from the request
+        title:
+          type: string
+          description: Name of error
+        detail:
+          type: string
+          description: Description of the specific occurance of the error
+        source:
+          $ref: '#/components/schemas/type_commons:ErrorSource'
+          description: An object containing a reference to the primary source of the error
+        id:
+          type: string
+          description: The id of the resource which caused the error. Always returned for multi-status errors.
+      required:
+      - status
+      - title
+      - detail
+      title: ErrorObject
+    type_commons:EmptyObject:
+      type: object
+      properties: {}
+      title: EmptyObject
+    type_internal-organizations:DeleteResourceResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_internal-organizations:DeleteResourceData'
+      required:
+      - data
+      description: Response returned after deleting a resource
+      title: DeleteResourceResponse
+    type_internal-organizations:DeleteResourceData:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Resource type identifier
+        id:
+          type: string
+          description: ID of the deleted resource
+        attributes:
+          $ref: '#/components/schemas/type_commons:EmptyObject'
+      required:
+      - type
+      - id
+      - attributes
+      description: Deleted resource stub
+      title: DeleteResourceData
+    type_commons:ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:ErrorObject'
+      required:
+      - errors
+      title: ErrorResponse
+  securitySchemes:
+    OAuthScheme:
+      type: http
+      scheme: bearer

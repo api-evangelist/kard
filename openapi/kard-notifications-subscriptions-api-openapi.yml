@@ -1,0 +1,255 @@
+openapi: 3.1.0
+info:
+  title: API Reference attributions notifications > Subscriptions API
+  version: 1.0.0
+servers:
+- url: https://rewards-api.getkard.com
+  description: Production
+- url: https://test-rewards-api.getkard.com
+  description: Sandbox
+tags:
+- name: notifications > Subscriptions
+paths:
+  /v2/issuers/{organizationId}/subscriptions:
+    get:
+      operationId: get
+      summary: Get Subscriptions
+      description: 'Call this endpoint to fetch the subscriptions of the provided issuer.<br/>
+
+        <b>Required scopes:</b> `notifications:read`'
+      tags:
+      - notifications > Subscriptions
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:OrganizationId'
+      - name: filter[eventName]
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:NotificationType'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_notifications/subscriptions:SubscriptionsResponseObject'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+    post:
+      operationId: create
+      summary: Create Subscription
+      description: 'Call this endpoint to subscribe to notification events.<br/>
+
+        <b>Required scopes:</b> `notifications:write`'
+      tags:
+      - notifications > Subscriptions
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:OrganizationId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Response with status 201
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_notifications/subscriptions:CreateSubscriptionsResponseObject'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_notifications/subscriptions:SubscriptionRequestBody'
+  /v2/issuers/{organizationId}/subscriptions/{subscriptionId}:
+    patch:
+      operationId: update
+      summary: Update Subscription
+      description: 'Call this endpoint to update existing notification subscriptions.<br/>
+
+        <b>Required scopes:</b> `notifications:write`'
+      tags:
+      - notifications > Subscriptions
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:OrganizationId'
+      - name: subscriptionId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:SubscriptionId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_notifications/subscriptions:UpdateSubscriptionsResponseObject'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_notifications/subscriptions:UpdateSubscriptionRequestBody'
+components:
+  schemas:
+    type_commons:ErrorSource:
+      type: object
+      properties:
+        pointer:
+          type: string
+          description: A JSON pointer to the value in the request document that caused the error
+        parameter:
+          type: string
+          description: A string indicating which URI query parameter caused the error
+        header:
+          type: string
+          description: A string indicating the name of a single request header which caused the error
+      title: ErrorSource
+    type_commons:SubscriptionId:
+      type: string
+      description: The ID of the subscription
+      title: SubscriptionId
+    type_commons:OrganizationId:
+      type: string
+      description: Your issuer organization ID, provided by Kard
+      title: OrganizationId
+    type_commons:NotificationType:
+      type: string
+      enum:
+      - earnedRewardApproved
+      - earnedRewardSettled
+      - earnedRewardRejected
+      - validTransaction
+      - failedTransaction
+      - clawback
+      - auditUpdate
+      - fileProcessingResult
+      - pushNotificationPlacementFile
+      - emailNotificationPlacementFile
+      title: NotificationType
+    type_commons:ErrorObject:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Status code returned from the request
+        title:
+          type: string
+          description: Name of error
+        detail:
+          type: string
+          description: Description of the specific occurance of the error
+        source:
+          $ref: '#/components/schemas/type_commons:ErrorSource'
+          description: An object containing a reference to the primary source of the error
+        id:
+          type: string
+          description: The id of the resource which caused the error. Always returned for multi-status errors.
+      required:
+      - status
+      - title
+      - detail
+      title: ErrorObject
+    type_commons:ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:ErrorObject'
+      required:
+      - errors
+      title: ErrorResponse
+  securitySchemes:
+    OAuthScheme:
+      type: http
+      scheme: bearer

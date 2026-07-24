@@ -1,0 +1,248 @@
+openapi: 3.1.0
+info:
+  title: API Reference attributions notifications > Notifications API
+  version: 1.0.0
+servers:
+- url: https://rewards-api.getkard.com
+  description: Production
+- url: https://test-rewards-api.getkard.com
+  description: Sandbox
+tags:
+- name: notifications > Notifications
+paths:
+  /v2/issuers/{organizationId}/notifications:
+    get:
+      operationId: list
+      summary: List Notifications
+      description: 'Lists notifications previously dispatched to the issuer, most recent
+
+        first.
+
+
+        Results are filterable by event name, delivery status, and a
+
+        `created_at` time range.<br/>
+
+        <b>Required scopes:</b> `notifications:read`'
+      tags:
+      - notifications > Notifications
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:OrganizationId'
+      - name: page[after]
+        in: query
+        description: Represents a cursor value, and if provided, returns the next page of results
+        required: false
+        schema:
+          type: string
+      - name: page[before]
+        in: query
+        description: Represents a cursor value, and if provided, returns the previous page of results
+        required: false
+        schema:
+          type: string
+      - name: page[size]
+        in: query
+        description: Maximum number of records to be returned [1 - 200], (default = 200)
+        required: false
+        schema:
+          type: integer
+      - name: filter[eventName]
+        in: query
+        description: Return only notifications for this event name.
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_commons:NotificationType'
+      - name: filter[status]
+        in: query
+        description: Return only notifications with this delivery status.
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_notifications/notifications:DeliveryStatus'
+      - name: filter[after]
+        in: query
+        description: Return only notifications created strictly after this timestamp (ISO 8601).
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: filter[before]
+        in: query
+        description: Return only notifications created strictly before this timestamp (ISO 8601).
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_notifications/notifications:NotificationsListResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+  /v2/issuers/{organizationId}/notifications/{eventId}/replay:
+    post:
+      operationId: replay
+      summary: Replay Notification
+      description: 'Re-enqueues a previously dispatched notification so it is redelivered to
+
+        the issuer''s currently configured webhook for that event. Returns 409
+
+        when the issuer has no enabled subscription for the event.<br/>
+
+        <b>Required scopes:</b> `notifications:write`'
+      tags:
+      - notifications > Notifications
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:OrganizationId'
+      - name: eventId
+        in: path
+        description: The event ID of the notification to replay.
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '202':
+          description: Response with status 202
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_notifications/notifications:ReplayNotificationResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+components:
+  schemas:
+    type_commons:ErrorSource:
+      type: object
+      properties:
+        pointer:
+          type: string
+          description: A JSON pointer to the value in the request document that caused the error
+        parameter:
+          type: string
+          description: A string indicating which URI query parameter caused the error
+        header:
+          type: string
+          description: A string indicating the name of a single request header which caused the error
+      title: ErrorSource
+    type_commons:OrganizationId:
+      type: string
+      description: Your issuer organization ID, provided by Kard
+      title: OrganizationId
+    type_commons:NotificationType:
+      type: string
+      enum:
+      - earnedRewardApproved
+      - earnedRewardSettled
+      - earnedRewardRejected
+      - validTransaction
+      - failedTransaction
+      - clawback
+      - auditUpdate
+      - fileProcessingResult
+      - pushNotificationPlacementFile
+      - emailNotificationPlacementFile
+      title: NotificationType
+    type_commons:ErrorObject:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Status code returned from the request
+        title:
+          type: string
+          description: Name of error
+        detail:
+          type: string
+          description: Description of the specific occurance of the error
+        source:
+          $ref: '#/components/schemas/type_commons:ErrorSource'
+          description: An object containing a reference to the primary source of the error
+        id:
+          type: string
+          description: The id of the resource which caused the error. Always returned for multi-status errors.
+      required:
+      - status
+      - title
+      - detail
+      title: ErrorObject
+    type_commons:ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:ErrorObject'
+      required:
+      - errors
+      title: ErrorResponse
+  securitySchemes:
+    OAuthScheme:
+      type: http
+      scheme: bearer

@@ -1,0 +1,274 @@
+openapi: 3.1.0
+info:
+  title: API Reference attributions users > uploads API
+  version: 1.0.0
+servers:
+- url: https://rewards-api.getkard.com
+  description: Production
+- url: https://test-rewards-api.getkard.com
+  description: Sandbox
+tags:
+- name: users > uploads
+paths:
+  /v2/issuers/{organizationId}/users/{userId}/uploads:
+    post:
+      operationId: create
+      summary: Create Upload
+      description: '<b>Deprecated.</b> This endpoint is deprecated in favor of the [Create Bulk Transactions Upload URL](/2024-10-01/api/transactions/create-bulk-transactions-upload-url) endpoint. New integrations should use the bulk flow outlined in the [Historical Transaction Uploads](/2024-10-01/api/integration-guides/historical-transaction-uploads) integration guide.
+
+
+        Call this endpoint to create an upload session and retrieve an upload ID. Using the upload ID in the [Add Upload Part](/2024-10-01/api/transactions/uploads/create-part) endpoint, historical transactions can be sent in batches for further processing.
+
+        <b>Required scopes:</b> `transaction:write`'
+      tags:
+      - users > uploads
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:OrganizationId'
+      - name: userId
+        in: path
+        description: The ID of the user as defined on the issuers system
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_users/uploads:CreateUploadResponseObject'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_users/uploads:CreateUploadRequestObject'
+  /v2/issuers/{organizationId}/users/{userId}/uploads/{uploadId}/parts:
+    put:
+      operationId: create-part
+      summary: Add Upload Part
+      description: '<b>Deprecated.</b> This endpoint is deprecated in favor of the [Create Bulk Transactions Upload URL](/2024-10-01/api/transactions/create-bulk-transactions-upload-url) endpoint. New integrations should use the bulk flow outlined in the [Historical Transaction Uploads](/2024-10-01/api/integration-guides/historical-transaction-uploads) integration guide.
+
+
+        Call this endpoint using the upload ID provided in the [Create Upload](/2024-10-01/api/transactions/uploads/create) endpoint to add parts to your upload. Currently, this endpoint supports adding historical transactions.
+
+        <b>Required scopes:</b> `transaction:write`
+
+        <b>Note:</b> `Maximum of 500 transactions can be uploaded per request`.'
+      tags:
+      - users > uploads
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:OrganizationId'
+      - name: userId
+        in: path
+        description: The ID of the user as defined on the issuers system
+        required: true
+        schema:
+          type: string
+      - name: uploadId
+        in: path
+        description: The upload ID identifying the upload session to add parts
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_users/uploads:CreateUploadPartResponseObject'
+        '207':
+          description: Error response with status 207
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_users/uploads:CreateUploadPartMultiStatusResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_users/uploads:CreateUploadPartRequestObject'
+  /v2/issuers/{organizationId}/users/{userId}/uploads/{uploadId}:
+    put:
+      operationId: update
+      summary: Update Upload
+      description: '<b>Deprecated.</b> This endpoint is deprecated in favor of the [Create Bulk Transactions Upload URL](/2024-10-01/api/transactions/create-bulk-transactions-upload-url) endpoint. New integrations should use the bulk flow outlined in the [Historical Transaction Uploads](/2024-10-01/api/integration-guides/historical-transaction-uploads) integration guide.
+
+
+        Call this endpoint to update your upload session. Currently, you can signal completing a historical transactions upload.
+
+        <b>Required scopes:</b> `transaction:write`'
+      tags:
+      - users > uploads
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:OrganizationId'
+      - name: userId
+        in: path
+        description: The ID of the user as defined on the issuers system
+        required: true
+        schema:
+          type: string
+      - name: uploadId
+        in: path
+        description: The upload ID identifying the upload session to update
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_users/uploads:UpdateUploadResponseObject'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_users/uploads:UpdateUploadRequestObject'
+components:
+  schemas:
+    type_commons:ErrorSource:
+      type: object
+      properties:
+        pointer:
+          type: string
+          description: A JSON pointer to the value in the request document that caused the error
+        parameter:
+          type: string
+          description: A string indicating which URI query parameter caused the error
+        header:
+          type: string
+          description: A string indicating the name of a single request header which caused the error
+      title: ErrorSource
+    type_commons:ErrorObject:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Status code returned from the request
+        title:
+          type: string
+          description: Name of error
+        detail:
+          type: string
+          description: Description of the specific occurance of the error
+        source:
+          $ref: '#/components/schemas/type_commons:ErrorSource'
+          description: An object containing a reference to the primary source of the error
+        id:
+          type: string
+          description: The id of the resource which caused the error. Always returned for multi-status errors.
+      required:
+      - status
+      - title
+      - detail
+      title: ErrorObject
+    type_commons:OrganizationId:
+      type: string
+      description: Your issuer organization ID, provided by Kard
+      title: OrganizationId
+    type_commons:ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:ErrorObject'
+      required:
+      - errors
+      title: ErrorResponse
+  securitySchemes:
+    OAuthScheme:
+      type: http
+      scheme: bearer

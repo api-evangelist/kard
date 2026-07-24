@@ -1,0 +1,341 @@
+openapi: 3.1.0
+info:
+  title: API Reference attributions users > attributions API
+  version: 1.0.0
+servers:
+- url: https://rewards-api.getkard.com
+  description: Production
+- url: https://test-rewards-api.getkard.com
+  description: Sandbox
+tags:
+- name: users > attributions
+paths:
+  /v2/issuers/{organizationId}/users/{userId}/attributions:
+    post:
+      operationId: create
+      summary: Create Attribution Events
+      description: 'Call this endpoint to send attribution events made by a single enrolled user for processing. A maximum of 100 events can be included in a single request.
+
+
+        <b>Required scopes:</b> `attributions:write`'
+      tags:
+      - users > attributions
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:OrganizationId'
+      - name: userId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:UserId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '202':
+          description: Response with status 202
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_users/attributions:CreateAttributionResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_users/attributions:CreateAttributionRequestObject'
+  /v2/issuers/{organizationId}/users/{userId}/offers/{offerId}/activate:
+    post:
+      operationId: activate
+      summary: Activate Offer
+      description: 'Record when a user activates an offer. Creates an attribution event with eventCode=ACTIVATE and medium=CTA.
+
+        Optionally include the offer data by passing `include=offer`.'
+      tags:
+      - users > attributions
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:OrganizationId'
+      - name: userId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:UserId'
+      - name: offerId
+        in: path
+        description: The unique identifier of the offer being activated
+        required: true
+        schema:
+          type: string
+      - name: supportedComponents
+        in: query
+        description: UI component types to include in the offer response (when include=offer).
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_users/rewards:ComponentType'
+      - name: include
+        in: query
+        description: Related resources to include in the response. Allowed value is `offer`.
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_users/attributions:ActivateOfferIncludeOption'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Response with status 201
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_users/attributions:ActivateOfferResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+  /v2/issuers/{organizationId}/users/{userId}/offers/{offerId}/boost:
+    post:
+      operationId: boost
+      summary: Boost Offer
+      description: 'Record when a user boosts an offer. Creates an attribution event with eventCode=BOOST and medium=CTA.
+
+        Optionally include the offer data by passing `include=offer`.'
+      tags:
+      - users > attributions
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:OrganizationId'
+      - name: userId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:UserId'
+      - name: offerId
+        in: path
+        description: The unique identifier of the offer being boosted
+        required: true
+        schema:
+          type: string
+      - name: supportedComponents
+        in: query
+        description: UI component types to include in the offer response (when include=offer).
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_users/rewards:ComponentType'
+      - name: include
+        in: query
+        description: Related resources to include in the response. Allowed value is `offer`.
+        required: false
+        schema:
+          $ref: '#/components/schemas/type_users/attributions:BoostOfferIncludeOption'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Response with status 201
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_users/attributions:BoostOfferResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+  /v2/issuers/{organizationId}/users/{userId}/placements/{placementId}/slot/{slotId}/activate:
+    post:
+      operationId: activate-placement-slot
+      summary: Activate Placement Slot
+      description: 'Record when a user activates a batch-activation placement slot. Writes a slot-level
+
+        `placementSlotAttribution` ACTIVATE event and fans out a per-offer
+
+        `offerAttribution` ACTIVATE event for every offer resolved by the slot''s content
+
+        strategy. The slot-level event id and the resolved `offerIds` are returned so the
+
+        partner can render the batch immediately without an extra round-trip to re-fetch
+
+        the placement content.
+
+
+        <b>Required scopes:</b> `attributions:write`'
+      tags:
+      - users > attributions
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:OrganizationId'
+      - name: userId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:UserId'
+      - name: placementId
+        in: path
+        description: Unique identifier of the placement (UUID v7)
+        required: true
+        schema:
+          type: string
+      - name: slotId
+        in: path
+        description: Stable identifier for the slot within the placement
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Response with status 201
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_users/attributions:ActivatePlacementSlotResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+components:
+  schemas:
+    type_commons:ErrorSource:
+      type: object
+      properties:
+        pointer:
+          type: string
+          description: A JSON pointer to the value in the request document that caused the error
+        parameter:
+          type: string
+          description: A string indicating which URI query parameter caused the error
+        header:
+          type: string
+          description: A string indicating the name of a single request header which caused the error
+      title: ErrorSource
+    type_commons:OrganizationId:
+      type: string
+      description: Your issuer organization ID, provided by Kard
+      title: OrganizationId
+    type_commons:ErrorObject:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Status code returned from the request
+        title:
+          type: string
+          description: Name of error
+        detail:
+          type: string
+          description: Description of the specific occurance of the error
+        source:
+          $ref: '#/components/schemas/type_commons:ErrorSource'
+          description: An object containing a reference to the primary source of the error
+        id:
+          type: string
+          description: The id of the resource which caused the error. Always returned for multi-status errors.
+      required:
+      - status
+      - title
+      - detail
+      title: ErrorObject
+    type_commons:UserId:
+      type: string
+      description: The ID of the user as defined on the issuers system
+      title: UserId
+    type_commons:ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:ErrorObject'
+      required:
+      - errors
+      title: ErrorResponse
+  securitySchemes:
+    OAuthScheme:
+      type: http
+      scheme: bearer

@@ -1,0 +1,1054 @@
+openapi: 3.1.0
+info:
+  title: API Reference attributions users API
+  version: 1.0.0
+servers:
+- url: https://rewards-api.getkard.com
+  description: Production
+- url: https://test-rewards-api.getkard.com
+  description: Sandbox
+tags:
+- name: users
+paths:
+  /v2/issuers/{organizationId}/users:
+    post:
+      operationId: create
+      summary: Create Users
+      description: 'Call this endpoint to enroll a specified user into your rewards program.<br/>
+
+
+        <b>Required scopes:</b>&nbsp;&nbsp;`user:write`<br/>
+
+        <b>Note:</b> `Maximum of 100 users can be created per request`.'
+      tags:
+      - users
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:OrganizationId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Response with status 201
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_users:CreateUsersObject'
+        '207':
+          description: Error response with status 207
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_users:CreateUsersMultiStatusResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_users:CreateUsersObject'
+  /v2/issuers/{organizationId}/users/{userId}:
+    put:
+      operationId: update
+      summary: Update User
+      description: 'Call this endpoint to update the details on a specified user.<br/>
+
+
+        <b>Required scopes:</b> `user:update`'
+      tags:
+      - users
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:OrganizationId'
+      - name: userId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:UserId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_users:UserResponseObject'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_users:UpdateUserObject'
+    delete:
+      operationId: delete
+      summary: Delete User
+      description: 'Call this endpoint to delete a specified enrolled user from the rewards program and Kard''s system. Users can be re-enrolled into rewards by calling the [Create User](/2024-10-01/api/users/create) endpoint using the same `id` from before.<br/>
+
+
+        <b>Required scopes:</b> `user:delete`'
+      tags:
+      - users
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:OrganizationId'
+      - name: userId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:UserId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_users:DeleteUserResponseObject'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+    get:
+      operationId: get
+      summary: Get User By ID
+      description: 'Call this endpoint to fetch the details on a specified user.<br/>
+
+        <br/>
+
+        <b>Required scopes:</b>&nbsp;&nbsp;`user:read`'
+      tags:
+      - users
+      parameters:
+      - name: organizationId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:OrganizationId'
+      - name: userId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/type_commons:UserId'
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_users:UserResponseObject'
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:ErrorResponse'
+  /users/users:
+    post:
+      operationId: create-user
+      summary: Create User
+      description: 'Call this endpoint to enroll a specified user into your rewards program. Learn more about the [Enrolling Users](https://github.com/kard-financial/kard-postman#a-cardholders) flow based on your use case here.<br/>
+
+        <b>Required scopes:</b> `user:write`'
+      tags:
+      - users
+      parameters:
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Response with status 201
+          content:
+            application/json:
+              schema:
+                type: string
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:InvalidRequestUnion'
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:UnauthorizedErrorBody'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: string
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_users:CreateUserRequestBody'
+  /users/users/{id}/cards:
+    post:
+      operationId: create-user-card
+      summary: Create User Card
+      description: 'Call this endpoint to create a card that a specified user enrolled in rewards will use to make purchases and earn rewards.<br/>
+
+        <b>Required scopes:</b> `user:write`'
+      tags:
+      - users
+      parameters:
+      - name: id
+        in: path
+        description: Referring partner user ID from issuer that specifies user
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Response with status 201
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_users:CreateUserCardResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:InvalidRequestUnion'
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:UnauthorizedErrorBody'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: string
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_users:CreateUserCardRequestBody'
+  /users/users/{id}:
+    put:
+      operationId: update-user
+      summary: Update User
+      description: 'Call this endpoint to update the details on a specified user. If you would like to add a card to a specified user, please refer to the [Create User Card endpoint](/legacy/api/users/create-user-card).<br/>
+
+        <b>Required scopes:</b> `user:update`'
+      tags:
+      - users
+      parameters:
+      - name: id
+        in: path
+        description: Referring partner user ID from issuer that specifies user
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_users:UpdateUserResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:InvalidRequestUnion'
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:UnauthorizedErrorBody'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_users:UserRequestBody'
+    delete:
+      operationId: delete-user-by-id
+      summary: Delete User
+      description: 'Call this endpoint to delete a specified enrolled user from the rewards program and Kard''s system. Users can be re-enrolled into rewards by calling the [Create User](/legacy/api/users/create-user) endpoint using the same `referringPartnerUserId` from before. Deleting a user will remove all the user fields for that specific user from Kard’s system.<br/>
+
+        <b>Required scopes:</b> `user:delete`'
+      tags:
+      - users
+      parameters:
+      - name: id
+        in: path
+        description: Referring partner user ID from issuer that specifies user
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Bearer authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                type: string
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:InvalidRequestUnion'
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:UnauthorizedErrorBody'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: string
+components:
+  schemas:
+    type_users:UserResponseUnionNoData:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - user
+            description: 'Discriminator value: user'
+          id:
+            $ref: '#/components/schemas/type_commons:UserId'
+          attributes:
+            $ref: '#/components/schemas/type_commons:EmptyObject'
+        required:
+        - type
+        - id
+        - attributes
+      discriminator:
+        propertyName: type
+      title: UserResponseUnionNoData
+    type_users:UserResponseObject:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_users:UserRequestDataUnion'
+      required:
+      - data
+      title: UserResponseObject
+    type_users:CardStatus:
+      type: string
+      enum:
+      - ENABLED
+      - DISABLED
+      title: CardStatus
+    type_commons:RequestValidationErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: string
+      required:
+      - errors
+      title: RequestValidationErrorResponse
+    type_commons:UserId:
+      type: string
+      description: The ID of the user as defined on the issuers system
+      title: UserId
+    type_users:UpdateUserObject:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_users:UpdateUserRequestDataUnion'
+      required:
+      - data
+      title: UpdateUserObject
+    type_users:UserRequestBody:
+      type: object
+      properties:
+        email:
+          type: string
+          description: Email of user
+        hashedEmail:
+          type: string
+          description: Hashed email address of user (using SHA-256)
+        phoneNumber:
+          type: string
+          description: Phone number of user in E.164 format
+        birthYear:
+          type: string
+          description: Birth year of user
+        userName:
+          type: string
+          description: Username of user from issuer
+        firstName:
+          type: string
+          description: First name of user
+        lastName:
+          type: string
+          description: Last name of user
+        zipCode:
+          type: string
+          description: Zipcode of user
+        referringPartnerUserId:
+          type: string
+          description: Referring partner user ID of user from issuer. Must be a unique identifier across users
+        externalPartnerUserId:
+          type: string
+          description: Partner unique user id, might be equal to referringPartnerUserId
+        enrolledRewards:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:EnrolledRewardsType_2'
+          description: An empty array will unenroll user from all programs. Note, <b>please do not send AFFILIATE</b> as this field has been deprecated.
+      required:
+      - referringPartnerUserId
+      title: UserRequestBody
+    type_commons:ErrorObject:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Status code returned from the request
+        title:
+          type: string
+          description: Name of error
+        detail:
+          type: string
+          description: Description of the specific occurance of the error
+        source:
+          $ref: '#/components/schemas/type_commons:ErrorSource'
+          description: An object containing a reference to the primary source of the error
+        id:
+          type: string
+          description: The id of the resource which caused the error. Always returned for multi-status errors.
+      required:
+      - status
+      - title
+      - detail
+      title: ErrorObject
+    type_users:CreateUserCardRequestBody:
+      type: object
+      properties:
+        referringPartnerUserId:
+          type: string
+          description: Referring partner user ID from issuer
+        cards:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_users:CardInfoRequest'
+          description: List of User Cards Information to add
+        cardInfo:
+          $ref: '#/components/schemas/type_users:CardInfoRequest'
+          description: <b>[Deprecated -- please use "cards" field]</b> User Card Information
+      required:
+      - referringPartnerUserId
+      title: CreateUserCardRequestBody
+    type_users:CreateUsersObject:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_users:UserRequestDataUnion'
+      required:
+      - data
+      title: CreateUsersObject
+    type_commons:EnrolledRewardsType_2:
+      type: string
+      enum:
+      - CARDLINKED
+      - AFFILIATE
+      description: Enrolled Rewards
+      title: EnrolledRewardsType
+    type_users:UserRequestAttributes:
+      type: object
+      properties:
+        enrolledRewards:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:EnrolledRewardsType'
+          description: Rewards programs to enroll the user in. If an empty array is supplied, the user will not be enrolled in any programs.
+        zipCode:
+          type: string
+          description: Zipcode of user
+        email:
+          type: string
+          description: Email address of user
+        hashedEmail:
+          type: string
+          description: Hashed email address of user (using SHA-256)
+        phoneNumber:
+          type: string
+          description: Phone number of user in E.164 format
+        birthYear:
+          type: string
+          description: Birth year of user
+        historicalTransactionsSent:
+          type: boolean
+          description: Indicates whether historical transactions have been sent for this user
+      required:
+      - enrolledRewards
+      title: UserRequestAttributes
+    type_commons:InvalidRequestUnion:
+      oneOf:
+      - $ref: '#/components/schemas/type_commons:RequestValidationErrorResponse'
+      - type: string
+      title: InvalidRequestUnion
+    type_commons:ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:ErrorObject'
+      required:
+      - errors
+      title: ErrorResponse
+    type_users:CardInfoResponse:
+      type: object
+      properties:
+        _id:
+          $ref: '#/components/schemas/type_commons:MongoId'
+          description: Card ID in Kard's system
+        last4:
+          type: string
+          description: Card last four digits. <b>Note, this field is REQUIRED for matching purposes.</b>
+        bin:
+          type: string
+          description: Bank identification number (BIN). Must be a valid BIN of 6 digits. If over 6 digits, please send first 6.<b>Note, this field is REQUIRED for matching purposes.</b>
+        issuer:
+          type: string
+          description: Issuer name
+        network:
+          $ref: '#/components/schemas/type_commons:Network'
+          description: Name of card network
+        status:
+          $ref: '#/components/schemas/type_users:CardStatus'
+          description: Status of the card
+        token:
+          type: string
+          description: Card token
+        tokenSource:
+          type: string
+          description: Card token source
+      required:
+      - _id
+      - last4
+      - bin
+      - issuer
+      - network
+      - status
+      description: Credit Card Information
+      title: CardInfoResponse
+    type_users:UpdateUserRequestAttributes:
+      type: object
+      properties:
+        enrolledRewards:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:EnrolledRewardsType'
+          description: Rewards programs to enroll the user in. If an empty array is supplied, the user will not be enrolled in any programs.
+        zipCode:
+          type: string
+          description: Zipcode of user
+        email:
+          type: string
+          description: Email address of user
+        hashedEmail:
+          type: string
+          description: Hashed email address of user (using SHA-256)
+        phoneNumber:
+          type: string
+          description: Phone number of user in E.164 format
+        birthYear:
+          type: string
+          description: Birth year of user
+        historicalTransactionsSent:
+          type: boolean
+          description: 'Set to `true` to confirm that historical transactions have been sent for this user. This is a one-way flag: once `true` it cannot be set back to `false`, and a request attempting to do so is rejected.'
+      required:
+      - enrolledRewards
+      title: UpdateUserRequestAttributes
+    type_commons:MongoId:
+      type: string
+      description: The unique identifier for a document in the database
+      title: MongoId
+    type_users:UpdateUserResponse:
+      type: object
+      properties:
+        enrolledRewards:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:EnrolledRewardsType_2'
+          description: List of enrolled rewards
+        email:
+          type: string
+          description: Email of user if available
+        hashedEmail:
+          type: string
+          description: Hashed email address of user (using SHA-256)
+        phoneNumber:
+          type: string
+          description: Phone number of user in E.164 format
+        birthYear:
+          type: string
+          description: Birth year of user
+        firstName:
+          type: string
+          description: First name of user if available
+        lastName:
+          type: string
+          description: Last name of user if available
+        zipCode:
+          type: string
+          description: Zipcode of user if available
+        referringPartnerUserId:
+          type: string
+          description: Referring partner user ID of user from issuer. Must be a unique identifier across users
+        cards:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_users:CardInfoResponse'
+          description: List of User Cards Information
+        userName:
+          type: string
+          description: Username of user from issuer if available
+      required:
+      - referringPartnerUserId
+      title: UpdateUserResponse
+    type_commons:EmptyObject:
+      type: object
+      properties: {}
+      title: EmptyObject
+    type_users:CreateUsersMultiStatusResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:ErrorObject'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_users:UserRequestDataUnion'
+      required:
+      - errors
+      title: CreateUsersMultiStatusResponse
+    type_users:UpdateUserRequestDataUnion:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - user
+            description: 'Discriminator value: user'
+          id:
+            $ref: '#/components/schemas/type_commons:UserId'
+          attributes:
+            $ref: '#/components/schemas/type_users:UpdateUserRequestAttributes'
+        required:
+        - type
+        - id
+        - attributes
+      discriminator:
+        propertyName: type
+      title: UpdateUserRequestDataUnion
+    type_users:CreateUserCardResponse:
+      type: object
+      properties:
+        _id:
+          $ref: '#/components/schemas/type_commons:MongoId'
+          description: Unique user ID of user in Kard's system
+        email:
+          type: string
+          description: Email of user if available
+        hashedEmail:
+          type: string
+          description: Hashed email address of user (using SHA-256)
+        phoneNumber:
+          type: string
+          description: Phone number of user in E.164 format
+        birthYear:
+          type: string
+          description: Birth year of user
+        userName:
+          type: string
+          description: Username of user if available
+        firstName:
+          type: string
+          description: First name of user if available
+        lastName:
+          type: string
+          description: Last name of user if available
+        zipCode:
+          type: string
+          description: Zipcode of user if available
+        referringPartner:
+          type: string
+          description: Issuer name
+        referringPartnerUserId:
+          type: string
+          description: Referring partner user ID of user from issuer
+        externalPartnerUserId:
+          type: string
+          description: Partner unique user id, might be equal to referringPartnerUserId, if available
+        enrolledRewards:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:EnrolledRewardsType_2'
+          description: List of enrolled rewards
+        cards:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_users:CardInfoResponse'
+          description: List of User Cards Information (this will include the newly added cards added).
+        createdDate:
+          type: string
+          format: date-time
+          description: Created date of user in Kard's system (UTC)
+        lastModified:
+          type: string
+          format: date-time
+          description: Last modified date of user in Kard's system (UTC)
+        __v:
+          type: integer
+          description: Version of user in Kard's system
+      required:
+      - _id
+      - referringPartner
+      - referringPartnerUserId
+      - cards
+      - createdDate
+      - lastModified
+      - __v
+      title: CreateUserCardResponse
+    type_commons:ErrorSource:
+      type: object
+      properties:
+        pointer:
+          type: string
+          description: A JSON pointer to the value in the request document that caused the error
+        parameter:
+          type: string
+          description: A string indicating which URI query parameter caused the error
+        header:
+          type: string
+          description: A string indicating the name of a single request header which caused the error
+      title: ErrorSource
+    type_commons:OrganizationId:
+      type: string
+      description: Your issuer organization ID, provided by Kard
+      title: OrganizationId
+    type_users:CardInfoRequest:
+      type: object
+      properties:
+        last4:
+          type: string
+          description: Card last four digits. <b>Note, this field is REQUIRED for matching purposes.</b>
+        bin:
+          type: string
+          description: Bank identification number (BIN). Must be a valid BIN of 6 digits. If over 6 digits, please send first 6.<b>Note, this field is REQUIRED for matching purposes.</b>
+        issuer:
+          type: string
+          description: Issuer
+        network:
+          $ref: '#/components/schemas/type_commons:Network'
+          description: Name of card network
+        status:
+          $ref: '#/components/schemas/type_users:CardStatus'
+          description: Status of card
+        token:
+          type: string
+          description: Card token
+        tokenSource:
+          type: string
+          description: Card token source
+      required:
+      - last4
+      - bin
+      - issuer
+      - network
+      title: CardInfoRequest
+    type_commons:Network:
+      type: string
+      enum:
+      - VISA
+      - MASTERCARD
+      - AMERICAN EXPRESS
+      - DISCOVER
+      title: Network
+    type_commons:EnrolledRewardsType:
+      type: string
+      enum:
+      - CARDLINKED
+      description: Enrolled Rewards
+      title: EnrolledRewardsType
+    type_users:DeleteUserResponseObject:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_users:UserResponseUnionNoData'
+      required:
+      - data
+      title: DeleteUserResponseObject
+    type_commons:UnauthorizedErrorBody:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: UnauthorizedErrorBody
+    type_users:UserRequestDataUnion:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - user
+            description: 'Discriminator value: user'
+          id:
+            $ref: '#/components/schemas/type_commons:UserId'
+          attributes:
+            $ref: '#/components/schemas/type_users:UserRequestAttributes'
+        required:
+        - type
+        - id
+        - attributes
+      discriminator:
+        propertyName: type
+      title: UserRequestDataUnion
+    type_users:CreateUserRequestBody:
+      type: object
+      properties:
+        email:
+          type: string
+          description: Email of user; <b>AT LEAST one of email or userName is REQUIRED. We HIGHLY RECOMMEND sending both.</b>
+        hashedEmail:
+          type: string
+          description: Hashed email address of user (using SHA-256)
+        phoneNumber:
+          type: string
+          description: Phone number of user in E.164 format
+        birthYear:
+          type: string
+          description: Birth year of user
+        userName:
+          type: string
+          description: Username of user from issuer; <b>AT LEAST one of email or userName is REQUIRED. We HIGHLY RECOMMEND sending both.</b>
+        firstName:
+          type: string
+          description: First name of user. <b>We HIGHLY RECOMMEND sending this field.</b>
+        lastName:
+          type: string
+          description: Last name of user. <b>We HIGHLY RECOMMEND sending this field.</b>
+        zipCode:
+          type: string
+          description: Zipcode of user. <b>We HIGHLY RECOMMEND sending this field as it may be required in the near future.</b>
+        referringPartnerUserId:
+          type: string
+          description: Referring partner user ID of user from issuer. Must be a unique identifier across users
+        externalPartnerUserId:
+          type: string
+          description: Partner unique user id, might be equal to referringPartnerUserId
+        enrolledRewards:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:EnrolledRewardsType_2'
+          description: If field is not supplied, user will be automatically enrolled in all programs. Note, <b>please do not send AFFILIATE</b> as this field has been deprecated.
+        cards:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_users:CardInfoRequest'
+          description: List of User Cards Information. <b>This is REQUIRED for matching purposes.</b>
+        cardInfo:
+          $ref: '#/components/schemas/type_users:CardInfoRequest'
+          description: <b>[Deprecated — please use 'cards' field]</b> User Card Information
+        referringPartner:
+          type: string
+          description: Issuer name
+      required:
+      - referringPartnerUserId
+      title: CreateUserRequestBody
+  securitySchemes:
+    OAuthScheme:
+      type: http
+      scheme: bearer
