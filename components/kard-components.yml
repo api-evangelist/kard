@@ -1,0 +1,12 @@
+generated: '2026-07-19'
+method: searched
+source: https://docs.getkard.com/api/web-view
+components:
+- family: WebView
+  kind: hosted-embedded-surface
+  description: Kard WebView is a hosted, embeddable rewards surface issuers drop into
+    their app/web experience to render a user's live offers and locations without
+    building UI.
+  token_operation: get-web-view-token
+  token_endpoint: /v2/auth/issuers/{organizationId}/users/{userId}/token
+  docs: https://docs.getkard.com/api/web-view

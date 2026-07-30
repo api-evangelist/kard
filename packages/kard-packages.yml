@@ -1,0 +1,47 @@
+generated: '2026-07-19'
+method: searched
+source: https://docs.getkard.com/2024-10-01/sdks
+packages:
+- language: typescript
+  registry: npm
+  name: '@kard-financial/sdk'
+  url: https://www.npmjs.com/package/@kard-financial/sdk
+  install: npm install --save @kard-financial/sdk
+  official: true
+  docs: https://docs.getkard.com/sdks/type-script-sdk/getting-started
+- language: python
+  registry: pypi
+  name: kard-financial-sdk
+  url: https://pypi.org/project/kard-financial-sdk/
+  install: pip install kard-financial-sdk
+  official: true
+  docs: https://docs.getkard.com/sdks/python-sdk/getting-started
+- language: java
+  registry: maven
+  name: com.getkard:kard-financial-sdk
+  url: https://central.sonatype.com/artifact/com.getkard/kard-financial-sdk
+  install: implementation 'com.getkard:kard-financial-sdk'
+  official: true
+  docs: https://docs.getkard.com/sdks/java-sdk/getting-started
+- language: go
+  registry: pkg.go.dev
+  name: github.com/KardFinancial/kard-go-sdk
+  url: https://pkg.go.dev/github.com/KardFinancial/kard-go-sdk
+  install: go get github.com/KardFinancial/kard-go-sdk
+  official: true
+  docs: https://docs.getkard.com/sdks/go-sdk/getting-started
+- language: dotnet
+  registry: nuget
+  name: KardFinancial
+  url: https://www.nuget.org/packages/KardFinancial
+  install: dotnet add package KardFinancial
+  official: true
+  docs: https://docs.getkard.com/sdks/net-sdk/getting-started
+- language: http
+  registry: github
+  name: kard-financial/kard-postman
+  url: https://github.com/kard-financial/kard-postman
+  install: git clone https://github.com/kard-financial/kard-postman
+  official: true
+  kind: postman-collection
+  notes: Postman collection for the Kard API sandbox environment.

@@ -1,0 +1,73 @@
+> For clean Markdown of any page, append .md to the page URL.
+> For a complete documentation index, see https://docs.getkard.com/2024-10-01/llms.txt.
+> For AI client integration (Claude Code, Cursor, etc.), connect to the MCP server at https://docs.getkard.com/2024-10-01/_mcp/server.
+
+# 2024-10-01
+
+## Docs
+
+- [Kard API Reference](https://docs.getkard.com/home.md)
+- [Developer SDKs](https://docs.getkard.com/api/sd-ks.md): Official SDKs for building with Kard
+- [WebView](https://docs.getkard.com/api/web-view.md)
+- [Getting Started](https://docs.getkard.com/api/integration-guides/getting-started.md)
+- [Authentication](https://docs.getkard.com/api/integration-guides/authentication.md)
+- [Historical Transaction Uploads](https://docs.getkard.com/api/integration-guides/historical-transaction-uploads.md)
+- [Notifications](https://docs.getkard.com/api/integration-guides/notifications.md)
+- [Attributions](https://docs.getkard.com/api/integration-guides/attributions.md)
+- [Extended API Integration](https://docs.getkard.com/api/integration-guides/extended-api.md)
+- [Getting Started](https://docs.getkard.com/sdks/type-script-sdk/getting-started.md)
+- [Getting Started](https://docs.getkard.com/sdks/java-sdk/getting-started.md)
+- [Getting Started](https://docs.getkard.com/sdks/python-sdk/getting-started.md)
+- [Getting Started](https://docs.getkard.com/sdks/go-sdk/getting-started.md)
+- [Getting Started](https://docs.getkard.com/sdks/net-sdk/getting-started.md)
+
+## API Docs
+
+- API Reference > Transactions [Create Incoming Transactions](https://docs.getkard.com/api/transactions/create.md)
+- API Reference > Transactions [Create Bulk Transactions Upload URL](https://docs.getkard.com/api/transactions/create-bulk-transactions-upload-url.md)
+- API Reference > Transactions [Create Audits](https://docs.getkard.com/api/transactions/create-audits.md)
+- API Reference > Transactions [Get Earned Rewards](https://docs.getkard.com/api/transactions/get-earned-rewards.md)
+- API Reference > Transactions > Uploads [Create Upload](https://docs.getkard.com/api/transactions/uploads/create.md)
+- API Reference > Transactions > Uploads [Add Upload Part](https://docs.getkard.com/api/transactions/uploads/create-part.md)
+- API Reference > Transactions > Uploads [Update Upload](https://docs.getkard.com/api/transactions/uploads/update.md)
+- API Reference > Users [Create Users](https://docs.getkard.com/api/users/create.md)
+- API Reference > Users [Update User](https://docs.getkard.com/api/users/update.md)
+- API Reference > Users [Delete User](https://docs.getkard.com/api/users/delete.md)
+- API Reference > Users [Get User By ID](https://docs.getkard.com/api/users/get.md)
+- API Reference > Rewards [Get Offers By User](https://docs.getkard.com/api/rewards/offers.md)
+- API Reference > Rewards [Get Locations By User](https://docs.getkard.com/api/rewards/locations.md)
+- API Reference > Notifications [Notification Webhook](https://docs.getkard.com/api/notifications/notification-webhook.md)
+- API Reference > Notifications > Notifications [List Notifications](https://docs.getkard.com/api/notifications/notifications/list.md)
+- API Reference > Notifications > Notifications [Replay Notification](https://docs.getkard.com/api/notifications/notifications/replay.md)
+- API Reference > Notifications > Subscriptions [Get Subscriptions](https://docs.getkard.com/api/notifications/subscriptions/get.md)
+- API Reference > Notifications > Subscriptions [Create Subscription](https://docs.getkard.com/api/notifications/subscriptions/create.md)
+- API Reference > Notifications > Subscriptions [Update Subscription](https://docs.getkard.com/api/notifications/subscriptions/update.md)
+- API Reference > Attributions [Create Attribution Events](https://docs.getkard.com/api/attributions/create.md)
+- API Reference > Attributions [Activate Offer](https://docs.getkard.com/api/attributions/activate.md)
+- API Reference > Attributions [Boost Offer](https://docs.getkard.com/api/attributions/boost.md)
+- API Reference > Attributions [Activate Placement Slot](https://docs.getkard.com/api/attributions/activate-placement-slot.md)
+- API Reference > Files [Get Files](https://docs.getkard.com/api/files/get-metadata.md)
+- API Reference > WebView [Get WebView Token](https://docs.getkard.com/api/auth/get-web-view-token.md)
+- API Reference > Organizations [Get](https://docs.getkard.com/api/organizations/get.md)
+- API Reference > Organizations > Children [List](https://docs.getkard.com/api/organizations/children/list.md)
+- API Reference > Organizations > Children [Create](https://docs.getkard.com/api/organizations/children/create.md)
+- API Reference > Organizations > Children [Get](https://docs.getkard.com/api/organizations/children/get.md)
+- API Reference > Organizations > Children [Update](https://docs.getkard.com/api/organizations/children/update.md)
+- API Reference > Organizations > Children [Delete](https://docs.getkard.com/api/organizations/children/delete.md)
+- API Reference > Placements > Placements [Create](https://docs.getkard.com/api/placements/placements/create.md)
+- API Reference > Placements > Placements [List](https://docs.getkard.com/api/placements/placements/list.md)
+- API Reference > Placements > Placements [Get](https://docs.getkard.com/api/placements/placements/get.md)
+- API Reference > Placements > Placements [Update](https://docs.getkard.com/api/placements/placements/update.md)
+- API Reference > Placements > Placements [Delete](https://docs.getkard.com/api/placements/placements/delete.md)
+- API Reference > Content Strategies > ContentStrategies [Create](https://docs.getkard.com/api/content-strategies/content-strategies/create.md)
+- API Reference > Content Strategies > ContentStrategies [List](https://docs.getkard.com/api/content-strategies/content-strategies/list.md)
+- API Reference > Content Strategies > ContentStrategies [Get](https://docs.getkard.com/api/content-strategies/content-strategies/get.md)
+- API Reference > Content Strategies > ContentStrategies [Update](https://docs.getkard.com/api/content-strategies/content-strategies/update.md)
+- API Reference > Content Strategies > ContentStrategies [Delete](https://docs.getkard.com/api/content-strategies/content-strategies/delete.md)
+- API Reference > Ping [Ping](https://docs.getkard.com/api/ping/ping.md)
+
+## OpenAPI Specification
+
+The raw OpenAPI 3.1 specification for this API is available at:
+- [OpenAPI JSON](https://docs.getkard.com/openapi.json)
+- [OpenAPI YAML](https://docs.getkard.com/openapi.yaml)

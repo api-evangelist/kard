@@ -1,0 +1,33 @@
+generated: '2026-07-19'
+method: searched
+hosts:
+- host: https://getkard.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    file: kard-security.txt
+- host: https://www.getkard.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    file: kard-security.txt
+- host: https://docs.getkard.com
+  documents:
+  - path: /.well-known/api-catalog
+    status: 200
+    file: kard-api-catalog.json
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+- host: https://rewards-api.getkard.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 403
+  - path: /.well-known/openid-configuration
+    status: 403
+  - path: /.well-known/oauth-authorization-server
+    status: 403
+notes: RFC 9116 security.txt served on the marketing apex; RFC 9727 api-catalog served
+  on the docs host indexing both OpenAPI specs. API host rewards-api.getkard.com returns
+  403 on unauthenticated well-known probes.

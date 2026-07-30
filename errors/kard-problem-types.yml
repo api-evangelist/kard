@@ -1,0 +1,84 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/kard-api-reference-openapi.yaml
+format: json-api
+envelope:
+  content_type: application/json
+  schema: ErrorResponse
+  shape:
+    errors:
+    - status: string
+      title: string
+      detail: string
+      source:
+        pointer: string
+        parameter: string
+        header: string
+      id: string (resource id; always present on multi-status errors)
+  notes: Kard uses a JSON:API-style error envelope (not RFC 9457 problem+json). 207
+    Multi-Status responses return per-item errors keyed by ErrorObject.id.
+problems:
+- status: 400
+  title: Bad Request
+  envelope: application/json (JSON:API errors[] with status/title/detail/source)
+  remediation: Fix the request body/parameters; inspect errors[].source.pointer/parameter/header
+    for the offending field.
+  example_operations:
+  - DELETE /v2/issuers/{organizationId}/users/{userId}
+  - GET /v2/issuers/{organizationId}/contentStrategies
+  - GET /v2/issuers/{organizationId}/files/metadata
+  - GET /v2/issuers/{organizationId}/notifications
+- status: 401
+  title: Unauthorized
+  envelope: application/json (JSON:API errors[] with status/title/detail/source)
+  remediation: Obtain a fresh bearer token from /v2/auth/token (client_credentials)
+    and retry.
+  example_operations:
+  - DELETE /v2/issuers/{organizationId}/children/{childId}
+  - DELETE /v2/issuers/{organizationId}/contentStrategies/{contentStrategyId}
+  - DELETE /v2/issuers/{organizationId}/placements/{placementId}
+  - DELETE /v2/issuers/{organizationId}/users/{userId}
+- status: 403
+  title: Forbidden
+  envelope: application/json (JSON:API errors[] with status/title/detail/source)
+  remediation: The token lacks the required scope for this operation; request the
+    scope listed in the operation.
+  example_operations:
+  - DELETE /v2/issuers/{organizationId}/children/{childId}
+  - DELETE /v2/issuers/{organizationId}/contentStrategies/{contentStrategyId}
+  - DELETE /v2/issuers/{organizationId}/placements/{placementId}
+  - GET /v2/issuer
+- status: 404
+  title: Not Found
+  envelope: application/json (JSON:API errors[] with status/title/detail/source)
+  remediation: The referenced resource (issuer, user, offer, placement, ...) does
+    not exist.
+  example_operations:
+  - DELETE /v2/issuers/{organizationId}/children/{childId}
+  - DELETE /v2/issuers/{organizationId}/contentStrategies/{contentStrategyId}
+  - DELETE /v2/issuers/{organizationId}/placements/{placementId}
+  - DELETE /v2/issuers/{organizationId}/users/{userId}
+- status: 409
+  title: Conflict
+  envelope: application/json (JSON:API errors[] with status/title/detail/source)
+  remediation: The resource already exists or conflicts with current state; reconcile
+    before retrying.
+  example_operations:
+  - DELETE /v2/issuers/{organizationId}/contentStrategies/{contentStrategyId}
+  - POST /v2/issuers/{organizationId}/children
+  - POST /v2/issuers/{organizationId}/contentStrategies
+  - POST /v2/issuers/{organizationId}/notifications/{eventId}/replay
+- status: 500
+  title: Internal Server Error
+  envelope: application/json (JSON:API errors[] with status/title/detail/source)
+  remediation: Transient server error; retry with backoff and contact support if it
+    persists.
+  example_operations:
+  - DELETE /v2/issuers/{organizationId}/children/{childId}
+  - DELETE /v2/issuers/{organizationId}/contentStrategies/{contentStrategyId}
+  - DELETE /v2/issuers/{organizationId}/placements/{placementId}
+  - DELETE /v2/issuers/{organizationId}/users/{userId}
+special:
+- schema: NetworkBlockedErrorBody
+  operation: GET /v2/ping
+  detail: Returned by the ping/health check when the caller network is blocked.

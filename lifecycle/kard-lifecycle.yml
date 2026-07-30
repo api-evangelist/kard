@@ -1,0 +1,15 @@
+generated: '2026-07-19'
+method: searched
+source: https://docs.getkard.com/2024-10-01/llms.txt
+versioning:
+  scheme: calver-date
+  current: '2024-10-01'
+  docs: https://docs.getkard.com/home
+  notes: Date-based API versions; the '2024-10-01' version is the default. A 'Legacy'
+    version remains documented.
+deprecation:
+  legacy_version: legacy
+  notes: Legacy API surface (github kard-postman-era endpoints) is retained but superseded
+    by the 2024-10-01 version. A legacy Amazon Cognito auth endpoint is being discontinued.
+status_page: https://status.getkard.com/
+deprecated_operations: []

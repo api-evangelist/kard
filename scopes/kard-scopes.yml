@@ -1,0 +1,67 @@
+generated: '2026-07-19'
+method: searched
+source: openapi/kard-api-reference-openapi.yaml
+docs: https://docs.getkard.com/api/integration-guides/authentication
+schemes:
+- name: OAuthScheme
+  source: openapi/kard-api-reference-openapi.yaml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://{client-subdomain}.getkard.com/v2/auth/token
+notes: The OpenAPI declares an http/bearer scheme, but the docs and per-operation
+  'Required scopes' annotations show OAuth2 client_credentials with the scopes below.
+  Scopes harvested from the OpenAPI operation descriptions.
+scopes:
+- scope: transaction:read
+  description: Read transactions and matched/earned reward data.
+  flows:
+  - clientCredentials
+- scope: transaction:write
+  description: Submit incoming transactions for CLO matching.
+  flows:
+  - clientCredentials
+- scope: audit:read
+  description: Read transaction audit records.
+  flows:
+  - clientCredentials
+- scope: audit:write
+  description: Create transaction audit records.
+  flows:
+  - clientCredentials
+- scope: user:read
+  description: Read enrolled user records.
+  flows:
+  - clientCredentials
+- scope: user:write
+  description: Create enrolled users.
+  flows:
+  - clientCredentials
+- scope: user:update
+  description: Update enrolled user records.
+  flows:
+  - clientCredentials
+- scope: user:delete
+  description: Delete enrolled user records.
+  flows:
+  - clientCredentials
+- scope: rewards:read
+  description: Read offers and locations available to a user.
+  flows:
+  - clientCredentials
+- scope: attributions:write
+  description: Create attribution events, activate and boost offers, activate placement
+    slots.
+  flows:
+  - clientCredentials
+- scope: notifications:read
+  description: List and read notification events and subscriptions.
+  flows:
+  - clientCredentials
+- scope: notifications:write
+  description: Create/update notification subscriptions and replay notifications.
+  flows:
+  - clientCredentials
+- scope: files:write
+  description: Create and upload files / bulk transaction uploads.
+  flows:
+  - clientCredentials

@@ -1,0 +1,78 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/kard-api-reference-openapi.yaml
+entities:
+- name: Issuer
+- name: Organization
+- name: User
+- name: Transaction
+- name: EarnedReward
+- name: Offer
+- name: Location
+- name: Merchant
+- name: Notification
+- name: Subscription
+- name: Attribution
+- name: Placement
+- name: ContentStrategy
+- name: Upload
+- name: File
+relationships:
+- from: Organization
+  type: has_many
+  to: Organization
+  via: children
+- from: Issuer
+  type: has_many
+  to: User
+  via: organizationId
+- from: User
+  type: has_many
+  to: Transaction
+  via: userId
+- from: User
+  type: has_many
+  to: EarnedReward
+  via: userId
+- from: User
+  type: has_many
+  to: Offer
+  via: offers
+- from: User
+  type: has_many
+  to: Location
+  via: locations
+- from: Offer
+  type: belongs_to
+  to: Merchant
+  via: merchantId
+- from: Location
+  type: belongs_to
+  to: Merchant
+  via: merchantId
+- from: Attribution
+  type: belongs_to
+  to: Offer
+  via: offerId
+- from: Attribution
+  type: belongs_to
+  to: User
+  via: userId
+- from: Subscription
+  type: has_many
+  to: Notification
+  via: eventId
+- from: Placement
+  type: belongs_to
+  to: Organization
+  via: organizationId
+- from: ContentStrategy
+  type: belongs_to
+  to: Organization
+  via: organizationId
+- from: Placement
+  type: has_many
+  to: ContentStrategy
+  via: contentStrategyId
+notes: Entity graph derived from the 2024-10-01 OpenAPI path structure (/v2/issuers/{organizationId}/...),
+  tag grouping, and id-reference fields. 278 component schemas back these entities.

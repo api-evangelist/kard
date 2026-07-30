@@ -1,0 +1,19 @@
+generated: '2026-07-19'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: getkard.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Aug 24 20:29:31 2026 GMT
+  hsts: null
+domains:
+- domain: getkard.com
+  dnssec: false
+  caa:
+  - 0 issue "pki.goog; cansignhttpexchanges=yes"
+  - 0 issue "amazon.com"
+  - 0 issue "letsencrypt.org"
+  spf: true
+  dmarc: true
+  dmarc_policy: none

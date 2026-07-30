@@ -1,0 +1,15 @@
+generated: '2026-07-19'
+method: searched
+status: published
+source: https://docs.getkard.com/2024-10-01/llms.txt
+server:
+  name: kard
+  transport: http
+  url: https://docs.getkard.com/_mcp/server
+  versioned_url: https://docs.getkard.com/2024-10-01/_mcp/server
+  description: Official hosted MCP server exposing the Kard API documentation to AI
+    clients (Claude Code, Cursor, etc.). Documentation-scoped MCP server (docs + spec
+    navigation).
+notes: Published documentation MCP server advertised in the Kard llms.txt. Scope is
+  documentation retrieval over the Kard API reference, not a transactional API tool
+  server.

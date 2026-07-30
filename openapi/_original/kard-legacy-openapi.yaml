@@ -1,0 +1,3707 @@
+openapi: 3.1.0
+info:
+  title: API Reference
+  version: 1.0.0
+paths:
+  /transactions/incoming:
+    post:
+      operationId: create-incoming-transaction
+      summary: Create Incoming Transaction
+      description: >-
+        Call this endpoint to send all incoming transactions made by all enrolled users in your rewards program. These
+        incoming transactions will be processed and matched by the Kard system. Learn more about the [Transaction CLO
+        Matching](https://github.com/kard-financial/kard-postman#c-transaction-clo-matching) flow here.<br/>
+
+        <b>Required scopes:</b> `transaction:write`
+      tags:
+        - transactions
+      parameters:
+        - name: Authorization
+          in: header
+          description: Bearer authentication
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Response with status 201
+          content:
+            application/json:
+              schema:
+                type: string
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:InvalidRequestUnion'
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:UnauthorizedErrorBody'
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_transactions:CreateIncomingTransactionRequestBody'
+  /transactions/audit:
+    post:
+      operationId: create-audit
+      summary: Create Audit
+      description: >-
+        Call this endpoint to request that a particular transaction be audited further by the Kard system, in the event
+        of a missing cashback claim, incorrect cashback amount claim or other mis-match claims.<br/>
+
+        <b>Required scopes:</b> `audit:write`
+      tags:
+        - transactions
+      parameters:
+        - name: Authorization
+          in: header
+          description: Bearer authentication
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Response with status 201
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_transactions:CreateAuditResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:InvalidRequestUnion'
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:UnauthorizedErrorBody'
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_transactions:CreateAuditRequestBody'
+  /transactions/audit/{id}:
+    get:
+      operationId: get-audit-by-id
+      summary: Get Audit Status
+      description: >-
+        Call this endpoint to retrieve an update on the status of a created transaction audit. Note, the resolutionCode,
+        resolutionDescription and resolutionTimeStamp will not be available until the audit has a “CLOSED” status
+        signifying its resolution. <br/>
+
+        <b>Required scopes:</b> `audit:read`
+      tags:
+        - transactions
+      parameters:
+        - name: id
+          in: path
+          description: The audit ID provided by Kard's system
+          required: true
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          description: Bearer authentication
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_transactions:GetAuditByIdResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:InvalidRequestUnion'
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:UnauthorizedErrorBody'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: string
+  /users/users:
+    post:
+      operationId: create-user
+      summary: Create User
+      description: >-
+        Call this endpoint to enroll a specified user into your rewards program. Learn more about the [Enrolling
+        Users](https://github.com/kard-financial/kard-postman#a-cardholders) flow based on your use case here.<br/>
+
+        <b>Required scopes:</b> `user:write`
+      tags:
+        - users
+      parameters:
+        - name: Authorization
+          in: header
+          description: Bearer authentication
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Response with status 201
+          content:
+            application/json:
+              schema:
+                type: string
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:InvalidRequestUnion'
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:UnauthorizedErrorBody'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: string
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_users:CreateUserRequestBody'
+  /users/users/{id}/cards:
+    post:
+      operationId: create-user-card
+      summary: Create User Card
+      description: >-
+        Call this endpoint to create a card that a specified user enrolled in rewards will use to make purchases and
+        earn rewards.<br/>
+
+        <b>Required scopes:</b> `user:write`
+      tags:
+        - users
+      parameters:
+        - name: id
+          in: path
+          description: Referring partner user ID from issuer that specifies user
+          required: true
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          description: Bearer authentication
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Response with status 201
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_users:CreateUserCardResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:InvalidRequestUnion'
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:UnauthorizedErrorBody'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: string
+        '409':
+          description: Error response with status 409
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_users:CreateUserCardRequestBody'
+  /users/users/{id}:
+    put:
+      operationId: update-user
+      summary: Update User
+      description: >-
+        Call this endpoint to update the details on a specified user. If you would like to add a card to a specified
+        user, please refer to the [Create User Card endpoint](/legacy/api/users/create-user-card).<br/>
+
+        <b>Required scopes:</b> `user:update`
+      tags:
+        - users
+      parameters:
+        - name: id
+          in: path
+          description: Referring partner user ID from issuer that specifies user
+          required: true
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          description: Bearer authentication
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_users:UpdateUserResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:InvalidRequestUnion'
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:UnauthorizedErrorBody'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_users:UserRequestBody'
+    delete:
+      operationId: delete-user-by-id
+      summary: Delete User
+      description: >-
+        Call this endpoint to delete a specified enrolled user from the rewards program and Kard's system. Users can be
+        re-enrolled into rewards by calling the [Create User](/legacy/api/users/create-user) endpoint using the same
+        `referringPartnerUserId` from before. Deleting a user will remove all the user fields for that specific user
+        from Kard’s system.<br/>
+
+        <b>Required scopes:</b> `user:delete`
+      tags:
+        - users
+      parameters:
+        - name: id
+          in: path
+          description: Referring partner user ID from issuer that specifies user
+          required: true
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          description: Bearer authentication
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                type: string
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:InvalidRequestUnion'
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:UnauthorizedErrorBody'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: string
+  /rewards/merchant/user/{referringPartnerUserId}:
+    get:
+      operationId: get-merchants-by-user
+      summary: Get Eligible Merchants
+      description: >-
+        Retrieve national merchants data that a specified user has eligible national offers at. Call this endpoint to
+        build out your [targeted offers UX
+        experience](https://github.com/kard-financial/kard-postman?tab=readme-ov-file#b-targeted-offers). Local
+        merchants and offers details can be found by calling the [Get Eligible
+        Locations](/legacy/api/rewards/locations/get-locations-by-user) endpoint with the `includeLocal` query
+        parameter.<br/>
+
+        <b>Required scopes:</b> `rewards:read`
+      tags:
+        - rewards
+      parameters:
+        - name: referringPartnerUserId
+          in: path
+          description: Referring partner user ID from issuer that specifies user
+          required: true
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: Page number [>= 0], (default = 0)
+          required: false
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          description: Maximum number of merchants to be returned [1 - 200], (default = 200)
+          required: false
+          schema:
+            type: integer
+        - name: category
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/type_commons:CategoryOption'
+        - name: Authorization
+          in: header
+          description: Bearer authentication
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/type_rewards:MerchantWithAttribution'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:InvalidRequestUnion'
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:UnauthorizedErrorBody'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: string
+  /rewards/merchant/{id}:
+    get:
+      operationId: get-merchant-by-id
+      summary: Get Merchant by ID
+      description: |-
+        Retrieve merchant data for a specific Kard merchant ID.<br/>
+        <b>Required scopes:</b> `rewards:read`
+      tags:
+        - rewards
+      parameters:
+        - name: id
+          in: path
+          description: The Kard merchant ID to query
+          required: true
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          description: Bearer authentication
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_rewards:GetMerchantByIdResponse'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:InvalidRequestUnion'
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:UnauthorizedErrorBody'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: string
+  /rewards/merchant:
+    get:
+      operationId: get-merchants
+      summary: Get Merchants
+      description: >-
+        Retrieve ALL national and local merchant data regardless of whether a user is eligible to see them. This
+        endpoint is a legacy endpoint and will no longer be maintained soon. Instead, use [Get Eligible
+        Merchants](/legacy/api/rewards/merchants/get-merchants-by-user) to retrieve national merchant data and build
+        your [targeted offers UX
+        experience](https://github.com/kard-financial/kard-postman?tab=readme-ov-file#b-targeted-offers). Local
+        merchants and offers details can be found by calling the [Get Eligible
+        Locations](/legacy/api/rewards/locations/get-locations-by-user) endpoint with the `includeLocal` query
+        parameter.<br/>
+
+        <b>Required scopes:</b> `rewards:read`
+      tags:
+        - rewards
+      parameters:
+        - name: page
+          in: query
+          description: Page number [>= 0], (default = 0)
+          required: false
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          description: Maximum number of merchants [1 - 200], (default = 200)
+          required: false
+          schema:
+            type: integer
+        - name: source
+          in: query
+          description: Merchant source
+          required: false
+          schema:
+            $ref: '#/components/schemas/type_commons:Source'
+        - name: category
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/type_commons:CategoryOption'
+        - name: Authorization
+          in: header
+          description: Bearer authentication
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/type_rewards:Merchant'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:InvalidRequestUnion'
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:UnauthorizedErrorBody'
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: string
+  /rewards/merchant/offers/user/{referringPartnerUserId}:
+    get:
+      operationId: get-offers-by-user
+      summary: Get Eligible Offers
+      description: >-
+        Retrieve national offers data that a specified user is eligible for. Call this endpoint to build out your
+        [targeted offers UX
+        experience](https://github.com/kard-financial/kard-postman?tab=readme-ov-file#b-targeted-offers). Local
+        merchants and offers details can be found by calling the [Get Eligible
+        Locations](/legacy/api/rewards/locations/get-locations-by-user) endpoint with the `includeLocal` query
+        parameter.<br/>
+
+        <b>Required scopes:</b> `rewards:read`
+      tags:
+        - rewards
+      parameters:
+        - name: referringPartnerUserId
+          in: path
+          description: Referring partner user ID from issuer that specifies user
+          required: true
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: Page number [>= 0], (default = 0)
+          required: false
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          description: Maximum number of offers to be returned [1 - 200], (default = 200)
+          required: false
+          schema:
+            type: integer
+        - name: merchantId
+          in: query
+          description: Merchant ID in Kard's system
+          required: false
+          schema:
+            type: string
+        - name: offerType
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/type_commons:OfferType'
+        - name: category
+          in: query
+          description: >-
+            Category of merchant associated with offer. Please use URL Encode for non single word categories. (Food &
+            Beverage should be Food%20%26%20Beverage)
+          required: false
+          schema:
+            $ref: '#/components/schemas/type_commons:CategoryOption'
+        - name: isTargeted
+          in: query
+          description: True returns targeted offers, false returns targeted and non-targeted offers
+          required: false
+          schema:
+            type: boolean
+        - name: startDateSort
+          in: query
+          description: Sort offer start dates chronologically (1 for ascending, -1 for descending)
+          required: false
+          schema:
+            $ref: '#/components/schemas/type_commons:SortOptions'
+        - name: expirationDateSort
+          in: query
+          description: Sort offer expiration dates chronologically (1 for ascending, -1 for descending)
+          required: false
+          schema:
+            $ref: '#/components/schemas/type_commons:SortOptions'
+        - name: merchantNameSort
+          in: query
+          description: Sort merchant names (1 for A-Z, -1 for Z-A)
+          required: false
+          schema:
+            $ref: '#/components/schemas/type_commons:SortOptions'
+        - name: supportedComponents
+          in: query
+          description: UI component types to include in the response.
+          required: false
+          schema:
+            $ref: '#/components/schemas/type_rewards:ComponentType'
+        - name: Authorization
+          in: header
+          description: Bearer authentication
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/type_rewards:OfferWithAttribution'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:InvalidRequestUnion'
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:UnauthorizedErrorBody'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: string
+  /rewards/merchant/offers:
+    get:
+      operationId: get-offers
+      summary: Get Offers
+      description: >-
+        Retrieve ALL national and local offer data regardless of whether a user is eligible to see them. This endpoint
+        is a legacy endpoint and will no longer be maintained soon. Instead, use [Get Eligible
+        Offers](/legacy/api/rewards/offers/get-offers-by-user) to retrieve national merchant data and build your
+        [targeted offers UX
+        experience](https://github.com/kard-financial/kard-postman?tab=readme-ov-file#b-targeted-offers). Local
+        merchants and offers details can be found by calling the [Get Eligible
+        Locations](/legacy/api/rewards/locations/get-locations-by-user) endpoint with the `includeLocal` query
+        parameter.<br/>
+
+        <b>Required scopes:</b> `rewards:read`
+      tags:
+        - rewards
+      parameters:
+        - name: page
+          in: query
+          description: Page number [>= 0], (default = 0)
+          required: false
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          description: Maximum number of offers [1 - 200], (default = 200)
+          required: false
+          schema:
+            type: integer
+        - name: source
+          in: query
+          description: Source of merchant associated with offer
+          required: false
+          schema:
+            $ref: '#/components/schemas/type_commons:Source'
+        - name: category
+          in: query
+          description: >-
+            Category of merchant associated with offer. Please use URL Encode for non single word categories. (Food &
+            Beverage should be Food%20%26%20Beverage)
+          required: false
+          schema:
+            $ref: '#/components/schemas/type_commons:CategoryOption'
+        - name: name
+          in: query
+          description: Name of offer
+          required: false
+          schema:
+            type: string
+        - name: offerType
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/type_commons:OfferType'
+        - name: merchantId
+          in: query
+          description: Merchant ID in Kard's system
+          required: false
+          schema:
+            type: string
+        - name: isTargeted
+          in: query
+          description: True returns targeted offers, false returns targeted and non-targeted offers
+          required: false
+          schema:
+            type: boolean
+        - name: startDateStart
+          in: query
+          description: Time in string format for offer startDate search (UTC)
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: startDateEnd
+          in: query
+          description: Time in string format for offer startDate search (UTC)
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: expirationDateStart
+          in: query
+          description: Time in string format for offer expirationDate search (UTC)
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: expirationDateEnd
+          in: query
+          description: Time in string format for offer expirationDate search (UTC)
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: startDateSort
+          in: query
+          description: Sort offer start dates chronologically (1 for ascending, -1 for descending)
+          required: false
+          schema:
+            $ref: '#/components/schemas/type_commons:SortOptions'
+        - name: expirationDateSort
+          in: query
+          description: Sort offer expiration dates chronologically (1 for ascending, -1 for descending)
+          required: false
+          schema:
+            $ref: '#/components/schemas/type_commons:SortOptions'
+        - name: merchantNameSort
+          in: query
+          description: Sort merchant names (1 for A-Z, -1 for Z-A)
+          required: false
+          schema:
+            $ref: '#/components/schemas/type_commons:SortOptions'
+        - name: Authorization
+          in: header
+          description: Bearer authentication
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/type_rewards:Offer'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:InvalidRequestUnion'
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:UnauthorizedErrorBody'
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: string
+  /rewards/merchant/locations/user/{referringPartnerUserId}:
+    get:
+      operationId: get-locations-by-user
+      summary: Get Eligible Locations
+      description: >-
+        Retrieve national and local geographic locations data that a specified user has eligible in-store offers at. To
+        include local merchant locations, include the `includeLocal` query parameter. Call this endpoint to build out
+        your [targeted offers](https://github.com/kard-financial/kard-postman?tab=readme-ov-file#b-targeted-offers) and
+        [map-specific UX experiences](https://github.com/kard-financial/kard-postman#c-discover-clos-near-you-map-view).
+        Please note that Longitude and Latitude fields are prioritized over State, City and Zipcode.<br/>
+
+        <b>Required scopes:</b> `rewards:read`
+      tags:
+        - rewards
+      parameters:
+        - name: referringPartnerUserId
+          in: path
+          description: Referring partner user ID from issuer that specifies user
+          required: true
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: Page number [>= 0], (default = 0)
+          required: false
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          description: Maximum number of locations to be returned [1 - 200], (default = 200)
+          required: false
+          schema:
+            type: integer
+        - name: locationNameSort
+          in: query
+          description: Sort location names (1 for A-Z, -1 for Z-A)
+          required: false
+          schema:
+            $ref: '#/components/schemas/type_commons:SortOptions'
+        - name: citySort
+          in: query
+          description: Sort city names (1 for A-Z, -1 for Z-A)
+          required: false
+          schema:
+            $ref: '#/components/schemas/type_commons:SortOptions'
+        - name: stateSort
+          in: query
+          description: Sort state names (1 for A-Z, -1 for Z-A)
+          required: false
+          schema:
+            $ref: '#/components/schemas/type_commons:SortOptions'
+        - name: locationName
+          in: query
+          description: Name of location
+          required: false
+          schema:
+            type: string
+        - name: city
+          in: query
+          description: City of location; <b>REQUIRES</b> state query parameter
+          required: false
+          schema:
+            type: string
+        - name: zipCode
+          in: query
+          description: >-
+            Zip Code of location; <b>CANNOT</b> provide State, City, Longitude, Latitude, or Radius query params when
+            using zipCode
+          required: false
+          schema:
+            type: string
+        - name: state
+          in: query
+          description: State of location; <b>REQUIRES</b> city field
+          required: false
+          schema:
+            $ref: '#/components/schemas/type_commons:State'
+        - name: googleId
+          in: query
+          description: GoogleId from location
+          required: false
+          schema:
+            type: string
+        - name: source
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/type_commons:Source'
+        - name: category
+          in: query
+          description: >-
+            Category of merchant associated with location. Please use URL Encode for non single word categories. (Food &
+            Beverage should be Food%20%26%20Beverage)
+          required: false
+          schema:
+            $ref: '#/components/schemas/type_commons:CategoryOption'
+        - name: longitude
+          in: query
+          description: Longitude to search locations from [-180 - 180], <b>REQUIRES</b> latitude field
+          required: false
+          schema:
+            type: number
+            format: double
+        - name: latitude
+          in: query
+          description: Latitude to search locations from [-90 - 90], <b>REQUIRES</b> longitude field
+          required: false
+          schema:
+            type: number
+            format: double
+        - name: radius
+          in: query
+          description: >-
+            Radius to search for locations in miles [1 - 50], (default = 10). <b>REQUIRES</b> longitude & latitude
+            fields
+          required: false
+          schema:
+            type: integer
+        - name: includeLocal
+          in: query
+          description: >-
+            When included, the response will include local merchant locations alongside national merchant locations. If
+            omitted, the response will only contain national merchant locations.
+          required: false
+          schema:
+            type: boolean
+        - name: createdDateStart
+          in: query
+          description: Time in string format for location createdDate search start (UTC)
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: createdDateEnd
+          in: query
+          description: Time in string format for location createdDate search end (UTC)
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: supportedComponents
+          in: query
+          description: UI component types to include in included offers.
+          required: false
+          schema:
+            $ref: '#/components/schemas/type_rewards:ComponentType'
+        - name: Authorization
+          in: header
+          description: Bearer authentication
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/type_rewards:LocationWithFullOffer'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:InvalidRequestUnion'
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:UnauthorizedErrorBody'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: string
+  /rewards/merchant/location/{id}:
+    get:
+      operationId: get-location-by-id
+      summary: Get Location by ID
+      description: |-
+        Retrieve location data for a specific Kard location ID.<br/>
+        <b>Required scopes:</b> `rewards:read`
+      tags:
+        - rewards
+      parameters:
+        - name: id
+          in: path
+          description: The Kard location ID to query
+          required: true
+          schema:
+            type: string
+        - name: Authorization
+          in: header
+          description: Bearer authentication
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_rewards:Location'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:InvalidRequestUnion'
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:UnauthorizedErrorBody'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: string
+  /rewards/merchant/locations/{merchantId}:
+    get:
+      operationId: get-locations-by-merchant-id
+      summary: Get Locations by Merchant ID
+      description: |-
+        Retrieve all locations associated to a specific Kard merchant ID.<br/>
+        <b>Required scopes:</b> `rewards:read`
+      tags:
+        - rewards
+      parameters:
+        - name: merchantId
+          in: path
+          description: The Kard merchant ID to query
+          required: true
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: Page number [>= 0], (default = 0)
+          required: false
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          description: Maximum number of locations [1 - 200], (default = 200)
+          required: false
+          schema:
+            type: integer
+        - name: Authorization
+          in: header
+          description: Bearer authentication
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/type_rewards:Location'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:InvalidRequestUnion'
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:UnauthorizedErrorBody'
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: string
+  /rewards/merchant/locations:
+    get:
+      operationId: get-locations
+      summary: Get Locations
+      description: >-
+        Retrieve ALL national and local geographic locations data regardless of whether a user is eligible to see them.
+        This endpoint is a legacy endpoint and will no longer be maintained soon. Instead, use [Get Eligible
+        Locations](/legacy/api/rewards/locations/get-locations-by-user) to build your [map-specific UX
+        experiences](https://github.com/kard-financial/kard-postman#c-discover-clos-near-you-map-view).<br/>
+
+        <b>Required scopes:</b> `rewards:read`
+      tags:
+        - rewards
+      parameters:
+        - name: page
+          in: query
+          description: Page number [>= 0], (default = 0)
+          required: false
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          description: Maximum number of locations [1 - 200], (default = 200)
+          required: false
+          schema:
+            type: integer
+        - name: googleId
+          in: query
+          description: GoogleId from location
+          required: false
+          schema:
+            type: string
+        - name: city
+          in: query
+          description: City of location; <b>REQUIRES</b> state query parameter
+          required: false
+          schema:
+            type: string
+        - name: zipCode
+          in: query
+          description: >-
+            Zip Code of location; <b>CANNOT</b> provide State, City, Longitude, Latitude, or Radius query params when
+            using zipCode
+          required: false
+          schema:
+            type: string
+        - name: state
+          in: query
+          description: State of location; <b>REQUIRES</b> city field
+          required: false
+          schema:
+            $ref: '#/components/schemas/type_commons:State'
+        - name: locationNameSort
+          in: query
+          description: Sort location names (1 for A-Z, -1 for Z-A)
+          required: false
+          schema:
+            $ref: '#/components/schemas/type_commons:SortOptions'
+        - name: citySort
+          in: query
+          description: Sort city names (1 for A-Z, -1 for Z-A)
+          required: false
+          schema:
+            $ref: '#/components/schemas/type_commons:SortOptions'
+        - name: stateSort
+          in: query
+          description: Sort state names (1 for A-Z, -1 for Z-A)
+          required: false
+          schema:
+            $ref: '#/components/schemas/type_commons:SortOptions'
+        - name: longitude
+          in: query
+          description: Longitude to search locations from [-180 - 180], <b>REQUIRES</b> latitude field
+          required: false
+          schema:
+            type: integer
+        - name: latitude
+          in: query
+          description: Latitude to search locations from [-90 - 90], <b>REQUIRES</b> longitude field
+          required: false
+          schema:
+            type: integer
+        - name: radius
+          in: query
+          description: >-
+            Radius to search for locations in miles [1 - 50], (default = 10). <b>REQUIRES</b> longitude & latitude
+            fields
+          required: false
+          schema:
+            type: integer
+        - name: source
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/type_commons:Source'
+        - name: category
+          in: query
+          description: >-
+            Category of merchant associated with location. Please use URL Encode for non single word categories. (Food &
+            Beverage should be Food%20%26%20Beverage)
+          required: false
+          schema:
+            $ref: '#/components/schemas/type_commons:CategoryOption'
+        - name: locationName
+          in: query
+          description: Name of location
+          required: false
+          schema:
+            type: string
+        - name: createdDateStart
+          in: query
+          description: Time in string format for location createdDate search start (UTC)
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: createdDateEnd
+          in: query
+          description: Time in string format for location createdDate search start (UTC)
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: Authorization
+          in: header
+          description: Bearer authentication
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/type_rewards:LocationWithPartialOffer'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:InvalidRequestUnion'
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:UnauthorizedErrorBody'
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: string
+  /issuers/{organizationId}/attributions:
+    post:
+      operationId: create-attribution-events
+      summary: Create Attribution Events
+      description: >-
+        Call this endpoint to send all attribution events made by all enrolled users in your rewards program. These
+        attribution events will be processed by the Kard system.<br/>
+
+        <b>Required scopes:</b> `attributions.write`
+      tags:
+        - attributions
+      parameters:
+        - name: organizationId
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/type_attributions:OrganizationId'
+        - name: Authorization
+          in: header
+          description: Bearer authentication
+          required: true
+          schema:
+            type: string
+        - name: X-Kard-organizationId
+          in: header
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                type: string
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:InvalidRequestUnion'
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:UnauthorizedErrorBody'
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_attributions:CreateAttributionRequestBody'
+  /issuers/{organizationId}/files:
+    get:
+      operationId: list
+      summary: List
+      description: >-
+        Retrieve file information for users eligibility and reconciliation files, along with file download URL
+        links.<br/>
+
+        <b>Required scopes:</b> `files.read`
+      tags:
+        - files
+      parameters:
+        - name: organizationId
+          in: path
+          description: Your organization ID, provided by Kard.
+          required: true
+          schema:
+            type: string
+        - name: page[size]
+          in: query
+          description: Number of records to be returned [1-100], default is 10.
+          required: false
+          schema:
+            type: integer
+        - name: page[after]
+          in: query
+          description: >-
+            Cursor value to retrieve next page of results if provided. Value can be received from the 'links' section of
+            previous API calls.
+          required: false
+          schema:
+            type: string
+        - name: fileType
+          in: query
+          description: The document file type.
+          required: true
+          schema:
+            $ref: '#/components/schemas/type_files:FileType'
+        - name: Authorization
+          in: header
+          description: Bearer authentication
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_files:Files'
+        '400':
+          description: Error response with status 400
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:InvalidRequestUnion'
+        '401':
+          description: Error response with status 401
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/type_commons:UnauthorizedErrorBody'
+        '404':
+          description: Error response with status 404
+          content:
+            application/json:
+              schema:
+                type: string
+        '500':
+          description: Error response with status 500
+          content:
+            application/json:
+              schema:
+                type: string
+servers:
+  - url: https://rewards-api.getkard.com
+    description: Production
+  - url: https://test-rewards-api.getkard.com
+    description: Sandbox
+webhooks:
+  payment-notification:
+    post:
+      operationId: payment-notification
+      summary: Earned Reward Webhook
+      description: >-
+        This is an outbound webhook for issuers to receive notifications from Kard on transactions that earn rewards.
+        Learn more about how to configure, ingest and trigger your earned reward webhooks
+        [here](https://github.com/kard-financial/kard-postman#d-trigger-an-earned-reward-webhook).
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/type_webhooks:IssuerEarnedRewardWebhookPayload'
+components:
+  schemas:
+    type_transactions:TransactionStatus:
+      type: string
+      enum:
+        - APPROVED
+        - SETTLED
+        - REVERSED
+        - RETURNED
+        - DECLINED
+      title: TransactionStatus
+    type_commons:State:
+      type: string
+      enum:
+        - AL
+        - AK
+        - AS
+        - AZ
+        - AR
+        - CA
+        - CO
+        - CT
+        - DE
+        - DC
+        - FM
+        - FL
+        - GA
+        - GU
+        - HI
+        - ID
+        - IL
+        - IN
+        - IA
+        - KS
+        - KY
+        - LA
+        - ME
+        - MH
+        - MD
+        - MA
+        - MI
+        - MN
+        - MS
+        - MO
+        - MT
+        - NE
+        - NV
+        - NH
+        - NJ
+        - NM
+        - NY
+        - NC
+        - ND
+        - MP
+        - OH
+        - OK
+        - OR
+        - PW
+        - PA
+        - PR
+        - RI
+        - SC
+        - SD
+        - TN
+        - TX
+        - UT
+        - VT
+        - VI
+        - VA
+        - WA
+        - WV
+        - WI
+        - WY
+      title: State
+    type_transactions:IncomingTransactionRequest:
+      type: object
+      properties:
+        transactionId:
+          type: string
+          description: Transaction ID in issuer's system
+        referringPartnerUserId:
+          type: string
+          description: Referring partner user ID from issuer associated with transaction
+        amount:
+          type: integer
+          description: Transaction amount in cents
+        status:
+          $ref: '#/components/schemas/type_transactions:TransactionStatus'
+          description: Transaction status
+        currency:
+          type: string
+          description: Currency of transaction
+        description:
+          type: string
+          description: Description of transaction - usually includes merchant and other key details on transaction
+        description2:
+          type: string
+          description: Description2 of transaction — usually includes other merchant identifying information
+        mcc:
+          type: string
+          description: >-
+            Merchant Category Code (usually a 4-digit numerical number). <b>Note, this field is REQUIRED for SOME
+            national offers. We HIGHLY RECOMMEND sending this field as it will be required in the near future.</b>
+        coreProviderId:
+          type: string
+          description: Name of processor associated with transaction
+        transactionDate:
+          type: string
+          format: date-time
+          description: >-
+            Timestamp for <b>REVERSED, RETURNED, DECLINED</b> transaction events; <b>REQUIRED</b> for transactions with
+            <b>REVERSED, RETURNED, DECLINED</b> status. Date string should be in ISO format
+            i.e.`'YYYY-MM-DDThh:mm:ss.sTZD'` where TZD = time zone designator (Z or +hh:mm or -hh:mm) i.e.
+            `1994-11-05T08:15:30-05:00` OR `1994-11-05T08:15:30Z`
+        authorizationDate:
+          type: string
+          format: date-time
+          description: >-
+            Timestamp for <b>APPROVED</b> transaction event; <b>REQUIRED</b> for transactions with <b>APPROVED</b>
+            status, and <b>HIGHLY RECOMMENDED</b> to include for transactions with a <b>SETTLED</b> status. Date string
+            should be in ISO format i.e.`'YYYY-MM-DDThh:mm:ss.sTZD'` where TZD = time zone designator (Z or +hh:mm or
+            -hh:mm) i.e. `1994-11-05T08:15:30-05:00 OR 1994-11-05T08:15:30Z`
+        settledDate:
+          type: string
+          format: date-time
+          description: >-
+            Timestamp for <b>SETTLED</b> transaction event, <b>REQUIRED</b> for transactions with <b>SETTLED</b> status.
+            Date string should be in ISO format i.e.`'YYYY-MM-DDThh:mm:ss.sTZD'` where TZD = time zone designator (Z or
+            +hh:mm or -hh:mm) i.e. `1994-11-05T08:15:30-05:00` OR `1994-11-05T08:15:30Z`
+        merchantId:
+          type: string
+          description: >-
+            Acquirer Merchant Identification Number (MID) — usually a 15 digit numerical identifier code. <b>Note, this
+            field is REQUIRED for local offers. We HIGHLY RECOMMEND sending this field as it will be required in the
+            near future.</b>
+        merchantStoreId:
+          type: string
+          description: Merchant store ID where transaction originated from
+        cardPresence:
+          type: string
+          description: Whether card was present at time of transaction
+        merchantName:
+          type: string
+          description: Merchant name associated with transaction
+        merchantAddrCity:
+          type: string
+          description: >-
+            Merchant address city associated with transaction. <b>We HIGHLY RECOMMEND sending this field as it may be
+            required in the near future.</b>
+        merchantAddrState:
+          $ref: '#/components/schemas/type_commons:State'
+          description: >-
+            Merchant address state associated with transaction. <b>We HIGHLY RECOMMEND sending this field as it may be
+            required in the near future.</b>
+        merchantAddrZipcode:
+          type: string
+          description: >-
+            Merchant address zip code associated with transaction. <b>We HIGHLY RECOMMEND sending this field as it may
+            be required in the near future.</b>
+        merchantAddrCountry:
+          type: string
+          description: >-
+            Merchant address country associated with transaction. <b>We HIGHLY RECOMMEND sending this field as it may be
+            required in the near future.</b>
+        merchantAddrStreet:
+          type: string
+          description: >-
+            Merchant street address associated with transaction. <b>We HIGHLY RECOMMEND sending this field as it may be
+            required in the near future.</b>
+        merchantLat:
+          type: string
+          description: >-
+            Merchant latitude geocoordinate associated with transaction. <b>We HIGHLY RECOMMEND sending this field as it
+            may be required in the near future.</b>
+        merchantLong:
+          type: string
+          description: >-
+            Merchant longitude geocoordinate associated with transaction. <b>We HIGHLY RECOMMEND sending this field as
+            it may be required in the near future.</b>
+        panEntryMode:
+          type: string
+          description: PAN entry mode (usually a 2 digit numeric code)
+        cardBIN:
+          type: string
+          description: >-
+            Bank identification number (BIN). Must be a valid BIN of 6 digits. If over 6 digits, please send first 6.
+            <b>Note, this field is REQUIRED for matching purposes.</b>
+        cardLastFour:
+          type: string
+          description: Card last four digits. <b>Note, this field is REQUIRED for matching purposes.</b>
+        googleId:
+          type: string
+          description: Google Id
+        authorizationCode:
+          type: string
+          description: Transaction approval code
+        retrievalReferenceNumber:
+          type: string
+          description: Retrieval Reference Number
+        systemTraceAuditNumber:
+          type: string
+          description: System Trace Audit Number
+        acquirerReferenceNumber:
+          type: string
+          description: Acquirer Reference Number
+        isDeposit:
+          type: boolean
+          description: Transaction is a deposit
+      required:
+        - transactionId
+        - referringPartnerUserId
+        - amount
+        - status
+        - currency
+        - description
+      title: IncomingTransactionRequest
+    type_transactions:CreateIncomingTransactionRequestBody:
+      type: array
+      items:
+        $ref: '#/components/schemas/type_transactions:IncomingTransactionRequest'
+      title: CreateIncomingTransactionRequestBody
+    type_commons:UnauthorizedErrorBody:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+        - message
+      title: UnauthorizedErrorBody
+    type_commons:RequestValidationErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: string
+      required:
+        - errors
+      title: RequestValidationErrorResponse
+    type_commons:InvalidRequestUnion:
+      oneOf:
+        - $ref: '#/components/schemas/type_commons:RequestValidationErrorResponse'
+        - type: string
+      title: InvalidRequestUnion
+    type_transactions:CreateAuditRequestBody:
+      type: object
+      properties:
+        transactionId:
+          type: string
+          description: Transaction ID from issuer to audit
+        auditCode:
+          type: integer
+          description: |-
+            Audit Code - Enum. Please submit the code that is most relevant to your audit request.
+              <ul>
+                <li>`3005` : Customer is claiming cashback is incorrect - INCORRECT CASHBACK CLAIM</li>
+                <li>`3006` : Transaction is missing the cashback award - MISSING CASHBACK AWARD</li>
+                <li>`8001` : Other - check audit description</li>
+              </ul>
+        merchantName:
+          type: string
+          description: Merchant name related to the transaction audit
+        auditDescription:
+          type: string
+          description: Audit Description. Please provide more details around the audit
+        preferredContactEmail:
+          type: string
+          description: Preferred contact email to message to as audit is reviewed
+        issuer:
+          type: string
+          description: Issuer name
+        transactionAmountInCents:
+          type: integer
+          description: Transaction amount in cents
+        referringPartnerUserId:
+          type: string
+          description: Referring partner user ID associated with the transaction to audit
+        merchantId:
+          type: string
+          description: Related merchant ID in Kard's system associated to the transaction audit
+        submitterName:
+          type: string
+          description: Submitter name
+      required:
+        - transactionId
+        - auditCode
+        - merchantName
+        - auditDescription
+        - preferredContactEmail
+        - issuer
+      title: CreateAuditRequestBody
+    type_commons:MongoId:
+      type: string
+      description: The unique identifier for a document in the database
+      title: MongoId
+    type_transactions:AuditStatus:
+      type: string
+      enum:
+        - NEW
+        - IN_PROGRESS
+        - CLOSED
+      title: AuditStatus
+    type_transactions:CreateAuditResponse:
+      type: object
+      properties:
+        _id:
+          $ref: '#/components/schemas/type_commons:MongoId'
+          description: Audit Request ID
+        transactionId:
+          type: string
+          description: Cardlinked Transaction ID
+        auditCode:
+          type: integer
+          description: |-
+            Audit Code - Enum 
+              <ul>
+                <li>`3005` : Customer is claiming cashback is incorrect - INCORRECT CASHBACK CLAIM</li>
+                <li>`3006` : Transaction is missing the cashback award - MISSING CASHBACK AWARD</li>
+                <li>`8001` : Other - check audit description</li>
+              </ul>
+        merchantName:
+          type: string
+          description: Merchant name
+        auditDescription:
+          type: string
+          description: Audit Description
+        preferredContactEmail:
+          type: string
+          description: Preferred Contact Email
+        transactionAmountInCents:
+          type: integer
+          description: Transaction amount in cents
+        referringPartnerUserId:
+          type: string
+          description: User ID
+        merchantId:
+          $ref: '#/components/schemas/type_commons:MongoId'
+          description: Internal Kard Merchant ID
+        submitterName:
+          type: string
+          description: Submitter Name
+        status:
+          $ref: '#/components/schemas/type_transactions:AuditStatus'
+          description: Status of Audit
+      required:
+        - _id
+        - transactionId
+        - auditCode
+        - merchantName
+        - auditDescription
+        - preferredContactEmail
+        - status
+      title: CreateAuditResponse
+    type_transactions:GetAuditByIdResponse:
+      type: object
+      properties:
+        _id:
+          $ref: '#/components/schemas/type_commons:MongoId'
+          description: The audit ID provided by Kard's system
+        transactionId:
+          type: string
+          description: Transaction ID associated with audit
+        auditCode:
+          type: integer
+          description: |-
+            Audit Code - Enum. Code to define audit.
+              <ul>
+                <li>`3005` : Customer is claiming cashback is incorrect - INCORRECT CASHBACK CLAIM</li>
+                <li>`3006` : Transaction is missing the cashback award - MISSING CASHBACK AWARD</li>
+                <li>`8001` : Other - check audit description</li>
+              </ul>
+        merchantName:
+          type: string
+          description: Merchant name related to the transaction audit
+        auditDescription:
+          type: string
+          description: Audit Description. More details around the audit
+        preferredContactEmail:
+          type: string
+          description: Preferred contact email to message to as audit is reviewed
+        transactionAmountInCents:
+          type: integer
+          description: Transaction amount in cents
+        referringPartnerUserId:
+          type: string
+          description: Referring partner user ID associated with the transaction to audit
+        merchantId:
+          $ref: '#/components/schemas/type_commons:MongoId'
+          description: Related merchant ID in Kard's system associated to the transaction audit
+        submitterName:
+          type: string
+          description: Submitter name
+        status:
+          $ref: '#/components/schemas/type_transactions:AuditStatus'
+          description: Status of audit
+        resolutionCode:
+          type: integer
+          description: |-
+            Resolution Code - Enum. field is available when audit is status CLOSED.
+            <ul>
+              <li>`5001` : Transaction will be deleted</li>
+              <li>`5002` : Settlement amount will be adjusted</li>
+              <li>`5003` : Return amount will be adjusted</li>
+              <li>`5004` : Reward dispute resolved</li>
+              <li>`5005` : Transaction will be marked for writeoff</li>
+              <li>`5006` : Transaction will be marked as rejected</li>
+              <li>`5007` : Transaction will be resent through webhook</li>
+              <li>`5008` : Transaction will be resent through daily file</li>
+              <li>`5009` : No change needed</li>
+              <li>`9001` : Ineligible item in purchase</li>
+              <li>`9002` : Return was made</li>
+              <li>`9003` : User ineligible for offer (usually because of participation through another program)</li>
+              <li>`9004` : Redemption limit hit (if offer has a set number of redemptions and it isn't handled programmatically)</li>
+              <li>`9005` : Transaction not captured</li>
+            </ul>
+        resolutionDescription:
+          type: string
+          description: Resolution Description; field is available when audit is status CLOSED
+        resolutionTimeStamp:
+          type: string
+          format: date-time
+          description: >-
+            Resolution timestamp of when the audit was marked as status CLOSED in ISO format; available when audit is
+            closed.
+      required:
+        - _id
+        - transactionId
+        - auditCode
+        - merchantName
+        - auditDescription
+        - preferredContactEmail
+        - status
+      title: GetAuditByIdResponse
+    type_commons:EnrolledRewardsType:
+      type: string
+      enum:
+        - CARDLINKED
+        - AFFILIATE
+      description: Enrolled Rewards
+      title: EnrolledRewardsType
+    type_commons:Network:
+      type: string
+      enum:
+        - VISA
+        - MASTERCARD
+        - AMERICAN EXPRESS
+        - DISCOVER
+      title: Network
+    type_users:CardStatus:
+      type: string
+      enum:
+        - ENABLED
+        - DISABLED
+      title: CardStatus
+    type_users:CardInfoRequest:
+      type: object
+      properties:
+        last4:
+          type: string
+          description: Card last four digits. <b>Note, this field is REQUIRED for matching purposes.</b>
+        bin:
+          type: string
+          description: >-
+            Bank identification number (BIN). Must be a valid BIN of 6 digits. If over 6 digits, please send first
+            6.<b>Note, this field is REQUIRED for matching purposes.</b>
+        issuer:
+          type: string
+          description: Issuer
+        network:
+          $ref: '#/components/schemas/type_commons:Network'
+          description: Name of card network
+        status:
+          $ref: '#/components/schemas/type_users:CardStatus'
+          description: Status of card
+        token:
+          type: string
+          description: Card token
+        tokenSource:
+          type: string
+          description: Card token source
+      required:
+        - last4
+        - bin
+        - issuer
+        - network
+      title: CardInfoRequest
+    type_users:CreateUserRequestBody:
+      type: object
+      properties:
+        email:
+          type: string
+          description: Email of user; <b>AT LEAST one of email or userName is REQUIRED. We HIGHLY RECOMMEND sending both.</b>
+        hashedEmail:
+          type: string
+          description: Hashed email address of user (using SHA-256)
+        phoneNumber:
+          type: string
+          description: Phone number of user in E.164 format
+        birthYear:
+          type: string
+          description: Birth year of user
+        userName:
+          type: string
+          description: >-
+            Username of user from issuer; <b>AT LEAST one of email or userName is REQUIRED. We HIGHLY RECOMMEND sending
+            both.</b>
+        firstName:
+          type: string
+          description: First name of user. <b>We HIGHLY RECOMMEND sending this field.</b>
+        lastName:
+          type: string
+          description: Last name of user. <b>We HIGHLY RECOMMEND sending this field.</b>
+        zipCode:
+          type: string
+          description: Zipcode of user. <b>We HIGHLY RECOMMEND sending this field as it may be required in the near future.</b>
+        referringPartnerUserId:
+          type: string
+          description: Referring partner user ID of user from issuer. Must be a unique identifier across users
+        externalPartnerUserId:
+          type: string
+          description: Partner unique user id, might be equal to referringPartnerUserId
+        enrolledRewards:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:EnrolledRewardsType'
+          description: >-
+            If field is not supplied, user will be automatically enrolled in all programs. Note, <b>please do not send
+            AFFILIATE</b> as this field has been deprecated.
+        cards:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_users:CardInfoRequest'
+          description: List of User Cards Information. <b>This is REQUIRED for matching purposes.</b>
+        cardInfo:
+          $ref: '#/components/schemas/type_users:CardInfoRequest'
+          description: <b>[Deprecated — please use 'cards' field]</b> User Card Information
+        referringPartner:
+          type: string
+          description: Issuer name
+      required:
+        - referringPartnerUserId
+      title: CreateUserRequestBody
+    type_users:CreateUserCardRequestBody:
+      type: object
+      properties:
+        referringPartnerUserId:
+          type: string
+          description: Referring partner user ID from issuer
+        cards:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_users:CardInfoRequest'
+          description: List of User Cards Information to add
+        cardInfo:
+          $ref: '#/components/schemas/type_users:CardInfoRequest'
+          description: <b>[Deprecated -- please use "cards" field]</b> User Card Information
+      required:
+        - referringPartnerUserId
+      title: CreateUserCardRequestBody
+    type_users:CardInfoResponse:
+      type: object
+      properties:
+        _id:
+          $ref: '#/components/schemas/type_commons:MongoId'
+          description: Card ID in Kard's system
+        last4:
+          type: string
+          description: Card last four digits. <b>Note, this field is REQUIRED for matching purposes.</b>
+        bin:
+          type: string
+          description: >-
+            Bank identification number (BIN). Must be a valid BIN of 6 digits. If over 6 digits, please send first
+            6.<b>Note, this field is REQUIRED for matching purposes.</b>
+        issuer:
+          type: string
+          description: Issuer name
+        network:
+          $ref: '#/components/schemas/type_commons:Network'
+          description: Name of card network
+        status:
+          $ref: '#/components/schemas/type_users:CardStatus'
+          description: Status of the card
+        token:
+          type: string
+          description: Card token
+        tokenSource:
+          type: string
+          description: Card token source
+      required:
+        - _id
+        - last4
+        - bin
+        - issuer
+        - network
+        - status
+      description: Credit Card Information
+      title: CardInfoResponse
+    type_users:CreateUserCardResponse:
+      type: object
+      properties:
+        _id:
+          $ref: '#/components/schemas/type_commons:MongoId'
+          description: Unique user ID of user in Kard's system
+        email:
+          type: string
+          description: Email of user if available
+        hashedEmail:
+          type: string
+          description: Hashed email address of user (using SHA-256)
+        phoneNumber:
+          type: string
+          description: Phone number of user in E.164 format
+        birthYear:
+          type: string
+          description: Birth year of user
+        userName:
+          type: string
+          description: Username of user if available
+        firstName:
+          type: string
+          description: First name of user if available
+        lastName:
+          type: string
+          description: Last name of user if available
+        zipCode:
+          type: string
+          description: Zipcode of user if available
+        referringPartner:
+          type: string
+          description: Issuer name
+        referringPartnerUserId:
+          type: string
+          description: Referring partner user ID of user from issuer
+        externalPartnerUserId:
+          type: string
+          description: Partner unique user id, might be equal to referringPartnerUserId, if available
+        enrolledRewards:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:EnrolledRewardsType'
+          description: List of enrolled rewards
+        cards:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_users:CardInfoResponse'
+          description: List of User Cards Information (this will include the newly added cards added).
+        createdDate:
+          type: string
+          format: date-time
+          description: Created date of user in Kard's system (UTC)
+        lastModified:
+          type: string
+          format: date-time
+          description: Last modified date of user in Kard's system (UTC)
+        __v:
+          type: integer
+          description: Version of user in Kard's system
+      required:
+        - _id
+        - referringPartner
+        - referringPartnerUserId
+        - cards
+        - createdDate
+        - lastModified
+        - __v
+      title: CreateUserCardResponse
+    type_users:UserRequestBody:
+      type: object
+      properties:
+        email:
+          type: string
+          description: Email of user
+        hashedEmail:
+          type: string
+          description: Hashed email address of user (using SHA-256)
+        phoneNumber:
+          type: string
+          description: Phone number of user in E.164 format
+        birthYear:
+          type: string
+          description: Birth year of user
+        userName:
+          type: string
+          description: Username of user from issuer
+        firstName:
+          type: string
+          description: First name of user
+        lastName:
+          type: string
+          description: Last name of user
+        zipCode:
+          type: string
+          description: Zipcode of user
+        referringPartnerUserId:
+          type: string
+          description: Referring partner user ID of user from issuer. Must be a unique identifier across users
+        externalPartnerUserId:
+          type: string
+          description: Partner unique user id, might be equal to referringPartnerUserId
+        enrolledRewards:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:EnrolledRewardsType'
+          description: >-
+            An empty array will unenroll user from all programs. Note, <b>please do not send AFFILIATE</b> as this field
+            has been deprecated.
+      required:
+        - referringPartnerUserId
+      title: UserRequestBody
+    type_users:UpdateUserResponse:
+      type: object
+      properties:
+        enrolledRewards:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:EnrolledRewardsType'
+          description: List of enrolled rewards
+        email:
+          type: string
+          description: Email of user if available
+        hashedEmail:
+          type: string
+          description: Hashed email address of user (using SHA-256)
+        phoneNumber:
+          type: string
+          description: Phone number of user in E.164 format
+        birthYear:
+          type: string
+          description: Birth year of user
+        firstName:
+          type: string
+          description: First name of user if available
+        lastName:
+          type: string
+          description: Last name of user if available
+        zipCode:
+          type: string
+          description: Zipcode of user if available
+        referringPartnerUserId:
+          type: string
+          description: Referring partner user ID of user from issuer. Must be a unique identifier across users
+        cards:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_users:CardInfoResponse'
+          description: List of User Cards Information
+        userName:
+          type: string
+          description: Username of user from issuer if available
+      required:
+        - referringPartnerUserId
+      title: UpdateUserResponse
+    type_commons:CategoryOption:
+      type: string
+      enum:
+        - Arts & Entertainment
+        - Baby, Kids & Toys
+        - Books & Digital Media
+        - Clothing, Shoes & Accessories
+        - Computers, Electronics & Software
+        - Convenience
+        - Gas
+        - Department Stores
+        - Food & Beverage
+        - Health & Beauty
+        - Home & Garden
+        - Miscellaneous
+        - Occasions & Gifts
+        - Pets
+        - Sports & Outdoors
+        - Supplies & Services
+        - Travel
+      description: >-
+        Category of merchant. Please use URL Encode for non single word categories. (Food & Beverage should be
+        Food%20%26%20Beverage)
+      title: CategoryOption
+    type_commons:AcceptedCards:
+      type: string
+      enum:
+        - VISA
+        - MASTERCARD
+        - AMERICAN EXPRESS
+        - DISCOVER
+      description: Card types accepted by merchant
+      title: AcceptedCards
+    type_commons:Source:
+      type: string
+      enum:
+        - NATIONAL
+        - LOCAL
+      description: Source of the merchant associated to the location
+      title: Source
+    type_commons:OfferType:
+      type: string
+      enum:
+        - INSTORE
+        - ONLINE
+      description: Type of offer (whether it is run online or in-store)
+      title: OfferType
+    type_commons:CommissionType:
+      type: string
+      enum:
+        - FLAT
+        - PERCENT
+      description: Type of commission on offer (% or a flat $)
+      title: CommissionType
+    type_rewards:MerchantOfferWithAttribution:
+      type: object
+      properties:
+        _id:
+          $ref: '#/components/schemas/type_commons:MongoId'
+          description: Offer ID in Kard's system
+        terms:
+          type: string
+          description: Terms and conditions on offer
+        redeemableOnce:
+          type: boolean
+          description: Is the offer redeemable once
+        name:
+          type: string
+          description: Name of offer
+        offerType:
+          $ref: '#/components/schemas/type_commons:OfferType'
+        commissionType:
+          $ref: '#/components/schemas/type_commons:CommissionType'
+        startDate:
+          type: string
+          format: date-time
+          description: Beginning date of offer (UTC)
+        expirationDate:
+          type: string
+          format: date-time
+          description: Expiration date of offer if applicable (UTC)
+        isTargeted:
+          type: boolean
+          description: True returns targeted offers, false returns targeted and non-targeted offers
+        createdDate:
+          type: string
+          format: date-time
+          description: Create date of offer (UTC)
+        lastModified:
+          type: string
+          format: date-time
+          description: Last modified date of offer (UTC)
+        totalCommission:
+          type: number
+          format: double
+          description: Commission going to issuer and cardholder
+        isLocationSpecific:
+          type: boolean
+          description: Is offer location specific
+        merchantId:
+          $ref: '#/components/schemas/type_commons:MongoId'
+          description: Id of Merchant associated with Offer
+        issuersCommission:
+          type: number
+          format: double
+          description: Commission going to the issuer
+        usersCommission:
+          type: number
+          format: double
+          description: Commission going to user
+        minTransactionAmount:
+          type: integer
+          description: Min Transaction Amount for Offer, if available
+        maxTransactionAmount:
+          type: integer
+          description: Max Transaction Amount for Offer, if available
+        minRewardAmount:
+          type: integer
+          description: Min Reward Amount for Offer, if available
+        maxRewardAmount:
+          type: integer
+          description: Max Reward Amount for Offer, if available
+        merchantLocationIds:
+          type: array
+          items:
+            type: string
+          description: Location Ids when isLocationSpecific is true
+        optInRequired:
+          type: boolean
+          description: Is opt in required
+        imgUrl:
+          type: string
+          description: Image URL asset containing attribution tokens
+        bannerImgUrl:
+          type: string
+          description: Banner image URL asset containing attribution tokens
+      required:
+        - _id
+        - terms
+        - redeemableOnce
+        - name
+        - offerType
+        - commissionType
+        - startDate
+        - expirationDate
+        - isTargeted
+        - createdDate
+        - lastModified
+        - totalCommission
+        - isLocationSpecific
+        - merchantId
+        - optInRequired
+      title: MerchantOfferWithAttribution
+    type_rewards:MerchantWithAttribution:
+      type: object
+      properties:
+        _id:
+          $ref: '#/components/schemas/type_commons:MongoId'
+          description: Merchant ID in Kard's system
+        name:
+          type: string
+          description: Merchant name
+        description:
+          type: string
+          description: Merchant description - usually a blurb outlining more details about the merchant
+        websiteURL:
+          type: string
+          description: Merchant's URL website
+        category:
+          $ref: '#/components/schemas/type_commons:CategoryOption'
+          description: Category of merchant
+        acceptedCards:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:AcceptedCards'
+        source:
+          $ref: '#/components/schemas/type_commons:Source'
+          description: Merchant source
+        createdDate:
+          type: string
+          format: date-time
+          description: Created date of merchant in Kard's system (UTC)
+        lastModified:
+          type: string
+          format: date-time
+          description: Last modified date of merchant in Kard's system (UTC)
+        offers:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_rewards:MerchantOfferWithAttribution'
+          description: Offers associated to the merchant
+        imgUrl:
+          type: string
+          description: >-
+            <b>[Deprecated — Please use imgUrl on the offer object which contain attribution tokens]</b>. Merchant image
+            asset URL
+        bannerImgUrl:
+          type: string
+          description: >-
+            <b>[Deprecated — Please use bannerImgUrl on the offer object which contain attribution tokens]</b>. Merchant
+            banner image asset URL
+      required:
+        - _id
+        - name
+        - description
+        - websiteURL
+        - category
+        - acceptedCards
+        - source
+        - createdDate
+        - lastModified
+        - offers
+        - imgUrl
+      title: MerchantWithAttribution
+    type_rewards:MerchantOffer:
+      type: object
+      properties:
+        _id:
+          $ref: '#/components/schemas/type_commons:MongoId'
+          description: Offer ID in Kard's system
+        terms:
+          type: string
+          description: Terms and conditions on offer
+        redeemableOnce:
+          type: boolean
+          description: Is the offer redeemable once
+        name:
+          type: string
+          description: Name of offer
+        offerType:
+          $ref: '#/components/schemas/type_commons:OfferType'
+        commissionType:
+          $ref: '#/components/schemas/type_commons:CommissionType'
+        startDate:
+          type: string
+          format: date-time
+          description: Beginning date of offer (UTC)
+        expirationDate:
+          type: string
+          format: date-time
+          description: Expiration date of offer if applicable (UTC)
+        isTargeted:
+          type: boolean
+          description: True returns targeted offers, false returns targeted and non-targeted offers
+        createdDate:
+          type: string
+          format: date-time
+          description: Create date of offer (UTC)
+        lastModified:
+          type: string
+          format: date-time
+          description: Last modified date of offer (UTC)
+        totalCommission:
+          type: number
+          format: double
+          description: Commission going to issuer and cardholder
+        isLocationSpecific:
+          type: boolean
+          description: Is offer location specific
+        merchantId:
+          $ref: '#/components/schemas/type_commons:MongoId'
+          description: Id of Merchant associated with Offer
+        issuersCommission:
+          type: number
+          format: double
+          description: Commission going to the issuer
+        usersCommission:
+          type: number
+          format: double
+          description: Commission going to user
+        minTransactionAmount:
+          type: integer
+          description: Min Transaction Amount for Offer, if available
+        maxTransactionAmount:
+          type: integer
+          description: Max Transaction Amount for Offer, if available
+        minRewardAmount:
+          type: integer
+          description: Min Reward Amount for Offer, if available
+        maxRewardAmount:
+          type: integer
+          description: Max Reward Amount for Offer, if available
+        merchantLocationIds:
+          type: array
+          items:
+            type: string
+          description: Location Ids when isLocationSpecific is true
+        optInRequired:
+          type: boolean
+          description: Is opt in required
+        status:
+          type: string
+          description: Status of offer
+      required:
+        - _id
+        - terms
+        - redeemableOnce
+        - name
+        - offerType
+        - commissionType
+        - startDate
+        - expirationDate
+        - isTargeted
+        - createdDate
+        - lastModified
+        - totalCommission
+        - isLocationSpecific
+        - merchantId
+        - optInRequired
+        - status
+      title: MerchantOffer
+    type_rewards:Merchant:
+      type: object
+      properties:
+        _id:
+          $ref: '#/components/schemas/type_commons:MongoId'
+          description: Merchant ID in Kard's system
+        name:
+          type: string
+          description: Merchant name
+        description:
+          type: string
+          description: Merchant description - usually a blurb outlining more details about the merchant
+        websiteURL:
+          type: string
+          description: Merchant's URL website
+        category:
+          $ref: '#/components/schemas/type_commons:CategoryOption'
+          description: Category of merchant
+        acceptedCards:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:AcceptedCards'
+        source:
+          $ref: '#/components/schemas/type_commons:Source'
+          description: Merchant source
+        createdDate:
+          type: string
+          format: date-time
+          description: Created date of merchant in Kard's system (UTC)
+        lastModified:
+          type: string
+          format: date-time
+          description: Last modified date of merchant in Kard's system (UTC)
+        offers:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_rewards:MerchantOffer'
+          description: Offers associated to the merchant
+        imgUrl:
+          type: string
+          description: Merchant image asset URL
+        bannerImgUrl:
+          type: string
+          description: Merchant banner image asset URL
+      required:
+        - _id
+        - name
+        - description
+        - websiteURL
+        - category
+        - acceptedCards
+        - source
+        - createdDate
+        - lastModified
+        - offers
+        - imgUrl
+      title: Merchant
+    type_rewards:GetMerchantByIdResponse:
+      oneOf:
+        - $ref: '#/components/schemas/type_rewards:Merchant'
+        - type: string
+      title: GetMerchantByIdResponse
+    type_commons:SortOptions:
+      type: string
+      enum:
+        - '1'
+        - '-1'
+      title: SortOptions
+    type_rewards:ComponentType:
+      type: string
+      enum:
+        - shortDescription
+        - longDescription
+        - baseReward
+        - boostedReward
+        - cta
+        - tags
+        - detailTags
+        - logoFlare
+        - progressBar
+      description: Available UI component types for offers
+      title: ComponentType
+    type_rewards:OfferMerchantWithAttribution:
+      type: object
+      properties:
+        _id:
+          $ref: '#/components/schemas/type_commons:MongoId'
+          description: Merchant ID in Kard's system
+        name:
+          type: string
+          description: Name of merchant
+        description:
+          type: string
+          description: Description of merchant
+        type:
+          $ref: '#/components/schemas/type_commons:EnrolledRewardsType'
+          description: Type of merchant
+        websiteURL:
+          type: string
+          description: Website URL of merchant
+        category:
+          $ref: '#/components/schemas/type_commons:CategoryOption'
+          description: Category of merchant
+        acceptedCards:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:AcceptedCards'
+        imgUrl:
+          type: string
+          description: '[Deprecated — Please use imgUrl on the offer object which contain attribution tokens]'
+        bannerImgUrl:
+          type: string
+          description: '[Deprecated — Please use bannerImgUrl on the offer object which contain attribution tokens]'
+      required:
+        - _id
+        - name
+        - description
+        - type
+        - websiteURL
+        - category
+        - acceptedCards
+        - imgUrl
+      title: OfferMerchantWithAttribution
+    type_rewards:OfferWithAttribution:
+      type: object
+      properties:
+        _id:
+          $ref: '#/components/schemas/type_commons:MongoId'
+          description: Offer ID in Kard's system
+        terms:
+          type: string
+          description: Terms and conditions on offer
+        redeemableOnce:
+          type: boolean
+          description: True if offer is redeemable only once, false if not
+        name:
+          type: string
+          description: Name of offer
+        offerType:
+          $ref: '#/components/schemas/type_commons:OfferType'
+        commissionType:
+          $ref: '#/components/schemas/type_commons:CommissionType'
+        startDate:
+          type: string
+          format: date-time
+          description: Beginning date of offer (UTC)
+        expirationDate:
+          type: string
+          format: date-time
+          description: Expiration date of offer if applicable (UTC)
+        isTargeted:
+          type: boolean
+          description: True returns targeted offers, false returns targeted and non-targeted offers
+        createdDate:
+          type: string
+          format: date-time
+          description: Created date of offer in Kard's system (UTC)
+        lastModified:
+          type: string
+          format: date-time
+          description: Last modified date in Kard's system (UTC)
+        totalCommission:
+          type: number
+          format: double
+          description: Offer commission going to issuer and user summed up
+        isLocationSpecific:
+          type: boolean
+          description: >-
+            True if offer is valid only for specific locations, false if valid for all locations. Note, this field is
+            usually false
+        issuersCommission:
+          type: number
+          format: double
+          description: Commission going to the issuer
+        usersCommission:
+          type: number
+          format: double
+          description: Commission going to user
+        minTransactionAmount:
+          type: integer
+          description: Minimum Transaction Amount required to redeem offer, if available on offer
+        maxTransactionAmount:
+          type: integer
+          description: Maximum Transaction Amount allowed to redeem offer, if available on offer
+        minRewardAmount:
+          type: integer
+          description: Minimum Reward Amount, if available on offer
+        maxRewardAmount:
+          type: integer
+          description: Maximum Reward Amount, if available on offer
+        source:
+          $ref: '#/components/schemas/type_commons:Source'
+          description: Source of merchant associated with offer
+        category:
+          $ref: '#/components/schemas/type_commons:CategoryOption'
+          description: Category of merchant associated with offer
+        imgUrl:
+          type: string
+          description: Image URL asset containing attribution tokens
+        bannerImgUrl:
+          type: string
+          description: Banner image URL asset containing attribution tokens
+        merchant:
+          $ref: '#/components/schemas/type_rewards:OfferMerchantWithAttribution'
+      required:
+        - _id
+        - terms
+        - redeemableOnce
+        - name
+        - offerType
+        - commissionType
+        - startDate
+        - expirationDate
+        - isTargeted
+        - createdDate
+        - lastModified
+        - totalCommission
+        - isLocationSpecific
+        - source
+        - category
+        - merchant
+      title: OfferWithAttribution
+    type_rewards:OfferMerchant:
+      type: object
+      properties:
+        _id:
+          $ref: '#/components/schemas/type_commons:MongoId'
+          description: Merchant ID in Kard's system
+        name:
+          type: string
+          description: Name of merchant
+        description:
+          type: string
+          description: Description of merchant
+        type:
+          $ref: '#/components/schemas/type_commons:EnrolledRewardsType'
+          description: Type of merchant
+        websiteURL:
+          type: string
+          description: Website URL of merchant
+        category:
+          $ref: '#/components/schemas/type_commons:CategoryOption'
+          description: Category of merchant
+        acceptedCards:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:AcceptedCards'
+        imgUrl:
+          type: string
+          description: Merchant image asset URL
+        bannerImgUrl:
+          type: string
+          description: Merchant banner image asset URL
+      required:
+        - _id
+        - name
+        - description
+        - type
+        - websiteURL
+        - category
+        - acceptedCards
+        - imgUrl
+      description: Merchant associated with the offer
+      title: OfferMerchant
+    type_rewards:Offer:
+      type: object
+      properties:
+        _id:
+          $ref: '#/components/schemas/type_commons:MongoId'
+          description: Offer ID in Kard's system
+        terms:
+          type: string
+          description: Terms and conditions on offer
+        redeemableOnce:
+          type: boolean
+          description: True if offer is redeemable only once, false if not
+        name:
+          type: string
+          description: Name of offer
+        offerType:
+          $ref: '#/components/schemas/type_commons:OfferType'
+        commissionType:
+          $ref: '#/components/schemas/type_commons:CommissionType'
+        startDate:
+          type: string
+          format: date-time
+          description: Beginning date of offer (UTC)
+        expirationDate:
+          type: string
+          format: date-time
+          description: Expiration date of offer if applicable (UTC)
+        isTargeted:
+          type: boolean
+          description: True returns targeted offers, false returns targeted and non-targeted offers
+        createdDate:
+          type: string
+          format: date-time
+          description: Created date of offer in Kard's system (UTC)
+        lastModified:
+          type: string
+          format: date-time
+          description: Last modified date in Kard's system (UTC)
+        totalCommission:
+          type: number
+          format: double
+          description: Offer commission going to issuer and user summed up
+        isLocationSpecific:
+          type: boolean
+          description: >-
+            True if offer is valid only for specific locations, false if valid for all locations. Note, this field is
+            usually false
+        issuersCommission:
+          type: number
+          format: double
+          description: Commission going to the issuer
+        usersCommission:
+          type: number
+          format: double
+          description: Commission going to user
+        minTransactionAmount:
+          type: integer
+          description: Minimum Transaction Amount required to redeem offer, if available on offer
+        maxTransactionAmount:
+          type: integer
+          description: Maximum Transaction Amount allowed to redeem offer, if available on offer
+        minRewardAmount:
+          type: integer
+          description: Minimum Reward Amount, if available on offer
+        maxRewardAmount:
+          type: integer
+          description: Maximum Reward Amount, if available on offer
+        source:
+          $ref: '#/components/schemas/type_commons:Source'
+          description: Source of merchant associated with offer
+        category:
+          $ref: '#/components/schemas/type_commons:CategoryOption'
+          description: Category of merchant associated with offer
+        merchant:
+          $ref: '#/components/schemas/type_rewards:OfferMerchant'
+      required:
+        - _id
+        - terms
+        - redeemableOnce
+        - name
+        - offerType
+        - commissionType
+        - startDate
+        - expirationDate
+        - isTargeted
+        - createdDate
+        - lastModified
+        - totalCommission
+        - isLocationSpecific
+        - source
+        - category
+        - merchant
+      title: Offer
+    type_rewards:LocationType:
+      type: string
+      enum:
+        - INSTORE
+      title: LocationType
+    type_commons:Address:
+      type: object
+      properties:
+        street:
+          type: string
+        city:
+          type: string
+        state:
+          $ref: '#/components/schemas/type_commons:State'
+        zipCode:
+          type: string
+      required:
+        - street
+        - city
+        - state
+        - zipCode
+      title: Address
+    type_commons:GeoLocation:
+      type: object
+      properties:
+        longitude:
+          type: number
+          format: double
+          description: Longitude of location
+        latitude:
+          type: number
+          format: double
+          description: Latitude of location
+      required:
+        - longitude
+        - latitude
+      title: GeoLocation
+    type_commons:OperatingHours:
+      type: object
+      properties:
+        SUNDAY:
+          type: string
+        MONDAY:
+          type: string
+        TUESDAY:
+          type: string
+        WEDNESDAY:
+          type: string
+        THURSDAY:
+          type: string
+        FRIDAY:
+          type: string
+        SATURDAY:
+          type: string
+      title: OperatingHours
+    type_rewards:FullLocationsOffer:
+      type: object
+      properties:
+        _id:
+          $ref: '#/components/schemas/type_commons:MongoId'
+          description: Offer Id in Kard's system
+        totalCommission:
+          type: number
+          format: double
+          description: Commission going to issuer and cardholder
+        commissionType:
+          $ref: '#/components/schemas/type_commons:CommissionType'
+        startDate:
+          type: string
+          format: date-time
+          description: Beginning date of offer (UTC)
+        expirationDate:
+          type: string
+          format: date-time
+          description: Expiration date of offer if applicable (UTC)
+        minTransactionAmount:
+          type: integer
+          description: Min Transaction Amount for Offer, if available
+        maxTransactionAmount:
+          type: integer
+          description: Max Transaction Amount for Offer, if available
+        minRewardAmount:
+          type: integer
+          description: Min Reward Amount for Offer, if available
+        maxRewardAmount:
+          type: integer
+          description: Max Reward Amount for Offer, if available
+        issuersCommission:
+          type: number
+          format: double
+          description: Commission going to the issuer
+        usersCommission:
+          type: number
+          format: double
+          description: Commission going to user
+        terms:
+          type: string
+          description: Terms and conditions on offer
+        redeemableOnce:
+          type: boolean
+          description: Is the offer redeemable once
+        name:
+          type: string
+          description: Name of offer
+        offerType:
+          $ref: '#/components/schemas/type_commons:OfferType'
+        isTargeted:
+          type: boolean
+          description: True returns targeted offers, false returns targeted and non-targeted offers
+        createdDate:
+          type: string
+          format: date-time
+          description: Create date of offer (UTC)
+        lastModified:
+          type: string
+          format: date-time
+          description: Last modified date of offer (UTC)
+        isLocationSpecific:
+          type: boolean
+          description: Is offer location specific
+        imgUrl:
+          type: string
+          description: Image URL asset containing attribution tokens
+        bannerImgUrl:
+          type: string
+          description: Banner image URL asset containing attribution tokens
+        source:
+          $ref: '#/components/schemas/type_commons:Source'
+          description: Source of merchant associated to the offer
+        category:
+          $ref: '#/components/schemas/type_commons:CategoryOption'
+          description: Category of merchant associated with offer
+      required:
+        - _id
+        - totalCommission
+        - commissionType
+        - startDate
+        - expirationDate
+        - terms
+        - redeemableOnce
+        - name
+        - offerType
+        - isTargeted
+        - createdDate
+        - lastModified
+        - isLocationSpecific
+        - source
+      title: FullLocationsOffer
+    type_rewards:LocationsMerchantWithAttribution:
+      type: object
+      properties:
+        _id:
+          $ref: '#/components/schemas/type_commons:MongoId'
+          description: Merchant ID in Kard's system
+        name:
+          type: string
+          description: Name of merchant
+        description:
+          type: string
+          description: Description of merchant
+        websiteURL:
+          type: string
+          description: Website URL associated with merchant
+        type:
+          $ref: '#/components/schemas/type_commons:EnrolledRewardsType'
+          description: Merchant type
+        category:
+          $ref: '#/components/schemas/type_commons:CategoryOption'
+          description: Category of merchant
+        acceptedCards:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:AcceptedCards'
+        imgUrl:
+          type: string
+          description: <b>[Deprecated — Please use imgUrl on the offer object which contain attribution tokens]</b>
+        bannerImgUrl:
+          type: string
+          description: <b>[Deprecated — Please use bannerImgUrl on the offer object which contain attribution tokens]</b>
+      required:
+        - _id
+        - name
+        - description
+        - websiteURL
+        - type
+        - category
+        - acceptedCards
+        - imgUrl
+      title: LocationsMerchantWithAttribution
+    type_rewards:LocationWithFullOffer:
+      type: object
+      properties:
+        _id:
+          $ref: '#/components/schemas/type_commons:MongoId'
+          description: Location ID in Kard's system
+        merchantId:
+          type: string
+          description: Merchant ID in Kard's system associated to location
+        name:
+          type: string
+          description: Name of the location
+        locationType:
+          $ref: '#/components/schemas/type_rewards:LocationType'
+          description: Type of offer associated to location, will always be in INSTORE
+        address:
+          $ref: '#/components/schemas/type_commons:Address'
+          description: Address of location
+        geoLocation:
+          $ref: '#/components/schemas/type_commons:GeoLocation'
+          description: Geo-coordinates of location
+        phone:
+          type: string
+          description: Phone number for location
+        operationHours:
+          $ref: '#/components/schemas/type_commons:OperatingHours'
+          description: Hours of operation for location
+        googleId:
+          type: string
+          description: GoogleId of location
+        createdDate:
+          type: string
+          format: date-time
+          description: Created date of location in Kard's system (UTC)
+        lastModified:
+          type: string
+          format: date-time
+          description: Last modified date of location in Kard's system (UTC)
+        source:
+          $ref: '#/components/schemas/type_commons:Source'
+        category:
+          $ref: '#/components/schemas/type_commons:CategoryOption'
+          description: Category of merchant associated with location
+        offers:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_rewards:FullLocationsOffer'
+          description: Offers associated to the location
+        merchant:
+          $ref: '#/components/schemas/type_rewards:LocationsMerchantWithAttribution'
+          description: Merchant object associated with location
+      required:
+        - _id
+        - merchantId
+        - name
+        - locationType
+        - address
+        - geoLocation
+        - phone
+        - createdDate
+        - lastModified
+        - source
+        - category
+        - offers
+        - merchant
+      title: LocationWithFullOffer
+    type_rewards:Location:
+      type: object
+      properties:
+        _id:
+          $ref: '#/components/schemas/type_commons:MongoId'
+          description: Location ID in Kard's system
+        merchantId:
+          type: string
+          description: Merchant ID in Kard's system associated to location
+        name:
+          type: string
+          description: Name of the location
+        locationType:
+          $ref: '#/components/schemas/type_rewards:LocationType'
+          description: Type of offer associated to location, will always be in INSTORE
+        address:
+          $ref: '#/components/schemas/type_commons:Address'
+          description: Address of location
+        geoLocation:
+          $ref: '#/components/schemas/type_commons:GeoLocation'
+          description: Geo-coordinates of location
+        phone:
+          type: string
+          description: Phone number for location
+        operationHours:
+          $ref: '#/components/schemas/type_commons:OperatingHours'
+          description: Hours of operation for location
+        googleId:
+          type: string
+          description: GoogleId of location
+        createdDate:
+          type: string
+          format: date-time
+          description: Created date of location in Kard's system (UTC)
+        lastModified:
+          type: string
+          format: date-time
+          description: Last modified date of location in Kard's system (UTC)
+        source:
+          $ref: '#/components/schemas/type_commons:Source'
+        category:
+          $ref: '#/components/schemas/type_commons:CategoryOption'
+          description: Category of merchant associated with location
+      required:
+        - _id
+        - merchantId
+        - name
+        - locationType
+        - address
+        - geoLocation
+        - phone
+        - createdDate
+        - lastModified
+        - source
+        - category
+      title: Location
+    type_rewards:LocationsOffer:
+      type: object
+      properties:
+        _id:
+          $ref: '#/components/schemas/type_commons:MongoId'
+          description: Offer Id in Kard's system
+        totalCommission:
+          type: number
+          format: double
+          description: Commission going to issuer and cardholder
+        commissionType:
+          $ref: '#/components/schemas/type_commons:CommissionType'
+        startDate:
+          type: string
+          format: date-time
+          description: Beginning date of offer (UTC)
+        expirationDate:
+          type: string
+          format: date-time
+          description: Expiration date of offer if applicable (UTC)
+        minTransactionAmount:
+          type: integer
+          description: Min Transaction Amount for Offer, if available
+        maxTransactionAmount:
+          type: integer
+          description: Max Transaction Amount for Offer, if available
+        minRewardAmount:
+          type: integer
+          description: Min Reward Amount for Offer, if available
+        maxRewardAmount:
+          type: integer
+          description: Max Reward Amount for Offer, if available
+        issuersCommission:
+          type: number
+          format: double
+          description: Commission going to the issuer
+        usersCommission:
+          type: number
+          format: double
+          description: Commission going to user
+      required:
+        - _id
+        - totalCommission
+        - commissionType
+        - startDate
+        - expirationDate
+      title: LocationsOffer
+    type_rewards:LocationsMerchant:
+      type: object
+      properties:
+        _id:
+          $ref: '#/components/schemas/type_commons:MongoId'
+          description: Merchant ID in Kard's system
+        name:
+          type: string
+          description: Name of merchant
+        description:
+          type: string
+          description: Description of merchant
+        websiteURL:
+          type: string
+          description: Website URL associated with merchant
+        type:
+          $ref: '#/components/schemas/type_commons:EnrolledRewardsType'
+          description: Merchant type
+        category:
+          $ref: '#/components/schemas/type_commons:CategoryOption'
+          description: Category of merchant
+        acceptedCards:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons:AcceptedCards'
+        imgUrl:
+          type: string
+          description: Merchant image asset URL
+        bannerImgUrl:
+          type: string
+          description: Merchant banner image asset URL
+      required:
+        - _id
+        - name
+        - description
+        - websiteURL
+        - type
+        - category
+        - acceptedCards
+        - imgUrl
+      title: LocationsMerchant
+    type_rewards:LocationWithPartialOffer:
+      type: object
+      properties:
+        _id:
+          $ref: '#/components/schemas/type_commons:MongoId'
+          description: Location ID in Kard's system
+        merchantId:
+          type: string
+          description: Merchant ID in Kard's system associated to location
+        name:
+          type: string
+          description: Name of the location
+        locationType:
+          $ref: '#/components/schemas/type_rewards:LocationType'
+          description: Type of offer associated to location, will always be in INSTORE
+        address:
+          $ref: '#/components/schemas/type_commons:Address'
+          description: Address of location
+        geoLocation:
+          $ref: '#/components/schemas/type_commons:GeoLocation'
+          description: Geo-coordinates of location
+        phone:
+          type: string
+          description: Phone number for location
+        operationHours:
+          $ref: '#/components/schemas/type_commons:OperatingHours'
+          description: Hours of operation for location
+        googleId:
+          type: string
+          description: GoogleId of location
+        createdDate:
+          type: string
+          format: date-time
+          description: Created date of location in Kard's system (UTC)
+        lastModified:
+          type: string
+          format: date-time
+          description: Last modified date of location in Kard's system (UTC)
+        source:
+          $ref: '#/components/schemas/type_commons:Source'
+        category:
+          $ref: '#/components/schemas/type_commons:CategoryOption'
+          description: Category of merchant associated with location
+        offers:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_rewards:LocationsOffer'
+          description: Offers associated to the location
+        merchant:
+          $ref: '#/components/schemas/type_rewards:LocationsMerchant'
+          description: Merchant object associated with location
+      required:
+        - _id
+        - merchantId
+        - name
+        - locationType
+        - address
+        - geoLocation
+        - phone
+        - createdDate
+        - lastModified
+        - source
+        - category
+        - offers
+        - merchant
+      title: LocationWithPartialOffer
+    type_attributions:OrganizationId:
+      type: string
+      description: Your organization ID, provided by Kard.
+      title: OrganizationId
+    type_attributions:ObjectType:
+      type: string
+      enum:
+        - attribution
+      title: ObjectType
+    type_attributions:UserId:
+      type: string
+      description: The referring partner user ID associated with the attribution event.
+      title: UserId
+    type_attributions:Type:
+      type: string
+      enum:
+        - OFFER
+        - NOTIFICATION
+      description: What the attribution event is on.
+      title: Type
+    type_attributions:Subtype:
+      type: string
+      enum:
+        - IMPRESSION
+        - VIEW
+      description: The type of attribution event.
+      title: Subtype
+    type_attributions:Medium:
+      type: string
+      enum:
+        - BROWSE
+        - MAP
+        - SEARCH
+        - PUSH
+      description: Where the attribution event is taking place in your rewards experience.
+      title: Medium
+    type_attributions:TypeId:
+      type: string
+      description: >-
+        The ID in Kard’s system associated with what the attribution event is on. If `type` is `OFFER`, `typeId` should
+        be the associated offer ID in Kard’s system.
+      title: TypeId
+    type_attributions:Attributes:
+      type: object
+      properties:
+        userId:
+          $ref: '#/components/schemas/type_attributions:UserId'
+        type:
+          $ref: '#/components/schemas/type_attributions:Type'
+        subtype:
+          $ref: '#/components/schemas/type_attributions:Subtype'
+        medium:
+          $ref: '#/components/schemas/type_attributions:Medium'
+        typeId:
+          $ref: '#/components/schemas/type_attributions:TypeId'
+      required:
+        - userId
+        - type
+        - subtype
+        - typeId
+      title: Attributes
+    type_attributions:CreateAttributesRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/type_attributions:ObjectType'
+        attributes:
+          $ref: '#/components/schemas/type_attributions:Attributes'
+      required:
+        - type
+        - attributes
+      title: CreateAttributesRequest
+    type_attributions:CreateAttributionRequestBody:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_attributions:CreateAttributesRequest'
+          description: Data and attributes related to the attribution event.
+      required:
+        - data
+      title: CreateAttributionRequestBody
+    type_files:FileType:
+      type: string
+      enum:
+        - usersEligibilityFile
+        - dailyReconciliationFile
+        - monthlyReconciliationFile
+      title: FileType
+    type_files:FileAttributes:
+      type: object
+      properties:
+        fileName:
+          type: string
+          description: The name of the file to download.
+        lastModified:
+          type: string
+          format: date-time
+          description: The last time this document was modified (ISO 8601).
+        contentType:
+          type: string
+          description: The content type of the file.
+        downloadUrl:
+          type: string
+          description: >-
+            The download link of the file. Use this to download the associated file. These are ephemeral links with an
+            expiration time of 1 hour.
+      required:
+        - fileName
+        - lastModified
+        - contentType
+        - downloadUrl
+      title: FileAttributes
+    type_files:File:
+      oneOf:
+        - type: object
+          properties:
+            type:
+              type: string
+              enum:
+                - usersEligibilityFile
+              description: 'Discriminator value: usersEligibilityFile'
+            id:
+              type: string
+              description: The File ID in Kard’s system
+            attributes:
+              $ref: '#/components/schemas/type_files:FileAttributes'
+          required:
+            - type
+            - id
+            - attributes
+        - type: object
+          properties:
+            type:
+              type: string
+              enum:
+                - dailyReconciliationFile
+              description: 'Discriminator value: dailyReconciliationFile'
+            id:
+              type: string
+              description: The File ID in Kard’s system
+            attributes:
+              $ref: '#/components/schemas/type_files:FileAttributes'
+          required:
+            - type
+            - id
+            - attributes
+        - type: object
+          properties:
+            type:
+              type: string
+              enum:
+                - monthlyReconciliationFile
+              description: 'Discriminator value: monthlyReconciliationFile'
+            id:
+              type: string
+              description: The File ID in Kard’s system
+            attributes:
+              $ref: '#/components/schemas/type_files:FileAttributes'
+          required:
+            - type
+            - id
+            - attributes
+      discriminator:
+        propertyName: type
+      description: Type of document returned. Will always be type file
+      title: File
+    type_files:FilesMeta:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          description: The number of records returned in API call.
+      required:
+        - pageSize
+      title: FilesMeta
+    type_files:PaginationLinks:
+      type: object
+      properties:
+        self:
+          type: string
+          description: The self link. Will point to the current URL.
+        next:
+          type: string
+          description: The URL to get the next page of results.
+        first:
+          type: string
+          description: The URL to get the first page of results.
+      required:
+        - self
+        - first
+      description: Related pagination links to the API call.
+      title: PaginationLinks
+    type_files:Files:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_files:File'
+          description: Data and attributes related to files
+        meta:
+          $ref: '#/components/schemas/type_files:FilesMeta'
+          description: Meta information about the API call
+        links:
+          $ref: '#/components/schemas/type_files:PaginationLinks'
+          description: Related pagination links to the API call
+      required:
+        - data
+        - meta
+        - links
+      title: Files
+    type_webhooks:User:
+      type: object
+      properties:
+        referringPartnerUserId:
+          type: string
+          description: Referring partner user ID of user from issuer
+      required:
+        - referringPartnerUserId
+      title: User
+    type_webhooks:Card:
+      type: object
+      properties:
+        bin:
+          type: string
+          description: Card Bank identification number (BIN)
+        last4:
+          type: string
+          description: Card last four digits
+        network:
+          $ref: '#/components/schemas/type_commons:Network'
+          description: Name of card network
+      required:
+        - bin
+        - last4
+        - network
+      title: Card
+    type_webhooks:CommissionSplit:
+      type: object
+      properties:
+        issuersCommissionInCents:
+          type: integer
+          description: Issuer's Commission In Cents
+        usersCommissionInCents:
+          type: integer
+          description: User's Commission In Cents
+      required:
+        - issuersCommissionInCents
+        - usersCommissionInCents
+      title: CommissionSplit
+    type_webhooks:Reward:
+      type: object
+      properties:
+        merchantId:
+          type: string
+          description: Merchant ID in Kard's system associated to reward
+        name:
+          type: string
+          description: Merchant Name
+        commissionToIssuer:
+          type: integer
+          description: Commission going to issuer and user summed up in cents
+        commissionSplit:
+          $ref: '#/components/schemas/type_webhooks:CommissionSplit'
+          description: Split of commission going to issuer and user in cents
+        status:
+          type: string
+          description: Status of reward. Note, this will always be **“APPROVED"**
+        type:
+          type: string
+          description: Type of reward. Note, this will always be **“CARDLINKED”**
+      required:
+        - merchantId
+        - name
+        - commissionToIssuer
+        - commissionSplit
+        - status
+        - type
+      title: Reward
+    type_webhooks:Transaction:
+      type: object
+      properties:
+        issuerTransactionId:
+          type: string
+          description: Transaction ID provided by issuer
+        status:
+          type: string
+          description: Status of transaction. Note, this will either be **“APPROVED”** or **“SETTLED”**
+        transactionAmountInCents:
+          type: integer
+          description: Transaction amount in cents
+        transactionTimeStamp:
+          type: string
+          description: Time of transaction
+      required:
+        - issuerTransactionId
+        - status
+        - transactionAmountInCents
+        - transactionTimeStamp
+      title: Transaction
+    type_webhooks:IssuerEarnedRewardWebhookPayload:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/type_webhooks:User'
+          description: Information about user that is earning reward
+        card:
+          $ref: '#/components/schemas/type_webhooks:Card'
+          description: Information about card associated with transaction that is earning reward
+        reward:
+          $ref: '#/components/schemas/type_webhooks:Reward'
+          description: Information about reward earned
+        transaction:
+          $ref: '#/components/schemas/type_webhooks:Transaction'
+          description: Information about transaction that is earning reward
+        postDineInLinkURL:
+          type: string
+          description: Post Dine In Survey Link URL, if available. This will be present for rewards associated with local offers
+        error:
+          type: string
+          description: Error, if available
+      required:
+        - user
+        - card
+        - reward
+        - transaction
+      title: IssuerEarnedRewardWebhookPayload
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer

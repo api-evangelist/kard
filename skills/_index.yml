@@ -1,0 +1,31 @@
+generated: '2026-07-19'
+method: generated
+api: openapi/kard-api-reference-openapi.yaml
+skills:
+- file: kard-enroll-user-and-fetch-offers.md
+  name: Enroll a user and fetch their live offers
+  api: openapi/kard-api-reference-openapi.yaml
+  operations:
+  - create
+  - offers
+  - locations
+- file: kard-submit-transactions.md
+  name: Submit transactions for reward matching
+  api: openapi/kard-api-reference-openapi.yaml
+  operations:
+  - create
+  - get-earned-rewards
+  - create-bulk-transactions-upload-url
+- file: kard-subscribe-webhooks.md
+  name: Subscribe to reward notifications
+  api: openapi/kard-api-reference-openapi.yaml
+  operations:
+  - create
+  - get
+  - list
+  - replay
+- file: kard-embed-webview.md
+  name: Embed the Kard WebView
+  api: openapi/kard-api-reference-openapi.yaml
+  operations:
+  - get-web-view-token

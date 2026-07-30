@@ -1,0 +1,38 @@
+generated: '2026-07-19'
+method: searched
+source: openapi/kard-api-reference-openapi.yaml
+docs: https://docs.getkard.com/api/integration-guides/getting-started
+authentication:
+  style: oauth2-client-credentials-bearer
+  token_endpoint: https://{client-subdomain}.getkard.com/v2/auth/token
+  artifact: authentication/kard-authentication.yml
+versioning:
+  style: calver-date-path
+  current: '2024-10-01'
+  base_path: /v2
+  multi_issuer_header: X-Kard-Target-Issuer
+idempotency:
+  request_level: false
+  notes: No request Idempotency-Key contract is documented. Webhook notifications
+    carry their own delivery idempotency identifier (see asyncapi/kard-notifications-webhooks.yml).
+error_envelope:
+  shape: json-api
+  content_type: application/json
+  schema: '{errors:[{status,title,detail,source:{pointer,parameter,header},id}]}'
+  artifact: errors/kard-problem-types.yml
+webhooks:
+  signature_header: notify-signature
+  algorithm: HMAC-SHA256
+  signed_over: raw webhook request body with the issuer webhook key
+  artifact: asyncapi/kard-notifications-webhooks.yml
+multi_status:
+  code: 207
+  notes: Bulk operations can return 207 Multi-Status; per-item errors carry the offending
+    resource id in ErrorObject.id.
+rate_limiting:
+  documented: false
+  notes: No rate-limit headers or limits documented in the OpenAPI or integration
+    guides.
+pagination:
+  documented: false
+  notes: No cross-cutting pagination convention documented in the specs.

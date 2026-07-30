@@ -1,0 +1,27 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Kard API (2024-10-01)
+  version: 1.0.0
+extends: openapi/kard-api-reference-openapi.yaml
+actions:
+- target: $.info
+  update:
+    x-apievangelist-enriched: '2026-07-19'
+    x-apievangelist-provider: kard
+    x-apievangelist-artifacts:
+    - authentication
+    - scopes
+    - errors
+    - conventions
+    - asyncapi
+    - packages
+    - mcp
+    - well-known
+    - lifecycle
+    - conformance
+    - data-model
+    - skills
+- target: $.info
+  update:
+    x-kard-auth: OAuth2 client_credentials -> Bearer; token at /v2/auth/token; scope
+      via X-Kard-Target-Issuer

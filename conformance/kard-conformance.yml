@@ -1,0 +1,35 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/kard-api-reference-openapi.yaml
+standards:
+- id: oauth2-client-credentials
+  conforms: true
+  evidence: OAuth2 client_credentials token endpoint documented; bearer access tokens
+- id: openapi-3.1
+  conforms: true
+  evidence: 'both specs declare openapi: 3.1.0'
+- id: json-api-errors
+  conforms: true
+  evidence: error envelope is a JSON:API-style {errors:[{status,title,detail,source:{pointer,parameter,header}}]}
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: errors are application/json JSON:API shape, not application/problem+json
+- id: rfc9116-security-txt
+  conforms: true
+  evidence: /.well-known/security.txt served on getkard.com
+- id: rfc9727-api-catalog
+  conforms: true
+  evidence: /.well-known/api-catalog served on docs.getkard.com
+- id: webhooks-hmac-sha256
+  conforms: true
+  evidence: notify-signature header, HMAC-SHA256 over the webhook body with the issuer
+    webhook key
+- id: calver-versioning
+  conforms: true
+  evidence: date-based API version 2024-10-01
+- id: fhir-r4
+  conforms: false
+- id: scim2
+  conforms: false
+- id: fapi
+  conforms: false

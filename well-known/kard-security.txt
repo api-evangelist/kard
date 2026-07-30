@@ -1,0 +1,11 @@
+# Kard Financial, Inc security contacts and policy
+
+# Our security contact channels
+Contact: mailto:security@getkard.com
+
+# Link to our vulnerability disclosure policy
+Policy: https://getkard.com/security
+
+# Languages that our team speaks and understands
+Preferred-Languages: en-US
+

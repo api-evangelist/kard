@@ -1,0 +1,32 @@
+generated: '2026-07-19'
+method: searched
+source: https://docs.getkard.com/api/integration-guides/notifications
+spec_type: Webhooks
+transport: HTTPS POST to issuer-registered subscription URL
+signature:
+  header: notify-signature
+  algorithm: HMAC-SHA256
+  signed_over: raw webhook request body
+  key: issuer webhook key (case-insensitive header match)
+delivery:
+  idempotency: each notification carries a unique idempotency identifier for consistent
+    delivery
+  replay: POST /v2/issuers/{organizationId}/notifications/{eventId}/replay
+  list: GET /v2/issuers/{organizationId}/notifications
+subscription_management:
+  create: POST /v2/issuers/{organizationId}/subscriptions
+  get: GET /v2/issuers/{organizationId}/subscriptions
+  update: PATCH /v2/issuers/{organizationId}/subscriptions/{subscriptionId}
+events:
+- name: earnedRewardApproved
+  description: An approved transaction has qualified for a reward.
+  payload_fields:
+  - message (suggested push text)
+  - attribution (tracking links)
+  - idempotency identifier
+- name: earnedRewardSettled
+  description: A settled transaction has qualified for a reward.
+  payload_fields:
+  - message (suggested push text)
+  - attribution (tracking links)
+  - idempotency identifier
