@@ -1,20 +1,498 @@
 aid: kard
 name: Kard
-description: Kard is a company surfaced as a portfolio company of techstars and added to the API Evangelist
-  network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: Kard is an independent commerce media network and card-linked-offers (CLO) rewards platform. Its Rewards API
+  lets fintechs, banks, and card issuers enroll cardholders, submit transactions for closed-loop offer matching, surface personalized
+  offers and redemption locations, run attributions and placements, and receive earned-reward webhook notifications — powering
+  embedded loyalty and cashback programs without building the matching infrastructure. Marketers use the same network to reach
+  47M+ cardholders with performance-based, transaction-driven offers.
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://cdn.prod.website-files.com/6501e86bc5fd522771731f1e/6900e3183a88a4d43e5f8952_Preview-image.png
 url: https://raw.githubusercontent.com/api-evangelist/kard/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - techstars
-x-tier: stub
-x-tier-reason: portfolio-lead
+x-tier: enriched
+x-tier-reason: real-openapi-and-artifacts
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-19'
 tags:
 - Company
-apis: []
+- Rewards
+- Card-Linked Offers
+- Loyalty
+- Fintech
+- Commerce Media
+- Advertising
+- Transactions
+- Cashback
+- Webhooks
+apis:
+- aid: kard:kard-attributions-api
+  name: Kard attributions API
+  description: The attributions API from Kard — 1 operation(s) for attributions.
+  humanURL: https://docs.getkard.com/home
+  baseURL: https://rewards-api.getkard.com
+  tags:
+  - attributions
+  properties:
+  - type: OpenAPI
+    url: openapi/kard-attributions-api-openapi.yml
+  - type: Authentication
+    url: authentication/kard-authentication.yml
+  - type: OAuthScopes
+    url: scopes/kard-scopes.yml
+  - type: ErrorCatalog
+    url: errors/kard-problem-types.yml
+  - type: Conventions
+    url: conventions/kard-conventions.yml
+  - type: DataModel
+    url: data-model/kard-data-model.yml
+  - type: Conformance
+    url: conformance/kard-conformance.yml
+  - type: AsyncAPI
+    url: asyncapi/kard-notifications-webhooks.yml
+  - type: Webhooks
+    url: asyncapi/kard-notifications-webhooks.yml
+  - type: AgenticAccess
+    url: agentic-access/kard-agentic-access.yml
+- aid: kard:kard-files-api
+  name: Kard Files API
+  description: The Files API from Kard — 2 operation(s) for files.
+  humanURL: https://docs.getkard.com/home
+  baseURL: https://rewards-api.getkard.com
+  tags:
+  - Files
+  properties:
+  - type: OpenAPI
+    url: openapi/kard-files-api-openapi.yml
+  - type: Authentication
+    url: authentication/kard-authentication.yml
+  - type: OAuthScopes
+    url: scopes/kard-scopes.yml
+  - type: ErrorCatalog
+    url: errors/kard-problem-types.yml
+  - type: Conventions
+    url: conventions/kard-conventions.yml
+  - type: DataModel
+    url: data-model/kard-data-model.yml
+  - type: Conformance
+    url: conformance/kard-conformance.yml
+  - type: AsyncAPI
+    url: asyncapi/kard-notifications-webhooks.yml
+  - type: Webhooks
+    url: asyncapi/kard-notifications-webhooks.yml
+  - type: AgenticAccess
+    url: agentic-access/kard-agentic-access.yml
+- aid: kard:kard-notifications-notifications-api
+  name: Kard notifications > Notifications API
+  description: >-
+    The notifications > Notifications API from Kard — 2 operation(s) for notifications > notifications.
+  humanURL: https://docs.getkard.com/home
+  baseURL: https://rewards-api.getkard.com
+  tags:
+  - notifications > Notifications
+  properties:
+  - type: OpenAPI
+    url: openapi/kard-notifications-notifications-api-openapi.yml
+  - type: Authentication
+    url: authentication/kard-authentication.yml
+  - type: OAuthScopes
+    url: scopes/kard-scopes.yml
+  - type: ErrorCatalog
+    url: errors/kard-problem-types.yml
+  - type: Conventions
+    url: conventions/kard-conventions.yml
+  - type: DataModel
+    url: data-model/kard-data-model.yml
+  - type: Conformance
+    url: conformance/kard-conformance.yml
+  - type: AsyncAPI
+    url: asyncapi/kard-notifications-webhooks.yml
+  - type: Webhooks
+    url: asyncapi/kard-notifications-webhooks.yml
+  - type: AgenticAccess
+    url: agentic-access/kard-agentic-access.yml
+- aid: kard:kard-notifications-subscriptions-api
+  name: Kard notifications > Subscriptions API
+  description: >-
+    The notifications > Subscriptions API from Kard — 2 operation(s) for notifications > subscriptions.
+  humanURL: https://docs.getkard.com/home
+  baseURL: https://rewards-api.getkard.com
+  tags:
+  - notifications > Subscriptions
+  properties:
+  - type: OpenAPI
+    url: openapi/kard-notifications-subscriptions-api-openapi.yml
+  - type: Authentication
+    url: authentication/kard-authentication.yml
+  - type: OAuthScopes
+    url: scopes/kard-scopes.yml
+  - type: ErrorCatalog
+    url: errors/kard-problem-types.yml
+  - type: Conventions
+    url: conventions/kard-conventions.yml
+  - type: DataModel
+    url: data-model/kard-data-model.yml
+  - type: Conformance
+    url: conformance/kard-conformance.yml
+  - type: AsyncAPI
+    url: asyncapi/kard-notifications-webhooks.yml
+  - type: Webhooks
+    url: asyncapi/kard-notifications-webhooks.yml
+  - type: AgenticAccess
+    url: agentic-access/kard-agentic-access.yml
+- aid: kard:kard-organizations-api
+  name: Kard Organizations API
+  description: The Organizations API from Kard — 1 operation(s) for organizations.
+  humanURL: https://docs.getkard.com/home
+  baseURL: https://rewards-api.getkard.com
+  tags:
+  - Organizations
+  properties:
+  - type: OpenAPI
+    url: openapi/kard-organizations-api-openapi.yml
+  - type: Authentication
+    url: authentication/kard-authentication.yml
+  - type: OAuthScopes
+    url: scopes/kard-scopes.yml
+  - type: ErrorCatalog
+    url: errors/kard-problem-types.yml
+  - type: Conventions
+    url: conventions/kard-conventions.yml
+  - type: DataModel
+    url: data-model/kard-data-model.yml
+  - type: Conformance
+    url: conformance/kard-conformance.yml
+  - type: AsyncAPI
+    url: asyncapi/kard-notifications-webhooks.yml
+  - type: Webhooks
+    url: asyncapi/kard-notifications-webhooks.yml
+  - type: AgenticAccess
+    url: agentic-access/kard-agentic-access.yml
+- aid: kard:kard-organizations-children-api
+  name: Kard Organizations > Children API
+  description: >-
+    The Organizations > Children API from Kard — 2 operation(s) for organizations > children.
+  humanURL: https://docs.getkard.com/home
+  baseURL: https://rewards-api.getkard.com
+  tags:
+  - Organizations > Children
+  properties:
+  - type: OpenAPI
+    url: openapi/kard-organizations-children-api-openapi.yml
+  - type: Authentication
+    url: authentication/kard-authentication.yml
+  - type: OAuthScopes
+    url: scopes/kard-scopes.yml
+  - type: ErrorCatalog
+    url: errors/kard-problem-types.yml
+  - type: Conventions
+    url: conventions/kard-conventions.yml
+  - type: DataModel
+    url: data-model/kard-data-model.yml
+  - type: Conformance
+    url: conformance/kard-conformance.yml
+  - type: AsyncAPI
+    url: asyncapi/kard-notifications-webhooks.yml
+  - type: Webhooks
+    url: asyncapi/kard-notifications-webhooks.yml
+  - type: AgenticAccess
+    url: agentic-access/kard-agentic-access.yml
+- aid: kard:kard-organizations-contentstrategies-api
+  name: Kard Organizations > ContentStrategies API
+  description: >-
+    The Organizations > ContentStrategies API from Kard — 2 operation(s) for organizations > contentstrategies.
+  humanURL: https://docs.getkard.com/home
+  baseURL: https://rewards-api.getkard.com
+  tags:
+  - Organizations > ContentStrategies
+  properties:
+  - type: OpenAPI
+    url: openapi/kard-organizations-contentstrategies-api-openapi.yml
+  - type: Authentication
+    url: authentication/kard-authentication.yml
+  - type: OAuthScopes
+    url: scopes/kard-scopes.yml
+  - type: ErrorCatalog
+    url: errors/kard-problem-types.yml
+  - type: Conventions
+    url: conventions/kard-conventions.yml
+  - type: DataModel
+    url: data-model/kard-data-model.yml
+  - type: Conformance
+    url: conformance/kard-conformance.yml
+  - type: AsyncAPI
+    url: asyncapi/kard-notifications-webhooks.yml
+  - type: Webhooks
+    url: asyncapi/kard-notifications-webhooks.yml
+  - type: AgenticAccess
+    url: agentic-access/kard-agentic-access.yml
+- aid: kard:kard-organizations-placements-api
+  name: Kard Organizations > Placements API
+  description: >-
+    The Organizations > Placements API from Kard — 2 operation(s) for organizations > placements.
+  humanURL: https://docs.getkard.com/home
+  baseURL: https://rewards-api.getkard.com
+  tags:
+  - Organizations > Placements
+  properties:
+  - type: OpenAPI
+    url: openapi/kard-organizations-placements-api-openapi.yml
+  - type: Authentication
+    url: authentication/kard-authentication.yml
+  - type: OAuthScopes
+    url: scopes/kard-scopes.yml
+  - type: ErrorCatalog
+    url: errors/kard-problem-types.yml
+  - type: Conventions
+    url: conventions/kard-conventions.yml
+  - type: DataModel
+    url: data-model/kard-data-model.yml
+  - type: Conformance
+    url: conformance/kard-conformance.yml
+  - type: AsyncAPI
+    url: asyncapi/kard-notifications-webhooks.yml
+  - type: Webhooks
+    url: asyncapi/kard-notifications-webhooks.yml
+  - type: AgenticAccess
+    url: agentic-access/kard-agentic-access.yml
+- aid: kard:kard-ping-api
+  name: Kard Ping API
+  description: The Ping API from Kard — 1 operation(s) for ping.
+  humanURL: https://docs.getkard.com/home
+  baseURL: https://rewards-api.getkard.com
+  tags:
+  - Ping
+  properties:
+  - type: OpenAPI
+    url: openapi/kard-ping-api-openapi.yml
+  - type: Authentication
+    url: authentication/kard-authentication.yml
+  - type: OAuthScopes
+    url: scopes/kard-scopes.yml
+  - type: ErrorCatalog
+    url: errors/kard-problem-types.yml
+  - type: Conventions
+    url: conventions/kard-conventions.yml
+  - type: DataModel
+    url: data-model/kard-data-model.yml
+  - type: Conformance
+    url: conformance/kard-conformance.yml
+  - type: AsyncAPI
+    url: asyncapi/kard-notifications-webhooks.yml
+  - type: Webhooks
+    url: asyncapi/kard-notifications-webhooks.yml
+  - type: AgenticAccess
+    url: agentic-access/kard-agentic-access.yml
+- aid: kard:kard-rewards-api
+  name: Kard rewards API
+  description: The rewards API from Kard — 9 operation(s) for rewards.
+  humanURL: https://docs.getkard.com/home
+  baseURL: https://rewards-api.getkard.com
+  tags:
+  - rewards
+  properties:
+  - type: OpenAPI
+    url: openapi/kard-rewards-api-openapi.yml
+  - type: Authentication
+    url: authentication/kard-authentication.yml
+  - type: OAuthScopes
+    url: scopes/kard-scopes.yml
+  - type: ErrorCatalog
+    url: errors/kard-problem-types.yml
+  - type: Conventions
+    url: conventions/kard-conventions.yml
+  - type: DataModel
+    url: data-model/kard-data-model.yml
+  - type: Conformance
+    url: conformance/kard-conformance.yml
+  - type: AsyncAPI
+    url: asyncapi/kard-notifications-webhooks.yml
+  - type: Webhooks
+    url: asyncapi/kard-notifications-webhooks.yml
+  - type: AgenticAccess
+    url: agentic-access/kard-agentic-access.yml
+- aid: kard:kard-transactions-api
+  name: Kard transactions API
+  description: The transactions API from Kard — 7 operation(s) for transactions.
+  humanURL: https://docs.getkard.com/home
+  baseURL: https://rewards-api.getkard.com
+  tags:
+  - transactions
+  properties:
+  - type: OpenAPI
+    url: openapi/kard-transactions-api-openapi.yml
+  - type: Authentication
+    url: authentication/kard-authentication.yml
+  - type: OAuthScopes
+    url: scopes/kard-scopes.yml
+  - type: ErrorCatalog
+    url: errors/kard-problem-types.yml
+  - type: Conventions
+    url: conventions/kard-conventions.yml
+  - type: DataModel
+    url: data-model/kard-data-model.yml
+  - type: Conformance
+    url: conformance/kard-conformance.yml
+  - type: AsyncAPI
+    url: asyncapi/kard-notifications-webhooks.yml
+  - type: Webhooks
+    url: asyncapi/kard-notifications-webhooks.yml
+  - type: AgenticAccess
+    url: agentic-access/kard-agentic-access.yml
+- aid: kard:kard-users-api
+  name: Kard users API
+  description: The users API from Kard — 5 operation(s) for users.
+  humanURL: https://docs.getkard.com/home
+  baseURL: https://rewards-api.getkard.com
+  tags:
+  - users
+  properties:
+  - type: OpenAPI
+    url: openapi/kard-users-api-openapi.yml
+  - type: Authentication
+    url: authentication/kard-authentication.yml
+  - type: OAuthScopes
+    url: scopes/kard-scopes.yml
+  - type: ErrorCatalog
+    url: errors/kard-problem-types.yml
+  - type: Conventions
+    url: conventions/kard-conventions.yml
+  - type: DataModel
+    url: data-model/kard-data-model.yml
+  - type: Conformance
+    url: conformance/kard-conformance.yml
+  - type: AsyncAPI
+    url: asyncapi/kard-notifications-webhooks.yml
+  - type: Webhooks
+    url: asyncapi/kard-notifications-webhooks.yml
+  - type: AgenticAccess
+    url: agentic-access/kard-agentic-access.yml
+- aid: kard:kard-users-attributions-api
+  name: Kard users > attributions API
+  description: The users > attributions API from Kard — 4 operation(s) for users > attributions.
+  humanURL: https://docs.getkard.com/home
+  baseURL: https://rewards-api.getkard.com
+  tags:
+  - users > attributions
+  properties:
+  - type: OpenAPI
+    url: openapi/kard-users-attributions-api-openapi.yml
+  - type: Authentication
+    url: authentication/kard-authentication.yml
+  - type: OAuthScopes
+    url: scopes/kard-scopes.yml
+  - type: ErrorCatalog
+    url: errors/kard-problem-types.yml
+  - type: Conventions
+    url: conventions/kard-conventions.yml
+  - type: DataModel
+    url: data-model/kard-data-model.yml
+  - type: Conformance
+    url: conformance/kard-conformance.yml
+  - type: AsyncAPI
+    url: asyncapi/kard-notifications-webhooks.yml
+  - type: Webhooks
+    url: asyncapi/kard-notifications-webhooks.yml
+  - type: AgenticAccess
+    url: agentic-access/kard-agentic-access.yml
+- aid: kard:kard-users-rewards-api
+  name: Kard users > Rewards API
+  description: The users > Rewards API from Kard — 2 operation(s) for users > rewards.
+  humanURL: https://docs.getkard.com/home
+  baseURL: https://rewards-api.getkard.com
+  tags:
+  - users > Rewards
+  properties:
+  - type: OpenAPI
+    url: openapi/kard-users-rewards-api-openapi.yml
+  - type: Authentication
+    url: authentication/kard-authentication.yml
+  - type: OAuthScopes
+    url: scopes/kard-scopes.yml
+  - type: ErrorCatalog
+    url: errors/kard-problem-types.yml
+  - type: Conventions
+    url: conventions/kard-conventions.yml
+  - type: DataModel
+    url: data-model/kard-data-model.yml
+  - type: Conformance
+    url: conformance/kard-conformance.yml
+  - type: AsyncAPI
+    url: asyncapi/kard-notifications-webhooks.yml
+  - type: Webhooks
+    url: asyncapi/kard-notifications-webhooks.yml
+  - type: AgenticAccess
+    url: agentic-access/kard-agentic-access.yml
+- aid: kard:kard-users-uploads-api
+  name: Kard users > uploads API
+  description: The users > uploads API from Kard — 3 operation(s) for users > uploads.
+  humanURL: https://docs.getkard.com/home
+  baseURL: https://rewards-api.getkard.com
+  tags:
+  - users > uploads
+  properties:
+  - type: OpenAPI
+    url: openapi/kard-users-uploads-api-openapi.yml
+  - type: Authentication
+    url: authentication/kard-authentication.yml
+  - type: OAuthScopes
+    url: scopes/kard-scopes.yml
+  - type: ErrorCatalog
+    url: errors/kard-problem-types.yml
+  - type: Conventions
+    url: conventions/kard-conventions.yml
+  - type: DataModel
+    url: data-model/kard-data-model.yml
+  - type: Conformance
+    url: conformance/kard-conformance.yml
+  - type: AsyncAPI
+    url: asyncapi/kard-notifications-webhooks.yml
+  - type: Webhooks
+    url: asyncapi/kard-notifications-webhooks.yml
+  - type: AgenticAccess
+    url: agentic-access/kard-agentic-access.yml
+- aid: kard:kard-users-webview-api
+  name: Kard users > WebView API
+  description: The users > WebView API from Kard — 1 operation(s) for users > webview.
+  humanURL: https://docs.getkard.com/home
+  baseURL: https://rewards-api.getkard.com
+  tags:
+  - users > WebView
+  properties:
+  - type: OpenAPI
+    url: openapi/kard-users-webview-api-openapi.yml
+  - type: Authentication
+    url: authentication/kard-authentication.yml
+  - type: OAuthScopes
+    url: scopes/kard-scopes.yml
+  - type: ErrorCatalog
+    url: errors/kard-problem-types.yml
+  - type: Conventions
+    url: conventions/kard-conventions.yml
+  - type: DataModel
+    url: data-model/kard-data-model.yml
+  - type: Conformance
+    url: conformance/kard-conformance.yml
+  - type: AsyncAPI
+    url: asyncapi/kard-notifications-webhooks.yml
+  - type: Webhooks
+    url: asyncapi/kard-notifications-webhooks.yml
+  - type: AgenticAccess
+    url: agentic-access/kard-agentic-access.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -23,3 +501,74 @@ maintainers:
 common:
 - type: Website
   url: https://getkard.com/
+- type: DeveloperPortal
+  url: https://docs.getkard.com/home
+- type: Documentation
+  url: https://docs.getkard.com/home
+- type: APIReference
+  url: https://docs.getkard.com/api/transactions/create
+- type: GettingStarted
+  url: https://docs.getkard.com/api/integration-guides/getting-started
+- type: Quickstart
+  url: https://www.getkard.com/docs/quickstart
+- type: Authentication
+  url: authentication/kard-authentication.yml
+- type: OAuthScopes
+  url: scopes/kard-scopes.yml
+- type: SDKs
+  url: packages/kard-packages.yml
+- type: Packages
+  url: packages/kard-packages.yml
+- type: MCPServer
+  url: mcp/kard-mcp.yml
+- type: LLMsTxt
+  url: llms/kard-llms.txt
+- type: AgentSkill
+  url: skills/_index.yml
+- type: WellKnown
+  url: well-known/kard-well-known.yml
+- type: APICatalog
+  url: well-known/kard-api-catalog.json
+- type: SecurityTxt
+  url: well-known/kard-security.txt
+- type: Components
+  url: components/kard-components.yml
+- type: Webhooks
+  url: asyncapi/kard-notifications-webhooks.yml
+- type: ErrorCatalog
+  url: errors/kard-problem-types.yml
+- type: Conventions
+  url: conventions/kard-conventions.yml
+- type: Conformance
+  url: conformance/kard-conformance.yml
+- type: Lifecycle
+  url: lifecycle/kard-lifecycle.yml
+- type: StatusPage
+  url: https://status.getkard.com/
+- type: Deprecation
+  url: lifecycle/kard-lifecycle.yml
+- type: DomainSecurity
+  url: security/kard-domain-security.yml
+- type: VulnerabilityDisclosure
+  url: security/kard-vulnerability-disclosure.yml
+- type: Security
+  url: https://getkard.com/security
+- type: AgenticAccess
+  url: agentic-access/kard-agentic-access.yml
+- type: Postman
+  url: https://github.com/kard-financial/kard-postman
+- type: GitHubOrganization
+  url: https://github.com/kard-financial
+- type: Blog
+  url: https://www.getkard.com/blog
+- type: Support
+  url: https://www.getkard.com/contact
+- type: SignUp
+  url: https://www.getkard.com/demo
+- type: PrivacyPolicy
+  url: https://www.getkard.com/privacy-policy
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence
