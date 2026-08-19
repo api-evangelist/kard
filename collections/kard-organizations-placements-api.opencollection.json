@@ -1,0 +1,211 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference attributions Organizations > Placements API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Organizations > Placements",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rewards-api.getkard.com/v2/issuers/:organizationId/placements",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the organization"
+              },
+              {
+                "name": "filter[type]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by placement type (placement, placementPushNotification, placementEmail, placementBatchActivation, or placementGroup)"
+              },
+              {
+                "name": "filter[name]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by exact placement name (unique within an organization per type)"
+              },
+              {
+                "name": "filter[contentStrategyId]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the ID of the content strategy linked to the placement"
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "CSV list of related resources to embed in the `included` array. Supported paths: `contentStrategy` (the direct content strategy of a non-batch placement), `slots` (the slot resources of a batch-activation or group placement), `slots.placement` (and the placement each slot references), and `slots.placement.contentStrategy` (and the content strategy of each referenced placement). Dotted paths implicitly include all intermediate resources."
+              },
+              {
+                "name": "page[after]",
+                "value": "",
+                "type": "query",
+                "description": "Cursor value for the next page of results"
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of records to return [1 - 200] (default = 200)"
+              }
+            ]
+          },
+          "docs": "List placements belonging to the authenticated organization"
+        },
+        {
+          "info": {
+            "name": "Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://rewards-api.getkard.com/v2/issuers/:organizationId/placements",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the organization"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a placement for the organization. Use type \"placement\" for standard placements (requires name and availableSlots), \"placementPushNotification\" for push-notification placements (requires name and cadence; availableSlots is automatically set to 1), \"placementEmail\" for email placements (requires name, cadence, and availableSlots), \"placementBatchActivation\" for batch-activation placements (requires name, refreshInterval, and slots), or \"placementGroup\" for group placements (requires name an"
+        },
+        {
+          "info": {
+            "name": "Get",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rewards-api.getkard.com/v2/issuers/:organizationId/placements/:placementId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the organization"
+              },
+              {
+                "name": "placementId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the placement (UUID v7)"
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "CSV list of related resources to embed in the `included` array. Supported paths: `contentStrategy` (the direct content strategy of a non-batch placement), `slots` (the slot resources of a batch-activation or group placement), `slots.placement` (and the placement each slot references), and `slots.placement.contentStrategy` (and the content strategy of each referenced placement). Dotted paths implicitly include all intermediate resources."
+              }
+            ]
+          },
+          "docs": "Retrieve a specific placement"
+        },
+        {
+          "info": {
+            "name": "Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://rewards-api.getkard.com/v2/issuers/:organizationId/placements/:placementId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the organization"
+              },
+              {
+                "name": "placementId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the placement (UUID v7)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replace a placement. All fields must be provided. Use type \"placement\", \"placementPushNotification\", \"placementEmail\", \"placementBatchActivation\", or \"placementGroup\" to set the placement kind. If the type is \"placementPushNotification\", availableSlots is automatically set to 1."
+        },
+        {
+          "info": {
+            "name": "Delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://rewards-api.getkard.com/v2/issuers/:organizationId/placements/:placementId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the organization"
+              },
+              {
+                "name": "placementId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the placement (UUID v7)"
+              }
+            ]
+          },
+          "docs": "Delete a placement"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

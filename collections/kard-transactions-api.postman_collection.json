@@ -1,0 +1,2737 @@
+{
+  "item": [
+    {
+      "id": "7ac6ed62-5b22-4b74-81c4-13cf19e705d8",
+      "name": "transactions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8a92919e-8114-49b8-97e8-dd0e7fe96eb1",
+          "name": "Create Incoming Transactions",
+          "request": {
+            "name": "Create Incoming Transactions",
+            "description": {
+              "content": "Call this endpoint to send all transactions made by all your enrolled users in your rewards program. The request body will depend on the transaction type.<br/>\nPlease use the correct type when calling the endpoint:\n- `transaction`: These incoming transactions will be processed and matched by the Kard system. Learn more about the [Transaction CLO Matching](https://github.com/kard-financial/kard-postman#c-transaction-clo-matching) flow here.\n- `matchedTransaction`: For pre-matched transactions that need validation on match by the Kard system.\n- `coreTransaction`: For transactions from core banking systems with limited card-level data.<br/>\n\n<b>Required scopes:</b> `transaction:write`<br/>\n<b>Note:</b> `Maximum of 500 transactions can be created per request`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "issuers",
+                ":organizationId",
+                "transactions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": [\n    {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"attributes\": {\n        \"userId\": \"<string>\",\n        \"amount\": \"<integer>\",\n        \"status\": \"<string>\",\n        \"currency\": \"<string>\",\n        \"description\": \"<string>\",\n        \"cardBIN\": \"<string>\",\n        \"cardLastFour\": \"<string>\",\n        \"direction\": \"<string>\",\n        \"paymentType\": \"<string>\",\n        \"transactionId\": \"<string>\",\n        \"subtotal\": \"<integer>\",\n        \"description2\": \"<string>\",\n        \"mcc\": \"<string>\",\n        \"coreProviderId\": \"<string>\",\n        \"transactionDate\": \"<dateTime>\",\n        \"authorizationDate\": \"<dateTime>\",\n        \"settledDate\": \"<dateTime>\",\n        \"merchant\": {\n          \"name\": \"<string>\",\n          \"id\": \"<string>\",\n          \"addrStreet\": \"<string>\",\n          \"addrCity\": \"<string>\",\n          \"addrState\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"addrZipcode\": \"<string>\",\n          \"addrCountry\": \"<string>\",\n          \"latitude\": \"<string>\",\n          \"longitude\": \"<string>\",\n          \"storeId\": \"<string>\"\n        },\n        \"cardPresence\": \"<string>\",\n        \"panEntryMode\": \"<string>\",\n        \"authorizationCode\": \"<string>\",\n        \"retrievalReferenceNumber\": \"<string>\",\n        \"systemTraceAuditNumber\": \"<string>\",\n        \"acquirerReferenceNumber\": \"<string>\",\n        \"cardNetwork\": \"<string>\",\n        \"cardProductId\": \"<string>\",\n        \"userZipCode\": \"<string>\",\n        \"processorMids\": {\n          \"processor\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"mids\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"accountId\": \"<string>\"\n      }\n    },\n    {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"attributes\": {\n        \"userId\": \"<string>\",\n        \"amount\": \"<integer>\",\n        \"status\": \"<string>\",\n        \"currency\": \"<string>\",\n        \"description\": \"<string>\",\n        \"cardBIN\": \"<string>\",\n        \"cardLastFour\": \"<string>\",\n        \"direction\": \"<string>\",\n        \"paymentType\": \"<string>\",\n        \"transactionId\": \"<string>\",\n        \"subtotal\": \"<integer>\",\n        \"description2\": \"<string>\",\n        \"mcc\": \"<string>\",\n        \"coreProviderId\": \"<string>\",\n        \"transactionDate\": \"<dateTime>\",\n        \"authorizationDate\": \"<dateTime>\",\n        \"settledDate\": \"<dateTime>\",\n        \"merchant\": {\n          \"name\": \"<string>\",\n          \"id\": \"<string>\",\n          \"addrStreet\": \"<string>\",\n          \"addrCity\": \"<string>\",\n          \"addrState\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"addrZipcode\": \"<string>\",\n          \"addrCountry\": \"<string>\",\n          \"latitude\": \"<string>\",\n          \"longitude\": \"<string>\",\n          \"storeId\": \"<string>\"\n        },\n        \"cardPresence\": \"<string>\",\n        \"panEntryMode\": \"<string>\",\n        \"authorizationCode\": \"<string>\",\n        \"retrievalReferenceNumber\": \"<string>\",\n        \"systemTraceAuditNumber\": \"<string>\",\n        \"acquirerReferenceNumber\": \"<string>\",\n        \"cardNetwork\": \"<string>\",\n        \"cardProductId\": \"<string>\",\n        \"userZipCode\": \"<string>\",\n        \"processorMids\": {\n          \"processor\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"mids\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"accountId\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8f7b5260-dc27-439b-b69d-0feb93a390e2",
+              "name": "Response with status 202",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"type\": \"transaction\",\n      \"id\": \"string\",\n      \"attributes\": {\n        \"userId\": \"string\",\n        \"amount\": 498,\n        \"status\": \"APPROVED\",\n        \"currency\": \"string\",\n        \"description\": \"string\",\n        \"cardBIN\": \"string\",\n        \"cardLastFour\": \"string\",\n        \"direction\": \"DEBIT\",\n        \"paymentType\": \"CARD\",\n        \"transactionId\": \"string\",\n        \"subtotal\": 4006,\n        \"description2\": \"string\",\n        \"mcc\": \"string\",\n        \"coreProviderId\": \"string\",\n        \"transactionDate\": \"1978-04-24T00:55:00.613Z\",\n        \"authorizationDate\": \"1956-04-19T22:33:46.963Z\",\n        \"settledDate\": \"1957-08-03T22:44:08.324Z\",\n        \"merchant\": {\n          \"name\": \"string\",\n          \"id\": \"string\",\n          \"addrStreet\": \"string\",\n          \"addrCity\": \"string\",\n          \"addrState\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"addrZipcode\": \"string\",\n          \"addrCountry\": \"string\",\n          \"latitude\": \"string\",\n          \"longitude\": \"string\",\n          \"storeId\": \"string\"\n        },\n        \"cardPresence\": \"string\",\n        \"panEntryMode\": \"string\",\n        \"authorizationCode\": \"string\",\n        \"retrievalReferenceNumber\": \"string\",\n        \"systemTraceAuditNumber\": \"string\",\n        \"acquirerReferenceNumber\": \"string\",\n        \"cardNetwork\": \"DISCOVER\",\n        \"cardProductId\": \"string\",\n        \"userZipCode\": \"string\",\n        \"processorMids\": {\n          \"processor\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"mids\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"accountId\": \"string\"\n      }\n    },\n    {\n      \"type\": \"transaction\",\n      \"id\": \"string\",\n      \"attributes\": {\n        \"userId\": \"string\",\n        \"amount\": 6105,\n        \"status\": \"RETURNED\",\n        \"currency\": \"string\",\n        \"description\": \"string\",\n        \"cardBIN\": \"string\",\n        \"cardLastFour\": \"string\",\n        \"direction\": \"DEBIT\",\n        \"paymentType\": \"CARD\",\n        \"transactionId\": \"string\",\n        \"subtotal\": 2218,\n        \"description2\": \"string\",\n        \"mcc\": \"string\",\n        \"coreProviderId\": \"string\",\n        \"transactionDate\": \"1964-08-28T11:53:44.383Z\",\n        \"authorizationDate\": \"1968-07-03T01:09:20.770Z\",\n        \"settledDate\": \"2025-12-01T21:16:41.740Z\",\n        \"merchant\": {\n          \"name\": \"string\",\n          \"id\": \"string\",\n          \"addrStreet\": \"string\",\n          \"addrCity\": \"string\",\n          \"addrState\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"addrZipcode\": \"string\",\n          \"addrCountry\": \"string\",\n          \"latitude\": \"string\",\n          \"longitude\": \"string\",\n          \"storeId\": \"string\"\n        },\n        \"cardPresence\": \"string\",\n        \"panEntryMode\": \"string\",\n        \"authorizationCode\": \"string\",\n        \"retrievalReferenceNumber\": \"string\",\n        \"systemTraceAuditNumber\": \"string\",\n        \"acquirerReferenceNumber\": \"string\",\n        \"cardNetwork\": \"VISA\",\n        \"cardProductId\": \"string\",\n        \"userZipCode\": \"string\",\n        \"processorMids\": {\n          \"processor\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"mids\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"accountId\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"type\": \"string\",\n    \"id\": \"string\",\n    \"attributes\": {\n      \"status\": \"queued\",\n      \"message\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c2888381-4f8a-4a11-aeba-27dd0b6105ff",
+              "name": "Error response with status 207",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"type\": \"transaction\",\n      \"id\": \"string\",\n      \"attributes\": {\n        \"userId\": \"string\",\n        \"amount\": 498,\n        \"status\": \"APPROVED\",\n        \"currency\": \"string\",\n        \"description\": \"string\",\n        \"cardBIN\": \"string\",\n        \"cardLastFour\": \"string\",\n        \"direction\": \"DEBIT\",\n        \"paymentType\": \"CARD\",\n        \"transactionId\": \"string\",\n        \"subtotal\": 4006,\n        \"description2\": \"string\",\n        \"mcc\": \"string\",\n        \"coreProviderId\": \"string\",\n        \"transactionDate\": \"1978-04-24T00:55:00.613Z\",\n        \"authorizationDate\": \"1956-04-19T22:33:46.963Z\",\n        \"settledDate\": \"1957-08-03T22:44:08.324Z\",\n        \"merchant\": {\n          \"name\": \"string\",\n          \"id\": \"string\",\n          \"addrStreet\": \"string\",\n          \"addrCity\": \"string\",\n          \"addrState\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"addrZipcode\": \"string\",\n          \"addrCountry\": \"string\",\n          \"latitude\": \"string\",\n          \"longitude\": \"string\",\n          \"storeId\": \"string\"\n        },\n        \"cardPresence\": \"string\",\n        \"panEntryMode\": \"string\",\n        \"authorizationCode\": \"string\",\n        \"retrievalReferenceNumber\": \"string\",\n        \"systemTraceAuditNumber\": \"string\",\n        \"acquirerReferenceNumber\": \"string\",\n        \"cardNetwork\": \"DISCOVER\",\n        \"cardProductId\": \"string\",\n        \"userZipCode\": \"string\",\n        \"processorMids\": {\n          \"processor\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"mids\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"accountId\": \"string\"\n      }\n    },\n    {\n      \"type\": \"transaction\",\n      \"id\": \"string\",\n      \"attributes\": {\n        \"userId\": \"string\",\n        \"amount\": 6105,\n        \"status\": \"RETURNED\",\n        \"currency\": \"string\",\n        \"description\": \"string\",\n        \"cardBIN\": \"string\",\n        \"cardLastFour\": \"string\",\n        \"direction\": \"DEBIT\",\n        \"paymentType\": \"CARD\",\n        \"transactionId\": \"string\",\n        \"subtotal\": 2218,\n        \"description2\": \"string\",\n        \"mcc\": \"string\",\n        \"coreProviderId\": \"string\",\n        \"transactionDate\": \"1964-08-28T11:53:44.383Z\",\n        \"authorizationDate\": \"1968-07-03T01:09:20.770Z\",\n        \"settledDate\": \"2025-12-01T21:16:41.740Z\",\n        \"merchant\": {\n          \"name\": \"string\",\n          \"id\": \"string\",\n          \"addrStreet\": \"string\",\n          \"addrCity\": \"string\",\n          \"addrState\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"addrZipcode\": \"string\",\n          \"addrCountry\": \"string\",\n          \"latitude\": \"string\",\n          \"longitude\": \"string\",\n          \"storeId\": \"string\"\n        },\n        \"cardPresence\": \"string\",\n        \"panEntryMode\": \"string\",\n        \"authorizationCode\": \"string\",\n        \"retrievalReferenceNumber\": \"string\",\n        \"systemTraceAuditNumber\": \"string\",\n        \"acquirerReferenceNumber\": \"string\",\n        \"cardNetwork\": \"VISA\",\n        \"cardProductId\": \"string\",\n        \"userZipCode\": \"string\",\n        \"processorMids\": {\n          \"processor\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"mids\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"accountId\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Multi-Status (WebDAV) (RFC 4918)",
+              "code": 207,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ],\n  \"data\": {\n    \"type\": \"string\",\n    \"id\": \"string\",\n    \"attributes\": {\n      \"status\": \"queued\",\n      \"message\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "52c8516b-ffde-405c-9393-fa154f460de9",
+              "name": "Error response with status 400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"type\": \"transaction\",\n      \"id\": \"string\",\n      \"attributes\": {\n        \"userId\": \"string\",\n        \"amount\": 498,\n        \"status\": \"APPROVED\",\n        \"currency\": \"string\",\n        \"description\": \"string\",\n        \"cardBIN\": \"string\",\n        \"cardLastFour\": \"string\",\n        \"direction\": \"DEBIT\",\n        \"paymentType\": \"CARD\",\n        \"transactionId\": \"string\",\n        \"subtotal\": 4006,\n        \"description2\": \"string\",\n        \"mcc\": \"string\",\n        \"coreProviderId\": \"string\",\n        \"transactionDate\": \"1978-04-24T00:55:00.613Z\",\n        \"authorizationDate\": \"1956-04-19T22:33:46.963Z\",\n        \"settledDate\": \"1957-08-03T22:44:08.324Z\",\n        \"merchant\": {\n          \"name\": \"string\",\n          \"id\": \"string\",\n          \"addrStreet\": \"string\",\n          \"addrCity\": \"string\",\n          \"addrState\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"addrZipcode\": \"string\",\n          \"addrCountry\": \"string\",\n          \"latitude\": \"string\",\n          \"longitude\": \"string\",\n          \"storeId\": \"string\"\n        },\n        \"cardPresence\": \"string\",\n        \"panEntryMode\": \"string\",\n        \"authorizationCode\": \"string\",\n        \"retrievalReferenceNumber\": \"string\",\n        \"systemTraceAuditNumber\": \"string\",\n        \"acquirerReferenceNumber\": \"string\",\n        \"cardNetwork\": \"DISCOVER\",\n        \"cardProductId\": \"string\",\n        \"userZipCode\": \"string\",\n        \"processorMids\": {\n          \"processor\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"mids\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"accountId\": \"string\"\n      }\n    },\n    {\n      \"type\": \"transaction\",\n      \"id\": \"string\",\n      \"attributes\": {\n        \"userId\": \"string\",\n        \"amount\": 6105,\n        \"status\": \"RETURNED\",\n        \"currency\": \"string\",\n        \"description\": \"string\",\n        \"cardBIN\": \"string\",\n        \"cardLastFour\": \"string\",\n        \"direction\": \"DEBIT\",\n        \"paymentType\": \"CARD\",\n        \"transactionId\": \"string\",\n        \"subtotal\": 2218,\n        \"description2\": \"string\",\n        \"mcc\": \"string\",\n        \"coreProviderId\": \"string\",\n        \"transactionDate\": \"1964-08-28T11:53:44.383Z\",\n        \"authorizationDate\": \"1968-07-03T01:09:20.770Z\",\n        \"settledDate\": \"2025-12-01T21:16:41.740Z\",\n        \"merchant\": {\n          \"name\": \"string\",\n          \"id\": \"string\",\n          \"addrStreet\": \"string\",\n          \"addrCity\": \"string\",\n          \"addrState\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"addrZipcode\": \"string\",\n          \"addrCountry\": \"string\",\n          \"latitude\": \"string\",\n          \"longitude\": \"string\",\n          \"storeId\": \"string\"\n        },\n        \"cardPresence\": \"string\",\n        \"panEntryMode\": \"string\",\n        \"authorizationCode\": \"string\",\n        \"retrievalReferenceNumber\": \"string\",\n        \"systemTraceAuditNumber\": \"string\",\n        \"acquirerReferenceNumber\": \"string\",\n        \"cardNetwork\": \"VISA\",\n        \"cardProductId\": \"string\",\n        \"userZipCode\": \"string\",\n        \"processorMids\": {\n          \"processor\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"mids\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"accountId\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a2ef77ed-1d33-44fe-a066-2e172d62390d",
+              "name": "Error response with status 401",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"type\": \"transaction\",\n      \"id\": \"string\",\n      \"attributes\": {\n        \"userId\": \"string\",\n        \"amount\": 498,\n        \"status\": \"APPROVED\",\n        \"currency\": \"string\",\n        \"description\": \"string\",\n        \"cardBIN\": \"string\",\n        \"cardLastFour\": \"string\",\n        \"direction\": \"DEBIT\",\n        \"paymentType\": \"CARD\",\n        \"transactionId\": \"string\",\n        \"subtotal\": 4006,\n        \"description2\": \"string\",\n        \"mcc\": \"string\",\n        \"coreProviderId\": \"string\",\n        \"transactionDate\": \"1978-04-24T00:55:00.613Z\",\n        \"authorizationDate\": \"1956-04-19T22:33:46.963Z\",\n        \"settledDate\": \"1957-08-03T22:44:08.324Z\",\n        \"merchant\": {\n          \"name\": \"string\",\n          \"id\": \"string\",\n          \"addrStreet\": \"string\",\n          \"addrCity\": \"string\",\n          \"addrState\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"addrZipcode\": \"string\",\n          \"addrCountry\": \"string\",\n          \"latitude\": \"string\",\n          \"longitude\": \"string\",\n          \"storeId\": \"string\"\n        },\n        \"cardPresence\": \"string\",\n        \"panEntryMode\": \"string\",\n        \"authorizationCode\": \"string\",\n        \"retrievalReferenceNumber\": \"string\",\n        \"systemTraceAuditNumber\": \"string\",\n        \"acquirerReferenceNumber\": \"string\",\n        \"cardNetwork\": \"DISCOVER\",\n        \"cardProductId\": \"string\",\n        \"userZipCode\": \"string\",\n        \"processorMids\": {\n          \"processor\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"mids\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"accountId\": \"string\"\n      }\n    },\n    {\n      \"type\": \"transaction\",\n      \"id\": \"string\",\n      \"attributes\": {\n        \"userId\": \"string\",\n        \"amount\": 6105,\n        \"status\": \"RETURNED\",\n        \"currency\": \"string\",\n        \"description\": \"string\",\n        \"cardBIN\": \"string\",\n        \"cardLastFour\": \"string\",\n        \"direction\": \"DEBIT\",\n        \"paymentType\": \"CARD\",\n        \"transactionId\": \"string\",\n        \"subtotal\": 2218,\n        \"description2\": \"string\",\n        \"mcc\": \"string\",\n        \"coreProviderId\": \"string\",\n        \"transactionDate\": \"1964-08-28T11:53:44.383Z\",\n        \"authorizationDate\": \"1968-07-03T01:09:20.770Z\",\n        \"settledDate\": \"2025-12-01T21:16:41.740Z\",\n        \"merchant\": {\n          \"name\": \"string\",\n          \"id\": \"string\",\n          \"addrStreet\": \"string\",\n          \"addrCity\": \"string\",\n          \"addrState\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"addrZipcode\": \"string\",\n          \"addrCountry\": \"string\",\n          \"latitude\": \"string\",\n          \"longitude\": \"string\",\n          \"storeId\": \"string\"\n        },\n        \"cardPresence\": \"string\",\n        \"panEntryMode\": \"string\",\n        \"authorizationCode\": \"string\",\n        \"retrievalReferenceNumber\": \"string\",\n        \"systemTraceAuditNumber\": \"string\",\n        \"acquirerReferenceNumber\": \"string\",\n        \"cardNetwork\": \"VISA\",\n        \"cardProductId\": \"string\",\n        \"userZipCode\": \"string\",\n        \"processorMids\": {\n          \"processor\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"mids\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"accountId\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4ca44128-47f5-473a-81ec-b2da71363261",
+              "name": "Error response with status 409",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"type\": \"transaction\",\n      \"id\": \"string\",\n      \"attributes\": {\n        \"userId\": \"string\",\n        \"amount\": 498,\n        \"status\": \"APPROVED\",\n        \"currency\": \"string\",\n        \"description\": \"string\",\n        \"cardBIN\": \"string\",\n        \"cardLastFour\": \"string\",\n        \"direction\": \"DEBIT\",\n        \"paymentType\": \"CARD\",\n        \"transactionId\": \"string\",\n        \"subtotal\": 4006,\n        \"description2\": \"string\",\n        \"mcc\": \"string\",\n        \"coreProviderId\": \"string\",\n        \"transactionDate\": \"1978-04-24T00:55:00.613Z\",\n        \"authorizationDate\": \"1956-04-19T22:33:46.963Z\",\n        \"settledDate\": \"1957-08-03T22:44:08.324Z\",\n        \"merchant\": {\n          \"name\": \"string\",\n          \"id\": \"string\",\n          \"addrStreet\": \"string\",\n          \"addrCity\": \"string\",\n          \"addrState\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"addrZipcode\": \"string\",\n          \"addrCountry\": \"string\",\n          \"latitude\": \"string\",\n          \"longitude\": \"string\",\n          \"storeId\": \"string\"\n        },\n        \"cardPresence\": \"string\",\n        \"panEntryMode\": \"string\",\n        \"authorizationCode\": \"string\",\n        \"retrievalReferenceNumber\": \"string\",\n        \"systemTraceAuditNumber\": \"string\",\n        \"acquirerReferenceNumber\": \"string\",\n        \"cardNetwork\": \"DISCOVER\",\n        \"cardProductId\": \"string\",\n        \"userZipCode\": \"string\",\n        \"processorMids\": {\n          \"processor\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"mids\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"accountId\": \"string\"\n      }\n    },\n    {\n      \"type\": \"transaction\",\n      \"id\": \"string\",\n      \"attributes\": {\n        \"userId\": \"string\",\n        \"amount\": 6105,\n        \"status\": \"RETURNED\",\n        \"currency\": \"string\",\n        \"description\": \"string\",\n        \"cardBIN\": \"string\",\n        \"cardLastFour\": \"string\",\n        \"direction\": \"DEBIT\",\n        \"paymentType\": \"CARD\",\n        \"transactionId\": \"string\",\n        \"subtotal\": 2218,\n        \"description2\": \"string\",\n        \"mcc\": \"string\",\n        \"coreProviderId\": \"string\",\n        \"transactionDate\": \"1964-08-28T11:53:44.383Z\",\n        \"authorizationDate\": \"1968-07-03T01:09:20.770Z\",\n        \"settledDate\": \"2025-12-01T21:16:41.740Z\",\n        \"merchant\": {\n          \"name\": \"string\",\n          \"id\": \"string\",\n          \"addrStreet\": \"string\",\n          \"addrCity\": \"string\",\n          \"addrState\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"addrZipcode\": \"string\",\n          \"addrCountry\": \"string\",\n          \"latitude\": \"string\",\n          \"longitude\": \"string\",\n          \"storeId\": \"string\"\n        },\n        \"cardPresence\": \"string\",\n        \"panEntryMode\": \"string\",\n        \"authorizationCode\": \"string\",\n        \"retrievalReferenceNumber\": \"string\",\n        \"systemTraceAuditNumber\": \"string\",\n        \"acquirerReferenceNumber\": \"string\",\n        \"cardNetwork\": \"VISA\",\n        \"cardProductId\": \"string\",\n        \"userZipCode\": \"string\",\n        \"processorMids\": {\n          \"processor\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"mids\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"accountId\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e36aa3a3-f7c4-40ec-b3f7-61c9fc827146",
+              "name": "Error response with status 500",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"type\": \"transaction\",\n      \"id\": \"string\",\n      \"attributes\": {\n        \"userId\": \"string\",\n        \"amount\": 498,\n        \"status\": \"APPROVED\",\n        \"currency\": \"string\",\n        \"description\": \"string\",\n        \"cardBIN\": \"string\",\n        \"cardLastFour\": \"string\",\n        \"direction\": \"DEBIT\",\n        \"paymentType\": \"CARD\",\n        \"transactionId\": \"string\",\n        \"subtotal\": 4006,\n        \"description2\": \"string\",\n        \"mcc\": \"string\",\n        \"coreProviderId\": \"string\",\n        \"transactionDate\": \"1978-04-24T00:55:00.613Z\",\n        \"authorizationDate\": \"1956-04-19T22:33:46.963Z\",\n        \"settledDate\": \"1957-08-03T22:44:08.324Z\",\n        \"merchant\": {\n          \"name\": \"string\",\n          \"id\": \"string\",\n          \"addrStreet\": \"string\",\n          \"addrCity\": \"string\",\n          \"addrState\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"addrZipcode\": \"string\",\n          \"addrCountry\": \"string\",\n          \"latitude\": \"string\",\n          \"longitude\": \"string\",\n          \"storeId\": \"string\"\n        },\n        \"cardPresence\": \"string\",\n        \"panEntryMode\": \"string\",\n        \"authorizationCode\": \"string\",\n        \"retrievalReferenceNumber\": \"string\",\n        \"systemTraceAuditNumber\": \"string\",\n        \"acquirerReferenceNumber\": \"string\",\n        \"cardNetwork\": \"DISCOVER\",\n        \"cardProductId\": \"string\",\n        \"userZipCode\": \"string\",\n        \"processorMids\": {\n          \"processor\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"mids\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"accountId\": \"string\"\n      }\n    },\n    {\n      \"type\": \"transaction\",\n      \"id\": \"string\",\n      \"attributes\": {\n        \"userId\": \"string\",\n        \"amount\": 6105,\n        \"status\": \"RETURNED\",\n        \"currency\": \"string\",\n        \"description\": \"string\",\n        \"cardBIN\": \"string\",\n        \"cardLastFour\": \"string\",\n        \"direction\": \"DEBIT\",\n        \"paymentType\": \"CARD\",\n        \"transactionId\": \"string\",\n        \"subtotal\": 2218,\n        \"description2\": \"string\",\n        \"mcc\": \"string\",\n        \"coreProviderId\": \"string\",\n        \"transactionDate\": \"1964-08-28T11:53:44.383Z\",\n        \"authorizationDate\": \"1968-07-03T01:09:20.770Z\",\n        \"settledDate\": \"2025-12-01T21:16:41.740Z\",\n        \"merchant\": {\n          \"name\": \"string\",\n          \"id\": \"string\",\n          \"addrStreet\": \"string\",\n          \"addrCity\": \"string\",\n          \"addrState\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"addrZipcode\": \"string\",\n          \"addrCountry\": \"string\",\n          \"latitude\": \"string\",\n          \"longitude\": \"string\",\n          \"storeId\": \"string\"\n        },\n        \"cardPresence\": \"string\",\n        \"panEntryMode\": \"string\",\n        \"authorizationCode\": \"string\",\n        \"retrievalReferenceNumber\": \"string\",\n        \"systemTraceAuditNumber\": \"string\",\n        \"acquirerReferenceNumber\": \"string\",\n        \"cardNetwork\": \"VISA\",\n        \"cardProductId\": \"string\",\n        \"userZipCode\": \"string\",\n        \"processorMids\": {\n          \"processor\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"mids\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"accountId\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f2ab2d27-74e2-48ec-bb5d-1904f1d35051",
+          "name": "Create Bulk Transactions Upload URL",
+          "request": {
+            "name": "Create Bulk Transactions Upload URL",
+            "description": {
+              "content": "Generates up to 10 presigned PUT URLs for uploading JSONL transaction files (up to 5GB each) directly\nto storage. Each URL is valid for 15 minutes. Use the returned URL to upload the file via an HTTP PUT request with the\nbinary file content as the body. If a URL expires before the upload completes, you must request a new one.\nFiles can be uploaded as plain JSONL or as a gzip-compressed file.\nSupports both `incomingTransactionsFile` for daily transaction ingestion and `historicalTransactionsFile` for historical transaction ingestion. See the [Historical Transaction Uploads](/2024-10-01/api/integration-guides/historical-transaction-uploads) integration guide for details on the historical flow.\n<b>Required scopes:</b> `files:write`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "issuers",
+                ":organizationId",
+                "transactions",
+                "uploads"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": [\n    {\n      \"type\": \"<string>\",\n      \"attributes\": {\n        \"filename\": \"<string>\"\n      }\n    },\n    {\n      \"type\": \"<string>\",\n      \"attributes\": {\n        \"filename\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "30bda677-fc28-49ab-b11f-725d1adb2dd8",
+              "name": "Response with status 201",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "transactions",
+                    "uploads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"type\": \"historicalTransactionsFile\",\n      \"attributes\": {\n        \"filename\": \"string\"\n      }\n    },\n    {\n      \"type\": \"historicalTransactionsFile\",\n      \"attributes\": {\n        \"filename\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"type\": \"incomingTransactionsFile\",\n      \"id\": \"string\",\n      \"attributes\": {\n        \"url\": \"string\",\n        \"expiresIn\": 7523\n      }\n    },\n    {\n      \"type\": \"incomingTransactionsFile\",\n      \"id\": \"string\",\n      \"attributes\": {\n        \"url\": \"string\",\n        \"expiresIn\": 4117\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b956f239-5a10-4810-bb84-a11bbe69f3ca",
+              "name": "Error response with status 400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "transactions",
+                    "uploads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"type\": \"historicalTransactionsFile\",\n      \"attributes\": {\n        \"filename\": \"string\"\n      }\n    },\n    {\n      \"type\": \"historicalTransactionsFile\",\n      \"attributes\": {\n        \"filename\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "30815392-c706-4b02-85ae-9179c0e2c395",
+              "name": "Error response with status 401",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "transactions",
+                    "uploads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"type\": \"historicalTransactionsFile\",\n      \"attributes\": {\n        \"filename\": \"string\"\n      }\n    },\n    {\n      \"type\": \"historicalTransactionsFile\",\n      \"attributes\": {\n        \"filename\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3ec9cc4e-ea37-46b4-86dd-c37d3cb5cf59",
+              "name": "Error response with status 403",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "transactions",
+                    "uploads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"type\": \"historicalTransactionsFile\",\n      \"attributes\": {\n        \"filename\": \"string\"\n      }\n    },\n    {\n      \"type\": \"historicalTransactionsFile\",\n      \"attributes\": {\n        \"filename\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "680b25b9-2cae-4988-89de-ddb776172d9a",
+              "name": "Error response with status 500",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "transactions",
+                    "uploads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"type\": \"historicalTransactionsFile\",\n      \"attributes\": {\n        \"filename\": \"string\"\n      }\n    },\n    {\n      \"type\": \"historicalTransactionsFile\",\n      \"attributes\": {\n        \"filename\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "24a6fa91-1bef-4675-aca3-b1cf7aebfc68",
+          "name": "Create Audits",
+          "request": {
+            "name": "Create Audits",
+            "description": {
+              "content": "Call this endpoint to request that a particular transaction be audited further by the Kard system, in the event of a missing cashback claim, incorrect cashback amount claim or other mis-match claims.<br/>\n<b>Required scopes:</b> `audit:write`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "issuers",
+                ":organizationId",
+                "users",
+                ":userId",
+                "audits"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) The ID of the user as defined on the issuers system"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": [\n    {\n      \"type\": \"<string>\",\n      \"attributes\": {\n        \"auditCode\": \"<integer>\",\n        \"merchantName\": \"<string>\",\n        \"auditDescription\": \"<string>\",\n        \"transactionId\": \"<string>\"\n      }\n    },\n    {\n      \"type\": \"<string>\",\n      \"attributes\": {\n        \"auditCode\": \"<integer>\",\n        \"merchantName\": \"<string>\",\n        \"auditDescription\": \"<string>\",\n        \"transactionId\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "171aae3b-267b-478f-8341-5d9e796a2876",
+              "name": "Response with status 201",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "users",
+                    ":userId",
+                    "audits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The ID of the user as defined on the issuers system"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"type\": \"audit\",\n      \"attributes\": {\n        \"auditCode\": 2272,\n        \"merchantName\": \"string\",\n        \"auditDescription\": \"string\",\n        \"transactionId\": \"string\"\n      }\n    },\n    {\n      \"type\": \"audit\",\n      \"attributes\": {\n        \"auditCode\": 8608,\n        \"merchantName\": \"string\",\n        \"auditDescription\": \"string\",\n        \"transactionId\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"type\": \"audit\",\n      \"id\": \"string\",\n      \"attributes\": {\n        \"transactionId\": \"string\"\n      }\n    },\n    {\n      \"type\": \"audit\",\n      \"id\": \"string\",\n      \"attributes\": {\n        \"transactionId\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a217c890-30c5-4463-a597-51b00599dbd4",
+              "name": "Error response with status 207",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "users",
+                    ":userId",
+                    "audits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The ID of the user as defined on the issuers system"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"type\": \"audit\",\n      \"attributes\": {\n        \"auditCode\": 2272,\n        \"merchantName\": \"string\",\n        \"auditDescription\": \"string\",\n        \"transactionId\": \"string\"\n      }\n    },\n    {\n      \"type\": \"audit\",\n      \"attributes\": {\n        \"auditCode\": 8608,\n        \"merchantName\": \"string\",\n        \"auditDescription\": \"string\",\n        \"transactionId\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Multi-Status (WebDAV) (RFC 4918)",
+              "code": 207,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ],\n  \"data\": [\n    {\n      \"type\": \"audit\",\n      \"id\": \"string\",\n      \"attributes\": {\n        \"transactionId\": \"string\"\n      }\n    },\n    {\n      \"type\": \"audit\",\n      \"id\": \"string\",\n      \"attributes\": {\n        \"transactionId\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "91b27712-3576-495a-9b77-fdc1a35ad6b5",
+              "name": "Error response with status 400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "users",
+                    ":userId",
+                    "audits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The ID of the user as defined on the issuers system"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"type\": \"audit\",\n      \"attributes\": {\n        \"auditCode\": 2272,\n        \"merchantName\": \"string\",\n        \"auditDescription\": \"string\",\n        \"transactionId\": \"string\"\n      }\n    },\n    {\n      \"type\": \"audit\",\n      \"attributes\": {\n        \"auditCode\": 8608,\n        \"merchantName\": \"string\",\n        \"auditDescription\": \"string\",\n        \"transactionId\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f5ba8ea0-bc9e-479e-a937-30bce0bdcc64",
+              "name": "Error response with status 401",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "users",
+                    ":userId",
+                    "audits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The ID of the user as defined on the issuers system"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"type\": \"audit\",\n      \"attributes\": {\n        \"auditCode\": 2272,\n        \"merchantName\": \"string\",\n        \"auditDescription\": \"string\",\n        \"transactionId\": \"string\"\n      }\n    },\n    {\n      \"type\": \"audit\",\n      \"attributes\": {\n        \"auditCode\": 8608,\n        \"merchantName\": \"string\",\n        \"auditDescription\": \"string\",\n        \"transactionId\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2544d191-1e61-4959-8e52-d25b73733899",
+              "name": "Error response with status 404",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "users",
+                    ":userId",
+                    "audits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The ID of the user as defined on the issuers system"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"type\": \"audit\",\n      \"attributes\": {\n        \"auditCode\": 2272,\n        \"merchantName\": \"string\",\n        \"auditDescription\": \"string\",\n        \"transactionId\": \"string\"\n      }\n    },\n    {\n      \"type\": \"audit\",\n      \"attributes\": {\n        \"auditCode\": 8608,\n        \"merchantName\": \"string\",\n        \"auditDescription\": \"string\",\n        \"transactionId\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "63bd9878-87b5-45a8-8378-994f7266cb46",
+              "name": "Error response with status 409",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "users",
+                    ":userId",
+                    "audits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The ID of the user as defined on the issuers system"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"type\": \"audit\",\n      \"attributes\": {\n        \"auditCode\": 2272,\n        \"merchantName\": \"string\",\n        \"auditDescription\": \"string\",\n        \"transactionId\": \"string\"\n      }\n    },\n    {\n      \"type\": \"audit\",\n      \"attributes\": {\n        \"auditCode\": 8608,\n        \"merchantName\": \"string\",\n        \"auditDescription\": \"string\",\n        \"transactionId\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7d095f70-5fe0-4ad4-a8b2-061a948660c9",
+              "name": "Error response with status 500",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "users",
+                    ":userId",
+                    "audits"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The ID of the user as defined on the issuers system"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"type\": \"audit\",\n      \"attributes\": {\n        \"auditCode\": 2272,\n        \"merchantName\": \"string\",\n        \"auditDescription\": \"string\",\n        \"transactionId\": \"string\"\n      }\n    },\n    {\n      \"type\": \"audit\",\n      \"attributes\": {\n        \"auditCode\": 8608,\n        \"merchantName\": \"string\",\n        \"auditDescription\": \"string\",\n        \"transactionId\": \"string\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "065c88ab-8022-4452-881a-cd27d6034e26",
+          "name": "Get Earned Rewards",
+          "request": {
+            "name": "Get Earned Rewards",
+            "description": {
+              "content": "Retrieve rewarded transaction history for a specific user. By default this returns only SETTLED transactions within the last 12 months regardless of payment status. Pass `filter[paidInFullOnly]=true` to restrict the response to matched transactions that have been paid in full to the issuer (`paidToIssuer` is `PAID_IN_FULL`).\n<br/>\n<b>Required scopes:</b> `transaction:read`\n<br/>\n<b>Query Limit:</b> Maximum of 12 months of transaction data can be queried.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "issuers",
+                ":organizationId",
+                "users",
+                ":userId",
+                "earned-rewards"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page[after]",
+                  "value": "<string>",
+                  "description": "Cursor for next page (base64-encoded timestamp + transaction ID)"
+                },
+                {
+                  "disabled": false,
+                  "key": "page[before]",
+                  "value": "<string>",
+                  "description": "Cursor for previous page (base64-encoded timestamp + transaction ID)"
+                },
+                {
+                  "disabled": false,
+                  "key": "page[size]",
+                  "value": "<integer>",
+                  "description": "Number of results per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[status]",
+                  "value": "<string>",
+                  "description": "Filter by transaction status. Supported values are `APPROVED` and `SETTLED`. Defaults to `SETTLED` when omitted. When `APPROVED` is specified, only approved transactions that do not yet have a corresponding settled transaction are returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[paidInFullOnly]",
+                  "value": "<boolean>",
+                  "description": "When `true`, only return transactions that have been paid in full to the issuer (`paidToIssuer` is `PAID_IN_FULL`). By default (`false`), any matched transaction is returned regardless of payment status. This also controls whether unpaid transactions contribute to `lifetimeRewardsInCents`. Has no effect on `APPROVED` transactions, which are always returned when requested."
+                },
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "<string>",
+                  "description": "Comma-separated list of related resources to include in the response. Supported values are `merchant` and `offer`."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) The ID of the user as defined on the issuers system"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fff007ca-2250-4599-9e96-8d1b08944318",
+              "name": "Response with status 200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "users",
+                    ":userId",
+                    "earned-rewards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page[after]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[before]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "filter[status]",
+                      "value": "SETTLED"
+                    },
+                    {
+                      "key": "filter[paidInFullOnly]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The ID of the user as defined on the issuers system"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"type\": \"rewardedTransaction\",\n      \"id\": \"string\",\n      \"attributes\": {\n        \"status\": \"SETTLED\",\n        \"transactionId\": \"string\",\n        \"transactionAmountInCents\": 3851,\n        \"transactionTimestamp\": \"2022-10-30T03:51:18.217Z\",\n        \"paidToIssuer\": \"UNPAID\",\n        \"commissionEarned\": {\n          \"user\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"payoutTimestamp\": \"2016-06-26T08:53:56.046Z\"\n      },\n      \"relationships\": {\n        \"user\": {\n          \"data\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"merchant\": {\n          \"data\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"offer\": {\n          \"data\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    },\n    {\n      \"type\": \"rewardedTransaction\",\n      \"id\": \"string\",\n      \"attributes\": {\n        \"status\": \"SETTLED\",\n        \"transactionId\": \"string\",\n        \"transactionAmountInCents\": 6032,\n        \"transactionTimestamp\": \"1952-03-23T22:19:13.805Z\",\n        \"paidToIssuer\": \"UNPAID\",\n        \"commissionEarned\": {\n          \"user\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"payoutTimestamp\": \"1966-04-12T11:05:15.125Z\"\n      },\n      \"relationships\": {\n        \"user\": {\n          \"data\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"merchant\": {\n          \"data\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"offer\": {\n          \"data\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    }\n  ],\n  \"links\": {\n    \"self\": \"string\",\n    \"prev\": \"string\",\n    \"next\": \"string\"\n  },\n  \"meta\": {\n    \"lifetimeRewardsInCents\": 7303\n  },\n  \"included\": [\n    {\n      \"type\": \"merchant\",\n      \"id\": \"string\",\n      \"attributes\": {\n        \"name\": \"string\",\n        \"assets\": [\n          {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"url\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"alt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"url\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"alt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    },\n    {\n      \"type\": \"merchant\",\n      \"id\": \"string\",\n      \"attributes\": {\n        \"name\": \"string\",\n        \"assets\": [\n          {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"url\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"alt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"url\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"alt\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1cbab496-ec52-4579-a562-4d4838ac2727",
+              "name": "Error response with status 400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "users",
+                    ":userId",
+                    "earned-rewards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page[after]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[before]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "filter[status]",
+                      "value": "SETTLED"
+                    },
+                    {
+                      "key": "filter[paidInFullOnly]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The ID of the user as defined on the issuers system"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e06e7706-4821-4267-a765-e95c5bfa306d",
+              "name": "Error response with status 401",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "users",
+                    ":userId",
+                    "earned-rewards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page[after]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[before]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "filter[status]",
+                      "value": "SETTLED"
+                    },
+                    {
+                      "key": "filter[paidInFullOnly]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The ID of the user as defined on the issuers system"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8e65b2f8-b0f2-44cf-947f-1a0adbfff7a7",
+              "name": "Error response with status 404",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "users",
+                    ":userId",
+                    "earned-rewards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page[after]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[before]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "filter[status]",
+                      "value": "SETTLED"
+                    },
+                    {
+                      "key": "filter[paidInFullOnly]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The ID of the user as defined on the issuers system"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0a137882-e6e7-4441-903e-3b661acfd66e",
+              "name": "Error response with status 500",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "users",
+                    ":userId",
+                    "earned-rewards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page[after]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[before]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "filter[status]",
+                      "value": "SETTLED"
+                    },
+                    {
+                      "key": "filter[paidInFullOnly]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) The ID of the user as defined on the issuers system"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "47d20fdb-20db-4ead-aa51-9cfa2957480f",
+          "name": "Create Incoming Transaction",
+          "request": {
+            "name": "Create Incoming Transaction",
+            "description": {
+              "content": "Call this endpoint to send all incoming transactions made by all enrolled users in your rewards program. These incoming transactions will be processed and matched by the Kard system. Learn more about the [Transaction CLO Matching](https://github.com/kard-financial/kard-postman#c-transaction-clo-matching) flow here.<br/>\n<b>Required scopes:</b> `transaction:write`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transactions",
+                "incoming"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"transactionId\": \"<string>\",\n    \"referringPartnerUserId\": \"<string>\",\n    \"amount\": \"<integer>\",\n    \"status\": \"<string>\",\n    \"currency\": \"<string>\",\n    \"description\": \"<string>\",\n    \"description2\": \"<string>\",\n    \"mcc\": \"<string>\",\n    \"coreProviderId\": \"<string>\",\n    \"transactionDate\": \"<dateTime>\",\n    \"authorizationDate\": \"<dateTime>\",\n    \"settledDate\": \"<dateTime>\",\n    \"merchantId\": \"<string>\",\n    \"merchantStoreId\": \"<string>\",\n    \"cardPresence\": \"<string>\",\n    \"merchantName\": \"<string>\",\n    \"merchantAddrCity\": \"<string>\",\n    \"merchantAddrState\": \"<string>\",\n    \"merchantAddrZipcode\": \"<string>\",\n    \"merchantAddrCountry\": \"<string>\",\n    \"merchantAddrStreet\": \"<string>\",\n    \"merchantLat\": \"<string>\",\n    \"merchantLong\": \"<string>\",\n    \"panEntryMode\": \"<string>\",\n    \"cardBIN\": \"<string>\",\n    \"cardLastFour\": \"<string>\",\n    \"googleId\": \"<string>\",\n    \"authorizationCode\": \"<string>\",\n    \"retrievalReferenceNumber\": \"<string>\",\n    \"systemTraceAuditNumber\": \"<string>\",\n    \"acquirerReferenceNumber\": \"<string>\",\n    \"isDeposit\": \"<boolean>\"\n  },\n  {\n    \"transactionId\": \"<string>\",\n    \"referringPartnerUserId\": \"<string>\",\n    \"amount\": \"<integer>\",\n    \"status\": \"<string>\",\n    \"currency\": \"<string>\",\n    \"description\": \"<string>\",\n    \"description2\": \"<string>\",\n    \"mcc\": \"<string>\",\n    \"coreProviderId\": \"<string>\",\n    \"transactionDate\": \"<dateTime>\",\n    \"authorizationDate\": \"<dateTime>\",\n    \"settledDate\": \"<dateTime>\",\n    \"merchantId\": \"<string>\",\n    \"merchantStoreId\": \"<string>\",\n    \"cardPresence\": \"<string>\",\n    \"merchantName\": \"<string>\",\n    \"merchantAddrCity\": \"<string>\",\n    \"merchantAddrState\": \"<string>\",\n    \"merchantAddrZipcode\": \"<string>\",\n    \"merchantAddrCountry\": \"<string>\",\n    \"merchantAddrStreet\": \"<string>\",\n    \"merchantLat\": \"<string>\",\n    \"merchantLong\": \"<string>\",\n    \"panEntryMode\": \"<string>\",\n    \"cardBIN\": \"<string>\",\n    \"cardLastFour\": \"<string>\",\n    \"googleId\": \"<string>\",\n    \"authorizationCode\": \"<string>\",\n    \"retrievalReferenceNumber\": \"<string>\",\n    \"systemTraceAuditNumber\": \"<string>\",\n    \"acquirerReferenceNumber\": \"<string>\",\n    \"isDeposit\": \"<boolean>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "05894554-cefd-4279-980a-915b521fd86d",
+              "name": "Response with status 201",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "incoming"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"transactionId\": \"string\",\n    \"referringPartnerUserId\": \"string\",\n    \"amount\": 1899,\n    \"status\": \"REVERSED\",\n    \"currency\": \"string\",\n    \"description\": \"string\",\n    \"description2\": \"string\",\n    \"mcc\": \"string\",\n    \"coreProviderId\": \"string\",\n    \"transactionDate\": \"1965-05-29T18:57:42.853Z\",\n    \"authorizationDate\": \"1982-04-23T18:32:55.904Z\",\n    \"settledDate\": \"2005-12-08T05:33:51.920Z\",\n    \"merchantId\": \"string\",\n    \"merchantStoreId\": \"string\",\n    \"cardPresence\": \"string\",\n    \"merchantName\": \"string\",\n    \"merchantAddrCity\": \"string\",\n    \"merchantAddrState\": \"TX\",\n    \"merchantAddrZipcode\": \"string\",\n    \"merchantAddrCountry\": \"string\",\n    \"merchantAddrStreet\": \"string\",\n    \"merchantLat\": \"string\",\n    \"merchantLong\": \"string\",\n    \"panEntryMode\": \"string\",\n    \"cardBIN\": \"string\",\n    \"cardLastFour\": \"string\",\n    \"googleId\": \"string\",\n    \"authorizationCode\": \"string\",\n    \"retrievalReferenceNumber\": \"string\",\n    \"systemTraceAuditNumber\": \"string\",\n    \"acquirerReferenceNumber\": \"string\",\n    \"isDeposit\": false\n  },\n  {\n    \"transactionId\": \"string\",\n    \"referringPartnerUserId\": \"string\",\n    \"amount\": 9958,\n    \"status\": \"RETURNED\",\n    \"currency\": \"string\",\n    \"description\": \"string\",\n    \"description2\": \"string\",\n    \"mcc\": \"string\",\n    \"coreProviderId\": \"string\",\n    \"transactionDate\": \"1966-12-29T00:09:34.232Z\",\n    \"authorizationDate\": \"1958-04-22T21:26:11.920Z\",\n    \"settledDate\": \"1995-10-23T15:52:16.228Z\",\n    \"merchantId\": \"string\",\n    \"merchantStoreId\": \"string\",\n    \"cardPresence\": \"string\",\n    \"merchantName\": \"string\",\n    \"merchantAddrCity\": \"string\",\n    \"merchantAddrState\": \"MA\",\n    \"merchantAddrZipcode\": \"string\",\n    \"merchantAddrCountry\": \"string\",\n    \"merchantAddrStreet\": \"string\",\n    \"merchantLat\": \"string\",\n    \"merchantLong\": \"string\",\n    \"panEntryMode\": \"string\",\n    \"cardBIN\": \"string\",\n    \"cardLastFour\": \"string\",\n    \"googleId\": \"string\",\n    \"authorizationCode\": \"string\",\n    \"retrievalReferenceNumber\": \"string\",\n    \"systemTraceAuditNumber\": \"string\",\n    \"acquirerReferenceNumber\": \"string\",\n    \"isDeposit\": false\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "30f57b10-a78b-439b-92bd-6a70c7667e5f",
+              "name": "Error response with status 400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "incoming"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"transactionId\": \"string\",\n    \"referringPartnerUserId\": \"string\",\n    \"amount\": 1899,\n    \"status\": \"REVERSED\",\n    \"currency\": \"string\",\n    \"description\": \"string\",\n    \"description2\": \"string\",\n    \"mcc\": \"string\",\n    \"coreProviderId\": \"string\",\n    \"transactionDate\": \"1965-05-29T18:57:42.853Z\",\n    \"authorizationDate\": \"1982-04-23T18:32:55.904Z\",\n    \"settledDate\": \"2005-12-08T05:33:51.920Z\",\n    \"merchantId\": \"string\",\n    \"merchantStoreId\": \"string\",\n    \"cardPresence\": \"string\",\n    \"merchantName\": \"string\",\n    \"merchantAddrCity\": \"string\",\n    \"merchantAddrState\": \"TX\",\n    \"merchantAddrZipcode\": \"string\",\n    \"merchantAddrCountry\": \"string\",\n    \"merchantAddrStreet\": \"string\",\n    \"merchantLat\": \"string\",\n    \"merchantLong\": \"string\",\n    \"panEntryMode\": \"string\",\n    \"cardBIN\": \"string\",\n    \"cardLastFour\": \"string\",\n    \"googleId\": \"string\",\n    \"authorizationCode\": \"string\",\n    \"retrievalReferenceNumber\": \"string\",\n    \"systemTraceAuditNumber\": \"string\",\n    \"acquirerReferenceNumber\": \"string\",\n    \"isDeposit\": false\n  },\n  {\n    \"transactionId\": \"string\",\n    \"referringPartnerUserId\": \"string\",\n    \"amount\": 9958,\n    \"status\": \"RETURNED\",\n    \"currency\": \"string\",\n    \"description\": \"string\",\n    \"description2\": \"string\",\n    \"mcc\": \"string\",\n    \"coreProviderId\": \"string\",\n    \"transactionDate\": \"1966-12-29T00:09:34.232Z\",\n    \"authorizationDate\": \"1958-04-22T21:26:11.920Z\",\n    \"settledDate\": \"1995-10-23T15:52:16.228Z\",\n    \"merchantId\": \"string\",\n    \"merchantStoreId\": \"string\",\n    \"cardPresence\": \"string\",\n    \"merchantName\": \"string\",\n    \"merchantAddrCity\": \"string\",\n    \"merchantAddrState\": \"MA\",\n    \"merchantAddrZipcode\": \"string\",\n    \"merchantAddrCountry\": \"string\",\n    \"merchantAddrStreet\": \"string\",\n    \"merchantLat\": \"string\",\n    \"merchantLong\": \"string\",\n    \"panEntryMode\": \"string\",\n    \"cardBIN\": \"string\",\n    \"cardLastFour\": \"string\",\n    \"googleId\": \"string\",\n    \"authorizationCode\": \"string\",\n    \"retrievalReferenceNumber\": \"string\",\n    \"systemTraceAuditNumber\": \"string\",\n    \"acquirerReferenceNumber\": \"string\",\n    \"isDeposit\": false\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e12763f0-83c5-4124-bee7-23c49494135f",
+              "name": "Error response with status 401",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "incoming"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"transactionId\": \"string\",\n    \"referringPartnerUserId\": \"string\",\n    \"amount\": 1899,\n    \"status\": \"REVERSED\",\n    \"currency\": \"string\",\n    \"description\": \"string\",\n    \"description2\": \"string\",\n    \"mcc\": \"string\",\n    \"coreProviderId\": \"string\",\n    \"transactionDate\": \"1965-05-29T18:57:42.853Z\",\n    \"authorizationDate\": \"1982-04-23T18:32:55.904Z\",\n    \"settledDate\": \"2005-12-08T05:33:51.920Z\",\n    \"merchantId\": \"string\",\n    \"merchantStoreId\": \"string\",\n    \"cardPresence\": \"string\",\n    \"merchantName\": \"string\",\n    \"merchantAddrCity\": \"string\",\n    \"merchantAddrState\": \"TX\",\n    \"merchantAddrZipcode\": \"string\",\n    \"merchantAddrCountry\": \"string\",\n    \"merchantAddrStreet\": \"string\",\n    \"merchantLat\": \"string\",\n    \"merchantLong\": \"string\",\n    \"panEntryMode\": \"string\",\n    \"cardBIN\": \"string\",\n    \"cardLastFour\": \"string\",\n    \"googleId\": \"string\",\n    \"authorizationCode\": \"string\",\n    \"retrievalReferenceNumber\": \"string\",\n    \"systemTraceAuditNumber\": \"string\",\n    \"acquirerReferenceNumber\": \"string\",\n    \"isDeposit\": false\n  },\n  {\n    \"transactionId\": \"string\",\n    \"referringPartnerUserId\": \"string\",\n    \"amount\": 9958,\n    \"status\": \"RETURNED\",\n    \"currency\": \"string\",\n    \"description\": \"string\",\n    \"description2\": \"string\",\n    \"mcc\": \"string\",\n    \"coreProviderId\": \"string\",\n    \"transactionDate\": \"1966-12-29T00:09:34.232Z\",\n    \"authorizationDate\": \"1958-04-22T21:26:11.920Z\",\n    \"settledDate\": \"1995-10-23T15:52:16.228Z\",\n    \"merchantId\": \"string\",\n    \"merchantStoreId\": \"string\",\n    \"cardPresence\": \"string\",\n    \"merchantName\": \"string\",\n    \"merchantAddrCity\": \"string\",\n    \"merchantAddrState\": \"MA\",\n    \"merchantAddrZipcode\": \"string\",\n    \"merchantAddrCountry\": \"string\",\n    \"merchantAddrStreet\": \"string\",\n    \"merchantLat\": \"string\",\n    \"merchantLong\": \"string\",\n    \"panEntryMode\": \"string\",\n    \"cardBIN\": \"string\",\n    \"cardLastFour\": \"string\",\n    \"googleId\": \"string\",\n    \"authorizationCode\": \"string\",\n    \"retrievalReferenceNumber\": \"string\",\n    \"systemTraceAuditNumber\": \"string\",\n    \"acquirerReferenceNumber\": \"string\",\n    \"isDeposit\": false\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f611e644-6f7b-4494-b8a7-062ce782b75e",
+              "name": "Error response with status 500",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "incoming"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"transactionId\": \"string\",\n    \"referringPartnerUserId\": \"string\",\n    \"amount\": 1899,\n    \"status\": \"REVERSED\",\n    \"currency\": \"string\",\n    \"description\": \"string\",\n    \"description2\": \"string\",\n    \"mcc\": \"string\",\n    \"coreProviderId\": \"string\",\n    \"transactionDate\": \"1965-05-29T18:57:42.853Z\",\n    \"authorizationDate\": \"1982-04-23T18:32:55.904Z\",\n    \"settledDate\": \"2005-12-08T05:33:51.920Z\",\n    \"merchantId\": \"string\",\n    \"merchantStoreId\": \"string\",\n    \"cardPresence\": \"string\",\n    \"merchantName\": \"string\",\n    \"merchantAddrCity\": \"string\",\n    \"merchantAddrState\": \"TX\",\n    \"merchantAddrZipcode\": \"string\",\n    \"merchantAddrCountry\": \"string\",\n    \"merchantAddrStreet\": \"string\",\n    \"merchantLat\": \"string\",\n    \"merchantLong\": \"string\",\n    \"panEntryMode\": \"string\",\n    \"cardBIN\": \"string\",\n    \"cardLastFour\": \"string\",\n    \"googleId\": \"string\",\n    \"authorizationCode\": \"string\",\n    \"retrievalReferenceNumber\": \"string\",\n    \"systemTraceAuditNumber\": \"string\",\n    \"acquirerReferenceNumber\": \"string\",\n    \"isDeposit\": false\n  },\n  {\n    \"transactionId\": \"string\",\n    \"referringPartnerUserId\": \"string\",\n    \"amount\": 9958,\n    \"status\": \"RETURNED\",\n    \"currency\": \"string\",\n    \"description\": \"string\",\n    \"description2\": \"string\",\n    \"mcc\": \"string\",\n    \"coreProviderId\": \"string\",\n    \"transactionDate\": \"1966-12-29T00:09:34.232Z\",\n    \"authorizationDate\": \"1958-04-22T21:26:11.920Z\",\n    \"settledDate\": \"1995-10-23T15:52:16.228Z\",\n    \"merchantId\": \"string\",\n    \"merchantStoreId\": \"string\",\n    \"cardPresence\": \"string\",\n    \"merchantName\": \"string\",\n    \"merchantAddrCity\": \"string\",\n    \"merchantAddrState\": \"MA\",\n    \"merchantAddrZipcode\": \"string\",\n    \"merchantAddrCountry\": \"string\",\n    \"merchantAddrStreet\": \"string\",\n    \"merchantLat\": \"string\",\n    \"merchantLong\": \"string\",\n    \"panEntryMode\": \"string\",\n    \"cardBIN\": \"string\",\n    \"cardLastFour\": \"string\",\n    \"googleId\": \"string\",\n    \"authorizationCode\": \"string\",\n    \"retrievalReferenceNumber\": \"string\",\n    \"systemTraceAuditNumber\": \"string\",\n    \"acquirerReferenceNumber\": \"string\",\n    \"isDeposit\": false\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "713d0c6d-ae98-49ae-bde0-756c9230ce1a",
+          "name": "Create Audit",
+          "request": {
+            "name": "Create Audit",
+            "description": {
+              "content": "Call this endpoint to request that a particular transaction be audited further by the Kard system, in the event of a missing cashback claim, incorrect cashback amount claim or other mis-match claims.<br/>\n<b>Required scopes:</b> `audit:write`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transactions",
+                "audit"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"transactionId\": \"<string>\",\n  \"auditCode\": \"<integer>\",\n  \"merchantName\": \"<string>\",\n  \"auditDescription\": \"<string>\",\n  \"preferredContactEmail\": \"<string>\",\n  \"issuer\": \"<string>\",\n  \"transactionAmountInCents\": \"<integer>\",\n  \"referringPartnerUserId\": \"<string>\",\n  \"merchantId\": \"<string>\",\n  \"submitterName\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fec2540b-79d0-47cb-836a-aa6f678ec285",
+              "name": "Response with status 201",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "audit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactionId\": \"<string>\",\n  \"auditCode\": \"<integer>\",\n  \"merchantName\": \"<string>\",\n  \"auditDescription\": \"<string>\",\n  \"preferredContactEmail\": \"<string>\",\n  \"issuer\": \"<string>\",\n  \"transactionAmountInCents\": \"<integer>\",\n  \"referringPartnerUserId\": \"<string>\",\n  \"merchantId\": \"<string>\",\n  \"submitterName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"transactionId\": \"string\",\n  \"auditCode\": 7014,\n  \"merchantName\": \"string\",\n  \"auditDescription\": \"string\",\n  \"preferredContactEmail\": \"string\",\n  \"status\": \"NEW\",\n  \"transactionAmountInCents\": 8251,\n  \"referringPartnerUserId\": \"string\",\n  \"merchantId\": \"string\",\n  \"submitterName\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ec17a7e1-028b-4769-bdb6-47e765455c07",
+              "name": "Error response with status 400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "audit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactionId\": \"<string>\",\n  \"auditCode\": \"<integer>\",\n  \"merchantName\": \"<string>\",\n  \"auditDescription\": \"<string>\",\n  \"preferredContactEmail\": \"<string>\",\n  \"issuer\": \"<string>\",\n  \"transactionAmountInCents\": \"<integer>\",\n  \"referringPartnerUserId\": \"<string>\",\n  \"merchantId\": \"<string>\",\n  \"submitterName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3ed66501-dcbb-40bb-872f-ba898d0d974c",
+              "name": "Error response with status 401",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "audit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactionId\": \"<string>\",\n  \"auditCode\": \"<integer>\",\n  \"merchantName\": \"<string>\",\n  \"auditDescription\": \"<string>\",\n  \"preferredContactEmail\": \"<string>\",\n  \"issuer\": \"<string>\",\n  \"transactionAmountInCents\": \"<integer>\",\n  \"referringPartnerUserId\": \"<string>\",\n  \"merchantId\": \"<string>\",\n  \"submitterName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e46d30e5-f7ca-4b2b-854b-7e540706c0f6",
+              "name": "Error response with status 409",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "audit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactionId\": \"<string>\",\n  \"auditCode\": \"<integer>\",\n  \"merchantName\": \"<string>\",\n  \"auditDescription\": \"<string>\",\n  \"preferredContactEmail\": \"<string>\",\n  \"issuer\": \"<string>\",\n  \"transactionAmountInCents\": \"<integer>\",\n  \"referringPartnerUserId\": \"<string>\",\n  \"merchantId\": \"<string>\",\n  \"submitterName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "26225e3e-e53b-4d8e-a195-b8c0ab2c0c1f",
+              "name": "Error response with status 500",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "audit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactionId\": \"<string>\",\n  \"auditCode\": \"<integer>\",\n  \"merchantName\": \"<string>\",\n  \"auditDescription\": \"<string>\",\n  \"preferredContactEmail\": \"<string>\",\n  \"issuer\": \"<string>\",\n  \"transactionAmountInCents\": \"<integer>\",\n  \"referringPartnerUserId\": \"<string>\",\n  \"merchantId\": \"<string>\",\n  \"submitterName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2b8e4186-c9b3-4a76-8dfe-681830418c73",
+          "name": "Get Audit Status",
+          "request": {
+            "name": "Get Audit Status",
+            "description": {
+              "content": "Call this endpoint to retrieve an update on the status of a created transaction audit. Note, the resolutionCode, resolutionDescription and resolutionTimeStamp will not be available until the audit has a “CLOSED” status signifying its resolution. <br/>\n<b>Required scopes:</b> `audit:read`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transactions",
+                "audit",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The audit ID provided by Kard's system"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ae34adc3-0fb0-4250-8f05-5cb6154ce34a",
+              "name": "Response with status 200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "audit",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The audit ID provided by Kard's system"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"transactionId\": \"string\",\n  \"auditCode\": 6029,\n  \"merchantName\": \"string\",\n  \"auditDescription\": \"string\",\n  \"preferredContactEmail\": \"string\",\n  \"status\": \"CLOSED\",\n  \"transactionAmountInCents\": 6823,\n  \"referringPartnerUserId\": \"string\",\n  \"merchantId\": \"string\",\n  \"submitterName\": \"string\",\n  \"resolutionCode\": 7128,\n  \"resolutionDescription\": \"string\",\n  \"resolutionTimeStamp\": \"1965-03-30T14:04:15.970Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3819d1de-fc9e-49b1-9942-e9854dd7ed12",
+              "name": "Error response with status 400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "audit",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The audit ID provided by Kard's system"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5c24ed25-c28a-43c8-8bb9-83d90c4ee874",
+              "name": "Error response with status 401",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "audit",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The audit ID provided by Kard's system"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c69523fe-78d5-40e0-9db8-1e131b116db8",
+              "name": "Error response with status 404",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "audit",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The audit ID provided by Kard's system"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe469d18-6e1a-42a0-9597-4994291739fa",
+              "name": "Error response with status 500",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "audit",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The audit ID provided by Kard's system"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://rewards-api.getkard.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "21dd374d-6db7-45f4-9f1e-2e6ff69ba716",
+    "name": "API Reference attributions transactions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

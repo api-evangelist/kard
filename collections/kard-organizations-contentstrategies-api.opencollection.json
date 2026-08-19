@@ -1,0 +1,187 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference attributions Organizations > ContentStrategies API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Organizations > ContentStrategies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rewards-api.getkard.com/v2/issuers/:organizationId/contentStrategies",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the organization"
+              },
+              {
+                "name": "filter[name]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by exact content strategy name (unique within an organization)"
+              },
+              {
+                "name": "page[after]",
+                "value": "",
+                "type": "query",
+                "description": "Cursor value for the next page of results"
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of records to return [1 - 200] (default = 200)"
+              }
+            ]
+          },
+          "docs": "List content strategies belonging to the authenticated organization"
+        },
+        {
+          "info": {
+            "name": "Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://rewards-api.getkard.com/v2/issuers/:organizationId/contentStrategies",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the organization"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a content strategy for the organization. The strategy name must be unique within the organization."
+        },
+        {
+          "info": {
+            "name": "Get",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rewards-api.getkard.com/v2/issuers/:organizationId/contentStrategies/:contentStrategyId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the organization"
+              },
+              {
+                "name": "contentStrategyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the content strategy (UUID v7)"
+              }
+            ]
+          },
+          "docs": "Retrieve a specific content strategy"
+        },
+        {
+          "info": {
+            "name": "Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://rewards-api.getkard.com/v2/issuers/:organizationId/contentStrategies/:contentStrategyId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the organization"
+              },
+              {
+                "name": "contentStrategyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the content strategy (UUID v7)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replace a content strategy. All fields must be provided; any omitted attribute is treated as cleared."
+        },
+        {
+          "info": {
+            "name": "Delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://rewards-api.getkard.com/v2/issuers/:organizationId/contentStrategies/:contentStrategyId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the organization"
+              },
+              {
+                "name": "contentStrategyId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the content strategy (UUID v7)"
+              }
+            ]
+          },
+          "docs": "Delete a content strategy. Returns 409 if the strategy is still referenced by another resource."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

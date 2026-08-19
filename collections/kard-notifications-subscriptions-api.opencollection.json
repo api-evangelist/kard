@@ -1,0 +1,108 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference attributions notifications > Subscriptions API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "notifications > Subscriptions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Subscriptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rewards-api.getkard.com/v2/issuers/:organizationId/subscriptions",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "filter[eventName]",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Call this endpoint to fetch the subscriptions of the provided issuer.<br/>\n<b>Required scopes:</b> `notifications:read`"
+        },
+        {
+          "info": {
+            "name": "Create Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://rewards-api.getkard.com/v2/issuers/:organizationId/subscriptions",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Call this endpoint to subscribe to notification events.<br/>\n<b>Required scopes:</b> `notifications:write`"
+        },
+        {
+          "info": {
+            "name": "Update Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://rewards-api.getkard.com/v2/issuers/:organizationId/subscriptions/:subscriptionId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Call this endpoint to update existing notification subscriptions.<br/>\n<b>Required scopes:</b> `notifications:write`"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

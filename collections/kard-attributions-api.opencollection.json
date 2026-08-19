@@ -1,0 +1,50 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference attributions API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "attributions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Attribution Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://rewards-api.getkard.com/issuers/:organizationId/attributions",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "X-Kard-organizationId",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Call this endpoint to send all attribution events made by all enrolled users in your rewards program. These attribution events will be processed by the Kard system.<br/>\n<b>Required scopes:</b> `attributions.write`"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

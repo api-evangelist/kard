@@ -1,0 +1,114 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference attributions notifications > Notifications API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "notifications > Notifications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Notifications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rewards-api.getkard.com/v2/issuers/:organizationId/notifications",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page[after]",
+                "value": "",
+                "type": "query",
+                "description": "Represents a cursor value, and if provided, returns the next page of results"
+              },
+              {
+                "name": "page[before]",
+                "value": "",
+                "type": "query",
+                "description": "Represents a cursor value, and if provided, returns the previous page of results"
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of records to be returned [1 - 200], (default = 200)"
+              },
+              {
+                "name": "filter[eventName]",
+                "value": "",
+                "type": "query",
+                "description": "Return only notifications for this event name."
+              },
+              {
+                "name": "filter[status]",
+                "value": "",
+                "type": "query",
+                "description": "Return only notifications with this delivery status."
+              },
+              {
+                "name": "filter[after]",
+                "value": "",
+                "type": "query",
+                "description": "Return only notifications created strictly after this timestamp (ISO 8601)."
+              },
+              {
+                "name": "filter[before]",
+                "value": "",
+                "type": "query",
+                "description": "Return only notifications created strictly before this timestamp (ISO 8601)."
+              }
+            ]
+          },
+          "docs": "Lists notifications previously dispatched to the issuer, most recent\nfirst.\n\nResults are filterable by event name, delivery status, and a\n`created_at` time range.<br/>\n<b>Required scopes:</b> `notifications:read`"
+        },
+        {
+          "info": {
+            "name": "Replay Notification",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://rewards-api.getkard.com/v2/issuers/:organizationId/notifications/:eventId/replay",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path",
+                "description": "The event ID of the notification to replay."
+              }
+            ]
+          },
+          "docs": "Re-enqueues a previously dispatched notification so it is redelivered to\nthe issuer's currently configured webhook for that event. Returns 409\nwhen the issuer has no enabled subscription for the event.<br/>\n<b>Required scopes:</b> `notifications:write`"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

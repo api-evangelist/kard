@@ -7,9 +7,12 @@ server:
   transport: http
   url: https://docs.getkard.com/_mcp/server
   versioned_url: https://docs.getkard.com/2024-10-01/_mcp/server
-  description: Official hosted MCP server exposing the Kard API documentation to AI
-    clients (Claude Code, Cursor, etc.). Documentation-scoped MCP server (docs + spec
-    navigation).
-notes: Published documentation MCP server advertised in the Kard llms.txt. Scope is
-  documentation retrieval over the Kard API reference, not a transactional API tool
-  server.
+  description: Official hosted MCP server exposing the Kard API documentation to AI clients (Claude Code,
+    Cursor, etc.). Documentation-scoped MCP server (docs + spec navigation).
+notes: Published documentation MCP server advertised in the Kard llms.txt. Scope is documentation retrieval
+  over the Kard API reference, not a transactional API tool server.
+deployment:
+  mode: remote
+  verified: searched
+  checked: '2026-08-12'
+  source: catalog MCP census

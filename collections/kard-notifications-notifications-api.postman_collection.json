@@ -1,0 +1,866 @@
+{
+  "item": [
+    {
+      "id": "1244690b-ba0a-4829-b3cc-a1741607cef3",
+      "name": "notifications > Notifications",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8a5fc1ad-d6bd-4636-a819-12b15da7bb2a",
+          "name": "List Notifications",
+          "request": {
+            "name": "List Notifications",
+            "description": {
+              "content": "Lists notifications previously dispatched to the issuer, most recent\nfirst.\n\nResults are filterable by event name, delivery status, and a\n`created_at` time range.<br/>\n<b>Required scopes:</b> `notifications:read`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "issuers",
+                ":organizationId",
+                "notifications"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page[after]",
+                  "value": "<string>",
+                  "description": "Represents a cursor value, and if provided, returns the next page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "page[before]",
+                  "value": "<string>",
+                  "description": "Represents a cursor value, and if provided, returns the previous page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "page[size]",
+                  "value": "<integer>",
+                  "description": "Maximum number of records to be returned [1 - 200], (default = 200)"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[eventName]",
+                  "value": "<string>",
+                  "description": "Return only notifications for this event name."
+                },
+                {
+                  "disabled": false,
+                  "key": "value",
+                  "value": "reference #/components/schemas/type_notifications/notifications:DeliveryStatus not found in the OpenAPI spec",
+                  "description": "Return only notifications with this delivery status."
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[after]",
+                  "value": "<dateTime>",
+                  "description": "Return only notifications created strictly after this timestamp (ISO 8601)."
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[before]",
+                  "value": "<dateTime>",
+                  "description": "Return only notifications created strictly before this timestamp (ISO 8601)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fac11abc-3478-408e-9a94-e0750861bfe2",
+              "name": "Response with status 200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "notifications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page[after]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[before]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "filter[eventName]",
+                      "value": "earnedRewardApproved"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/type_notifications/notifications:DeliveryStatus not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "filter[after]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "filter[before]",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "731071d9-56c8-4f31-ba63-8e30b2eeea9d",
+              "name": "Error response with status 400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "notifications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page[after]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[before]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "filter[eventName]",
+                      "value": "earnedRewardApproved"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/type_notifications/notifications:DeliveryStatus not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "filter[after]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "filter[before]",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bf38865c-908d-40ca-9b66-f22fcabf3c63",
+              "name": "Error response with status 401",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "notifications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page[after]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[before]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "filter[eventName]",
+                      "value": "earnedRewardApproved"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/type_notifications/notifications:DeliveryStatus not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "filter[after]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "filter[before]",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "74d468dd-8d20-4682-99e9-2b5d4ffc49a5",
+              "name": "Error response with status 500",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "notifications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page[after]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[before]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "filter[eventName]",
+                      "value": "earnedRewardApproved"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/type_notifications/notifications:DeliveryStatus not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "filter[after]",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "filter[before]",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b92cfc87-5a92-4e20-a79d-12d80eb9d7c5",
+          "name": "Replay Notification",
+          "request": {
+            "name": "Replay Notification",
+            "description": {
+              "content": "Re-enqueues a previously dispatched notification so it is redelivered to\nthe issuer's currently configured webhook for that event. Returns 409\nwhen the issuer has no enabled subscription for the event.<br/>\n<b>Required scopes:</b> `notifications:write`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "issuers",
+                ":organizationId",
+                "notifications",
+                ":eventId",
+                "replay"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "eventId",
+                  "description": "(Required) The event ID of the notification to replay."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "de025e74-4d8a-4e56-9d6f-00be16ee499f",
+              "name": "Response with status 202",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "notifications",
+                    ":eventId",
+                    "replay"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "eventId",
+                      "description": "(Required) The event ID of the notification to replay."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1c5d6f0e-3baf-4f5b-a6c8-c2cf3b7c1e04",
+              "name": "Error response with status 400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "notifications",
+                    ":eventId",
+                    "replay"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "eventId",
+                      "description": "(Required) The event ID of the notification to replay."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "11a08ff9-7259-459b-9e85-ec4e0898080b",
+              "name": "Error response with status 401",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "notifications",
+                    ":eventId",
+                    "replay"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "eventId",
+                      "description": "(Required) The event ID of the notification to replay."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4c588b79-4527-497f-ada3-399f51f04c5d",
+              "name": "Error response with status 404",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "notifications",
+                    ":eventId",
+                    "replay"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "eventId",
+                      "description": "(Required) The event ID of the notification to replay."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "50559a0b-f9e9-4f50-b798-c9267f07ddd4",
+              "name": "Error response with status 409",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "notifications",
+                    ":eventId",
+                    "replay"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "eventId",
+                      "description": "(Required) The event ID of the notification to replay."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3d26c9a1-db4e-40dd-b7fe-54c6d4baebde",
+              "name": "Error response with status 500",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "notifications",
+                    ":eventId",
+                    "replay"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "eventId",
+                      "description": "(Required) The event ID of the notification to replay."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://rewards-api.getkard.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e0dc1c89-4bdf-4fc7-92f5-927fd0ad9c2f",
+    "name": "API Reference attributions notifications > Notifications API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

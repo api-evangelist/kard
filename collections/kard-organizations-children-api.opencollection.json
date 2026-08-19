@@ -1,0 +1,181 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference attributions Organizations > Children API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Organizations > Children",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rewards-api.getkard.com/v2/issuers/:organizationId/children",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the parent organization"
+              },
+              {
+                "name": "page[after]",
+                "value": "",
+                "type": "query",
+                "description": "Cursor value for the next page of results"
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of records to return [1 - 200] (default = 200)"
+              }
+            ]
+          },
+          "docs": "List child organizations belonging to the authenticated issuer"
+        },
+        {
+          "info": {
+            "name": "Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://rewards-api.getkard.com/v2/issuers/:organizationId/children",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the parent organization"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a child organization by cloning the parent and overriding specified fields. An 8-digit numeric ID is generated automatically. The name is required, must contain at least one letter, and may contain only letters and spaces."
+        },
+        {
+          "info": {
+            "name": "Get",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rewards-api.getkard.com/v2/issuers/:organizationId/children/:childId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the parent organization"
+              },
+              {
+                "name": "childId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the child organization"
+              }
+            ]
+          },
+          "docs": "Retrieve a specific child organization"
+        },
+        {
+          "info": {
+            "name": "Update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://rewards-api.getkard.com/v2/issuers/:organizationId/children/:childId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the parent organization"
+              },
+              {
+                "name": "childId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the child organization"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a child organization. Only the name can be changed."
+        },
+        {
+          "info": {
+            "name": "Delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://rewards-api.getkard.com/v2/issuers/:organizationId/children/:childId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the parent organization"
+              },
+              {
+                "name": "childId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the child organization"
+              }
+            ]
+          },
+          "docs": "Delete a child organization"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

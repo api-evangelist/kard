@@ -1,0 +1,356 @@
+{
+  "item": [
+    {
+      "id": "1401ed0d-8a10-4f67-83fa-e57e2cce76b2",
+      "name": "attributions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cd996a8f-dfb7-4948-a41f-5d0399465bc5",
+          "name": "Create Attribution Events",
+          "request": {
+            "name": "Create Attribution Events",
+            "description": {
+              "content": "Call this endpoint to send all attribution events made by all enrolled users in your rewards program. These attribution events will be processed by the Kard system.<br/>\n<b>Required scopes:</b> `attributions.write`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "issuers",
+                ":organizationId",
+                "attributions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "key": "X-Kard-organizationId",
+                "value": "<string>",
+                "description": ""
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": [\n    {\n      \"type\": \"<string>\",\n      \"attributes\": {\n        \"userId\": \"<string>\",\n        \"type\": \"<string>\",\n        \"subtype\": \"<string>\",\n        \"typeId\": \"<string>\",\n        \"medium\": \"<string>\"\n      }\n    },\n    {\n      \"type\": \"<string>\",\n      \"attributes\": {\n        \"userId\": \"<string>\",\n        \"type\": \"<string>\",\n        \"subtype\": \"<string>\",\n        \"typeId\": \"<string>\",\n        \"medium\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9aca8e3b-7f08-470c-a0e0-1316ec3510e9",
+              "name": "Response with status 200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "issuers",
+                    ":organizationId",
+                    "attributions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-Kard-organizationId",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"type\": \"attribution\",\n      \"attributes\": {\n        \"userId\": \"string\",\n        \"type\": \"NOTIFICATION\",\n        \"subtype\": \"IMPRESSION\",\n        \"typeId\": \"string\",\n        \"medium\": \"SEARCH\"\n      }\n    },\n    {\n      \"type\": \"attribution\",\n      \"attributes\": {\n        \"userId\": \"string\",\n        \"type\": \"NOTIFICATION\",\n        \"subtype\": \"VIEW\",\n        \"typeId\": \"string\",\n        \"medium\": \"MAP\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ecccae58-415a-4e03-9abe-8320d771434c",
+              "name": "Error response with status 400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "issuers",
+                    ":organizationId",
+                    "attributions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-Kard-organizationId",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"type\": \"attribution\",\n      \"attributes\": {\n        \"userId\": \"string\",\n        \"type\": \"NOTIFICATION\",\n        \"subtype\": \"IMPRESSION\",\n        \"typeId\": \"string\",\n        \"medium\": \"SEARCH\"\n      }\n    },\n    {\n      \"type\": \"attribution\",\n      \"attributes\": {\n        \"userId\": \"string\",\n        \"type\": \"NOTIFICATION\",\n        \"subtype\": \"VIEW\",\n        \"typeId\": \"string\",\n        \"medium\": \"MAP\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "40c0a34f-6dd9-4151-a3a6-c4bd40ada5b4",
+              "name": "Error response with status 401",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "issuers",
+                    ":organizationId",
+                    "attributions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-Kard-organizationId",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"type\": \"attribution\",\n      \"attributes\": {\n        \"userId\": \"string\",\n        \"type\": \"NOTIFICATION\",\n        \"subtype\": \"IMPRESSION\",\n        \"typeId\": \"string\",\n        \"medium\": \"SEARCH\"\n      }\n    },\n    {\n      \"type\": \"attribution\",\n      \"attributes\": {\n        \"userId\": \"string\",\n        \"type\": \"NOTIFICATION\",\n        \"subtype\": \"VIEW\",\n        \"typeId\": \"string\",\n        \"medium\": \"MAP\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4a0cb812-08f5-48b9-b2f0-f3c911ced381",
+              "name": "Error response with status 500",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "issuers",
+                    ":organizationId",
+                    "attributions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "X-Kard-organizationId",
+                    "value": "<string>",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"type\": \"attribution\",\n      \"attributes\": {\n        \"userId\": \"string\",\n        \"type\": \"NOTIFICATION\",\n        \"subtype\": \"IMPRESSION\",\n        \"typeId\": \"string\",\n        \"medium\": \"SEARCH\"\n      }\n    },\n    {\n      \"type\": \"attribution\",\n      \"attributes\": {\n        \"userId\": \"string\",\n        \"type\": \"NOTIFICATION\",\n        \"subtype\": \"VIEW\",\n        \"typeId\": \"string\",\n        \"medium\": \"MAP\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://rewards-api.getkard.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "3add7b59-6dde-4ae7-8562-dc2bb60922ef",
+    "name": "API Reference attributions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,2927 @@
+{
+  "item": [
+    {
+      "id": "bc92deaa-498f-49ba-8ee7-6f5183193005",
+      "name": "users",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "783568e2-433a-41b7-b064-788d1cc6787a",
+          "name": "Create Users",
+          "request": {
+            "name": "Create Users",
+            "description": {
+              "content": "Call this endpoint to enroll a specified user into your rewards program.<br/>\n\n<b>Required scopes:</b>&nbsp;&nbsp;`user:write`<br/>\n<b>Note:</b> `Maximum of 100 users can be created per request`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "issuers",
+                ":organizationId",
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": [\n    {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"attributes\": {\n        \"enrolledRewards\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"zipCode\": \"<string>\",\n        \"email\": \"<string>\",\n        \"hashedEmail\": \"<string>\",\n        \"phoneNumber\": \"<string>\",\n        \"birthYear\": \"<string>\",\n        \"historicalTransactionsSent\": \"<boolean>\"\n      }\n    },\n    {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"attributes\": {\n        \"enrolledRewards\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"zipCode\": \"<string>\",\n        \"email\": \"<string>\",\n        \"hashedEmail\": \"<string>\",\n        \"phoneNumber\": \"<string>\",\n        \"birthYear\": \"<string>\",\n        \"historicalTransactionsSent\": \"<boolean>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bcb38909-85b5-4db6-982d-76c1647de849",
+              "name": "Response with status 201",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"type\": \"user\",\n      \"id\": \"string\",\n      \"attributes\": {\n        \"enrolledRewards\": [\n          \"CARDLINKED\",\n          \"CARDLINKED\"\n        ],\n        \"zipCode\": \"string\",\n        \"email\": \"string\",\n        \"hashedEmail\": \"string\",\n        \"phoneNumber\": \"string\",\n        \"birthYear\": \"string\",\n        \"historicalTransactionsSent\": true\n      }\n    },\n    {\n      \"type\": \"user\",\n      \"id\": \"string\",\n      \"attributes\": {\n        \"enrolledRewards\": [\n          \"CARDLINKED\",\n          \"CARDLINKED\"\n        ],\n        \"zipCode\": \"string\",\n        \"email\": \"string\",\n        \"hashedEmail\": \"string\",\n        \"phoneNumber\": \"string\",\n        \"birthYear\": \"string\",\n        \"historicalTransactionsSent\": true\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"type\": \"user\",\n      \"id\": \"string\",\n      \"attributes\": {\n        \"enrolledRewards\": [\n          \"CARDLINKED\",\n          \"CARDLINKED\"\n        ],\n        \"zipCode\": \"string\",\n        \"email\": \"string\",\n        \"hashedEmail\": \"string\",\n        \"phoneNumber\": \"string\",\n        \"birthYear\": \"string\",\n        \"historicalTransactionsSent\": false\n      }\n    },\n    {\n      \"type\": \"user\",\n      \"id\": \"string\",\n      \"attributes\": {\n        \"enrolledRewards\": [\n          \"CARDLINKED\",\n          \"CARDLINKED\"\n        ],\n        \"zipCode\": \"string\",\n        \"email\": \"string\",\n        \"hashedEmail\": \"string\",\n        \"phoneNumber\": \"string\",\n        \"birthYear\": \"string\",\n        \"historicalTransactionsSent\": true\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fa82b653-ee81-489a-9e01-6b603e562577",
+              "name": "Error response with status 207",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"type\": \"user\",\n      \"id\": \"string\",\n      \"attributes\": {\n        \"enrolledRewards\": [\n          \"CARDLINKED\",\n          \"CARDLINKED\"\n        ],\n        \"zipCode\": \"string\",\n        \"email\": \"string\",\n        \"hashedEmail\": \"string\",\n        \"phoneNumber\": \"string\",\n        \"birthYear\": \"string\",\n        \"historicalTransactionsSent\": true\n      }\n    },\n    {\n      \"type\": \"user\",\n      \"id\": \"string\",\n      \"attributes\": {\n        \"enrolledRewards\": [\n          \"CARDLINKED\",\n          \"CARDLINKED\"\n        ],\n        \"zipCode\": \"string\",\n        \"email\": \"string\",\n        \"hashedEmail\": \"string\",\n        \"phoneNumber\": \"string\",\n        \"birthYear\": \"string\",\n        \"historicalTransactionsSent\": true\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Multi-Status (WebDAV) (RFC 4918)",
+              "code": 207,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ],\n  \"data\": [\n    {\n      \"type\": \"user\",\n      \"id\": \"string\",\n      \"attributes\": {\n        \"enrolledRewards\": [\n          \"CARDLINKED\",\n          \"CARDLINKED\"\n        ],\n        \"zipCode\": \"string\",\n        \"email\": \"string\",\n        \"hashedEmail\": \"string\",\n        \"phoneNumber\": \"string\",\n        \"birthYear\": \"string\",\n        \"historicalTransactionsSent\": true\n      }\n    },\n    {\n      \"type\": \"user\",\n      \"id\": \"string\",\n      \"attributes\": {\n        \"enrolledRewards\": [\n          \"CARDLINKED\",\n          \"CARDLINKED\"\n        ],\n        \"zipCode\": \"string\",\n        \"email\": \"string\",\n        \"hashedEmail\": \"string\",\n        \"phoneNumber\": \"string\",\n        \"birthYear\": \"string\",\n        \"historicalTransactionsSent\": false\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dfe9403b-96e0-42f7-897c-99b1b5392b4c",
+              "name": "Error response with status 400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"type\": \"user\",\n      \"id\": \"string\",\n      \"attributes\": {\n        \"enrolledRewards\": [\n          \"CARDLINKED\",\n          \"CARDLINKED\"\n        ],\n        \"zipCode\": \"string\",\n        \"email\": \"string\",\n        \"hashedEmail\": \"string\",\n        \"phoneNumber\": \"string\",\n        \"birthYear\": \"string\",\n        \"historicalTransactionsSent\": true\n      }\n    },\n    {\n      \"type\": \"user\",\n      \"id\": \"string\",\n      \"attributes\": {\n        \"enrolledRewards\": [\n          \"CARDLINKED\",\n          \"CARDLINKED\"\n        ],\n        \"zipCode\": \"string\",\n        \"email\": \"string\",\n        \"hashedEmail\": \"string\",\n        \"phoneNumber\": \"string\",\n        \"birthYear\": \"string\",\n        \"historicalTransactionsSent\": true\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f92d7216-3993-4d7c-ae33-93168b1d93c5",
+              "name": "Error response with status 401",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"type\": \"user\",\n      \"id\": \"string\",\n      \"attributes\": {\n        \"enrolledRewards\": [\n          \"CARDLINKED\",\n          \"CARDLINKED\"\n        ],\n        \"zipCode\": \"string\",\n        \"email\": \"string\",\n        \"hashedEmail\": \"string\",\n        \"phoneNumber\": \"string\",\n        \"birthYear\": \"string\",\n        \"historicalTransactionsSent\": true\n      }\n    },\n    {\n      \"type\": \"user\",\n      \"id\": \"string\",\n      \"attributes\": {\n        \"enrolledRewards\": [\n          \"CARDLINKED\",\n          \"CARDLINKED\"\n        ],\n        \"zipCode\": \"string\",\n        \"email\": \"string\",\n        \"hashedEmail\": \"string\",\n        \"phoneNumber\": \"string\",\n        \"birthYear\": \"string\",\n        \"historicalTransactionsSent\": true\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c6c157a2-57af-431a-a299-b9ec6282af4d",
+              "name": "Error response with status 409",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"type\": \"user\",\n      \"id\": \"string\",\n      \"attributes\": {\n        \"enrolledRewards\": [\n          \"CARDLINKED\",\n          \"CARDLINKED\"\n        ],\n        \"zipCode\": \"string\",\n        \"email\": \"string\",\n        \"hashedEmail\": \"string\",\n        \"phoneNumber\": \"string\",\n        \"birthYear\": \"string\",\n        \"historicalTransactionsSent\": true\n      }\n    },\n    {\n      \"type\": \"user\",\n      \"id\": \"string\",\n      \"attributes\": {\n        \"enrolledRewards\": [\n          \"CARDLINKED\",\n          \"CARDLINKED\"\n        ],\n        \"zipCode\": \"string\",\n        \"email\": \"string\",\n        \"hashedEmail\": \"string\",\n        \"phoneNumber\": \"string\",\n        \"birthYear\": \"string\",\n        \"historicalTransactionsSent\": true\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4307e2c8-de98-4683-b056-10e2ea2e92b6",
+              "name": "Error response with status 500",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": [\n    {\n      \"type\": \"user\",\n      \"id\": \"string\",\n      \"attributes\": {\n        \"enrolledRewards\": [\n          \"CARDLINKED\",\n          \"CARDLINKED\"\n        ],\n        \"zipCode\": \"string\",\n        \"email\": \"string\",\n        \"hashedEmail\": \"string\",\n        \"phoneNumber\": \"string\",\n        \"birthYear\": \"string\",\n        \"historicalTransactionsSent\": true\n      }\n    },\n    {\n      \"type\": \"user\",\n      \"id\": \"string\",\n      \"attributes\": {\n        \"enrolledRewards\": [\n          \"CARDLINKED\",\n          \"CARDLINKED\"\n        ],\n        \"zipCode\": \"string\",\n        \"email\": \"string\",\n        \"hashedEmail\": \"string\",\n        \"phoneNumber\": \"string\",\n        \"birthYear\": \"string\",\n        \"historicalTransactionsSent\": true\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2eec348b-ad98-46f1-8d5b-9bd2fb78d517",
+          "name": "Update User",
+          "request": {
+            "name": "Update User",
+            "description": {
+              "content": "Call this endpoint to update the details on a specified user.<br/>\n\n<b>Required scopes:</b> `user:update`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "issuers",
+                ":organizationId",
+                "users",
+                ":userId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"type\": \"<string>\",\n    \"id\": \"<string>\",\n    \"attributes\": {\n      \"enrolledRewards\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"zipCode\": \"<string>\",\n      \"email\": \"<string>\",\n      \"hashedEmail\": \"<string>\",\n      \"phoneNumber\": \"<string>\",\n      \"birthYear\": \"<string>\",\n      \"historicalTransactionsSent\": \"<boolean>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2a86602a-2228-48a3-8fb2-d8a83b18aa88",
+              "name": "Response with status 200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"user\",\n    \"id\": \"string\",\n    \"attributes\": {\n      \"enrolledRewards\": [\n        \"CARDLINKED\",\n        \"CARDLINKED\"\n      ],\n      \"zipCode\": \"string\",\n      \"email\": \"string\",\n      \"hashedEmail\": \"string\",\n      \"phoneNumber\": \"string\",\n      \"birthYear\": \"string\",\n      \"historicalTransactionsSent\": false\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"type\": \"user\",\n    \"id\": \"string\",\n    \"attributes\": {\n      \"enrolledRewards\": [\n        \"CARDLINKED\",\n        \"CARDLINKED\"\n      ],\n      \"zipCode\": \"string\",\n      \"email\": \"string\",\n      \"hashedEmail\": \"string\",\n      \"phoneNumber\": \"string\",\n      \"birthYear\": \"string\",\n      \"historicalTransactionsSent\": false\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2e74bd6b-6a77-48df-8142-e8d0b3b5fb6a",
+              "name": "Error response with status 400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"user\",\n    \"id\": \"string\",\n    \"attributes\": {\n      \"enrolledRewards\": [\n        \"CARDLINKED\",\n        \"CARDLINKED\"\n      ],\n      \"zipCode\": \"string\",\n      \"email\": \"string\",\n      \"hashedEmail\": \"string\",\n      \"phoneNumber\": \"string\",\n      \"birthYear\": \"string\",\n      \"historicalTransactionsSent\": false\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b4ab8bb5-c3fc-4cb4-8980-795c7a4bb11b",
+              "name": "Error response with status 401",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"user\",\n    \"id\": \"string\",\n    \"attributes\": {\n      \"enrolledRewards\": [\n        \"CARDLINKED\",\n        \"CARDLINKED\"\n      ],\n      \"zipCode\": \"string\",\n      \"email\": \"string\",\n      \"hashedEmail\": \"string\",\n      \"phoneNumber\": \"string\",\n      \"birthYear\": \"string\",\n      \"historicalTransactionsSent\": false\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "08de8b87-b287-4e29-b1d8-e62dfc261d4c",
+              "name": "Error response with status 404",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"user\",\n    \"id\": \"string\",\n    \"attributes\": {\n      \"enrolledRewards\": [\n        \"CARDLINKED\",\n        \"CARDLINKED\"\n      ],\n      \"zipCode\": \"string\",\n      \"email\": \"string\",\n      \"hashedEmail\": \"string\",\n      \"phoneNumber\": \"string\",\n      \"birthYear\": \"string\",\n      \"historicalTransactionsSent\": false\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ed134c1b-43c8-4d9e-9ad3-f4ba65a44203",
+              "name": "Error response with status 500",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"type\": \"user\",\n    \"id\": \"string\",\n    \"attributes\": {\n      \"enrolledRewards\": [\n        \"CARDLINKED\",\n        \"CARDLINKED\"\n      ],\n      \"zipCode\": \"string\",\n      \"email\": \"string\",\n      \"hashedEmail\": \"string\",\n      \"phoneNumber\": \"string\",\n      \"birthYear\": \"string\",\n      \"historicalTransactionsSent\": false\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8c9efb20-fe76-45f9-8465-653c277a5576",
+          "name": "Delete User",
+          "request": {
+            "name": "Delete User",
+            "description": {
+              "content": "Call this endpoint to delete a specified enrolled user from the rewards program and Kard's system. Users can be re-enrolled into rewards by calling the [Create User](/2024-10-01/api/users/create) endpoint using the same `id` from before.<br/>\n\n<b>Required scopes:</b> `user:delete`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "issuers",
+                ":organizationId",
+                "users",
+                ":userId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9ab1e615-c8d3-4e84-9fce-8c5a1ca68719",
+              "name": "Response with status 200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"type\": \"user\",\n    \"id\": \"string\",\n    \"attributes\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "04b55b20-4157-4678-bb5f-a58233b9dc0d",
+              "name": "Error response with status 400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "544f5c1c-ac0d-4133-92a1-504d81f0a967",
+              "name": "Error response with status 401",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c8b96e10-825b-4468-8508-9130af859eb5",
+              "name": "Error response with status 404",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b174f438-9dff-4987-8a1c-74412454b1bf",
+              "name": "Error response with status 500",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5b7f6425-836a-4da5-8ab7-f03316bef9ae",
+          "name": "Get User By ID",
+          "request": {
+            "name": "Get User By ID",
+            "description": {
+              "content": "Call this endpoint to fetch the details on a specified user.<br/>\n<br/>\n<b>Required scopes:</b>&nbsp;&nbsp;`user:read`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "issuers",
+                ":organizationId",
+                "users",
+                ":userId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0936be51-cf01-4adc-8e0f-7c8320720f33",
+              "name": "Response with status 200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"type\": \"user\",\n    \"id\": \"string\",\n    \"attributes\": {\n      \"enrolledRewards\": [\n        \"CARDLINKED\",\n        \"CARDLINKED\"\n      ],\n      \"zipCode\": \"string\",\n      \"email\": \"string\",\n      \"hashedEmail\": \"string\",\n      \"phoneNumber\": \"string\",\n      \"birthYear\": \"string\",\n      \"historicalTransactionsSent\": false\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "75eca93f-9cf8-480d-a51a-f16b75b567d6",
+              "name": "Error response with status 401",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "89512520-24f0-4d17-8237-1fa1d05f0c39",
+              "name": "Error response with status 404",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1b31f0a3-0fcb-4c7a-a7ff-9410bbbe14f0",
+              "name": "Error response with status 500",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "users",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6da843eb-9d45-485f-aa16-e5e5404ac432",
+          "name": "Create User",
+          "request": {
+            "name": "Create User",
+            "description": {
+              "content": "Call this endpoint to enroll a specified user into your rewards program. Learn more about the [Enrolling Users](https://github.com/kard-financial/kard-postman#a-cardholders) flow based on your use case here.<br/>\n<b>Required scopes:</b> `user:write`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"referringPartnerUserId\": \"<string>\",\n  \"email\": \"<string>\",\n  \"hashedEmail\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"birthYear\": \"<string>\",\n  \"userName\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"zipCode\": \"<string>\",\n  \"externalPartnerUserId\": \"<string>\",\n  \"enrolledRewards\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cards\": [\n    {\n      \"last4\": \"<string>\",\n      \"bin\": \"<string>\",\n      \"issuer\": \"<string>\",\n      \"network\": \"<string>\",\n      \"status\": \"<string>\",\n      \"token\": \"<string>\",\n      \"tokenSource\": \"<string>\"\n    },\n    {\n      \"last4\": \"<string>\",\n      \"bin\": \"<string>\",\n      \"issuer\": \"<string>\",\n      \"network\": \"<string>\",\n      \"status\": \"<string>\",\n      \"token\": \"<string>\",\n      \"tokenSource\": \"<string>\"\n    }\n  ],\n  \"cardInfo\": {\n    \"last4\": \"<string>\",\n    \"bin\": \"<string>\",\n    \"issuer\": \"<string>\",\n    \"network\": \"<string>\",\n    \"status\": \"<string>\",\n    \"token\": \"<string>\",\n    \"tokenSource\": \"<string>\"\n  },\n  \"referringPartner\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "40e981d6-bfd7-43fa-b843-0ad01a998298",
+              "name": "Response with status 201",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referringPartnerUserId\": \"<string>\",\n  \"email\": \"<string>\",\n  \"hashedEmail\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"birthYear\": \"<string>\",\n  \"userName\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"zipCode\": \"<string>\",\n  \"externalPartnerUserId\": \"<string>\",\n  \"enrolledRewards\": [\n    \"CARDLINKED\",\n    \"AFFILIATE\"\n  ],\n  \"cards\": [\n    {\n      \"last4\": \"string\",\n      \"bin\": \"string\",\n      \"issuer\": \"string\",\n      \"network\": \"MASTERCARD\",\n      \"status\": \"ENABLED\",\n      \"token\": \"string\",\n      \"tokenSource\": \"string\"\n    },\n    {\n      \"last4\": \"string\",\n      \"bin\": \"string\",\n      \"issuer\": \"string\",\n      \"network\": \"AMERICAN EXPRESS\",\n      \"status\": \"DISABLED\",\n      \"token\": \"string\",\n      \"tokenSource\": \"string\"\n    }\n  ],\n  \"cardInfo\": {\n    \"last4\": \"string\",\n    \"bin\": \"string\",\n    \"issuer\": \"string\",\n    \"network\": \"VISA\",\n    \"status\": \"ENABLED\",\n    \"token\": \"string\",\n    \"tokenSource\": \"string\"\n  },\n  \"referringPartner\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6ff36e6d-287d-43f3-ba9a-a40e747a21d8",
+              "name": "Error response with status 400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referringPartnerUserId\": \"<string>\",\n  \"email\": \"<string>\",\n  \"hashedEmail\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"birthYear\": \"<string>\",\n  \"userName\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"zipCode\": \"<string>\",\n  \"externalPartnerUserId\": \"<string>\",\n  \"enrolledRewards\": [\n    \"CARDLINKED\",\n    \"AFFILIATE\"\n  ],\n  \"cards\": [\n    {\n      \"last4\": \"string\",\n      \"bin\": \"string\",\n      \"issuer\": \"string\",\n      \"network\": \"MASTERCARD\",\n      \"status\": \"ENABLED\",\n      \"token\": \"string\",\n      \"tokenSource\": \"string\"\n    },\n    {\n      \"last4\": \"string\",\n      \"bin\": \"string\",\n      \"issuer\": \"string\",\n      \"network\": \"AMERICAN EXPRESS\",\n      \"status\": \"DISABLED\",\n      \"token\": \"string\",\n      \"tokenSource\": \"string\"\n    }\n  ],\n  \"cardInfo\": {\n    \"last4\": \"string\",\n    \"bin\": \"string\",\n    \"issuer\": \"string\",\n    \"network\": \"VISA\",\n    \"status\": \"ENABLED\",\n    \"token\": \"string\",\n    \"tokenSource\": \"string\"\n  },\n  \"referringPartner\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e9142148-8713-43d8-b5ef-78e4c6351c30",
+              "name": "Error response with status 401",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referringPartnerUserId\": \"<string>\",\n  \"email\": \"<string>\",\n  \"hashedEmail\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"birthYear\": \"<string>\",\n  \"userName\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"zipCode\": \"<string>\",\n  \"externalPartnerUserId\": \"<string>\",\n  \"enrolledRewards\": [\n    \"CARDLINKED\",\n    \"AFFILIATE\"\n  ],\n  \"cards\": [\n    {\n      \"last4\": \"string\",\n      \"bin\": \"string\",\n      \"issuer\": \"string\",\n      \"network\": \"MASTERCARD\",\n      \"status\": \"ENABLED\",\n      \"token\": \"string\",\n      \"tokenSource\": \"string\"\n    },\n    {\n      \"last4\": \"string\",\n      \"bin\": \"string\",\n      \"issuer\": \"string\",\n      \"network\": \"AMERICAN EXPRESS\",\n      \"status\": \"DISABLED\",\n      \"token\": \"string\",\n      \"tokenSource\": \"string\"\n    }\n  ],\n  \"cardInfo\": {\n    \"last4\": \"string\",\n    \"bin\": \"string\",\n    \"issuer\": \"string\",\n    \"network\": \"VISA\",\n    \"status\": \"ENABLED\",\n    \"token\": \"string\",\n    \"tokenSource\": \"string\"\n  },\n  \"referringPartner\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f47f6e31-7267-4611-9e26-b1e1f2f3667b",
+              "name": "Error response with status 404",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referringPartnerUserId\": \"<string>\",\n  \"email\": \"<string>\",\n  \"hashedEmail\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"birthYear\": \"<string>\",\n  \"userName\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"zipCode\": \"<string>\",\n  \"externalPartnerUserId\": \"<string>\",\n  \"enrolledRewards\": [\n    \"CARDLINKED\",\n    \"AFFILIATE\"\n  ],\n  \"cards\": [\n    {\n      \"last4\": \"string\",\n      \"bin\": \"string\",\n      \"issuer\": \"string\",\n      \"network\": \"MASTERCARD\",\n      \"status\": \"ENABLED\",\n      \"token\": \"string\",\n      \"tokenSource\": \"string\"\n    },\n    {\n      \"last4\": \"string\",\n      \"bin\": \"string\",\n      \"issuer\": \"string\",\n      \"network\": \"AMERICAN EXPRESS\",\n      \"status\": \"DISABLED\",\n      \"token\": \"string\",\n      \"tokenSource\": \"string\"\n    }\n  ],\n  \"cardInfo\": {\n    \"last4\": \"string\",\n    \"bin\": \"string\",\n    \"issuer\": \"string\",\n    \"network\": \"VISA\",\n    \"status\": \"ENABLED\",\n    \"token\": \"string\",\n    \"tokenSource\": \"string\"\n  },\n  \"referringPartner\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "80c288f8-43f0-4c76-beec-5b2879edf930",
+              "name": "Error response with status 409",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referringPartnerUserId\": \"<string>\",\n  \"email\": \"<string>\",\n  \"hashedEmail\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"birthYear\": \"<string>\",\n  \"userName\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"zipCode\": \"<string>\",\n  \"externalPartnerUserId\": \"<string>\",\n  \"enrolledRewards\": [\n    \"CARDLINKED\",\n    \"AFFILIATE\"\n  ],\n  \"cards\": [\n    {\n      \"last4\": \"string\",\n      \"bin\": \"string\",\n      \"issuer\": \"string\",\n      \"network\": \"MASTERCARD\",\n      \"status\": \"ENABLED\",\n      \"token\": \"string\",\n      \"tokenSource\": \"string\"\n    },\n    {\n      \"last4\": \"string\",\n      \"bin\": \"string\",\n      \"issuer\": \"string\",\n      \"network\": \"AMERICAN EXPRESS\",\n      \"status\": \"DISABLED\",\n      \"token\": \"string\",\n      \"tokenSource\": \"string\"\n    }\n  ],\n  \"cardInfo\": {\n    \"last4\": \"string\",\n    \"bin\": \"string\",\n    \"issuer\": \"string\",\n    \"network\": \"VISA\",\n    \"status\": \"ENABLED\",\n    \"token\": \"string\",\n    \"tokenSource\": \"string\"\n  },\n  \"referringPartner\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "41567c08-8200-42e8-8710-578896a499c1",
+              "name": "Error response with status 500",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referringPartnerUserId\": \"<string>\",\n  \"email\": \"<string>\",\n  \"hashedEmail\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"birthYear\": \"<string>\",\n  \"userName\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"zipCode\": \"<string>\",\n  \"externalPartnerUserId\": \"<string>\",\n  \"enrolledRewards\": [\n    \"CARDLINKED\",\n    \"AFFILIATE\"\n  ],\n  \"cards\": [\n    {\n      \"last4\": \"string\",\n      \"bin\": \"string\",\n      \"issuer\": \"string\",\n      \"network\": \"MASTERCARD\",\n      \"status\": \"ENABLED\",\n      \"token\": \"string\",\n      \"tokenSource\": \"string\"\n    },\n    {\n      \"last4\": \"string\",\n      \"bin\": \"string\",\n      \"issuer\": \"string\",\n      \"network\": \"AMERICAN EXPRESS\",\n      \"status\": \"DISABLED\",\n      \"token\": \"string\",\n      \"tokenSource\": \"string\"\n    }\n  ],\n  \"cardInfo\": {\n    \"last4\": \"string\",\n    \"bin\": \"string\",\n    \"issuer\": \"string\",\n    \"network\": \"VISA\",\n    \"status\": \"ENABLED\",\n    \"token\": \"string\",\n    \"tokenSource\": \"string\"\n  },\n  \"referringPartner\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0af1f552-a376-422d-9ffe-388c343cd725",
+          "name": "Create User Card",
+          "request": {
+            "name": "Create User Card",
+            "description": {
+              "content": "Call this endpoint to create a card that a specified user enrolled in rewards will use to make purchases and earn rewards.<br/>\n<b>Required scopes:</b> `user:write`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                "users",
+                ":id",
+                "cards"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Referring partner user ID from issuer that specifies user"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"referringPartnerUserId\": \"<string>\",\n  \"cards\": [\n    {\n      \"last4\": \"<string>\",\n      \"bin\": \"<string>\",\n      \"issuer\": \"<string>\",\n      \"network\": \"<string>\",\n      \"status\": \"<string>\",\n      \"token\": \"<string>\",\n      \"tokenSource\": \"<string>\"\n    },\n    {\n      \"last4\": \"<string>\",\n      \"bin\": \"<string>\",\n      \"issuer\": \"<string>\",\n      \"network\": \"<string>\",\n      \"status\": \"<string>\",\n      \"token\": \"<string>\",\n      \"tokenSource\": \"<string>\"\n    }\n  ],\n  \"cardInfo\": {\n    \"last4\": \"<string>\",\n    \"bin\": \"<string>\",\n    \"issuer\": \"<string>\",\n    \"network\": \"<string>\",\n    \"status\": \"<string>\",\n    \"token\": \"<string>\",\n    \"tokenSource\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "082637b7-31f7-44b8-b231-9ae2acabfc88",
+              "name": "Response with status 201",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "users",
+                    ":id",
+                    "cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Referring partner user ID from issuer that specifies user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referringPartnerUserId\": \"<string>\",\n  \"cards\": [\n    {\n      \"last4\": \"string\",\n      \"bin\": \"string\",\n      \"issuer\": \"string\",\n      \"network\": \"VISA\",\n      \"status\": \"DISABLED\",\n      \"token\": \"string\",\n      \"tokenSource\": \"string\"\n    },\n    {\n      \"last4\": \"string\",\n      \"bin\": \"string\",\n      \"issuer\": \"string\",\n      \"network\": \"DISCOVER\",\n      \"status\": \"ENABLED\",\n      \"token\": \"string\",\n      \"tokenSource\": \"string\"\n    }\n  ],\n  \"cardInfo\": {\n    \"last4\": \"string\",\n    \"bin\": \"string\",\n    \"issuer\": \"string\",\n    \"network\": \"DISCOVER\",\n    \"status\": \"DISABLED\",\n    \"token\": \"string\",\n    \"tokenSource\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"referringPartner\": \"string\",\n  \"referringPartnerUserId\": \"string\",\n  \"cards\": [\n    {\n      \"_id\": \"string\",\n      \"last4\": \"string\",\n      \"bin\": \"string\",\n      \"issuer\": \"string\",\n      \"network\": \"AMERICAN EXPRESS\",\n      \"status\": \"ENABLED\",\n      \"token\": \"string\",\n      \"tokenSource\": \"string\"\n    },\n    {\n      \"_id\": \"string\",\n      \"last4\": \"string\",\n      \"bin\": \"string\",\n      \"issuer\": \"string\",\n      \"network\": \"DISCOVER\",\n      \"status\": \"DISABLED\",\n      \"token\": \"string\",\n      \"tokenSource\": \"string\"\n    }\n  ],\n  \"createdDate\": \"1977-10-11T10:45:08.393Z\",\n  \"lastModified\": \"2008-05-12T15:22:48.839Z\",\n  \"__v\": 3618,\n  \"email\": \"string\",\n  \"hashedEmail\": \"string\",\n  \"phoneNumber\": \"string\",\n  \"birthYear\": \"string\",\n  \"userName\": \"string\",\n  \"firstName\": \"string\",\n  \"lastName\": \"string\",\n  \"zipCode\": \"string\",\n  \"externalPartnerUserId\": \"string\",\n  \"enrolledRewards\": [\n    \"AFFILIATE\",\n    \"CARDLINKED\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4e7ddd14-e02c-4eda-95bc-eaeb8c80f7a2",
+              "name": "Error response with status 400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "users",
+                    ":id",
+                    "cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Referring partner user ID from issuer that specifies user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referringPartnerUserId\": \"<string>\",\n  \"cards\": [\n    {\n      \"last4\": \"string\",\n      \"bin\": \"string\",\n      \"issuer\": \"string\",\n      \"network\": \"VISA\",\n      \"status\": \"DISABLED\",\n      \"token\": \"string\",\n      \"tokenSource\": \"string\"\n    },\n    {\n      \"last4\": \"string\",\n      \"bin\": \"string\",\n      \"issuer\": \"string\",\n      \"network\": \"DISCOVER\",\n      \"status\": \"ENABLED\",\n      \"token\": \"string\",\n      \"tokenSource\": \"string\"\n    }\n  ],\n  \"cardInfo\": {\n    \"last4\": \"string\",\n    \"bin\": \"string\",\n    \"issuer\": \"string\",\n    \"network\": \"DISCOVER\",\n    \"status\": \"DISABLED\",\n    \"token\": \"string\",\n    \"tokenSource\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a72ca354-2674-4ea2-8d72-3a26e6d55f11",
+              "name": "Error response with status 401",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "users",
+                    ":id",
+                    "cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Referring partner user ID from issuer that specifies user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referringPartnerUserId\": \"<string>\",\n  \"cards\": [\n    {\n      \"last4\": \"string\",\n      \"bin\": \"string\",\n      \"issuer\": \"string\",\n      \"network\": \"VISA\",\n      \"status\": \"DISABLED\",\n      \"token\": \"string\",\n      \"tokenSource\": \"string\"\n    },\n    {\n      \"last4\": \"string\",\n      \"bin\": \"string\",\n      \"issuer\": \"string\",\n      \"network\": \"DISCOVER\",\n      \"status\": \"ENABLED\",\n      \"token\": \"string\",\n      \"tokenSource\": \"string\"\n    }\n  ],\n  \"cardInfo\": {\n    \"last4\": \"string\",\n    \"bin\": \"string\",\n    \"issuer\": \"string\",\n    \"network\": \"DISCOVER\",\n    \"status\": \"DISABLED\",\n    \"token\": \"string\",\n    \"tokenSource\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d8868922-44f6-4589-98aa-e9b682cb353f",
+              "name": "Error response with status 404",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "users",
+                    ":id",
+                    "cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Referring partner user ID from issuer that specifies user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referringPartnerUserId\": \"<string>\",\n  \"cards\": [\n    {\n      \"last4\": \"string\",\n      \"bin\": \"string\",\n      \"issuer\": \"string\",\n      \"network\": \"VISA\",\n      \"status\": \"DISABLED\",\n      \"token\": \"string\",\n      \"tokenSource\": \"string\"\n    },\n    {\n      \"last4\": \"string\",\n      \"bin\": \"string\",\n      \"issuer\": \"string\",\n      \"network\": \"DISCOVER\",\n      \"status\": \"ENABLED\",\n      \"token\": \"string\",\n      \"tokenSource\": \"string\"\n    }\n  ],\n  \"cardInfo\": {\n    \"last4\": \"string\",\n    \"bin\": \"string\",\n    \"issuer\": \"string\",\n    \"network\": \"DISCOVER\",\n    \"status\": \"DISABLED\",\n    \"token\": \"string\",\n    \"tokenSource\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bf52a3ba-a9cc-4011-b748-68e420cbbb20",
+              "name": "Error response with status 409",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "users",
+                    ":id",
+                    "cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Referring partner user ID from issuer that specifies user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referringPartnerUserId\": \"<string>\",\n  \"cards\": [\n    {\n      \"last4\": \"string\",\n      \"bin\": \"string\",\n      \"issuer\": \"string\",\n      \"network\": \"VISA\",\n      \"status\": \"DISABLED\",\n      \"token\": \"string\",\n      \"tokenSource\": \"string\"\n    },\n    {\n      \"last4\": \"string\",\n      \"bin\": \"string\",\n      \"issuer\": \"string\",\n      \"network\": \"DISCOVER\",\n      \"status\": \"ENABLED\",\n      \"token\": \"string\",\n      \"tokenSource\": \"string\"\n    }\n  ],\n  \"cardInfo\": {\n    \"last4\": \"string\",\n    \"bin\": \"string\",\n    \"issuer\": \"string\",\n    \"network\": \"DISCOVER\",\n    \"status\": \"DISABLED\",\n    \"token\": \"string\",\n    \"tokenSource\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9964dfa8-00e5-43fb-8c90-ce3f4cf554b7",
+              "name": "Error response with status 500",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "users",
+                    ":id",
+                    "cards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Referring partner user ID from issuer that specifies user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referringPartnerUserId\": \"<string>\",\n  \"cards\": [\n    {\n      \"last4\": \"string\",\n      \"bin\": \"string\",\n      \"issuer\": \"string\",\n      \"network\": \"VISA\",\n      \"status\": \"DISABLED\",\n      \"token\": \"string\",\n      \"tokenSource\": \"string\"\n    },\n    {\n      \"last4\": \"string\",\n      \"bin\": \"string\",\n      \"issuer\": \"string\",\n      \"network\": \"DISCOVER\",\n      \"status\": \"ENABLED\",\n      \"token\": \"string\",\n      \"tokenSource\": \"string\"\n    }\n  ],\n  \"cardInfo\": {\n    \"last4\": \"string\",\n    \"bin\": \"string\",\n    \"issuer\": \"string\",\n    \"network\": \"DISCOVER\",\n    \"status\": \"DISABLED\",\n    \"token\": \"string\",\n    \"tokenSource\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0615d078-f008-4258-ba85-8629516c3e48",
+          "name": "Update User",
+          "request": {
+            "name": "Update User",
+            "description": {
+              "content": "Call this endpoint to update the details on a specified user. If you would like to add a card to a specified user, please refer to the [Create User Card endpoint](/legacy/api/users/create-user-card).<br/>\n<b>Required scopes:</b> `user:update`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                "users",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Referring partner user ID from issuer that specifies user"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"referringPartnerUserId\": \"<string>\",\n  \"email\": \"<string>\",\n  \"hashedEmail\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"birthYear\": \"<string>\",\n  \"userName\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"zipCode\": \"<string>\",\n  \"externalPartnerUserId\": \"<string>\",\n  \"enrolledRewards\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d39821b9-93a4-4483-a7ad-26123bc3ce18",
+              "name": "Response with status 200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Referring partner user ID from issuer that specifies user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referringPartnerUserId\": \"<string>\",\n  \"email\": \"<string>\",\n  \"hashedEmail\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"birthYear\": \"<string>\",\n  \"userName\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"zipCode\": \"<string>\",\n  \"externalPartnerUserId\": \"<string>\",\n  \"enrolledRewards\": [\n    \"CARDLINKED\",\n    \"CARDLINKED\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"referringPartnerUserId\": \"string\",\n  \"enrolledRewards\": [\n    \"CARDLINKED\",\n    \"AFFILIATE\"\n  ],\n  \"email\": \"string\",\n  \"hashedEmail\": \"string\",\n  \"phoneNumber\": \"string\",\n  \"birthYear\": \"string\",\n  \"firstName\": \"string\",\n  \"lastName\": \"string\",\n  \"zipCode\": \"string\",\n  \"cards\": [\n    {\n      \"_id\": \"string\",\n      \"last4\": \"string\",\n      \"bin\": \"string\",\n      \"issuer\": \"string\",\n      \"network\": \"DISCOVER\",\n      \"status\": \"ENABLED\",\n      \"token\": \"string\",\n      \"tokenSource\": \"string\"\n    },\n    {\n      \"_id\": \"string\",\n      \"last4\": \"string\",\n      \"bin\": \"string\",\n      \"issuer\": \"string\",\n      \"network\": \"DISCOVER\",\n      \"status\": \"DISABLED\",\n      \"token\": \"string\",\n      \"tokenSource\": \"string\"\n    }\n  ],\n  \"userName\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f1b62273-efc3-4b41-b6c6-7e12caa65b44",
+              "name": "Error response with status 400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Referring partner user ID from issuer that specifies user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referringPartnerUserId\": \"<string>\",\n  \"email\": \"<string>\",\n  \"hashedEmail\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"birthYear\": \"<string>\",\n  \"userName\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"zipCode\": \"<string>\",\n  \"externalPartnerUserId\": \"<string>\",\n  \"enrolledRewards\": [\n    \"CARDLINKED\",\n    \"CARDLINKED\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7f45365d-9cc3-4997-a58c-a37380427f1e",
+              "name": "Error response with status 401",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Referring partner user ID from issuer that specifies user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referringPartnerUserId\": \"<string>\",\n  \"email\": \"<string>\",\n  \"hashedEmail\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"birthYear\": \"<string>\",\n  \"userName\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"zipCode\": \"<string>\",\n  \"externalPartnerUserId\": \"<string>\",\n  \"enrolledRewards\": [\n    \"CARDLINKED\",\n    \"CARDLINKED\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f303ef61-9fa1-46cf-a734-500bbae222a4",
+              "name": "Error response with status 404",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Referring partner user ID from issuer that specifies user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referringPartnerUserId\": \"<string>\",\n  \"email\": \"<string>\",\n  \"hashedEmail\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"birthYear\": \"<string>\",\n  \"userName\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"zipCode\": \"<string>\",\n  \"externalPartnerUserId\": \"<string>\",\n  \"enrolledRewards\": [\n    \"CARDLINKED\",\n    \"CARDLINKED\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4e254ce4-47e3-4840-8c8c-f6136fa6b806",
+              "name": "Error response with status 500",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Referring partner user ID from issuer that specifies user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"referringPartnerUserId\": \"<string>\",\n  \"email\": \"<string>\",\n  \"hashedEmail\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"birthYear\": \"<string>\",\n  \"userName\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"zipCode\": \"<string>\",\n  \"externalPartnerUserId\": \"<string>\",\n  \"enrolledRewards\": [\n    \"CARDLINKED\",\n    \"CARDLINKED\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "115b0f45-5604-4c93-bbab-d99bb83f8739",
+          "name": "Delete User",
+          "request": {
+            "name": "Delete User",
+            "description": {
+              "content": "Call this endpoint to delete a specified enrolled user from the rewards program and Kard's system. Users can be re-enrolled into rewards by calling the [Create User](/legacy/api/users/create-user) endpoint using the same `referringPartnerUserId` from before. Deleting a user will remove all the user fields for that specific user from Kard’s system.<br/>\n<b>Required scopes:</b> `user:delete`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "users",
+                "users",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Referring partner user ID from issuer that specifies user"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4db9871c-3bb0-4d44-bc6c-81da5bc83291",
+              "name": "Response with status 200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Referring partner user ID from issuer that specifies user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1e20a540-7ed2-4123-8acc-544c46882942",
+              "name": "Error response with status 400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Referring partner user ID from issuer that specifies user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d0f45035-1eb2-47b2-a6ba-b4321b7655b1",
+              "name": "Error response with status 401",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Referring partner user ID from issuer that specifies user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "71e5bb22-51cf-4da1-b38c-30aa1a672e80",
+              "name": "Error response with status 404",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Referring partner user ID from issuer that specifies user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3edf0b62-d5cd-43bc-b837-6a8d6b529bf3",
+              "name": "Error response with status 500",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "users",
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Referring partner user ID from issuer that specifies user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://rewards-api.getkard.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ac1ffa1f-b69b-4467-ae72-57e88dccf588",
+    "name": "API Reference attributions users API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

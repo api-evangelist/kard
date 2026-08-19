@@ -1,0 +1,1396 @@
+{
+  "item": [
+    {
+      "id": "5f829dfc-fd58-4e8c-ae88-5205fca1d549",
+      "name": "users > Rewards",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "93f33e02-4666-480a-800b-1526961d0638",
+          "name": "Get Offers By User",
+          "request": {
+            "name": "Get Offers By User",
+            "description": {
+              "content": "Retrieve national brand offers that a specified user is eligible for. Call this endpoint to build out your\n[targeted offers UX experience](/2024-10-01/api/getting-started#b-discover-a-lapsed-customer-clo). Local offers details\ncan be found by calling the [Get Eligible Locations](/2024-10-01/api/rewards/locations).<br/>\n<b>Required scopes:</b> `rewards:read`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "issuers",
+                ":organizationId",
+                "users",
+                ":userId",
+                "offers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page[size]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page[after]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page[before]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[search]",
+                  "value": "<string>",
+                  "description": "Case-insensitive substring search. Returns offers whose offer name or category name contains the search string."
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[purchaseChannel]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[purchaseChannel]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[category]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[isTargeted]",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "value",
+                  "value": "reference #/components/schemas/type_users/rewards:OfferSortOptions not found in the OpenAPI spec",
+                  "description": "If provided, response will be sorted by the specified fields"
+                },
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "<string>",
+                  "description": "CSV list of included resources in the response (e.g \"categories\"). Allowed value is `categories`."
+                },
+                {
+                  "disabled": false,
+                  "key": "value",
+                  "value": "reference #/components/schemas/type_users/rewards:ComponentType not found in the OpenAPI spec",
+                  "description": "UI component types to include in the response."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d57323c5-a73b-4f61-81a5-19a57c680271",
+              "name": "Response with status 200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "users",
+                    ":userId",
+                    "offers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page[size]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page[after]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[before]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[search]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[purchaseChannel]",
+                      "value": "INSTORE"
+                    },
+                    {
+                      "key": "filter[purchaseChannel]",
+                      "value": "ONLINE"
+                    },
+                    {
+                      "key": "filter[category]",
+                      "value": "Miscellaneous"
+                    },
+                    {
+                      "key": "filter[isTargeted]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/type_users/rewards:OfferSortOptions not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/type_users/rewards:ComponentType not found in the OpenAPI spec"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "15aeb755-498a-4b84-a2cd-fb301786d2f7",
+              "name": "Error response with status 400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "users",
+                    ":userId",
+                    "offers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page[size]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page[after]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[before]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[search]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[purchaseChannel]",
+                      "value": "INSTORE"
+                    },
+                    {
+                      "key": "filter[purchaseChannel]",
+                      "value": "ONLINE"
+                    },
+                    {
+                      "key": "filter[category]",
+                      "value": "Miscellaneous"
+                    },
+                    {
+                      "key": "filter[isTargeted]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/type_users/rewards:OfferSortOptions not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/type_users/rewards:ComponentType not found in the OpenAPI spec"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4577ff50-250a-4548-976f-fdb9c555909c",
+              "name": "Error response with status 401",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "users",
+                    ":userId",
+                    "offers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page[size]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page[after]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[before]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[search]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[purchaseChannel]",
+                      "value": "INSTORE"
+                    },
+                    {
+                      "key": "filter[purchaseChannel]",
+                      "value": "ONLINE"
+                    },
+                    {
+                      "key": "filter[category]",
+                      "value": "Miscellaneous"
+                    },
+                    {
+                      "key": "filter[isTargeted]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/type_users/rewards:OfferSortOptions not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/type_users/rewards:ComponentType not found in the OpenAPI spec"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bcbdc7d4-b554-4da0-809e-c9ba13999267",
+              "name": "Error response with status 404",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "users",
+                    ":userId",
+                    "offers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page[size]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page[after]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[before]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[search]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[purchaseChannel]",
+                      "value": "INSTORE"
+                    },
+                    {
+                      "key": "filter[purchaseChannel]",
+                      "value": "ONLINE"
+                    },
+                    {
+                      "key": "filter[category]",
+                      "value": "Miscellaneous"
+                    },
+                    {
+                      "key": "filter[isTargeted]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/type_users/rewards:OfferSortOptions not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/type_users/rewards:ComponentType not found in the OpenAPI spec"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "75f9d426-59a6-48b9-9a8c-1535b80437c1",
+              "name": "Error response with status 500",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "users",
+                    ":userId",
+                    "offers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page[size]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page[after]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[before]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[search]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[purchaseChannel]",
+                      "value": "INSTORE"
+                    },
+                    {
+                      "key": "filter[purchaseChannel]",
+                      "value": "ONLINE"
+                    },
+                    {
+                      "key": "filter[category]",
+                      "value": "Miscellaneous"
+                    },
+                    {
+                      "key": "filter[isTargeted]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/type_users/rewards:OfferSortOptions not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/type_users/rewards:ComponentType not found in the OpenAPI spec"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "beb17637-f266-4cee-ba7b-0be9cf2e5c65",
+          "name": "Get Locations By User",
+          "request": {
+            "name": "Get Locations By User",
+            "description": {
+              "content": "Retrieve national and local geographic locations that a specified user has eligible in-store offers at. Use this endpoint to build\nout your [map-specific UX experiences](/2024-10-01/api/getting-started#c-discover-clos-near-you-map-view). Please note\nthat Longitude and Latitude fields are prioritized over State, City and Zipcode and are the recommended search\npattern.<br/>\n<br/>\n<b>Required scopes:</b> `rewards:read`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "issuers",
+                ":organizationId",
+                "users",
+                ":userId",
+                "locations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page[size]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page[after]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page[before]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[name]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[city]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[zipCode]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[state]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[category]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[longitude]",
+                  "value": "<double>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[latitude]",
+                  "value": "<double>"
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[radius]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "value",
+                  "value": "reference #/components/schemas/type_users/rewards:LocationSortOptions not found in the OpenAPI spec",
+                  "description": "If provided, response will be sorted by the specified fields"
+                },
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "<string>",
+                  "description": "CSV list of included resources in the response (e.g \"offers,categories\"). Allowed values are `offers` and `categories`."
+                },
+                {
+                  "disabled": false,
+                  "key": "value",
+                  "value": "reference #/components/schemas/type_users/rewards:ComponentType not found in the OpenAPI spec",
+                  "description": "UI component types to include in included offers."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "de502d37-fd7a-4454-8f51-7ea78f0e0faf",
+              "name": "Response with status 200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "users",
+                    ":userId",
+                    "locations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page[size]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page[after]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[before]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[name]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[city]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[zipCode]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[state]",
+                      "value": "CA"
+                    },
+                    {
+                      "key": "filter[category]",
+                      "value": "Miscellaneous"
+                    },
+                    {
+                      "key": "filter[longitude]",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "filter[latitude]",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "filter[radius]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/type_users/rewards:LocationSortOptions not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/type_users/rewards:ComponentType not found in the OpenAPI spec"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6d2ce154-b46c-4ccb-ba8a-8a09a48bcd81",
+              "name": "Error response with status 400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "users",
+                    ":userId",
+                    "locations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page[size]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page[after]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[before]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[name]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[city]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[zipCode]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[state]",
+                      "value": "CA"
+                    },
+                    {
+                      "key": "filter[category]",
+                      "value": "Miscellaneous"
+                    },
+                    {
+                      "key": "filter[longitude]",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "filter[latitude]",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "filter[radius]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/type_users/rewards:LocationSortOptions not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/type_users/rewards:ComponentType not found in the OpenAPI spec"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "82310974-d564-4d40-a0d6-3655fd9df7ed",
+              "name": "Error response with status 401",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "users",
+                    ":userId",
+                    "locations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page[size]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page[after]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[before]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[name]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[city]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[zipCode]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[state]",
+                      "value": "CA"
+                    },
+                    {
+                      "key": "filter[category]",
+                      "value": "Miscellaneous"
+                    },
+                    {
+                      "key": "filter[longitude]",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "filter[latitude]",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "filter[radius]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/type_users/rewards:LocationSortOptions not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/type_users/rewards:ComponentType not found in the OpenAPI spec"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3ce1cbe3-394d-4cfc-a4e2-965f6ec04900",
+              "name": "Error response with status 404",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "users",
+                    ":userId",
+                    "locations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page[size]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page[after]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[before]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[name]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[city]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[zipCode]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[state]",
+                      "value": "CA"
+                    },
+                    {
+                      "key": "filter[category]",
+                      "value": "Miscellaneous"
+                    },
+                    {
+                      "key": "filter[longitude]",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "filter[latitude]",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "filter[radius]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/type_users/rewards:LocationSortOptions not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/type_users/rewards:ComponentType not found in the OpenAPI spec"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a7876b4e-882f-4779-b043-f9456fbed045",
+              "name": "Error response with status 500",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "users",
+                    ":userId",
+                    "locations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page[size]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page[after]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[before]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[name]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[city]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[zipCode]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[state]",
+                      "value": "CA"
+                    },
+                    {
+                      "key": "filter[category]",
+                      "value": "Miscellaneous"
+                    },
+                    {
+                      "key": "filter[longitude]",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "filter[latitude]",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "filter[radius]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/type_users/rewards:LocationSortOptions not found in the OpenAPI spec"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "value",
+                      "value": "reference #/components/schemas/type_users/rewards:ComponentType not found in the OpenAPI spec"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://rewards-api.getkard.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ac9a7cae-3d7e-414f-9767-3d371747b809",
+    "name": "API Reference attributions users > Rewards API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

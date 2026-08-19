@@ -1,0 +1,4252 @@
+{
+  "item": [
+    {
+      "id": "b142fc04-0cb8-4279-873b-cb411f6d65a6",
+      "name": "rewards",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "10b296c8-7e0c-4927-99fd-b6421c77dbb5",
+          "name": "Get Eligible Merchants",
+          "request": {
+            "name": "Get Eligible Merchants",
+            "description": {
+              "content": "Retrieve national merchants data that a specified user has eligible national offers at. Call this endpoint to build out your [targeted offers UX experience](https://github.com/kard-financial/kard-postman?tab=readme-ov-file#b-targeted-offers). Local merchants and offers details can be found by calling the [Get Eligible Locations](/legacy/api/rewards/locations/get-locations-by-user) endpoint with the `includeLocal` query parameter.<br/>\n<b>Required scopes:</b> `rewards:read`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rewards",
+                "merchant",
+                "user",
+                ":referringPartnerUserId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Page number [>= 0], (default = 0)"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Maximum number of merchants to be returned [1 - 200], (default = 200)"
+                },
+                {
+                  "disabled": false,
+                  "key": "category",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "referringPartnerUserId",
+                  "description": "(Required) Referring partner user ID from issuer that specifies user"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f663868d-a381-4fdd-88d9-090bfe4959b2",
+              "name": "Response with status 200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rewards",
+                    "merchant",
+                    "user",
+                    ":referringPartnerUserId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "category",
+                      "value": "Sports "
+                    },
+                    {
+                      "key": " Outdoors",
+                      "value": null
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "referringPartnerUserId",
+                      "description": "(Required) Referring partner user ID from issuer that specifies user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"_id\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"websiteURL\": \"string\",\n    \"category\": \"Convenience\",\n    \"acceptedCards\": [\n      \"VISA\",\n      \"AMERICAN EXPRESS\"\n    ],\n    \"source\": \"NATIONAL\",\n    \"createdDate\": \"1968-07-04T17:18:14.533Z\",\n    \"lastModified\": \"2005-01-03T08:03:02.424Z\",\n    \"offers\": [\n      {\n        \"_id\": \"string\",\n        \"terms\": \"string\",\n        \"redeemableOnce\": true,\n        \"name\": \"string\",\n        \"offerType\": \"INSTORE\",\n        \"commissionType\": \"FLAT\",\n        \"startDate\": \"2005-09-29T23:36:34.236Z\",\n        \"expirationDate\": \"1978-10-24T19:17:12.480Z\",\n        \"isTargeted\": false,\n        \"createdDate\": \"1997-11-11T11:40:48.761Z\",\n        \"lastModified\": \"1984-01-07T01:36:41.653Z\",\n        \"totalCommission\": 9960.111593846665,\n        \"isLocationSpecific\": false,\n        \"merchantId\": \"string\",\n        \"optInRequired\": false,\n        \"issuersCommission\": 2495.8969261538455,\n        \"usersCommission\": 6610.815126061338,\n        \"minTransactionAmount\": 6067,\n        \"maxTransactionAmount\": 4723,\n        \"minRewardAmount\": 5503,\n        \"maxRewardAmount\": 2486,\n        \"merchantLocationIds\": [\n          \"string\",\n          \"string\"\n        ],\n        \"imgUrl\": \"string\",\n        \"bannerImgUrl\": \"string\"\n      },\n      {\n        \"_id\": \"string\",\n        \"terms\": \"string\",\n        \"redeemableOnce\": false,\n        \"name\": \"string\",\n        \"offerType\": \"ONLINE\",\n        \"commissionType\": \"FLAT\",\n        \"startDate\": \"2002-12-01T16:43:30.391Z\",\n        \"expirationDate\": \"1957-03-17T19:17:28.672Z\",\n        \"isTargeted\": false,\n        \"createdDate\": \"2015-01-28T08:50:34.995Z\",\n        \"lastModified\": \"1984-05-12T20:06:24.515Z\",\n        \"totalCommission\": 8336.406353736837,\n        \"isLocationSpecific\": true,\n        \"merchantId\": \"string\",\n        \"optInRequired\": false,\n        \"issuersCommission\": 9693.371801740506,\n        \"usersCommission\": 8459.974897777816,\n        \"minTransactionAmount\": 4366,\n        \"maxTransactionAmount\": 1366,\n        \"minRewardAmount\": 573,\n        \"maxRewardAmount\": 168,\n        \"merchantLocationIds\": [\n          \"string\",\n          \"string\"\n        ],\n        \"imgUrl\": \"string\",\n        \"bannerImgUrl\": \"string\"\n      }\n    ],\n    \"imgUrl\": \"string\",\n    \"bannerImgUrl\": \"string\"\n  },\n  {\n    \"_id\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"websiteURL\": \"string\",\n    \"category\": \"Home & Garden\",\n    \"acceptedCards\": [\n      \"MASTERCARD\",\n      \"VISA\"\n    ],\n    \"source\": \"LOCAL\",\n    \"createdDate\": \"1974-03-11T19:10:48.703Z\",\n    \"lastModified\": \"1963-06-04T11:11:50.486Z\",\n    \"offers\": [\n      {\n        \"_id\": \"string\",\n        \"terms\": \"string\",\n        \"redeemableOnce\": true,\n        \"name\": \"string\",\n        \"offerType\": \"INSTORE\",\n        \"commissionType\": \"FLAT\",\n        \"startDate\": \"2024-02-24T09:53:43.584Z\",\n        \"expirationDate\": \"2018-08-19T08:29:08.900Z\",\n        \"isTargeted\": true,\n        \"createdDate\": \"1951-08-07T21:33:54.532Z\",\n        \"lastModified\": \"2003-02-23T04:15:05.631Z\",\n        \"totalCommission\": 9.038630650683999,\n        \"isLocationSpecific\": true,\n        \"merchantId\": \"string\",\n        \"optInRequired\": false,\n        \"issuersCommission\": 3339.818304468233,\n        \"usersCommission\": 1750.2312172887769,\n        \"minTransactionAmount\": 5266,\n        \"maxTransactionAmount\": 1087,\n        \"minRewardAmount\": 3263,\n        \"maxRewardAmount\": 9938,\n        \"merchantLocationIds\": [\n          \"string\",\n          \"string\"\n        ],\n        \"imgUrl\": \"string\",\n        \"bannerImgUrl\": \"string\"\n      },\n      {\n        \"_id\": \"string\",\n        \"terms\": \"string\",\n        \"redeemableOnce\": false,\n        \"name\": \"string\",\n        \"offerType\": \"INSTORE\",\n        \"commissionType\": \"PERCENT\",\n        \"startDate\": \"1981-03-18T01:58:26.996Z\",\n        \"expirationDate\": \"1971-12-22T00:35:47.084Z\",\n        \"isTargeted\": true,\n        \"createdDate\": \"2009-04-12T12:40:20.359Z\",\n        \"lastModified\": \"1978-02-06T05:07:53.781Z\",\n        \"totalCommission\": 593.6034155520331,\n        \"isLocationSpecific\": true,\n        \"merchantId\": \"string\",\n        \"optInRequired\": false,\n        \"issuersCommission\": 5750.02311263622,\n        \"usersCommission\": 3429.461128984793,\n        \"minTransactionAmount\": 3397,\n        \"maxTransactionAmount\": 6147,\n        \"minRewardAmount\": 6639,\n        \"maxRewardAmount\": 3432,\n        \"merchantLocationIds\": [\n          \"string\",\n          \"string\"\n        ],\n        \"imgUrl\": \"string\",\n        \"bannerImgUrl\": \"string\"\n      }\n    ],\n    \"imgUrl\": \"string\",\n    \"bannerImgUrl\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1214d1f2-76bf-44a6-b9e4-4f9da1c862ea",
+              "name": "Error response with status 400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rewards",
+                    "merchant",
+                    "user",
+                    ":referringPartnerUserId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "category",
+                      "value": "Sports "
+                    },
+                    {
+                      "key": " Outdoors",
+                      "value": null
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "referringPartnerUserId",
+                      "description": "(Required) Referring partner user ID from issuer that specifies user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "983666d0-fbcd-4211-a0e1-bedd09d42898",
+              "name": "Error response with status 401",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rewards",
+                    "merchant",
+                    "user",
+                    ":referringPartnerUserId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "category",
+                      "value": "Sports "
+                    },
+                    {
+                      "key": " Outdoors",
+                      "value": null
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "referringPartnerUserId",
+                      "description": "(Required) Referring partner user ID from issuer that specifies user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "50a0eb82-4397-422c-9f37-99dc8d26a0db",
+              "name": "Error response with status 404",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rewards",
+                    "merchant",
+                    "user",
+                    ":referringPartnerUserId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "category",
+                      "value": "Sports "
+                    },
+                    {
+                      "key": " Outdoors",
+                      "value": null
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "referringPartnerUserId",
+                      "description": "(Required) Referring partner user ID from issuer that specifies user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3fd0c111-4c7d-48d1-bb19-dd1e504fa675",
+              "name": "Error response with status 500",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rewards",
+                    "merchant",
+                    "user",
+                    ":referringPartnerUserId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "category",
+                      "value": "Sports "
+                    },
+                    {
+                      "key": " Outdoors",
+                      "value": null
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "referringPartnerUserId",
+                      "description": "(Required) Referring partner user ID from issuer that specifies user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "73aa447a-f059-47da-9e41-d8bed6b79354",
+          "name": "Get Merchant by ID",
+          "request": {
+            "name": "Get Merchant by ID",
+            "description": {
+              "content": "Retrieve merchant data for a specific Kard merchant ID.<br/>\n<b>Required scopes:</b> `rewards:read`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rewards",
+                "merchant",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The Kard merchant ID to query"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "68fa0828-9ecb-4fc5-b027-0bf3d1a8422a",
+              "name": "Response with status 200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rewards",
+                    "merchant",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The Kard merchant ID to query"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"websiteURL\": \"string\",\n  \"category\": \"Supplies & Services\",\n  \"acceptedCards\": [\n    \"DISCOVER\",\n    \"AMERICAN EXPRESS\"\n  ],\n  \"source\": \"NATIONAL\",\n  \"createdDate\": \"1976-08-22T18:11:49.472Z\",\n  \"lastModified\": \"2001-06-30T15:48:29.148Z\",\n  \"offers\": [\n    {\n      \"_id\": \"string\",\n      \"terms\": \"string\",\n      \"redeemableOnce\": false,\n      \"name\": \"string\",\n      \"offerType\": \"ONLINE\",\n      \"commissionType\": \"PERCENT\",\n      \"startDate\": \"2012-02-04T10:52:26.523Z\",\n      \"expirationDate\": \"1977-10-12T17:34:05.288Z\",\n      \"isTargeted\": true,\n      \"createdDate\": \"2002-03-17T02:57:51.973Z\",\n      \"lastModified\": \"1978-06-11T23:27:34.567Z\",\n      \"totalCommission\": 5098.199154216309,\n      \"isLocationSpecific\": false,\n      \"merchantId\": \"string\",\n      \"optInRequired\": true,\n      \"status\": \"string\",\n      \"issuersCommission\": 5469.579413799738,\n      \"usersCommission\": 7180.181879367738,\n      \"minTransactionAmount\": 9909,\n      \"maxTransactionAmount\": 8707,\n      \"minRewardAmount\": 3576,\n      \"maxRewardAmount\": 4372,\n      \"merchantLocationIds\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"_id\": \"string\",\n      \"terms\": \"string\",\n      \"redeemableOnce\": true,\n      \"name\": \"string\",\n      \"offerType\": \"ONLINE\",\n      \"commissionType\": \"FLAT\",\n      \"startDate\": \"1957-07-22T10:16:07.185Z\",\n      \"expirationDate\": \"2006-06-15T20:57:59.208Z\",\n      \"isTargeted\": true,\n      \"createdDate\": \"1961-05-11T14:34:17.300Z\",\n      \"lastModified\": \"1991-09-15T07:06:56.904Z\",\n      \"totalCommission\": 8065.989263315572,\n      \"isLocationSpecific\": true,\n      \"merchantId\": \"string\",\n      \"optInRequired\": true,\n      \"status\": \"string\",\n      \"issuersCommission\": 7529.984369120362,\n      \"usersCommission\": 7938.393090862435,\n      \"minTransactionAmount\": 8589,\n      \"maxTransactionAmount\": 6931,\n      \"minRewardAmount\": 9123,\n      \"maxRewardAmount\": 2807,\n      \"merchantLocationIds\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"imgUrl\": \"string\",\n  \"bannerImgUrl\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f7326f23-7c43-4518-9774-0db0bdf89f2c",
+              "name": "Error response with status 400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rewards",
+                    "merchant",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The Kard merchant ID to query"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f376ce9c-8de3-4e19-a39d-5cdb4ab5469b",
+              "name": "Error response with status 401",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rewards",
+                    "merchant",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The Kard merchant ID to query"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2bd10560-b803-4f0a-ae54-387029293243",
+              "name": "Error response with status 404",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rewards",
+                    "merchant",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The Kard merchant ID to query"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "237772fd-ea06-4805-bafb-ec2de8f4641d",
+              "name": "Error response with status 500",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rewards",
+                    "merchant",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The Kard merchant ID to query"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "712291e9-4fe3-434f-9a18-d100790a136e",
+          "name": "Get Merchants",
+          "request": {
+            "name": "Get Merchants",
+            "description": {
+              "content": "Retrieve ALL national and local merchant data regardless of whether a user is eligible to see them. This endpoint is a legacy endpoint and will no longer be maintained soon. Instead, use [Get Eligible Merchants](/legacy/api/rewards/merchants/get-merchants-by-user) to retrieve national merchant data and build your [targeted offers UX experience](https://github.com/kard-financial/kard-postman?tab=readme-ov-file#b-targeted-offers). Local merchants and offers details can be found by calling the [Get Eligible Locations](/legacy/api/rewards/locations/get-locations-by-user) endpoint with the `includeLocal` query parameter.<br/>\n<b>Required scopes:</b> `rewards:read`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rewards",
+                "merchant"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Page number [>= 0], (default = 0)"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Maximum number of merchants [1 - 200], (default = 200)"
+                },
+                {
+                  "disabled": false,
+                  "key": "source",
+                  "value": "<string>",
+                  "description": "Merchant source"
+                },
+                {
+                  "disabled": false,
+                  "key": "category",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a532eb4e-bf40-4c48-afc0-b5a318c166de",
+              "name": "Response with status 200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rewards",
+                    "merchant"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "NATIONAL"
+                    },
+                    {
+                      "key": "category",
+                      "value": "Sports "
+                    },
+                    {
+                      "key": " Outdoors",
+                      "value": null
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"_id\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"websiteURL\": \"string\",\n    \"category\": \"Convenience\",\n    \"acceptedCards\": [\n      \"MASTERCARD\",\n      \"MASTERCARD\"\n    ],\n    \"source\": \"NATIONAL\",\n    \"createdDate\": \"1949-03-30T03:45:22.656Z\",\n    \"lastModified\": \"2008-11-17T13:49:56.252Z\",\n    \"offers\": [\n      {\n        \"_id\": \"string\",\n        \"terms\": \"string\",\n        \"redeemableOnce\": false,\n        \"name\": \"string\",\n        \"offerType\": \"INSTORE\",\n        \"commissionType\": \"PERCENT\",\n        \"startDate\": \"1960-01-17T11:39:46.260Z\",\n        \"expirationDate\": \"1958-02-15T13:42:13.101Z\",\n        \"isTargeted\": false,\n        \"createdDate\": \"1961-03-23T21:00:58.091Z\",\n        \"lastModified\": \"1985-11-14T01:56:13.706Z\",\n        \"totalCommission\": 3142.896343815478,\n        \"isLocationSpecific\": true,\n        \"merchantId\": \"string\",\n        \"optInRequired\": true,\n        \"status\": \"string\",\n        \"issuersCommission\": 5560.846891565664,\n        \"usersCommission\": 8944.568756602968,\n        \"minTransactionAmount\": 1212,\n        \"maxTransactionAmount\": 605,\n        \"minRewardAmount\": 1358,\n        \"maxRewardAmount\": 5909,\n        \"merchantLocationIds\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      {\n        \"_id\": \"string\",\n        \"terms\": \"string\",\n        \"redeemableOnce\": false,\n        \"name\": \"string\",\n        \"offerType\": \"INSTORE\",\n        \"commissionType\": \"FLAT\",\n        \"startDate\": \"1959-12-25T09:59:50.349Z\",\n        \"expirationDate\": \"1951-01-06T06:43:17.386Z\",\n        \"isTargeted\": false,\n        \"createdDate\": \"2003-07-25T09:54:05.186Z\",\n        \"lastModified\": \"1960-10-27T18:27:57.614Z\",\n        \"totalCommission\": 9471.241162962368,\n        \"isLocationSpecific\": true,\n        \"merchantId\": \"string\",\n        \"optInRequired\": false,\n        \"status\": \"string\",\n        \"issuersCommission\": 9546.01718608056,\n        \"usersCommission\": 2361.032748594718,\n        \"minTransactionAmount\": 9466,\n        \"maxTransactionAmount\": 7761,\n        \"minRewardAmount\": 9506,\n        \"maxRewardAmount\": 4175,\n        \"merchantLocationIds\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    ],\n    \"imgUrl\": \"string\",\n    \"bannerImgUrl\": \"string\"\n  },\n  {\n    \"_id\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"websiteURL\": \"string\",\n    \"category\": \"Health & Beauty\",\n    \"acceptedCards\": [\n      \"AMERICAN EXPRESS\",\n      \"AMERICAN EXPRESS\"\n    ],\n    \"source\": \"NATIONAL\",\n    \"createdDate\": \"1948-08-02T08:34:53.807Z\",\n    \"lastModified\": \"1982-09-17T13:04:01.146Z\",\n    \"offers\": [\n      {\n        \"_id\": \"string\",\n        \"terms\": \"string\",\n        \"redeemableOnce\": false,\n        \"name\": \"string\",\n        \"offerType\": \"ONLINE\",\n        \"commissionType\": \"FLAT\",\n        \"startDate\": \"1951-12-28T12:44:59.458Z\",\n        \"expirationDate\": \"1963-08-01T01:19:58.379Z\",\n        \"isTargeted\": true,\n        \"createdDate\": \"1994-02-20T06:31:22.337Z\",\n        \"lastModified\": \"2024-11-02T13:45:48.891Z\",\n        \"totalCommission\": 112.03442313594935,\n        \"isLocationSpecific\": true,\n        \"merchantId\": \"string\",\n        \"optInRequired\": false,\n        \"status\": \"string\",\n        \"issuersCommission\": 4829.032399141696,\n        \"usersCommission\": 201.60251355169078,\n        \"minTransactionAmount\": 8908,\n        \"maxTransactionAmount\": 7106,\n        \"minRewardAmount\": 1371,\n        \"maxRewardAmount\": 9455,\n        \"merchantLocationIds\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      {\n        \"_id\": \"string\",\n        \"terms\": \"string\",\n        \"redeemableOnce\": true,\n        \"name\": \"string\",\n        \"offerType\": \"INSTORE\",\n        \"commissionType\": \"PERCENT\",\n        \"startDate\": \"1959-03-31T21:27:45.364Z\",\n        \"expirationDate\": \"2023-10-22T23:29:20.978Z\",\n        \"isTargeted\": true,\n        \"createdDate\": \"2019-12-16T14:00:00.691Z\",\n        \"lastModified\": \"1961-07-10T05:11:03.254Z\",\n        \"totalCommission\": 2221.9365219998213,\n        \"isLocationSpecific\": true,\n        \"merchantId\": \"string\",\n        \"optInRequired\": true,\n        \"status\": \"string\",\n        \"issuersCommission\": 1711.1532102162219,\n        \"usersCommission\": 283.8895363771332,\n        \"minTransactionAmount\": 3770,\n        \"maxTransactionAmount\": 4455,\n        \"minRewardAmount\": 4791,\n        \"maxRewardAmount\": 7913,\n        \"merchantLocationIds\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    ],\n    \"imgUrl\": \"string\",\n    \"bannerImgUrl\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "16067fe3-3bf9-4b61-913f-5e4191824477",
+              "name": "Error response with status 400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rewards",
+                    "merchant"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "NATIONAL"
+                    },
+                    {
+                      "key": "category",
+                      "value": "Sports "
+                    },
+                    {
+                      "key": " Outdoors",
+                      "value": null
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a048633d-cf95-47e0-a1f5-5de416b63490",
+              "name": "Error response with status 401",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rewards",
+                    "merchant"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "NATIONAL"
+                    },
+                    {
+                      "key": "category",
+                      "value": "Sports "
+                    },
+                    {
+                      "key": " Outdoors",
+                      "value": null
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "56596a12-97d8-4a83-aaa2-aadcbf30d260",
+              "name": "Error response with status 500",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rewards",
+                    "merchant"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "NATIONAL"
+                    },
+                    {
+                      "key": "category",
+                      "value": "Sports "
+                    },
+                    {
+                      "key": " Outdoors",
+                      "value": null
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e6f1ad06-da88-40f9-bb71-c8e47b0f345b",
+          "name": "Get Eligible Offers",
+          "request": {
+            "name": "Get Eligible Offers",
+            "description": {
+              "content": "Retrieve national offers data that a specified user is eligible for. Call this endpoint to build out your [targeted offers UX experience](https://github.com/kard-financial/kard-postman?tab=readme-ov-file#b-targeted-offers). Local merchants and offers details can be found by calling the [Get Eligible Locations](/legacy/api/rewards/locations/get-locations-by-user) endpoint with the `includeLocal` query parameter.<br/>\n<b>Required scopes:</b> `rewards:read`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rewards",
+                "merchant",
+                "offers",
+                "user",
+                ":referringPartnerUserId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Page number [>= 0], (default = 0)"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Maximum number of offers to be returned [1 - 200], (default = 200)"
+                },
+                {
+                  "disabled": false,
+                  "key": "merchantId",
+                  "value": "<string>",
+                  "description": "Merchant ID in Kard's system"
+                },
+                {
+                  "disabled": false,
+                  "key": "offerType",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "category",
+                  "value": "<string>",
+                  "description": "Category of merchant associated with offer. Please use URL Encode for non single word categories. (Food & Beverage should be Food%20%26%20Beverage)"
+                },
+                {
+                  "disabled": false,
+                  "key": "isTargeted",
+                  "value": "<boolean>",
+                  "description": "True returns targeted offers, false returns targeted and non-targeted offers"
+                },
+                {
+                  "disabled": false,
+                  "key": "startDateSort",
+                  "value": "<string>",
+                  "description": "Sort offer start dates chronologically (1 for ascending, -1 for descending)"
+                },
+                {
+                  "disabled": false,
+                  "key": "expirationDateSort",
+                  "value": "<string>",
+                  "description": "Sort offer expiration dates chronologically (1 for ascending, -1 for descending)"
+                },
+                {
+                  "disabled": false,
+                  "key": "merchantNameSort",
+                  "value": "<string>",
+                  "description": "Sort merchant names (1 for A-Z, -1 for Z-A)"
+                },
+                {
+                  "disabled": false,
+                  "key": "supportedComponents",
+                  "value": "<string>",
+                  "description": "UI component types to include in the response."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "referringPartnerUserId",
+                  "description": "(Required) Referring partner user ID from issuer that specifies user"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "22e24e1c-60e3-42eb-95c9-ca42ac635a0c",
+              "name": "Response with status 200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rewards",
+                    "merchant",
+                    "offers",
+                    "user",
+                    ":referringPartnerUserId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "merchantId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offerType",
+                      "value": "ONLINE"
+                    },
+                    {
+                      "key": "category",
+                      "value": "Sports "
+                    },
+                    {
+                      "key": " Outdoors",
+                      "value": null
+                    },
+                    {
+                      "key": "isTargeted",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "startDateSort",
+                      "value": "-1"
+                    },
+                    {
+                      "key": "expirationDateSort",
+                      "value": "-1"
+                    },
+                    {
+                      "key": "merchantNameSort",
+                      "value": "-1"
+                    },
+                    {
+                      "key": "supportedComponents",
+                      "value": "cta"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "referringPartnerUserId",
+                      "description": "(Required) Referring partner user ID from issuer that specifies user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"_id\": \"string\",\n    \"terms\": \"string\",\n    \"redeemableOnce\": false,\n    \"name\": \"string\",\n    \"offerType\": \"INSTORE\",\n    \"commissionType\": \"PERCENT\",\n    \"startDate\": \"1953-08-14T00:35:10.043Z\",\n    \"expirationDate\": \"1983-04-19T04:32:10.629Z\",\n    \"isTargeted\": false,\n    \"createdDate\": \"2004-04-25T06:17:44.242Z\",\n    \"lastModified\": \"2018-11-03T04:45:42.306Z\",\n    \"totalCommission\": 6567.619017132927,\n    \"isLocationSpecific\": false,\n    \"source\": \"NATIONAL\",\n    \"category\": \"Travel\",\n    \"merchant\": {\n      \"_id\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"type\": \"CARDLINKED\",\n      \"websiteURL\": \"string\",\n      \"category\": \"Sports & Outdoors\",\n      \"acceptedCards\": [\n        \"VISA\",\n        \"MASTERCARD\"\n      ],\n      \"imgUrl\": \"string\",\n      \"bannerImgUrl\": \"string\"\n    },\n    \"issuersCommission\": 2191.8040064673983,\n    \"usersCommission\": 3303.750314324534,\n    \"minTransactionAmount\": 2863,\n    \"maxTransactionAmount\": 3404,\n    \"minRewardAmount\": 1358,\n    \"maxRewardAmount\": 8095,\n    \"imgUrl\": \"string\",\n    \"bannerImgUrl\": \"string\"\n  },\n  {\n    \"_id\": \"string\",\n    \"terms\": \"string\",\n    \"redeemableOnce\": true,\n    \"name\": \"string\",\n    \"offerType\": \"ONLINE\",\n    \"commissionType\": \"PERCENT\",\n    \"startDate\": \"1959-12-04T16:47:45.414Z\",\n    \"expirationDate\": \"2018-08-14T04:51:43.612Z\",\n    \"isTargeted\": true,\n    \"createdDate\": \"1977-12-02T00:53:40.213Z\",\n    \"lastModified\": \"2017-05-23T07:57:53.064Z\",\n    \"totalCommission\": 5655.223451883704,\n    \"isLocationSpecific\": false,\n    \"source\": \"NATIONAL\",\n    \"category\": \"Sports & Outdoors\",\n    \"merchant\": {\n      \"_id\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"type\": \"AFFILIATE\",\n      \"websiteURL\": \"string\",\n      \"category\": \"Gas\",\n      \"acceptedCards\": [\n        \"VISA\",\n        \"AMERICAN EXPRESS\"\n      ],\n      \"imgUrl\": \"string\",\n      \"bannerImgUrl\": \"string\"\n    },\n    \"issuersCommission\": 3361.3620246704413,\n    \"usersCommission\": 6233.078807487218,\n    \"minTransactionAmount\": 2040,\n    \"maxTransactionAmount\": 836,\n    \"minRewardAmount\": 4883,\n    \"maxRewardAmount\": 9913,\n    \"imgUrl\": \"string\",\n    \"bannerImgUrl\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e77f2f0a-1a4d-4116-94df-a9c169b09ff8",
+              "name": "Error response with status 400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rewards",
+                    "merchant",
+                    "offers",
+                    "user",
+                    ":referringPartnerUserId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "merchantId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offerType",
+                      "value": "ONLINE"
+                    },
+                    {
+                      "key": "category",
+                      "value": "Sports "
+                    },
+                    {
+                      "key": " Outdoors",
+                      "value": null
+                    },
+                    {
+                      "key": "isTargeted",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "startDateSort",
+                      "value": "-1"
+                    },
+                    {
+                      "key": "expirationDateSort",
+                      "value": "-1"
+                    },
+                    {
+                      "key": "merchantNameSort",
+                      "value": "-1"
+                    },
+                    {
+                      "key": "supportedComponents",
+                      "value": "cta"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "referringPartnerUserId",
+                      "description": "(Required) Referring partner user ID from issuer that specifies user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "da2523ee-d246-4568-a466-9bc7d558d3de",
+              "name": "Error response with status 401",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rewards",
+                    "merchant",
+                    "offers",
+                    "user",
+                    ":referringPartnerUserId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "merchantId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offerType",
+                      "value": "ONLINE"
+                    },
+                    {
+                      "key": "category",
+                      "value": "Sports "
+                    },
+                    {
+                      "key": " Outdoors",
+                      "value": null
+                    },
+                    {
+                      "key": "isTargeted",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "startDateSort",
+                      "value": "-1"
+                    },
+                    {
+                      "key": "expirationDateSort",
+                      "value": "-1"
+                    },
+                    {
+                      "key": "merchantNameSort",
+                      "value": "-1"
+                    },
+                    {
+                      "key": "supportedComponents",
+                      "value": "cta"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "referringPartnerUserId",
+                      "description": "(Required) Referring partner user ID from issuer that specifies user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "53c73316-73ef-425a-a1a1-4c5e4f3ad23b",
+              "name": "Error response with status 404",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rewards",
+                    "merchant",
+                    "offers",
+                    "user",
+                    ":referringPartnerUserId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "merchantId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offerType",
+                      "value": "ONLINE"
+                    },
+                    {
+                      "key": "category",
+                      "value": "Sports "
+                    },
+                    {
+                      "key": " Outdoors",
+                      "value": null
+                    },
+                    {
+                      "key": "isTargeted",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "startDateSort",
+                      "value": "-1"
+                    },
+                    {
+                      "key": "expirationDateSort",
+                      "value": "-1"
+                    },
+                    {
+                      "key": "merchantNameSort",
+                      "value": "-1"
+                    },
+                    {
+                      "key": "supportedComponents",
+                      "value": "cta"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "referringPartnerUserId",
+                      "description": "(Required) Referring partner user ID from issuer that specifies user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ca5ba208-e75c-4816-b3de-c11974558c34",
+              "name": "Error response with status 500",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rewards",
+                    "merchant",
+                    "offers",
+                    "user",
+                    ":referringPartnerUserId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "merchantId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offerType",
+                      "value": "ONLINE"
+                    },
+                    {
+                      "key": "category",
+                      "value": "Sports "
+                    },
+                    {
+                      "key": " Outdoors",
+                      "value": null
+                    },
+                    {
+                      "key": "isTargeted",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "startDateSort",
+                      "value": "-1"
+                    },
+                    {
+                      "key": "expirationDateSort",
+                      "value": "-1"
+                    },
+                    {
+                      "key": "merchantNameSort",
+                      "value": "-1"
+                    },
+                    {
+                      "key": "supportedComponents",
+                      "value": "cta"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "referringPartnerUserId",
+                      "description": "(Required) Referring partner user ID from issuer that specifies user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "af613f39-ee08-49ac-ab1a-f8e8d5aba322",
+          "name": "Get Offers",
+          "request": {
+            "name": "Get Offers",
+            "description": {
+              "content": "Retrieve ALL national and local offer data regardless of whether a user is eligible to see them. This endpoint is a legacy endpoint and will no longer be maintained soon. Instead, use [Get Eligible Offers](/legacy/api/rewards/offers/get-offers-by-user) to retrieve national merchant data and build your [targeted offers UX experience](https://github.com/kard-financial/kard-postman?tab=readme-ov-file#b-targeted-offers). Local merchants and offers details can be found by calling the [Get Eligible Locations](/legacy/api/rewards/locations/get-locations-by-user) endpoint with the `includeLocal` query parameter.<br/>\n<b>Required scopes:</b> `rewards:read`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rewards",
+                "merchant",
+                "offers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Page number [>= 0], (default = 0)"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Maximum number of offers [1 - 200], (default = 200)"
+                },
+                {
+                  "disabled": false,
+                  "key": "source",
+                  "value": "<string>",
+                  "description": "Source of merchant associated with offer"
+                },
+                {
+                  "disabled": false,
+                  "key": "category",
+                  "value": "<string>",
+                  "description": "Category of merchant associated with offer. Please use URL Encode for non single word categories. (Food & Beverage should be Food%20%26%20Beverage)"
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Name of offer"
+                },
+                {
+                  "disabled": false,
+                  "key": "offerType",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "merchantId",
+                  "value": "<string>",
+                  "description": "Merchant ID in Kard's system"
+                },
+                {
+                  "disabled": false,
+                  "key": "isTargeted",
+                  "value": "<boolean>",
+                  "description": "True returns targeted offers, false returns targeted and non-targeted offers"
+                },
+                {
+                  "disabled": false,
+                  "key": "startDateStart",
+                  "value": "<dateTime>",
+                  "description": "Time in string format for offer startDate search (UTC)"
+                },
+                {
+                  "disabled": false,
+                  "key": "startDateEnd",
+                  "value": "<dateTime>",
+                  "description": "Time in string format for offer startDate search (UTC)"
+                },
+                {
+                  "disabled": false,
+                  "key": "expirationDateStart",
+                  "value": "<dateTime>",
+                  "description": "Time in string format for offer expirationDate search (UTC)"
+                },
+                {
+                  "disabled": false,
+                  "key": "expirationDateEnd",
+                  "value": "<dateTime>",
+                  "description": "Time in string format for offer expirationDate search (UTC)"
+                },
+                {
+                  "disabled": false,
+                  "key": "startDateSort",
+                  "value": "<string>",
+                  "description": "Sort offer start dates chronologically (1 for ascending, -1 for descending)"
+                },
+                {
+                  "disabled": false,
+                  "key": "expirationDateSort",
+                  "value": "<string>",
+                  "description": "Sort offer expiration dates chronologically (1 for ascending, -1 for descending)"
+                },
+                {
+                  "disabled": false,
+                  "key": "merchantNameSort",
+                  "value": "<string>",
+                  "description": "Sort merchant names (1 for A-Z, -1 for Z-A)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5d0a7bab-a144-4d47-92d1-b262f84e7096",
+              "name": "Response with status 200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rewards",
+                    "merchant",
+                    "offers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "NATIONAL"
+                    },
+                    {
+                      "key": "category",
+                      "value": "Sports "
+                    },
+                    {
+                      "key": " Outdoors",
+                      "value": null
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offerType",
+                      "value": "ONLINE"
+                    },
+                    {
+                      "key": "merchantId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "isTargeted",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "startDateStart",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "startDateEnd",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "expirationDateStart",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "expirationDateEnd",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "startDateSort",
+                      "value": "-1"
+                    },
+                    {
+                      "key": "expirationDateSort",
+                      "value": "-1"
+                    },
+                    {
+                      "key": "merchantNameSort",
+                      "value": "-1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"_id\": \"string\",\n    \"terms\": \"string\",\n    \"redeemableOnce\": false,\n    \"name\": \"string\",\n    \"offerType\": \"INSTORE\",\n    \"commissionType\": \"PERCENT\",\n    \"startDate\": \"1965-09-05T14:41:25.973Z\",\n    \"expirationDate\": \"1972-09-15T02:40:02.646Z\",\n    \"isTargeted\": true,\n    \"createdDate\": \"1996-06-26T19:03:24.988Z\",\n    \"lastModified\": \"2018-03-29T11:37:19.922Z\",\n    \"totalCommission\": 9412.358850092163,\n    \"isLocationSpecific\": false,\n    \"source\": \"LOCAL\",\n    \"category\": \"Sports & Outdoors\",\n    \"merchant\": {\n      \"_id\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"type\": \"CARDLINKED\",\n      \"websiteURL\": \"string\",\n      \"category\": \"Travel\",\n      \"acceptedCards\": [\n        \"DISCOVER\",\n        \"VISA\"\n      ],\n      \"imgUrl\": \"string\",\n      \"bannerImgUrl\": \"string\"\n    },\n    \"issuersCommission\": 4818.104332691404,\n    \"usersCommission\": 6578.564362232396,\n    \"minTransactionAmount\": 5871,\n    \"maxTransactionAmount\": 2947,\n    \"minRewardAmount\": 9257,\n    \"maxRewardAmount\": 8754\n  },\n  {\n    \"_id\": \"string\",\n    \"terms\": \"string\",\n    \"redeemableOnce\": true,\n    \"name\": \"string\",\n    \"offerType\": \"INSTORE\",\n    \"commissionType\": \"FLAT\",\n    \"startDate\": \"1989-09-09T15:16:58.004Z\",\n    \"expirationDate\": \"2015-01-02T09:22:17.012Z\",\n    \"isTargeted\": false,\n    \"createdDate\": \"1995-03-14T20:51:06.406Z\",\n    \"lastModified\": \"1952-03-01T21:11:55.434Z\",\n    \"totalCommission\": 4119.1046677234535,\n    \"isLocationSpecific\": true,\n    \"source\": \"LOCAL\",\n    \"category\": \"Department Stores\",\n    \"merchant\": {\n      \"_id\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"type\": \"AFFILIATE\",\n      \"websiteURL\": \"string\",\n      \"category\": \"Arts & Entertainment\",\n      \"acceptedCards\": [\n        \"MASTERCARD\",\n        \"MASTERCARD\"\n      ],\n      \"imgUrl\": \"string\",\n      \"bannerImgUrl\": \"string\"\n    },\n    \"issuersCommission\": 7589.165393981332,\n    \"usersCommission\": 2743.100508282983,\n    \"minTransactionAmount\": 1945,\n    \"maxTransactionAmount\": 3632,\n    \"minRewardAmount\": 9381,\n    \"maxRewardAmount\": 1581\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "60a23cae-a571-4ca6-a409-f71a1aace616",
+              "name": "Error response with status 400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rewards",
+                    "merchant",
+                    "offers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "NATIONAL"
+                    },
+                    {
+                      "key": "category",
+                      "value": "Sports "
+                    },
+                    {
+                      "key": " Outdoors",
+                      "value": null
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offerType",
+                      "value": "ONLINE"
+                    },
+                    {
+                      "key": "merchantId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "isTargeted",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "startDateStart",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "startDateEnd",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "expirationDateStart",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "expirationDateEnd",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "startDateSort",
+                      "value": "-1"
+                    },
+                    {
+                      "key": "expirationDateSort",
+                      "value": "-1"
+                    },
+                    {
+                      "key": "merchantNameSort",
+                      "value": "-1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c550cb29-fbc7-44ef-9d96-13f199d03a11",
+              "name": "Error response with status 401",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rewards",
+                    "merchant",
+                    "offers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "NATIONAL"
+                    },
+                    {
+                      "key": "category",
+                      "value": "Sports "
+                    },
+                    {
+                      "key": " Outdoors",
+                      "value": null
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offerType",
+                      "value": "ONLINE"
+                    },
+                    {
+                      "key": "merchantId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "isTargeted",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "startDateStart",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "startDateEnd",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "expirationDateStart",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "expirationDateEnd",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "startDateSort",
+                      "value": "-1"
+                    },
+                    {
+                      "key": "expirationDateSort",
+                      "value": "-1"
+                    },
+                    {
+                      "key": "merchantNameSort",
+                      "value": "-1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "350ac35e-eb40-4873-a584-21a278c82174",
+              "name": "Error response with status 500",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rewards",
+                    "merchant",
+                    "offers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "NATIONAL"
+                    },
+                    {
+                      "key": "category",
+                      "value": "Sports "
+                    },
+                    {
+                      "key": " Outdoors",
+                      "value": null
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offerType",
+                      "value": "ONLINE"
+                    },
+                    {
+                      "key": "merchantId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "isTargeted",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "startDateStart",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "startDateEnd",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "expirationDateStart",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "expirationDateEnd",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "startDateSort",
+                      "value": "-1"
+                    },
+                    {
+                      "key": "expirationDateSort",
+                      "value": "-1"
+                    },
+                    {
+                      "key": "merchantNameSort",
+                      "value": "-1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "23113775-f943-4da9-a797-1c44a7e26451",
+          "name": "Get Eligible Locations",
+          "request": {
+            "name": "Get Eligible Locations",
+            "description": {
+              "content": "Retrieve national and local geographic locations data that a specified user has eligible in-store offers at. To include local merchant locations, include the `includeLocal` query parameter. Call this endpoint to build out your [targeted offers](https://github.com/kard-financial/kard-postman?tab=readme-ov-file#b-targeted-offers) and [map-specific UX experiences](https://github.com/kard-financial/kard-postman#c-discover-clos-near-you-map-view). Please note that Longitude and Latitude fields are prioritized over State, City and Zipcode.<br/>\n<b>Required scopes:</b> `rewards:read`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rewards",
+                "merchant",
+                "locations",
+                "user",
+                ":referringPartnerUserId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Page number [>= 0], (default = 0)"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Maximum number of locations to be returned [1 - 200], (default = 200)"
+                },
+                {
+                  "disabled": false,
+                  "key": "locationNameSort",
+                  "value": "<string>",
+                  "description": "Sort location names (1 for A-Z, -1 for Z-A)"
+                },
+                {
+                  "disabled": false,
+                  "key": "citySort",
+                  "value": "<string>",
+                  "description": "Sort city names (1 for A-Z, -1 for Z-A)"
+                },
+                {
+                  "disabled": false,
+                  "key": "stateSort",
+                  "value": "<string>",
+                  "description": "Sort state names (1 for A-Z, -1 for Z-A)"
+                },
+                {
+                  "disabled": false,
+                  "key": "locationName",
+                  "value": "<string>",
+                  "description": "Name of location"
+                },
+                {
+                  "disabled": false,
+                  "key": "city",
+                  "value": "<string>",
+                  "description": "City of location; <b>REQUIRES</b> state query parameter"
+                },
+                {
+                  "disabled": false,
+                  "key": "zipCode",
+                  "value": "<string>",
+                  "description": "Zip Code of location; <b>CANNOT</b> provide State, City, Longitude, Latitude, or Radius query params when using zipCode"
+                },
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>",
+                  "description": "State of location; <b>REQUIRES</b> city field"
+                },
+                {
+                  "disabled": false,
+                  "key": "googleId",
+                  "value": "<string>",
+                  "description": "GoogleId from location"
+                },
+                {
+                  "disabled": false,
+                  "key": "source",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "category",
+                  "value": "<string>",
+                  "description": "Category of merchant associated with location. Please use URL Encode for non single word categories. (Food & Beverage should be Food%20%26%20Beverage)"
+                },
+                {
+                  "disabled": false,
+                  "key": "longitude",
+                  "value": "<double>",
+                  "description": "Longitude to search locations from [-180 - 180], <b>REQUIRES</b> latitude field"
+                },
+                {
+                  "disabled": false,
+                  "key": "latitude",
+                  "value": "<double>",
+                  "description": "Latitude to search locations from [-90 - 90], <b>REQUIRES</b> longitude field"
+                },
+                {
+                  "disabled": false,
+                  "key": "radius",
+                  "value": "<integer>",
+                  "description": "Radius to search for locations in miles [1 - 50], (default = 10). <b>REQUIRES</b> longitude & latitude fields"
+                },
+                {
+                  "disabled": false,
+                  "key": "includeLocal",
+                  "value": "<boolean>",
+                  "description": "When included, the response will include local merchant locations alongside national merchant locations. If omitted, the response will only contain national merchant locations."
+                },
+                {
+                  "disabled": false,
+                  "key": "createdDateStart",
+                  "value": "<dateTime>",
+                  "description": "Time in string format for location createdDate search start (UTC)"
+                },
+                {
+                  "disabled": false,
+                  "key": "createdDateEnd",
+                  "value": "<dateTime>",
+                  "description": "Time in string format for location createdDate search end (UTC)"
+                },
+                {
+                  "disabled": false,
+                  "key": "supportedComponents",
+                  "value": "<string>",
+                  "description": "UI component types to include in included offers."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "referringPartnerUserId",
+                  "description": "(Required) Referring partner user ID from issuer that specifies user"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e464f7c5-d43f-4dc2-8d46-2f0503ed0165",
+              "name": "Response with status 200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rewards",
+                    "merchant",
+                    "locations",
+                    "user",
+                    ":referringPartnerUserId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "locationNameSort",
+                      "value": "-1"
+                    },
+                    {
+                      "key": "citySort",
+                      "value": "-1"
+                    },
+                    {
+                      "key": "stateSort",
+                      "value": "-1"
+                    },
+                    {
+                      "key": "locationName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "city",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "zipCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "IA"
+                    },
+                    {
+                      "key": "googleId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "NATIONAL"
+                    },
+                    {
+                      "key": "category",
+                      "value": "Sports "
+                    },
+                    {
+                      "key": " Outdoors",
+                      "value": null
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "latitude",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "radius",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "includeLocal",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "createdDateStart",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdDateEnd",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "supportedComponents",
+                      "value": "cta"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "referringPartnerUserId",
+                      "description": "(Required) Referring partner user ID from issuer that specifies user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"_id\": \"string\",\n    \"merchantId\": \"string\",\n    \"name\": \"string\",\n    \"locationType\": \"INSTORE\",\n    \"address\": {\n      \"street\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"MN\",\n      \"zipCode\": \"string\"\n    },\n    \"geoLocation\": {\n      \"longitude\": 9980.510362953366,\n      \"latitude\": 4662.393053270526\n    },\n    \"phone\": \"string\",\n    \"createdDate\": \"2007-04-19T01:45:17.057Z\",\n    \"lastModified\": \"2006-05-21T00:28:30.012Z\",\n    \"source\": \"NATIONAL\",\n    \"category\": \"Books & Digital Media\",\n    \"offers\": [\n      {\n        \"_id\": \"string\",\n        \"totalCommission\": 3391.9073307738013,\n        \"commissionType\": \"PERCENT\",\n        \"startDate\": \"1975-12-02T01:15:18.040Z\",\n        \"expirationDate\": \"2008-03-01T15:30:31.356Z\",\n        \"terms\": \"string\",\n        \"redeemableOnce\": true,\n        \"name\": \"string\",\n        \"offerType\": \"ONLINE\",\n        \"isTargeted\": false,\n        \"createdDate\": \"2017-11-05T09:00:52.664Z\",\n        \"lastModified\": \"1964-06-07T16:18:33.092Z\",\n        \"isLocationSpecific\": false,\n        \"source\": \"LOCAL\",\n        \"minTransactionAmount\": 9003,\n        \"maxTransactionAmount\": 1239,\n        \"minRewardAmount\": 3424,\n        \"maxRewardAmount\": 7670,\n        \"issuersCommission\": 674.3161147504406,\n        \"usersCommission\": 4957.239937345511,\n        \"imgUrl\": \"string\",\n        \"bannerImgUrl\": \"string\",\n        \"category\": \"Department Stores\"\n      },\n      {\n        \"_id\": \"string\",\n        \"totalCommission\": 6888.325336136557,\n        \"commissionType\": \"PERCENT\",\n        \"startDate\": \"1974-12-08T11:56:55.026Z\",\n        \"expirationDate\": \"1993-10-10T00:01:37.012Z\",\n        \"terms\": \"string\",\n        \"redeemableOnce\": true,\n        \"name\": \"string\",\n        \"offerType\": \"ONLINE\",\n        \"isTargeted\": false,\n        \"createdDate\": \"1970-11-22T21:26:12.028Z\",\n        \"lastModified\": \"2009-02-02T16:46:13.835Z\",\n        \"isLocationSpecific\": true,\n        \"source\": \"LOCAL\",\n        \"minTransactionAmount\": 2377,\n        \"maxTransactionAmount\": 4101,\n        \"minRewardAmount\": 5305,\n        \"maxRewardAmount\": 9194,\n        \"issuersCommission\": 8175.353186752937,\n        \"usersCommission\": 4338.896227801696,\n        \"imgUrl\": \"string\",\n        \"bannerImgUrl\": \"string\",\n        \"category\": \"Department Stores\"\n      }\n    ],\n    \"merchant\": {\n      \"_id\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"websiteURL\": \"string\",\n      \"type\": \"CARDLINKED\",\n      \"category\": \"Travel\",\n      \"acceptedCards\": [\n        \"AMERICAN EXPRESS\",\n        \"MASTERCARD\"\n      ],\n      \"imgUrl\": \"string\",\n      \"bannerImgUrl\": \"string\"\n    },\n    \"operationHours\": {\n      \"SUNDAY\": \"string\",\n      \"MONDAY\": \"string\",\n      \"TUESDAY\": \"string\",\n      \"WEDNESDAY\": \"string\",\n      \"THURSDAY\": \"string\",\n      \"FRIDAY\": \"string\",\n      \"SATURDAY\": \"string\"\n    },\n    \"googleId\": \"string\"\n  },\n  {\n    \"_id\": \"string\",\n    \"merchantId\": \"string\",\n    \"name\": \"string\",\n    \"locationType\": \"INSTORE\",\n    \"address\": {\n      \"street\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"KS\",\n      \"zipCode\": \"string\"\n    },\n    \"geoLocation\": {\n      \"longitude\": 6801.271355987152,\n      \"latitude\": 4048.1413301992698\n    },\n    \"phone\": \"string\",\n    \"createdDate\": \"2004-08-18T13:22:00.218Z\",\n    \"lastModified\": \"2019-04-22T16:44:28.183Z\",\n    \"source\": \"LOCAL\",\n    \"category\": \"Clothing, Shoes & Accessories\",\n    \"offers\": [\n      {\n        \"_id\": \"string\",\n        \"totalCommission\": 3892.538770050372,\n        \"commissionType\": \"PERCENT\",\n        \"startDate\": \"2011-01-23T06:07:00.204Z\",\n        \"expirationDate\": \"2025-02-02T15:07:08.494Z\",\n        \"terms\": \"string\",\n        \"redeemableOnce\": false,\n        \"name\": \"string\",\n        \"offerType\": \"ONLINE\",\n        \"isTargeted\": false,\n        \"createdDate\": \"2001-10-28T08:01:30.868Z\",\n        \"lastModified\": \"1958-08-01T17:29:20.807Z\",\n        \"isLocationSpecific\": false,\n        \"source\": \"LOCAL\",\n        \"minTransactionAmount\": 8604,\n        \"maxTransactionAmount\": 599,\n        \"minRewardAmount\": 2720,\n        \"maxRewardAmount\": 676,\n        \"issuersCommission\": 9117.666449905906,\n        \"usersCommission\": 605.7797749589699,\n        \"imgUrl\": \"string\",\n        \"bannerImgUrl\": \"string\",\n        \"category\": \"Gas\"\n      },\n      {\n        \"_id\": \"string\",\n        \"totalCommission\": 8520.666010224404,\n        \"commissionType\": \"PERCENT\",\n        \"startDate\": \"1981-12-21T22:01:06.965Z\",\n        \"expirationDate\": \"2007-02-25T20:24:28.476Z\",\n        \"terms\": \"string\",\n        \"redeemableOnce\": true,\n        \"name\": \"string\",\n        \"offerType\": \"ONLINE\",\n        \"isTargeted\": true,\n        \"createdDate\": \"2021-02-27T21:19:06.027Z\",\n        \"lastModified\": \"1963-09-30T04:13:39.251Z\",\n        \"isLocationSpecific\": false,\n        \"source\": \"LOCAL\",\n        \"minTransactionAmount\": 4917,\n        \"maxTransactionAmount\": 474,\n        \"minRewardAmount\": 262,\n        \"maxRewardAmount\": 161,\n        \"issuersCommission\": 6503.057845914171,\n        \"usersCommission\": 1572.2594936736357,\n        \"imgUrl\": \"string\",\n        \"bannerImgUrl\": \"string\",\n        \"category\": \"Supplies & Services\"\n      }\n    ],\n    \"merchant\": {\n      \"_id\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"websiteURL\": \"string\",\n      \"type\": \"AFFILIATE\",\n      \"category\": \"Gas\",\n      \"acceptedCards\": [\n        \"VISA\",\n        \"VISA\"\n      ],\n      \"imgUrl\": \"string\",\n      \"bannerImgUrl\": \"string\"\n    },\n    \"operationHours\": {\n      \"SUNDAY\": \"string\",\n      \"MONDAY\": \"string\",\n      \"TUESDAY\": \"string\",\n      \"WEDNESDAY\": \"string\",\n      \"THURSDAY\": \"string\",\n      \"FRIDAY\": \"string\",\n      \"SATURDAY\": \"string\"\n    },\n    \"googleId\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4d5406f0-ff15-495e-a6f7-fa9b8455c52f",
+              "name": "Error response with status 400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rewards",
+                    "merchant",
+                    "locations",
+                    "user",
+                    ":referringPartnerUserId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "locationNameSort",
+                      "value": "-1"
+                    },
+                    {
+                      "key": "citySort",
+                      "value": "-1"
+                    },
+                    {
+                      "key": "stateSort",
+                      "value": "-1"
+                    },
+                    {
+                      "key": "locationName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "city",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "zipCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "IA"
+                    },
+                    {
+                      "key": "googleId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "NATIONAL"
+                    },
+                    {
+                      "key": "category",
+                      "value": "Sports "
+                    },
+                    {
+                      "key": " Outdoors",
+                      "value": null
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "latitude",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "radius",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "includeLocal",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "createdDateStart",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdDateEnd",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "supportedComponents",
+                      "value": "cta"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "referringPartnerUserId",
+                      "description": "(Required) Referring partner user ID from issuer that specifies user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "097dcbbd-7c69-4d46-ab4c-b6bdfa42ff33",
+              "name": "Error response with status 401",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rewards",
+                    "merchant",
+                    "locations",
+                    "user",
+                    ":referringPartnerUserId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "locationNameSort",
+                      "value": "-1"
+                    },
+                    {
+                      "key": "citySort",
+                      "value": "-1"
+                    },
+                    {
+                      "key": "stateSort",
+                      "value": "-1"
+                    },
+                    {
+                      "key": "locationName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "city",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "zipCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "IA"
+                    },
+                    {
+                      "key": "googleId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "NATIONAL"
+                    },
+                    {
+                      "key": "category",
+                      "value": "Sports "
+                    },
+                    {
+                      "key": " Outdoors",
+                      "value": null
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "latitude",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "radius",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "includeLocal",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "createdDateStart",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdDateEnd",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "supportedComponents",
+                      "value": "cta"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "referringPartnerUserId",
+                      "description": "(Required) Referring partner user ID from issuer that specifies user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "677d2613-06f0-4392-ab58-b0993bdb12e1",
+              "name": "Error response with status 404",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rewards",
+                    "merchant",
+                    "locations",
+                    "user",
+                    ":referringPartnerUserId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "locationNameSort",
+                      "value": "-1"
+                    },
+                    {
+                      "key": "citySort",
+                      "value": "-1"
+                    },
+                    {
+                      "key": "stateSort",
+                      "value": "-1"
+                    },
+                    {
+                      "key": "locationName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "city",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "zipCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "IA"
+                    },
+                    {
+                      "key": "googleId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "NATIONAL"
+                    },
+                    {
+                      "key": "category",
+                      "value": "Sports "
+                    },
+                    {
+                      "key": " Outdoors",
+                      "value": null
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "latitude",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "radius",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "includeLocal",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "createdDateStart",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdDateEnd",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "supportedComponents",
+                      "value": "cta"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "referringPartnerUserId",
+                      "description": "(Required) Referring partner user ID from issuer that specifies user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8f79dbd3-1f99-4e9b-81b4-2f79055ddcd6",
+              "name": "Error response with status 500",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rewards",
+                    "merchant",
+                    "locations",
+                    "user",
+                    ":referringPartnerUserId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "locationNameSort",
+                      "value": "-1"
+                    },
+                    {
+                      "key": "citySort",
+                      "value": "-1"
+                    },
+                    {
+                      "key": "stateSort",
+                      "value": "-1"
+                    },
+                    {
+                      "key": "locationName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "city",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "zipCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "IA"
+                    },
+                    {
+                      "key": "googleId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "NATIONAL"
+                    },
+                    {
+                      "key": "category",
+                      "value": "Sports "
+                    },
+                    {
+                      "key": " Outdoors",
+                      "value": null
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "latitude",
+                      "value": "<double>"
+                    },
+                    {
+                      "key": "radius",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "includeLocal",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "createdDateStart",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdDateEnd",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "supportedComponents",
+                      "value": "cta"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "referringPartnerUserId",
+                      "description": "(Required) Referring partner user ID from issuer that specifies user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "38e78964-3e0f-4f20-9d7b-3ea620128891",
+          "name": "Get Location by ID",
+          "request": {
+            "name": "Get Location by ID",
+            "description": {
+              "content": "Retrieve location data for a specific Kard location ID.<br/>\n<b>Required scopes:</b> `rewards:read`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rewards",
+                "merchant",
+                "location",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The Kard location ID to query"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6b74f379-2c39-4772-8645-0e6263f1f54d",
+              "name": "Response with status 200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rewards",
+                    "merchant",
+                    "location",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The Kard location ID to query"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"_id\": \"string\",\n  \"merchantId\": \"string\",\n  \"name\": \"string\",\n  \"locationType\": \"INSTORE\",\n  \"address\": {\n    \"street\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"WY\",\n    \"zipCode\": \"string\"\n  },\n  \"geoLocation\": {\n    \"longitude\": 5328.714059814241,\n    \"latitude\": 4293.694117469804\n  },\n  \"phone\": \"string\",\n  \"createdDate\": \"2006-04-27T19:08:47.409Z\",\n  \"lastModified\": \"1958-07-21T09:43:53.923Z\",\n  \"source\": \"NATIONAL\",\n  \"category\": \"Gas\",\n  \"operationHours\": {\n    \"SUNDAY\": \"string\",\n    \"MONDAY\": \"string\",\n    \"TUESDAY\": \"string\",\n    \"WEDNESDAY\": \"string\",\n    \"THURSDAY\": \"string\",\n    \"FRIDAY\": \"string\",\n    \"SATURDAY\": \"string\"\n  },\n  \"googleId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "827de517-239c-4524-914c-39aedaee1d71",
+              "name": "Error response with status 400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rewards",
+                    "merchant",
+                    "location",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The Kard location ID to query"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0b6bdf2a-2c07-4927-a0ff-7f6c46dd89b0",
+              "name": "Error response with status 401",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rewards",
+                    "merchant",
+                    "location",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The Kard location ID to query"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5ed25cec-3e7d-490a-b9c1-74e2a0721d8e",
+              "name": "Error response with status 404",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rewards",
+                    "merchant",
+                    "location",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The Kard location ID to query"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f944d9ef-14b1-410d-8b4c-464d3e0db7a9",
+              "name": "Error response with status 500",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rewards",
+                    "merchant",
+                    "location",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The Kard location ID to query"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5e5ab88f-d70f-44cb-968d-bac982085f9b",
+          "name": "Get Locations by Merchant ID",
+          "request": {
+            "name": "Get Locations by Merchant ID",
+            "description": {
+              "content": "Retrieve all locations associated to a specific Kard merchant ID.<br/>\n<b>Required scopes:</b> `rewards:read`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rewards",
+                "merchant",
+                "locations",
+                ":merchantId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Page number [>= 0], (default = 0)"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Maximum number of locations [1 - 200], (default = 200)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "merchantId",
+                  "description": "(Required) The Kard merchant ID to query"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "58a7fe01-8b6f-4480-8c83-768746e0b644",
+              "name": "Response with status 200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rewards",
+                    "merchant",
+                    "locations",
+                    ":merchantId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "merchantId",
+                      "description": "(Required) The Kard merchant ID to query"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"_id\": \"string\",\n    \"merchantId\": \"string\",\n    \"name\": \"string\",\n    \"locationType\": \"INSTORE\",\n    \"address\": {\n      \"street\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"MO\",\n      \"zipCode\": \"string\"\n    },\n    \"geoLocation\": {\n      \"longitude\": 7058.038201930365,\n      \"latitude\": 4987.123592798157\n    },\n    \"phone\": \"string\",\n    \"createdDate\": \"2012-01-16T22:12:28.159Z\",\n    \"lastModified\": \"1948-12-19T17:45:27.518Z\",\n    \"source\": \"NATIONAL\",\n    \"category\": \"Arts & Entertainment\",\n    \"operationHours\": {\n      \"SUNDAY\": \"string\",\n      \"MONDAY\": \"string\",\n      \"TUESDAY\": \"string\",\n      \"WEDNESDAY\": \"string\",\n      \"THURSDAY\": \"string\",\n      \"FRIDAY\": \"string\",\n      \"SATURDAY\": \"string\"\n    },\n    \"googleId\": \"string\"\n  },\n  {\n    \"_id\": \"string\",\n    \"merchantId\": \"string\",\n    \"name\": \"string\",\n    \"locationType\": \"INSTORE\",\n    \"address\": {\n      \"street\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"VA\",\n      \"zipCode\": \"string\"\n    },\n    \"geoLocation\": {\n      \"longitude\": 3160.8240595503967,\n      \"latitude\": 9777.134995055963\n    },\n    \"phone\": \"string\",\n    \"createdDate\": \"1981-01-06T08:17:21.356Z\",\n    \"lastModified\": \"1979-02-17T09:05:05.596Z\",\n    \"source\": \"NATIONAL\",\n    \"category\": \"Arts & Entertainment\",\n    \"operationHours\": {\n      \"SUNDAY\": \"string\",\n      \"MONDAY\": \"string\",\n      \"TUESDAY\": \"string\",\n      \"WEDNESDAY\": \"string\",\n      \"THURSDAY\": \"string\",\n      \"FRIDAY\": \"string\",\n      \"SATURDAY\": \"string\"\n    },\n    \"googleId\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fcd39643-5c15-452b-8784-63cf5f5815ba",
+              "name": "Error response with status 400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rewards",
+                    "merchant",
+                    "locations",
+                    ":merchantId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "merchantId",
+                      "description": "(Required) The Kard merchant ID to query"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "344cd3ed-1512-4b1c-9610-ae8af981b203",
+              "name": "Error response with status 401",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rewards",
+                    "merchant",
+                    "locations",
+                    ":merchantId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "merchantId",
+                      "description": "(Required) The Kard merchant ID to query"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0b42eda8-bc7e-4be8-9803-d0bbaab052a9",
+              "name": "Error response with status 500",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rewards",
+                    "merchant",
+                    "locations",
+                    ":merchantId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "merchantId",
+                      "description": "(Required) The Kard merchant ID to query"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8194b663-5602-41ee-b4b9-aed50d4ef091",
+          "name": "Get Locations",
+          "request": {
+            "name": "Get Locations",
+            "description": {
+              "content": "Retrieve ALL national and local geographic locations data regardless of whether a user is eligible to see them. This endpoint is a legacy endpoint and will no longer be maintained soon. Instead, use [Get Eligible Locations](/legacy/api/rewards/locations/get-locations-by-user) to build your [map-specific UX experiences](https://github.com/kard-financial/kard-postman#c-discover-clos-near-you-map-view).<br/>\n<b>Required scopes:</b> `rewards:read`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rewards",
+                "merchant",
+                "locations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Page number [>= 0], (default = 0)"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Maximum number of locations [1 - 200], (default = 200)"
+                },
+                {
+                  "disabled": false,
+                  "key": "googleId",
+                  "value": "<string>",
+                  "description": "GoogleId from location"
+                },
+                {
+                  "disabled": false,
+                  "key": "city",
+                  "value": "<string>",
+                  "description": "City of location; <b>REQUIRES</b> state query parameter"
+                },
+                {
+                  "disabled": false,
+                  "key": "zipCode",
+                  "value": "<string>",
+                  "description": "Zip Code of location; <b>CANNOT</b> provide State, City, Longitude, Latitude, or Radius query params when using zipCode"
+                },
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>",
+                  "description": "State of location; <b>REQUIRES</b> city field"
+                },
+                {
+                  "disabled": false,
+                  "key": "locationNameSort",
+                  "value": "<string>",
+                  "description": "Sort location names (1 for A-Z, -1 for Z-A)"
+                },
+                {
+                  "disabled": false,
+                  "key": "citySort",
+                  "value": "<string>",
+                  "description": "Sort city names (1 for A-Z, -1 for Z-A)"
+                },
+                {
+                  "disabled": false,
+                  "key": "stateSort",
+                  "value": "<string>",
+                  "description": "Sort state names (1 for A-Z, -1 for Z-A)"
+                },
+                {
+                  "disabled": false,
+                  "key": "longitude",
+                  "value": "<integer>",
+                  "description": "Longitude to search locations from [-180 - 180], <b>REQUIRES</b> latitude field"
+                },
+                {
+                  "disabled": false,
+                  "key": "latitude",
+                  "value": "<integer>",
+                  "description": "Latitude to search locations from [-90 - 90], <b>REQUIRES</b> longitude field"
+                },
+                {
+                  "disabled": false,
+                  "key": "radius",
+                  "value": "<integer>",
+                  "description": "Radius to search for locations in miles [1 - 50], (default = 10). <b>REQUIRES</b> longitude & latitude fields"
+                },
+                {
+                  "disabled": false,
+                  "key": "source",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "category",
+                  "value": "<string>",
+                  "description": "Category of merchant associated with location. Please use URL Encode for non single word categories. (Food & Beverage should be Food%20%26%20Beverage)"
+                },
+                {
+                  "disabled": false,
+                  "key": "locationName",
+                  "value": "<string>",
+                  "description": "Name of location"
+                },
+                {
+                  "disabled": false,
+                  "key": "createdDateStart",
+                  "value": "<dateTime>",
+                  "description": "Time in string format for location createdDate search start (UTC)"
+                },
+                {
+                  "disabled": false,
+                  "key": "createdDateEnd",
+                  "value": "<dateTime>",
+                  "description": "Time in string format for location createdDate search start (UTC)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6ccb5633-59d1-4737-8015-ae056510d552",
+              "name": "Response with status 200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rewards",
+                    "merchant",
+                    "locations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "googleId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "city",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "zipCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "IA"
+                    },
+                    {
+                      "key": "locationNameSort",
+                      "value": "-1"
+                    },
+                    {
+                      "key": "citySort",
+                      "value": "-1"
+                    },
+                    {
+                      "key": "stateSort",
+                      "value": "-1"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "latitude",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "radius",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "NATIONAL"
+                    },
+                    {
+                      "key": "category",
+                      "value": "Sports "
+                    },
+                    {
+                      "key": " Outdoors",
+                      "value": null
+                    },
+                    {
+                      "key": "locationName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "createdDateStart",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdDateEnd",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"_id\": \"string\",\n    \"merchantId\": \"string\",\n    \"name\": \"string\",\n    \"locationType\": \"INSTORE\",\n    \"address\": {\n      \"street\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"MD\",\n      \"zipCode\": \"string\"\n    },\n    \"geoLocation\": {\n      \"longitude\": 7967.065773500663,\n      \"latitude\": 6349.628065897715\n    },\n    \"phone\": \"string\",\n    \"createdDate\": \"1989-09-08T12:00:43.649Z\",\n    \"lastModified\": \"1974-05-30T00:05:42.512Z\",\n    \"source\": \"NATIONAL\",\n    \"category\": \"Sports & Outdoors\",\n    \"offers\": [\n      {\n        \"_id\": \"string\",\n        \"totalCommission\": 3998.47190129212,\n        \"commissionType\": \"FLAT\",\n        \"startDate\": \"1964-10-28T03:08:16.163Z\",\n        \"expirationDate\": \"1996-10-12T17:19:34.392Z\",\n        \"minTransactionAmount\": 6913,\n        \"maxTransactionAmount\": 9176,\n        \"minRewardAmount\": 9550,\n        \"maxRewardAmount\": 9115,\n        \"issuersCommission\": 5346.754079517422,\n        \"usersCommission\": 4968.19514842269\n      },\n      {\n        \"_id\": \"string\",\n        \"totalCommission\": 917.7855920038457,\n        \"commissionType\": \"FLAT\",\n        \"startDate\": \"1971-03-14T14:54:43.089Z\",\n        \"expirationDate\": \"1986-08-25T13:52:58.226Z\",\n        \"minTransactionAmount\": 5483,\n        \"maxTransactionAmount\": 7124,\n        \"minRewardAmount\": 1718,\n        \"maxRewardAmount\": 3022,\n        \"issuersCommission\": 9482.19751507394,\n        \"usersCommission\": 8767.077227854967\n      }\n    ],\n    \"merchant\": {\n      \"_id\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"websiteURL\": \"string\",\n      \"type\": \"AFFILIATE\",\n      \"category\": \"Occasions & Gifts\",\n      \"acceptedCards\": [\n        \"VISA\",\n        \"VISA\"\n      ],\n      \"imgUrl\": \"string\",\n      \"bannerImgUrl\": \"string\"\n    },\n    \"operationHours\": {\n      \"SUNDAY\": \"string\",\n      \"MONDAY\": \"string\",\n      \"TUESDAY\": \"string\",\n      \"WEDNESDAY\": \"string\",\n      \"THURSDAY\": \"string\",\n      \"FRIDAY\": \"string\",\n      \"SATURDAY\": \"string\"\n    },\n    \"googleId\": \"string\"\n  },\n  {\n    \"_id\": \"string\",\n    \"merchantId\": \"string\",\n    \"name\": \"string\",\n    \"locationType\": \"INSTORE\",\n    \"address\": {\n      \"street\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"RI\",\n      \"zipCode\": \"string\"\n    },\n    \"geoLocation\": {\n      \"longitude\": 2999.433458017102,\n      \"latitude\": 3929.939230618674\n    },\n    \"phone\": \"string\",\n    \"createdDate\": \"2024-09-14T01:28:39.441Z\",\n    \"lastModified\": \"1990-03-01T17:44:24.916Z\",\n    \"source\": \"NATIONAL\",\n    \"category\": \"Computers, Electronics & Software\",\n    \"offers\": [\n      {\n        \"_id\": \"string\",\n        \"totalCommission\": 7885.121388405374,\n        \"commissionType\": \"PERCENT\",\n        \"startDate\": \"1983-06-20T05:22:20.859Z\",\n        \"expirationDate\": \"1998-12-11T07:52:14.365Z\",\n        \"minTransactionAmount\": 1367,\n        \"maxTransactionAmount\": 980,\n        \"minRewardAmount\": 305,\n        \"maxRewardAmount\": 6661,\n        \"issuersCommission\": 7118.552195781463,\n        \"usersCommission\": 1250.8018330368286\n      },\n      {\n        \"_id\": \"string\",\n        \"totalCommission\": 2818.461849647501,\n        \"commissionType\": \"PERCENT\",\n        \"startDate\": \"1952-03-27T21:31:32.702Z\",\n        \"expirationDate\": \"1980-07-28T00:06:16.246Z\",\n        \"minTransactionAmount\": 3178,\n        \"maxTransactionAmount\": 7956,\n        \"minRewardAmount\": 5616,\n        \"maxRewardAmount\": 9697,\n        \"issuersCommission\": 3509.2121291812173,\n        \"usersCommission\": 4952.268546456568\n      }\n    ],\n    \"merchant\": {\n      \"_id\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"websiteURL\": \"string\",\n      \"type\": \"CARDLINKED\",\n      \"category\": \"Sports & Outdoors\",\n      \"acceptedCards\": [\n        \"AMERICAN EXPRESS\",\n        \"VISA\"\n      ],\n      \"imgUrl\": \"string\",\n      \"bannerImgUrl\": \"string\"\n    },\n    \"operationHours\": {\n      \"SUNDAY\": \"string\",\n      \"MONDAY\": \"string\",\n      \"TUESDAY\": \"string\",\n      \"WEDNESDAY\": \"string\",\n      \"THURSDAY\": \"string\",\n      \"FRIDAY\": \"string\",\n      \"SATURDAY\": \"string\"\n    },\n    \"googleId\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d7a8ea34-9c83-4dc7-af72-8be9c48ebb85",
+              "name": "Error response with status 400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rewards",
+                    "merchant",
+                    "locations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "googleId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "city",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "zipCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "IA"
+                    },
+                    {
+                      "key": "locationNameSort",
+                      "value": "-1"
+                    },
+                    {
+                      "key": "citySort",
+                      "value": "-1"
+                    },
+                    {
+                      "key": "stateSort",
+                      "value": "-1"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "latitude",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "radius",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "NATIONAL"
+                    },
+                    {
+                      "key": "category",
+                      "value": "Sports "
+                    },
+                    {
+                      "key": " Outdoors",
+                      "value": null
+                    },
+                    {
+                      "key": "locationName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "createdDateStart",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdDateEnd",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3332515d-74a6-4525-8623-fe43f0ca0019",
+              "name": "Error response with status 401",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rewards",
+                    "merchant",
+                    "locations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "googleId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "city",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "zipCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "IA"
+                    },
+                    {
+                      "key": "locationNameSort",
+                      "value": "-1"
+                    },
+                    {
+                      "key": "citySort",
+                      "value": "-1"
+                    },
+                    {
+                      "key": "stateSort",
+                      "value": "-1"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "latitude",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "radius",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "NATIONAL"
+                    },
+                    {
+                      "key": "category",
+                      "value": "Sports "
+                    },
+                    {
+                      "key": " Outdoors",
+                      "value": null
+                    },
+                    {
+                      "key": "locationName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "createdDateStart",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdDateEnd",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "beca5905-43a8-47c6-b567-0b32be39a3e6",
+              "name": "Error response with status 500",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rewards",
+                    "merchant",
+                    "locations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "googleId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "city",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "zipCode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "IA"
+                    },
+                    {
+                      "key": "locationNameSort",
+                      "value": "-1"
+                    },
+                    {
+                      "key": "citySort",
+                      "value": "-1"
+                    },
+                    {
+                      "key": "stateSort",
+                      "value": "-1"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "latitude",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "radius",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "source",
+                      "value": "NATIONAL"
+                    },
+                    {
+                      "key": "category",
+                      "value": "Sports "
+                    },
+                    {
+                      "key": " Outdoors",
+                      "value": null
+                    },
+                    {
+                      "key": "locationName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "createdDateStart",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "createdDateEnd",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://rewards-api.getkard.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e08ba74d-ed90-45e3-95b0-85f38f57253a",
+    "name": "API Reference attributions rewards API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

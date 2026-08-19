@@ -1,0 +1,916 @@
+{
+  "item": [
+    {
+      "id": "7c4f9090-192b-4810-a3cb-646beb5414e5",
+      "name": "Files",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fc5c3802-af60-4b52-96a6-d1b9a4455264",
+          "name": "Get Files",
+          "request": {
+            "name": "Get Files",
+            "description": {
+              "content": "Retrieves metadata for files associated with a specific issuer/organization.\nThis endpoint supports pagination and sorting options to efficiently navigate \nthrough potentially large sets of file metadata.\n<b>Required scopes:</b> `files.read`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "issuers",
+                ":organizationId",
+                "files",
+                "metadata"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filter[dateFrom]",
+                  "value": "<string>",
+                  "description": "Start date for filtering files (format ISO8601). If not provided, defaults to current date minus 1 month."
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[dateTo]",
+                  "value": "<string>",
+                  "description": "End date for filtering files (format ISO8601). If not provided, defaults to current date."
+                },
+                {
+                  "disabled": false,
+                  "key": "filter[fileType]",
+                  "value": "<string>",
+                  "description": "The document file type."
+                },
+                {
+                  "disabled": false,
+                  "key": "page[size]",
+                  "value": "<integer>",
+                  "description": "Number of items per page. Defaults to 10 if not specified and maximum value allowed 100 items per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "page[after]",
+                  "value": "<string>",
+                  "description": "Cursor for forward pagination (next page)."
+                },
+                {
+                  "disabled": false,
+                  "key": "page[before]",
+                  "value": "<string>",
+                  "description": "Cursor for backward pagination (previous page)."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "If provided, response will be sorted by the specified fields. Defaults to descending sentDate, equivalent to \"-sentDate\""
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0aa23116-ba33-4e86-9840-ba51319db9b7",
+              "name": "Response with status 200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "files",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[dateFrom]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[dateTo]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[fileType]",
+                      "value": "earnedRewardApprovedDailyReconciliationFile"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page[after]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[before]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "-sentDate"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"type\": \"monthlyReconciliationFile\",\n      \"attributes\": {\n        \"fileName\": \"string\",\n        \"sentAt\": \"string\",\n        \"lastModified\": \"string\",\n        \"downloadUrl\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"type\": \"earnedRewardSettledDailyReconciliationFile\",\n      \"attributes\": {\n        \"fileName\": \"string\",\n        \"sentAt\": \"string\",\n        \"lastModified\": \"string\",\n        \"downloadUrl\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ],\n  \"links\": {\n    \"self\": \"string\",\n    \"prev\": \"string\",\n    \"next\": \"string\"\n  },\n  \"meta\": {\n    \"pageSize\": 1168,\n    \"hasNextPage\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "edf98332-1812-432e-9a1d-6395c51cf3ec",
+              "name": "Error response with status 400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "files",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[dateFrom]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[dateTo]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[fileType]",
+                      "value": "earnedRewardApprovedDailyReconciliationFile"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page[after]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[before]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "-sentDate"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "80fc38b3-f9d1-4957-b8aa-9cb5ad934a60",
+              "name": "Error response with status 401",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "files",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[dateFrom]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[dateTo]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[fileType]",
+                      "value": "earnedRewardApprovedDailyReconciliationFile"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page[after]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[before]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "-sentDate"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "605a6bed-d49d-4baf-9dce-d40bab835db5",
+              "name": "Error response with status 403",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "files",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[dateFrom]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[dateTo]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[fileType]",
+                      "value": "earnedRewardApprovedDailyReconciliationFile"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page[after]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[before]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "-sentDate"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "df2fa974-3e07-4e58-97a4-96191f18bc7e",
+              "name": "Error response with status 500",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "issuers",
+                    ":organizationId",
+                    "files",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter[dateFrom]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[dateTo]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filter[fileType]",
+                      "value": "earnedRewardApprovedDailyReconciliationFile"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page[after]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page[before]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "-sentDate"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    },\n    {\n      \"status\": \"string\",\n      \"title\": \"string\",\n      \"detail\": \"string\",\n      \"source\": {\n        \"pointer\": \"string\",\n        \"parameter\": \"string\",\n        \"header\": \"string\"\n      },\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "28db47cf-ff94-46ce-a721-62c5f1ce977c",
+          "name": "List",
+          "request": {
+            "name": "List",
+            "description": {
+              "content": "Retrieve file information for users eligibility and reconciliation files, along with file download URL links.<br/>\n<b>Required scopes:</b> `files.read`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "issuers",
+                ":organizationId",
+                "files"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page[size]",
+                  "value": "<integer>",
+                  "description": "Number of records to be returned [1-100], default is 10."
+                },
+                {
+                  "disabled": false,
+                  "key": "page[after]",
+                  "value": "<string>",
+                  "description": "Cursor value to retrieve next page of results if provided. Value can be received from the 'links' section of previous API calls."
+                },
+                {
+                  "disabled": false,
+                  "key": "fileType",
+                  "value": "<string>",
+                  "description": "(Required) The document file type."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "organizationId",
+                  "description": "(Required) Your organization ID, provided by Kard."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1ed92b5a-deef-4547-abf5-3218a37e987f",
+              "name": "Response with status 200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "issuers",
+                    ":organizationId",
+                    "files"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page[size]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page[after]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fileType",
+                      "value": "usersEligibilityFile"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) Your organization ID, provided by Kard."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"type\": \"usersEligibilityFile\",\n      \"id\": \"string\",\n      \"attributes\": {\n        \"fileName\": \"string\",\n        \"lastModified\": \"1981-05-26T15:01:31.963Z\",\n        \"contentType\": \"string\",\n        \"downloadUrl\": \"string\"\n      }\n    },\n    {\n      \"type\": \"usersEligibilityFile\",\n      \"id\": \"string\",\n      \"attributes\": {\n        \"fileName\": \"string\",\n        \"lastModified\": \"2015-11-19T17:25:22.984Z\",\n        \"contentType\": \"string\",\n        \"downloadUrl\": \"string\"\n      }\n    }\n  ],\n  \"meta\": {\n    \"pageSize\": 3456\n  },\n  \"links\": {\n    \"self\": \"string\",\n    \"first\": \"string\",\n    \"next\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "20b102a4-26fa-4355-b967-1a0ceba9f3cb",
+              "name": "Error response with status 400",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "issuers",
+                    ":organizationId",
+                    "files"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page[size]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page[after]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fileType",
+                      "value": "usersEligibilityFile"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) Your organization ID, provided by Kard."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d534b8af-9705-4c97-b48c-c3f1d987f36a",
+              "name": "Error response with status 401",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "issuers",
+                    ":organizationId",
+                    "files"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page[size]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page[after]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fileType",
+                      "value": "usersEligibilityFile"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) Your organization ID, provided by Kard."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8c55756a-e747-4f5b-b90e-63e305ed095e",
+              "name": "Error response with status 404",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "issuers",
+                    ":organizationId",
+                    "files"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page[size]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page[after]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fileType",
+                      "value": "usersEligibilityFile"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) Your organization ID, provided by Kard."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6abfaed3-d45b-42eb-bc3e-e29d4c7dc431",
+              "name": "Error response with status 500",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "issuers",
+                    ":organizationId",
+                    "files"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page[size]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page[after]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fileType",
+                      "value": "usersEligibilityFile"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "organizationId",
+                      "description": "(Required) Your organization ID, provided by Kard."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Bearer authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://rewards-api.getkard.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "34acb2d2-ac8d-41b1-9730-1cc6e39df415",
+    "name": "API Reference attributions Files API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

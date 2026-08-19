@@ -1,0 +1,203 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference attributions users > Rewards API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "users > Rewards",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Offers By User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rewards-api.getkard.com/v2/issuers/:organizationId/users/:userId/offers",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[after]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[before]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[search]",
+                "value": "",
+                "type": "query",
+                "description": "Case-insensitive substring search. Returns offers whose offer name or category name contains the search string."
+              },
+              {
+                "name": "filter[purchaseChannel]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[category]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[isTargeted]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "If provided, response will be sorted by the specified fields"
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "CSV list of included resources in the response (e.g \"categories\"). Allowed value is `categories`."
+              },
+              {
+                "name": "supportedComponents",
+                "value": "",
+                "type": "query",
+                "description": "UI component types to include in the response."
+              }
+            ]
+          },
+          "docs": "Retrieve national brand offers that a specified user is eligible for. Call this endpoint to build out your\n[targeted offers UX experience](/2024-10-01/api/getting-started#b-discover-a-lapsed-customer-clo). Local offers details\ncan be found by calling the [Get Eligible Locations](/2024-10-01/api/rewards/locations).<br/>\n<b>Required scopes:</b> `rewards:read`"
+        },
+        {
+          "info": {
+            "name": "Get Locations By User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rewards-api.getkard.com/v2/issuers/:organizationId/users/:userId/locations",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[after]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page[before]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[name]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[city]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[zipCode]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[state]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[category]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[longitude]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[latitude]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter[radius]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "If provided, response will be sorted by the specified fields"
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "CSV list of included resources in the response (e.g \"offers,categories\"). Allowed values are `offers` and `categories`."
+              },
+              {
+                "name": "supportedComponents",
+                "value": "",
+                "type": "query",
+                "description": "UI component types to include in included offers."
+              }
+            ]
+          },
+          "docs": "Retrieve national and local geographic locations that a specified user has eligible in-store offers at. Use this endpoint to build\nout your [map-specific UX experiences](/2024-10-01/api/getting-started#c-discover-clos-near-you-map-view). Please note\nthat Longitude and Latitude fields are prioritized over State, City and Zipcode and are the recommended search\npattern.<br/>\n<br/>\n<b>Required scopes:</b> `rewards:read`"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

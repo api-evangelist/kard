@@ -1,0 +1,127 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference attributions Files API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Files",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Files",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rewards-api.getkard.com/v2/issuers/:organizationId/files/metadata",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "filter[dateFrom]",
+                "value": "",
+                "type": "query",
+                "description": "Start date for filtering files (format ISO8601). If not provided, defaults to current date minus 1 month."
+              },
+              {
+                "name": "filter[dateTo]",
+                "value": "",
+                "type": "query",
+                "description": "End date for filtering files (format ISO8601). If not provided, defaults to current date."
+              },
+              {
+                "name": "filter[fileType]",
+                "value": "",
+                "type": "query",
+                "description": "The document file type."
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page. Defaults to 10 if not specified and maximum value allowed 100 items per page."
+              },
+              {
+                "name": "page[after]",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for forward pagination (next page)."
+              },
+              {
+                "name": "page[before]",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for backward pagination (previous page)."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "If provided, response will be sorted by the specified fields. Defaults to descending sentDate, equivalent to \"-sentDate\""
+              }
+            ]
+          },
+          "docs": "Retrieves metadata for files associated with a specific issuer/organization.\nThis endpoint supports pagination and sorting options to efficiently navigate \nthrough potentially large sets of file metadata.\n<b>Required scopes:</b> `files.read`"
+        },
+        {
+          "info": {
+            "name": "List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rewards-api.getkard.com/issuers/:organizationId/files",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path",
+                "description": "Your organization ID, provided by Kard."
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to be returned [1-100], default is 10."
+              },
+              {
+                "name": "page[after]",
+                "value": "",
+                "type": "query",
+                "description": "Cursor value to retrieve next page of results if provided. Value can be received from the 'links' section of previous API calls."
+              },
+              {
+                "name": "fileType",
+                "value": "",
+                "type": "query",
+                "description": "The document file type."
+              }
+            ]
+          },
+          "docs": "Retrieve file information for users eligibility and reconciliation files, along with file download URL links.<br/>\n<b>Required scopes:</b> `files.read`"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

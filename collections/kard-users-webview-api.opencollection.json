@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference attributions users > WebView API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "users > WebView",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get WebView Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://rewards-api.getkard.com/v2/auth/issuers/:organizationId/users/:userId/token",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves an OAuth token for webview authentication."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

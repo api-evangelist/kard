@@ -1,0 +1,241 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference attributions users API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://rewards-api.getkard.com/v2/issuers/:organizationId/users",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Call this endpoint to enroll a specified user into your rewards program.<br/>\n\n<b>Required scopes:</b>&nbsp;&nbsp;`user:write`<br/>\n<b>Note:</b> `Maximum of 100 users can be created per request`."
+        },
+        {
+          "info": {
+            "name": "Get User By ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rewards-api.getkard.com/v2/issuers/:organizationId/users/:userId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Call this endpoint to fetch the details on a specified user.<br/>\n<br/>\n<b>Required scopes:</b>&nbsp;&nbsp;`user:read`"
+        },
+        {
+          "info": {
+            "name": "Update User",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://rewards-api.getkard.com/v2/issuers/:organizationId/users/:userId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Call this endpoint to update the details on a specified user.<br/>\n\n<b>Required scopes:</b> `user:update`"
+        },
+        {
+          "info": {
+            "name": "Delete User",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://rewards-api.getkard.com/v2/issuers/:organizationId/users/:userId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Call this endpoint to delete a specified enrolled user from the rewards program and Kard's system. Users can be re-enrolled into rewards by calling the [Create User](/2024-10-01/api/users/create) endpoint using the same `id` from before.<br/>\n\n<b>Required scopes:</b> `user:delete`"
+        },
+        {
+          "info": {
+            "name": "Create User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://rewards-api.getkard.com/users/users",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Call this endpoint to enroll a specified user into your rewards program. Learn more about the [Enrolling Users](https://github.com/kard-financial/kard-postman#a-cardholders) flow based on your use case here.<br/>\n<b>Required scopes:</b> `user:write`"
+        },
+        {
+          "info": {
+            "name": "Create User Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://rewards-api.getkard.com/users/users/:id/cards",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Referring partner user ID from issuer that specifies user"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Call this endpoint to create a card that a specified user enrolled in rewards will use to make purchases and earn rewards.<br/>\n<b>Required scopes:</b> `user:write`"
+        },
+        {
+          "info": {
+            "name": "Update User",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://rewards-api.getkard.com/users/users/:id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Referring partner user ID from issuer that specifies user"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Call this endpoint to update the details on a specified user. If you would like to add a card to a specified user, please refer to the [Create User Card endpoint](/legacy/api/users/create-user-card).<br/>\n<b>Required scopes:</b> `user:update`"
+        },
+        {
+          "info": {
+            "name": "Delete User",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://rewards-api.getkard.com/users/users/:id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Referring partner user ID from issuer that specifies user"
+              }
+            ]
+          },
+          "docs": "Call this endpoint to delete a specified enrolled user from the rewards program and Kard's system. Users can be re-enrolled into rewards by calling the [Create User](/legacy/api/users/create-user) endpoint using the same `referringPartnerUserId` from before. Deleting a user will remove all the user fields for that specific user from Kard’s system.<br/>\n<b>Required scopes:</b> `user:delete`"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

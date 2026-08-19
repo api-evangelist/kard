@@ -1,0 +1,241 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference attributions transactions API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "transactions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Incoming Transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://rewards-api.getkard.com/v2/issuers/:organizationId/transactions",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Call this endpoint to send all transactions made by all your enrolled users in your rewards program. The request body will depend on the transaction type.<br/>\nPlease use the correct type when calling the endpoint:\n- `transaction`: These incoming transactions will be processed and matched by the Kard system. Learn more about the [Transaction CLO Matching](https://github.com/kard-financial/kard-postman#c-transaction-clo-matching) flow here.\n- `matchedTransaction`: For pre-matched transactions tha"
+        },
+        {
+          "info": {
+            "name": "Create Bulk Transactions Upload URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://rewards-api.getkard.com/v2/issuers/:organizationId/transactions/uploads",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generates up to 10 presigned PUT URLs for uploading JSONL transaction files (up to 5GB each) directly\nto storage. Each URL is valid for 15 minutes. Use the returned URL to upload the file via an HTTP PUT request with the\nbinary file content as the body. If a URL expires before the upload completes, you must request a new one.\nFiles can be uploaded as plain JSONL or as a gzip-compressed file.\nSupports both `incomingTransactionsFile` for daily transaction ingestion and `historicalTransactionsFile`"
+        },
+        {
+          "info": {
+            "name": "Create Audits",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://rewards-api.getkard.com/v2/issuers/:organizationId/users/:userId/audits",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the user as defined on the issuers system"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Call this endpoint to request that a particular transaction be audited further by the Kard system, in the event of a missing cashback claim, incorrect cashback amount claim or other mis-match claims.<br/>\n<b>Required scopes:</b> `audit:write`"
+        },
+        {
+          "info": {
+            "name": "Get Earned Rewards",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rewards-api.getkard.com/v2/issuers/:organizationId/users/:userId/earned-rewards",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the user as defined on the issuers system"
+              },
+              {
+                "name": "page[after]",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for next page (base64-encoded timestamp + transaction ID)"
+              },
+              {
+                "name": "page[before]",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for previous page (base64-encoded timestamp + transaction ID)"
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page"
+              },
+              {
+                "name": "filter[status]",
+                "value": "",
+                "type": "query",
+                "description": "Filter by transaction status. Supported values are `APPROVED` and `SETTLED`. Defaults to `SETTLED` when omitted. When `APPROVED` is specified, only approved transactions that do not yet have a corresponding settled transaction are returned."
+              },
+              {
+                "name": "filter[paidInFullOnly]",
+                "value": "",
+                "type": "query",
+                "description": "When `true`, only return transactions that have been paid in full to the issuer (`paidToIssuer` is `PAID_IN_FULL`). By default (`false`), any matched transaction is returned regardless of payment status. This also controls whether unpaid transactions contribute to `lifetimeRewardsInCents`. Has no effect on `APPROVED` transactions, which are always returned when requested."
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of related resources to include in the response. Supported values are `merchant` and `offer`."
+              }
+            ]
+          },
+          "docs": "Retrieve rewarded transaction history for a specific user. By default this returns only SETTLED transactions within the last 12 months regardless of payment status. Pass `filter[paidInFullOnly]=true` to restrict the response to matched transactions that have been paid in full to the issuer (`paidToIssuer` is `PAID_IN_FULL`).\n<br/>\n<b>Required scopes:</b> `transaction:read`\n<br/>\n<b>Query Limit:</b> Maximum of 12 months of transaction data can be queried."
+        },
+        {
+          "info": {
+            "name": "Create Incoming Transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://rewards-api.getkard.com/transactions/incoming",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Call this endpoint to send all incoming transactions made by all enrolled users in your rewards program. These incoming transactions will be processed and matched by the Kard system. Learn more about the [Transaction CLO Matching](https://github.com/kard-financial/kard-postman#c-transaction-clo-matching) flow here.<br/>\n<b>Required scopes:</b> `transaction:write`"
+        },
+        {
+          "info": {
+            "name": "Create Audit",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://rewards-api.getkard.com/transactions/audit",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Call this endpoint to request that a particular transaction be audited further by the Kard system, in the event of a missing cashback claim, incorrect cashback amount claim or other mis-match claims.<br/>\n<b>Required scopes:</b> `audit:write`"
+        },
+        {
+          "info": {
+            "name": "Get Audit Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rewards-api.getkard.com/transactions/audit/:id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The audit ID provided by Kard's system"
+              }
+            ]
+          },
+          "docs": "Call this endpoint to retrieve an update on the status of a created transaction audit. Note, the resolutionCode, resolutionDescription and resolutionTimeStamp will not be available until the audit has a “CLOSED” status signifying its resolution. <br/>\n<b>Required scopes:</b> `audit:read`"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

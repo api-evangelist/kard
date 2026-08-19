@@ -1,0 +1,186 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference attributions users > attributions API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "users > attributions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Attribution Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://rewards-api.getkard.com/v2/issuers/:organizationId/users/:userId/attributions",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Call this endpoint to send attribution events made by a single enrolled user for processing. A maximum of 100 events can be included in a single request.\n\n<b>Required scopes:</b> `attributions:write`"
+        },
+        {
+          "info": {
+            "name": "Activate Offer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://rewards-api.getkard.com/v2/issuers/:organizationId/users/:userId/offers/:offerId/activate",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "offerId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the offer being activated"
+              },
+              {
+                "name": "supportedComponents",
+                "value": "",
+                "type": "query",
+                "description": "UI component types to include in the offer response (when include=offer)."
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Related resources to include in the response. Allowed value is `offer`."
+              }
+            ]
+          },
+          "docs": "Record when a user activates an offer. Creates an attribution event with eventCode=ACTIVATE and medium=CTA.\nOptionally include the offer data by passing `include=offer`."
+        },
+        {
+          "info": {
+            "name": "Boost Offer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://rewards-api.getkard.com/v2/issuers/:organizationId/users/:userId/offers/:offerId/boost",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "offerId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the offer being boosted"
+              },
+              {
+                "name": "supportedComponents",
+                "value": "",
+                "type": "query",
+                "description": "UI component types to include in the offer response (when include=offer)."
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Related resources to include in the response. Allowed value is `offer`."
+              }
+            ]
+          },
+          "docs": "Record when a user boosts an offer. Creates an attribution event with eventCode=BOOST and medium=CTA.\nOptionally include the offer data by passing `include=offer`."
+        },
+        {
+          "info": {
+            "name": "Activate Placement Slot",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://rewards-api.getkard.com/v2/issuers/:organizationId/users/:userId/placements/:placementId/slot/:slotId/activate",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "organizationId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "placementId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the placement (UUID v7)"
+              },
+              {
+                "name": "slotId",
+                "value": "",
+                "type": "path",
+                "description": "Stable identifier for the slot within the placement"
+              }
+            ]
+          },
+          "docs": "Record when a user activates a batch-activation placement slot. Writes a slot-level\n`placementSlotAttribution` ACTIVATE event and fans out a per-offer\n`offerAttribution` ACTIVATE event for every offer resolved by the slot's content\nstrategy. The slot-level event id and the resolved `offerIds` are returned so the\npartner can render the batch immediately without an extra round-trip to re-fetch\nthe placement content.\n\n<b>Required scopes:</b> `attributions:write`"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

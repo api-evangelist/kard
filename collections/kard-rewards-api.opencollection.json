@@ -1,0 +1,639 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "API Reference attributions rewards API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "rewards",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Eligible Merchants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rewards-api.getkard.com/rewards/merchant/user/:referringPartnerUserId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "referringPartnerUserId",
+                "value": "",
+                "type": "path",
+                "description": "Referring partner user ID from issuer that specifies user"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number [>= 0], (default = 0)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of merchants to be returned [1 - 200], (default = 200)"
+              },
+              {
+                "name": "category",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve national merchants data that a specified user has eligible national offers at. Call this endpoint to build out your [targeted offers UX experience](https://github.com/kard-financial/kard-postman?tab=readme-ov-file#b-targeted-offers). Local merchants and offers details can be found by calling the [Get Eligible Locations](/legacy/api/rewards/locations/get-locations-by-user) endpoint with the `includeLocal` query parameter.<br/>\n<b>Required scopes:</b> `rewards:read`"
+        },
+        {
+          "info": {
+            "name": "Get Merchant by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rewards-api.getkard.com/rewards/merchant/:id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The Kard merchant ID to query"
+              }
+            ]
+          },
+          "docs": "Retrieve merchant data for a specific Kard merchant ID.<br/>\n<b>Required scopes:</b> `rewards:read`"
+        },
+        {
+          "info": {
+            "name": "Get Merchants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rewards-api.getkard.com/rewards/merchant",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number [>= 0], (default = 0)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of merchants [1 - 200], (default = 200)"
+              },
+              {
+                "name": "source",
+                "value": "",
+                "type": "query",
+                "description": "Merchant source"
+              },
+              {
+                "name": "category",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve ALL national and local merchant data regardless of whether a user is eligible to see them. This endpoint is a legacy endpoint and will no longer be maintained soon. Instead, use [Get Eligible Merchants](/legacy/api/rewards/merchants/get-merchants-by-user) to retrieve national merchant data and build your [targeted offers UX experience](https://github.com/kard-financial/kard-postman?tab=readme-ov-file#b-targeted-offers). Local merchants and offers details can be found by calling the [Get"
+        },
+        {
+          "info": {
+            "name": "Get Eligible Offers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rewards-api.getkard.com/rewards/merchant/offers/user/:referringPartnerUserId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "referringPartnerUserId",
+                "value": "",
+                "type": "path",
+                "description": "Referring partner user ID from issuer that specifies user"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number [>= 0], (default = 0)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of offers to be returned [1 - 200], (default = 200)"
+              },
+              {
+                "name": "merchantId",
+                "value": "",
+                "type": "query",
+                "description": "Merchant ID in Kard's system"
+              },
+              {
+                "name": "offerType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "category",
+                "value": "",
+                "type": "query",
+                "description": "Category of merchant associated with offer. Please use URL Encode for non single word categories. (Food & Beverage should be Food%20%26%20Beverage)"
+              },
+              {
+                "name": "isTargeted",
+                "value": "",
+                "type": "query",
+                "description": "True returns targeted offers, false returns targeted and non-targeted offers"
+              },
+              {
+                "name": "startDateSort",
+                "value": "",
+                "type": "query",
+                "description": "Sort offer start dates chronologically (1 for ascending, -1 for descending)"
+              },
+              {
+                "name": "expirationDateSort",
+                "value": "",
+                "type": "query",
+                "description": "Sort offer expiration dates chronologically (1 for ascending, -1 for descending)"
+              },
+              {
+                "name": "merchantNameSort",
+                "value": "",
+                "type": "query",
+                "description": "Sort merchant names (1 for A-Z, -1 for Z-A)"
+              },
+              {
+                "name": "supportedComponents",
+                "value": "",
+                "type": "query",
+                "description": "UI component types to include in the response."
+              }
+            ]
+          },
+          "docs": "Retrieve national offers data that a specified user is eligible for. Call this endpoint to build out your [targeted offers UX experience](https://github.com/kard-financial/kard-postman?tab=readme-ov-file#b-targeted-offers). Local merchants and offers details can be found by calling the [Get Eligible Locations](/legacy/api/rewards/locations/get-locations-by-user) endpoint with the `includeLocal` query parameter.<br/>\n<b>Required scopes:</b> `rewards:read`"
+        },
+        {
+          "info": {
+            "name": "Get Offers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rewards-api.getkard.com/rewards/merchant/offers",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number [>= 0], (default = 0)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of offers [1 - 200], (default = 200)"
+              },
+              {
+                "name": "source",
+                "value": "",
+                "type": "query",
+                "description": "Source of merchant associated with offer"
+              },
+              {
+                "name": "category",
+                "value": "",
+                "type": "query",
+                "description": "Category of merchant associated with offer. Please use URL Encode for non single word categories. (Food & Beverage should be Food%20%26%20Beverage)"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Name of offer"
+              },
+              {
+                "name": "offerType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "merchantId",
+                "value": "",
+                "type": "query",
+                "description": "Merchant ID in Kard's system"
+              },
+              {
+                "name": "isTargeted",
+                "value": "",
+                "type": "query",
+                "description": "True returns targeted offers, false returns targeted and non-targeted offers"
+              },
+              {
+                "name": "startDateStart",
+                "value": "",
+                "type": "query",
+                "description": "Time in string format for offer startDate search (UTC)"
+              },
+              {
+                "name": "startDateEnd",
+                "value": "",
+                "type": "query",
+                "description": "Time in string format for offer startDate search (UTC)"
+              },
+              {
+                "name": "expirationDateStart",
+                "value": "",
+                "type": "query",
+                "description": "Time in string format for offer expirationDate search (UTC)"
+              },
+              {
+                "name": "expirationDateEnd",
+                "value": "",
+                "type": "query",
+                "description": "Time in string format for offer expirationDate search (UTC)"
+              },
+              {
+                "name": "startDateSort",
+                "value": "",
+                "type": "query",
+                "description": "Sort offer start dates chronologically (1 for ascending, -1 for descending)"
+              },
+              {
+                "name": "expirationDateSort",
+                "value": "",
+                "type": "query",
+                "description": "Sort offer expiration dates chronologically (1 for ascending, -1 for descending)"
+              },
+              {
+                "name": "merchantNameSort",
+                "value": "",
+                "type": "query",
+                "description": "Sort merchant names (1 for A-Z, -1 for Z-A)"
+              }
+            ]
+          },
+          "docs": "Retrieve ALL national and local offer data regardless of whether a user is eligible to see them. This endpoint is a legacy endpoint and will no longer be maintained soon. Instead, use [Get Eligible Offers](/legacy/api/rewards/offers/get-offers-by-user) to retrieve national merchant data and build your [targeted offers UX experience](https://github.com/kard-financial/kard-postman?tab=readme-ov-file#b-targeted-offers). Local merchants and offers details can be found by calling the [Get Eligible Lo"
+        },
+        {
+          "info": {
+            "name": "Get Eligible Locations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rewards-api.getkard.com/rewards/merchant/locations/user/:referringPartnerUserId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "referringPartnerUserId",
+                "value": "",
+                "type": "path",
+                "description": "Referring partner user ID from issuer that specifies user"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number [>= 0], (default = 0)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of locations to be returned [1 - 200], (default = 200)"
+              },
+              {
+                "name": "locationNameSort",
+                "value": "",
+                "type": "query",
+                "description": "Sort location names (1 for A-Z, -1 for Z-A)"
+              },
+              {
+                "name": "citySort",
+                "value": "",
+                "type": "query",
+                "description": "Sort city names (1 for A-Z, -1 for Z-A)"
+              },
+              {
+                "name": "stateSort",
+                "value": "",
+                "type": "query",
+                "description": "Sort state names (1 for A-Z, -1 for Z-A)"
+              },
+              {
+                "name": "locationName",
+                "value": "",
+                "type": "query",
+                "description": "Name of location"
+              },
+              {
+                "name": "city",
+                "value": "",
+                "type": "query",
+                "description": "City of location; <b>REQUIRES</b> state query parameter"
+              },
+              {
+                "name": "zipCode",
+                "value": "",
+                "type": "query",
+                "description": "Zip Code of location; <b>CANNOT</b> provide State, City, Longitude, Latitude, or Radius query params when using zipCode"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "State of location; <b>REQUIRES</b> city field"
+              },
+              {
+                "name": "googleId",
+                "value": "",
+                "type": "query",
+                "description": "GoogleId from location"
+              },
+              {
+                "name": "source",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "category",
+                "value": "",
+                "type": "query",
+                "description": "Category of merchant associated with location. Please use URL Encode for non single word categories. (Food & Beverage should be Food%20%26%20Beverage)"
+              },
+              {
+                "name": "longitude",
+                "value": "",
+                "type": "query",
+                "description": "Longitude to search locations from [-180 - 180], <b>REQUIRES</b> latitude field"
+              },
+              {
+                "name": "latitude",
+                "value": "",
+                "type": "query",
+                "description": "Latitude to search locations from [-90 - 90], <b>REQUIRES</b> longitude field"
+              },
+              {
+                "name": "radius",
+                "value": "",
+                "type": "query",
+                "description": "Radius to search for locations in miles [1 - 50], (default = 10). <b>REQUIRES</b> longitude & latitude fields"
+              },
+              {
+                "name": "includeLocal",
+                "value": "",
+                "type": "query",
+                "description": "When included, the response will include local merchant locations alongside national merchant locations. If omitted, the response will only contain national merchant locations."
+              },
+              {
+                "name": "createdDateStart",
+                "value": "",
+                "type": "query",
+                "description": "Time in string format for location createdDate search start (UTC)"
+              },
+              {
+                "name": "createdDateEnd",
+                "value": "",
+                "type": "query",
+                "description": "Time in string format for location createdDate search end (UTC)"
+              },
+              {
+                "name": "supportedComponents",
+                "value": "",
+                "type": "query",
+                "description": "UI component types to include in included offers."
+              }
+            ]
+          },
+          "docs": "Retrieve national and local geographic locations data that a specified user has eligible in-store offers at. To include local merchant locations, include the `includeLocal` query parameter. Call this endpoint to build out your [targeted offers](https://github.com/kard-financial/kard-postman?tab=readme-ov-file#b-targeted-offers) and [map-specific UX experiences](https://github.com/kard-financial/kard-postman#c-discover-clos-near-you-map-view). Please note that Longitude and Latitude fields are pr"
+        },
+        {
+          "info": {
+            "name": "Get Location by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rewards-api.getkard.com/rewards/merchant/location/:id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The Kard location ID to query"
+              }
+            ]
+          },
+          "docs": "Retrieve location data for a specific Kard location ID.<br/>\n<b>Required scopes:</b> `rewards:read`"
+        },
+        {
+          "info": {
+            "name": "Get Locations by Merchant ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rewards-api.getkard.com/rewards/merchant/locations/:merchantId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "merchantId",
+                "value": "",
+                "type": "path",
+                "description": "The Kard merchant ID to query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number [>= 0], (default = 0)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of locations [1 - 200], (default = 200)"
+              }
+            ]
+          },
+          "docs": "Retrieve all locations associated to a specific Kard merchant ID.<br/>\n<b>Required scopes:</b> `rewards:read`"
+        },
+        {
+          "info": {
+            "name": "Get Locations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://rewards-api.getkard.com/rewards/merchant/locations",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number [>= 0], (default = 0)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of locations [1 - 200], (default = 200)"
+              },
+              {
+                "name": "googleId",
+                "value": "",
+                "type": "query",
+                "description": "GoogleId from location"
+              },
+              {
+                "name": "city",
+                "value": "",
+                "type": "query",
+                "description": "City of location; <b>REQUIRES</b> state query parameter"
+              },
+              {
+                "name": "zipCode",
+                "value": "",
+                "type": "query",
+                "description": "Zip Code of location; <b>CANNOT</b> provide State, City, Longitude, Latitude, or Radius query params when using zipCode"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "State of location; <b>REQUIRES</b> city field"
+              },
+              {
+                "name": "locationNameSort",
+                "value": "",
+                "type": "query",
+                "description": "Sort location names (1 for A-Z, -1 for Z-A)"
+              },
+              {
+                "name": "citySort",
+                "value": "",
+                "type": "query",
+                "description": "Sort city names (1 for A-Z, -1 for Z-A)"
+              },
+              {
+                "name": "stateSort",
+                "value": "",
+                "type": "query",
+                "description": "Sort state names (1 for A-Z, -1 for Z-A)"
+              },
+              {
+                "name": "longitude",
+                "value": "",
+                "type": "query",
+                "description": "Longitude to search locations from [-180 - 180], <b>REQUIRES</b> latitude field"
+              },
+              {
+                "name": "latitude",
+                "value": "",
+                "type": "query",
+                "description": "Latitude to search locations from [-90 - 90], <b>REQUIRES</b> longitude field"
+              },
+              {
+                "name": "radius",
+                "value": "",
+                "type": "query",
+                "description": "Radius to search for locations in miles [1 - 50], (default = 10). <b>REQUIRES</b> longitude & latitude fields"
+              },
+              {
+                "name": "source",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "category",
+                "value": "",
+                "type": "query",
+                "description": "Category of merchant associated with location. Please use URL Encode for non single word categories. (Food & Beverage should be Food%20%26%20Beverage)"
+              },
+              {
+                "name": "locationName",
+                "value": "",
+                "type": "query",
+                "description": "Name of location"
+              },
+              {
+                "name": "createdDateStart",
+                "value": "",
+                "type": "query",
+                "description": "Time in string format for location createdDate search start (UTC)"
+              },
+              {
+                "name": "createdDateEnd",
+                "value": "",
+                "type": "query",
+                "description": "Time in string format for location createdDate search start (UTC)"
+              }
+            ]
+          },
+          "docs": "Retrieve ALL national and local geographic locations data regardless of whether a user is eligible to see them. This endpoint is a legacy endpoint and will no longer be maintained soon. Instead, use [Get Eligible Locations](/legacy/api/rewards/locations/get-locations-by-user) to build your [map-specific UX experiences](https://github.com/kard-financial/kard-postman#c-discover-clos-near-you-map-view).<br/>\n<b>Required scopes:</b> `rewards:read`"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
