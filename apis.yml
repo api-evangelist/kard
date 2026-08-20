@@ -36,6 +36,17 @@ tags:
 - Fintech
 - Commerce Media
 - Advertising
+- Transaction
+- Cashback
+- Webhook
+tags_raw:
+- Company
+- Rewards
+- Card-Linked Offers
+- Loyalty
+- Fintech
+- Commerce Media
+- Advertising
 - Transactions
 - Cashback
 - Webhooks
@@ -46,6 +57,8 @@ apis:
   humanURL: https://docs.getkard.com/home
   baseURL: https://rewards-api.getkard.com
   tags:
+  - Attributions
+  tags_raw:
   - attributions
   properties:
   - type: OpenAPI
@@ -74,6 +87,8 @@ apis:
   humanURL: https://docs.getkard.com/home
   baseURL: https://rewards-api.getkard.com
   tags:
+  - File
+  tags_raw:
   - Files
   properties:
   - type: OpenAPI
@@ -160,6 +175,8 @@ apis:
   humanURL: https://docs.getkard.com/home
   baseURL: https://rewards-api.getkard.com
   tags:
+  - Organization
+  tags_raw:
   - Organizations
   properties:
   - type: OpenAPI
@@ -303,6 +320,8 @@ apis:
   humanURL: https://docs.getkard.com/home
   baseURL: https://rewards-api.getkard.com
   tags:
+  - Rewards
+  tags_raw:
   - rewards
   properties:
   - type: OpenAPI
@@ -331,6 +350,8 @@ apis:
   humanURL: https://docs.getkard.com/home
   baseURL: https://rewards-api.getkard.com
   tags:
+  - Transaction
+  tags_raw:
   - transactions
   properties:
   - type: OpenAPI
@@ -359,6 +380,8 @@ apis:
   humanURL: https://docs.getkard.com/home
   baseURL: https://rewards-api.getkard.com
   tags:
+  - User
+  tags_raw:
   - users
   properties:
   - type: OpenAPI
