@@ -5,6 +5,18 @@ description: Kard is an independent commerce media network and card-linked-offer
   offers and redemption locations, run attributions and placements, and receive earned-reward webhook notifications — powering
   embedded loyalty and cashback programs without building the matching infrastructure. Marketers use the same network to reach
   47M+ cardholders with performance-based, transaction-driven offers.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
