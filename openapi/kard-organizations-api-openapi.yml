@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: API Reference attributions Organizations API
+  title: Reference Organizations API
   version: 1.0.0
 servers:
 - url: https://rewards-api.getkard.com
@@ -30,47 +30,34 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_organizations:ExternalOrganizationResponse'
+                $ref: '#/components/schemas/type_organizations_ExternalOrganizationResponse'
         '401':
           description: Error response with status 401
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '403':
           description: Error response with status 403
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '404':
           description: Error response with status 404
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '500':
           description: Error response with status 500
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
 components:
   schemas:
-    type_commons:ErrorSource:
-      type: object
-      properties:
-        pointer:
-          type: string
-          description: A JSON pointer to the value in the request document that caused the error
-        parameter:
-          type: string
-          description: A string indicating which URI query parameter caused the error
-        header:
-          type: string
-          description: A string indicating the name of a single request header which caused the error
-      title: ErrorSource
-    type_commons:ErrorObject:
+    type_commons_ErrorObject:
       type: object
       properties:
         status:
@@ -83,7 +70,7 @@ components:
           type: string
           description: Description of the specific occurance of the error
         source:
-          $ref: '#/components/schemas/type_commons:ErrorSource'
+          $ref: '#/components/schemas/type_commons_ErrorSource'
           description: An object containing a reference to the primary source of the error
         id:
           type: string
@@ -93,14 +80,14 @@ components:
       - title
       - detail
       title: ErrorObject
-    type_internal-organizations:EnrolledReward:
+    type_internal-organizations_EnrolledReward:
       type: string
       enum:
       - CARDLINKED
       - AFFILIATE
       description: Rewards programs an organization is enrolled in
       title: EnrolledReward
-    type_organizations:ExternalOrganizationResponse:
+    type_organizations_ExternalOrganizationResponse:
       type: object
       properties:
         type:
@@ -111,14 +98,24 @@ components:
           type: string
           description: Unique identifier of the organization
         attributes:
-          $ref: '#/components/schemas/type_organizations:ExternalOrganizationAttributes'
+          $ref: '#/components/schemas/type_organizations_ExternalOrganizationAttributes'
       required:
       - type
       - id
       - attributes
       description: External organization resource response
       title: ExternalOrganizationResponse
-    type_commons:CardNetwork:
+    type_commons_ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_ErrorObject'
+      required:
+      - errors
+      title: ErrorResponse
+    type_commons_CardNetwork:
       type: string
       enum:
       - VISA
@@ -127,7 +124,7 @@ components:
       - DISCOVER
       description: Supported card networks
       title: CardNetwork
-    type_organizations:ExternalOrganizationAttributes:
+    type_organizations_ExternalOrganizationAttributes:
       type: object
       properties:
         name:
@@ -136,12 +133,12 @@ components:
         enrolledRewards:
           type: array
           items:
-            $ref: '#/components/schemas/type_internal-organizations:EnrolledReward'
+            $ref: '#/components/schemas/type_internal-organizations_EnrolledReward'
           description: Rewards programs the organization is enrolled in
         cardNetworks:
           type: array
           items:
-            $ref: '#/components/schemas/type_commons:CardNetwork'
+            $ref: '#/components/schemas/type_commons_CardNetwork'
           description: Card networks supported by the organization
         bins:
           type: array
@@ -170,16 +167,19 @@ components:
       - cardlinkedUserCommissionSplit
       description: Limited set of organization attributes exposed to external consumers
       title: ExternalOrganizationAttributes
-    type_commons:ErrorResponse:
+    type_commons_ErrorSource:
       type: object
       properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons:ErrorObject'
-      required:
-      - errors
-      title: ErrorResponse
+        pointer:
+          type: string
+          description: A JSON pointer to the value in the request document that caused the error
+        parameter:
+          type: string
+          description: A string indicating which URI query parameter caused the error
+        header:
+          type: string
+          description: A string indicating the name of a single request header which caused the error
+      title: ErrorSource
   securitySchemes:
     OAuthScheme:
       type: http

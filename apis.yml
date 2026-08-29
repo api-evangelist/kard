@@ -528,6 +528,16 @@ apis:
     url: asyncapi/kard-notifications-webhooks.yml
   - type: AgenticAccess
     url: agentic-access/kard-agentic-access.yml
+- aid: kard:kard-api-reference-api
+  name: Kard API Reference API
+  description: The API Reference API from Kard — 0 operation(s) for api reference.
+  humanURL: https://docs.getkard.com/home
+  baseURL: https://rewards-api.getkard.com
+  tags:
+  - API Reference
+  properties:
+  - type: OpenAPI
+    url: openapi/kard-api-reference-api-openapi.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

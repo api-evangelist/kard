@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: API Reference attributions users > Rewards API
+  title: Reference users > Rewards API
   version: 1.0.0
 servers:
 - url: https://rewards-api.getkard.com
@@ -28,12 +28,12 @@ paths:
         in: path
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:OrganizationId'
+          $ref: '#/components/schemas/type_commons_OrganizationId'
       - name: userId
         in: path
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:UserId'
+          $ref: '#/components/schemas/type_commons_UserId'
       - name: page[size]
         in: query
         required: false
@@ -61,12 +61,12 @@ paths:
         schema:
           type: array
           items:
-            $ref: '#/components/schemas/type_commons:PurchaseChannel'
+            $ref: '#/components/schemas/type_commons_PurchaseChannel'
       - name: filter[category]
         in: query
         required: false
         schema:
-          $ref: '#/components/schemas/type_commons:CategoryOption'
+          $ref: '#/components/schemas/type_commons_CategoryOption'
       - name: filter[isTargeted]
         in: query
         required: false
@@ -77,7 +77,7 @@ paths:
         description: If provided, response will be sorted by the specified fields
         required: false
         schema:
-          $ref: '#/components/schemas/type_users/rewards:OfferSortOptions'
+          $ref: '#/components/schemas/type_users_rewards_OfferSortOptions'
       - name: include
         in: query
         description: CSV list of included resources in the response (e.g "categories"). Allowed value is `categories`.
@@ -89,7 +89,7 @@ paths:
         description: UI component types to include in the response.
         required: false
         schema:
-          $ref: '#/components/schemas/type_users/rewards:ComponentType'
+          $ref: '#/components/schemas/type_users_rewards_ComponentType'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -102,31 +102,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_users/rewards:OffersResponseObject'
+                $ref: '#/components/schemas/type_users_rewards_OffersResponseObject'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '401':
           description: Error response with status 401
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '404':
           description: Error response with status 404
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '500':
           description: Error response with status 500
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
   /v2/issuers/{organizationId}/users/{userId}/locations:
     get:
       operationId: locations
@@ -149,12 +149,12 @@ paths:
         in: path
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:OrganizationId'
+          $ref: '#/components/schemas/type_commons_OrganizationId'
       - name: userId
         in: path
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:UserId'
+          $ref: '#/components/schemas/type_commons_UserId'
       - name: page[size]
         in: query
         required: false
@@ -189,12 +189,12 @@ paths:
         in: query
         required: false
         schema:
-          $ref: '#/components/schemas/type_commons:State'
+          $ref: '#/components/schemas/type_commons_State'
       - name: filter[category]
         in: query
         required: false
         schema:
-          $ref: '#/components/schemas/type_commons:CategoryOption'
+          $ref: '#/components/schemas/type_commons_CategoryOption'
       - name: filter[longitude]
         in: query
         required: false
@@ -217,7 +217,7 @@ paths:
         description: If provided, response will be sorted by the specified fields
         required: false
         schema:
-          $ref: '#/components/schemas/type_users/rewards:LocationSortOptions'
+          $ref: '#/components/schemas/type_users_rewards_LocationSortOptions'
       - name: include
         in: query
         description: CSV list of included resources in the response (e.g "offers,categories"). Allowed values are `offers` and `categories`.
@@ -229,7 +229,7 @@ paths:
         description: UI component types to include in included offers.
         required: false
         schema:
-          $ref: '#/components/schemas/type_users/rewards:ComponentType'
+          $ref: '#/components/schemas/type_users_rewards_ComponentType'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -242,81 +242,139 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_users/rewards:LocationsResponseObject'
+                $ref: '#/components/schemas/type_users_rewards_LocationsResponseObject'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '401':
           description: Error response with status 401
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '404':
           description: Error response with status 404
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '500':
           description: Error response with status 500
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
 components:
   schemas:
-    type_commons:ErrorSource:
+    type_users_rewards_ProgressBarSegments:
       type: object
       properties:
-        pointer:
-          type: string
-          description: A JSON pointer to the value in the request document that caused the error
-        parameter:
-          type: string
-          description: A string indicating which URI query parameter caused the error
-        header:
-          type: string
-          description: A string indicating the name of a single request header which caused the error
-      title: ErrorSource
-    type_commons:PurchaseChannel:
+        details:
+          $ref: '#/components/schemas/type_users_rewards_ProgressBarSegment'
+          description: Segment configuration for the details view
+        default:
+          $ref: '#/components/schemas/type_users_rewards_ProgressBarSegment'
+          description: Segment configuration for the default view
+        progress:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_users_rewards_ProgressBarSegmentProgress'
+          description: 'Per-segment fill state: one entry per segment node, index-aligned with the nodes (length equals the progress bar total). Reached nodes report 1 of 1 and not-yet-reached nodes 0 of 1; for a punch-card offer the in-progress node reports qualifying-purchase progress toward the next reward (Q mod N of N).'
+      required:
+      - default
+      - progress
+      description: Segment configuration for the progress bar in different layouts
+      title: ProgressBarSegments
+    type_users_rewards_Coordinates:
+      type: object
+      properties:
+        longitude:
+          type: number
+          format: double
+        latitude:
+          type: number
+          format: double
+      required:
+      - longitude
+      - latitude
+      title: Coordinates
+    type_commons_ResourceType:
+      type: string
+      description: Type of document returned
+      title: ResourceType
+    type_commons_PurchaseChannel:
       type: string
       enum:
       - INSTORE
       - ONLINE
       description: Purchase channel of offer
       title: PurchaseChannel
-    type_commons:OrganizationId:
-      type: string
-      description: Your issuer organization ID, provided by Kard
-      title: OrganizationId
-    type_commons:ErrorObject:
+    type_users_rewards_LocationRelationships:
       type: object
       properties:
-        status:
-          type: string
-          description: Status code returned from the request
-        title:
-          type: string
-          description: Name of error
-        detail:
-          type: string
-          description: Description of the specific occurance of the error
-        source:
-          $ref: '#/components/schemas/type_commons:ErrorSource'
-          description: An object containing a reference to the primary source of the error
+        offers:
+          $ref: '#/components/schemas/type_commons_RelationshipMultiple'
+        category:
+          $ref: '#/components/schemas/type_commons_RelationshipMultiple'
+      required:
+      - offers
+      - category
+      title: LocationRelationships
+    type_users_rewards_CategoryFields:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/type_commons_CategoryOption'
+          description: Name of the category
+      required:
+      - name
+      title: CategoryFields
+    type_users_rewards_CategoryData:
+      type: object
+      properties:
         id:
           type: string
-          description: The id of the resource which caused the error. Always returned for multi-status errors.
+          description: id of the category
+        type:
+          type: string
+          enum:
+          - category
       required:
-      - status
-      - title
-      - detail
-      title: ErrorObject
-    type_commons:CategoryOption:
+      - id
+      - type
+      title: CategoryData
+    type_users_rewards_ProgressBarSegmentSelection:
+      type: string
+      enum:
+      - CURRENT
+      - CURRENT_AND_BELOW
+      description: 'Supported selection strategies for highlighting segment nodes.
+
+        - CURRENT: select only the segment at currentProgress
+
+        - CURRENT_AND_BELOW: select the segment at currentProgress and all segments below it'
+      title: ProgressBarSegmentSelection
+    type_users_rewards_AmountType:
+      type: string
+      enum:
+      - CENTS
+      title: AmountType
+    type_commons_RelationshipData:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/type_commons_ResourceType'
+        id:
+          type: string
+          description: The ID of the related resource
+      required:
+      - type
+      - id
+      title: RelationshipData
+    type_commons_CategoryOption:
       type: string
       enum:
       - Arts & Entertainment
@@ -338,11 +396,22 @@ components:
       - Travel
       description: Category of merchant. Please use URL Encode for non single word categories. (Food & Beverage should be Food%20%26%20Beverage)
       title: CategoryOption
-    type_commons:UserId:
+    type_users_rewards_LocationPartnerIdType:
       type: string
-      description: The ID of the user as defined on the issuers system
-      title: UserId
-    type_commons:State:
+      enum:
+      - google
+      title: LocationPartnerIdType
+    type_users_rewards_CategoryRelationship:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_users_rewards_CategoryData'
+      required:
+      - data
+      title: CategoryRelationship
+    type_commons_State:
       type: string
       enum:
       - AL
@@ -405,16 +474,689 @@ components:
       - WI
       - WY
       title: State
-    type_commons:ErrorResponse:
+    type_users_rewards_ProgressBarSegmentProgress:
+      type: object
+      properties:
+        completed:
+          type: integer
+          description: Units completed within the current segment.
+        total:
+          type: integer
+          description: Total units required to complete the current segment.
+      required:
+      - completed
+      - total
+      description: Fill state of a single segment node, expressed as completed of total.
+      title: ProgressBarSegmentProgress
+    type_users_rewards_LogoFlareBorderColor:
+      type: string
+      enum:
+      - PRIMARY
+      - SECONDARY
+      description: Available border color options for logo flare
+      title: LogoFlareBorderColor
+    type_commons_MongoId:
+      type: string
+      description: The unique identifier for a document in the database
+      title: MongoId
+    type_users_rewards_LocationSortOptions:
+      type: string
+      enum:
+      - locationName
+      - -locationName
+      title: LocationSortOptions
+    type_commons_ErrorObject:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Status code returned from the request
+        title:
+          type: string
+          description: Name of error
+        detail:
+          type: string
+          description: Description of the specific occurance of the error
+        source:
+          $ref: '#/components/schemas/type_commons_ErrorSource'
+          description: An object containing a reference to the primary source of the error
+        id:
+          type: string
+          description: The id of the resource which caused the error. Always returned for multi-status errors.
+      required:
+      - status
+      - title
+      - detail
+      title: ErrorObject
+    type_users_rewards_Amount:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/type_users_rewards_AmountType'
+        value:
+          type: integer
+      required:
+      - type
+      - value
+      title: Amount
+    type_users_rewards_EligibilityOfferIncluded:
+      oneOf:
+      - $ref: '#/components/schemas/type_users_rewards_CategoryIncluded'
+      title: EligibilityOfferIncluded
+    type_commons_Links:
+      type: object
+      properties:
+        self:
+          type: string
+        prev:
+          type: string
+        next:
+          type: string
+      required:
+      - self
+      description: Related links to the API call
+      title: Links
+    type_users_rewards_CtaComponent:
+      type: object
+      properties:
+        buttonText:
+          type: string
+          description: Text to display on the button
+        buttonStyle:
+          $ref: '#/components/schemas/type_users_rewards_ButtonStyle'
+          description: Style of the button
+        action:
+          $ref: '#/components/schemas/type_users_rewards_CtaAction'
+          description: Action to perform when the button is clicked
+        startIcon:
+          type: string
+          description: Icon identifier to display on the button
+      required:
+      - buttonText
+      - buttonStyle
+      description: Call-to-action button component for offers
+      title: CtaComponent
+    type_users_rewards_LocationAttributes:
+      type: object
+      properties:
+        name:
+          type: string
+        address:
+          $ref: '#/components/schemas/type_users_rewards_EligibilityLocationAddress'
+        coordinates:
+          $ref: '#/components/schemas/type_users_rewards_Coordinates'
+        phone:
+          type: string
+        operationHours:
+          $ref: '#/components/schemas/type_users_rewards_OperationHours'
+        partnerIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_users_rewards_LocationPartnerId'
+          description: List of ids associated with the location from third party partners. Only applicable for LOCAL locations.
+      required:
+      - name
+      - address
+      - coordinates
+      - phone
+      - operationHours
+      - partnerIds
+      title: LocationAttributes
+    type_users_rewards_OfferComponents:
+      type: object
+      properties:
+        shortDescription:
+          type: string
+          description: Short description for the offer
+        longDescription:
+          type: string
+          description: Long description for the offer
+        baseReward:
+          type: string
+          description: Formatted reward string
+        boostedReward:
+          type: string
+          description: Formatted boosted reward string
+        cta:
+          $ref: '#/components/schemas/type_users_rewards_CtaComponent'
+          description: Call-to-action button component
+        tags:
+          type: array
+          items:
+            type: string
+          description: Tags for the offer
+        detailTags:
+          type: array
+          items:
+            type: string
+          description: Detail tags for the offer
+        logoFlare:
+          $ref: '#/components/schemas/type_users_rewards_LogoFlare'
+          description: Logo flare configuration for the offer
+        progressBar:
+          $ref: '#/components/schemas/type_users_rewards_ProgressBar'
+          description: Progress bar component for tracking offer redemptions
+      description: UI component data for rendering offer details
+      title: OfferComponents
+    type_users_rewards_Commission:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/type_commons_CommissionType'
+        value:
+          type: number
+          format: double
+      required:
+      - type
+      - value
+      title: Commission
+    type_users_rewards_CategoryRelationshipObject:
+      type: object
+      properties:
+        category:
+          $ref: '#/components/schemas/type_users_rewards_CategoryRelationship'
+      required:
+      - category
+      title: CategoryRelationshipObject
+    type_commons_ErrorSource:
+      type: object
+      properties:
+        pointer:
+          type: string
+          description: A JSON pointer to the value in the request document that caused the error
+        parameter:
+          type: string
+          description: A string indicating which URI query parameter caused the error
+        header:
+          type: string
+          description: A string indicating the name of a single request header which caused the error
+      title: ErrorSource
+    type_commons_CommissionType:
+      type: string
+      enum:
+      - FLAT
+      - PERCENT
+      description: Type of commission on offer (% or a flat $)
+      title: CommissionType
+    type_users_rewards_OperationPeriod:
+      type: object
+      properties:
+        close:
+          $ref: '#/components/schemas/type_users_rewards_OperationTime'
+        open:
+          $ref: '#/components/schemas/type_users_rewards_OperationTime'
+      required:
+      - close
+      - open
+      title: OperationPeriod
+    type_users_rewards_LocationsResponseObject:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_users_rewards_LocationData'
+        links:
+          $ref: '#/components/schemas/type_commons_Links'
+        included:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_users_rewards_EligibilityLocationIncluded'
+      required:
+      - data
+      - links
+      title: LocationsResponseObject
+    type_users_rewards_EligibilityLocationIncluded:
+      oneOf:
+      - $ref: '#/components/schemas/type_users_rewards_OfferDataUnion'
+      - $ref: '#/components/schemas/type_users_rewards_CategoryIncluded'
+      title: EligibilityLocationIncluded
+    type_users_rewards_OfferSortOptions:
+      type: string
+      enum:
+      - startDate
+      - -startDate
+      - expirationDate
+      - -expirationDate
+      - name
+      - -name
+      title: OfferSortOptions
+    type_users_rewards_ProgressBarSegment:
+      type: object
+      properties:
+        icon:
+          type: string
+          description: SVG icon to use for each segment
+        position:
+          $ref: '#/components/schemas/type_users_rewards_ProgressBarSegmentPosition'
+          description: Position of the segment within the layout
+        separator:
+          $ref: '#/components/schemas/type_users_rewards_ProgressBarSegmentSeparator'
+          description: Separator style to render between segment nodes
+        labels:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_users_rewards_ProgressBarSegmentLabel'
+          description: Label configuration for each node in the segment
+        selection:
+          $ref: '#/components/schemas/type_users_rewards_ProgressBarSegmentSelection'
+          description: Which segment nodes the UI should render as selected based on currentProgress
+      required:
+      - position
+      description: Segment configuration for a specific layout
+      title: ProgressBarSegment
+    type_users_rewards_ComponentType:
+      type: string
+      enum:
+      - shortDescription
+      - longDescription
+      - baseReward
+      - boostedReward
+      - cta
+      - tags
+      - detailTags
+      - logoFlare
+      - progressBar
+      description: Available UI component types for offers
+      title: ComponentType
+    type_users_rewards_ButtonStyle:
+      type: string
+      enum:
+      - PRIMARY
+      - SECONDARY
+      - DISABLED
+      description: Available button styles for CTA components
+      title: ButtonStyle
+    type_users_rewards_CategoryIncluded:
+      type: object
+      properties:
+        id:
+          type: string
+          description: id of the category
+        type:
+          type: string
+          enum:
+          - category
+        attributes:
+          $ref: '#/components/schemas/type_users_rewards_CategoryFields'
+      required:
+      - id
+      - type
+      - attributes
+      title: CategoryIncluded
+    type_users_rewards_OperationHours:
+      type: object
+      properties:
+        periods:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_users_rewards_OperationPeriod'
+        weekdayText:
+          type: array
+          items:
+            type: string
+      required:
+      - periods
+      - weekdayText
+      title: OperationHours
+    type_users_rewards_ProgressBarLabelPair:
+      type: object
+      properties:
+        left:
+          type: string
+          description: Text content for the left label
+        right:
+          type: string
+          description: Text content for the right label
+      description: Left and right label configuration for a specific layout
+      title: ProgressBarLabelPair
+    type_commons_ErrorResponse:
       type: object
       properties:
         errors:
           type: array
           items:
-            $ref: '#/components/schemas/type_commons:ErrorObject'
+            $ref: '#/components/schemas/type_commons_ErrorObject'
       required:
       - errors
       title: ErrorResponse
+    type_users_rewards_OperationTime:
+      type: object
+      properties:
+        day:
+          type: integer
+        time:
+          type: string
+      required:
+      - day
+      - time
+      title: OperationTime
+    type_users_rewards_LocationData:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - location
+        id:
+          $ref: '#/components/schemas/type_commons_MongoId'
+          description: Location ID in Kard's system
+        attributes:
+          $ref: '#/components/schemas/type_users_rewards_LocationAttributes'
+        relationships:
+          $ref: '#/components/schemas/type_users_rewards_LocationRelationships'
+          description: Related resources to the offer
+      required:
+      - type
+      - id
+      - attributes
+      title: LocationData
+    type_commons_UserId:
+      type: string
+      description: The ID of the user as defined on the issuers system
+      title: UserId
+    type_users_rewards_OfferDataUnion:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - standardOffer
+            description: 'Discriminator value: standardOffer'
+          id:
+            $ref: '#/components/schemas/type_commons_MongoId'
+            description: Offer ID in Kard's system
+          attributes:
+            $ref: '#/components/schemas/type_users_rewards_StandardOfferFields'
+          relationships:
+            $ref: '#/components/schemas/type_users_rewards_EligibilityOfferRelationship'
+        required:
+        - type
+        - id
+        - attributes
+      discriminator:
+        propertyName: type
+      title: OfferDataUnion
+    type_users_rewards_ProgressBarSegmentLabel:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Title text for the segment node
+        description:
+          type: string
+          description: Description text for the segment node
+      required:
+      - title
+      - description
+      description: Label configuration for a single node within a segment
+      title: ProgressBarSegmentLabel
+    type_users_rewards_CtaAction:
+      type: object
+      properties:
+        url:
+          type: string
+          description: URL endpoint to call when button is clicked
+        method:
+          type: string
+          description: HTTP method to use (e.g., POST)
+      required:
+      - url
+      - method
+      description: Action configuration for CTA button
+      title: CtaAction
+    type_users_rewards_LogoFlareBadgePosition:
+      type: string
+      enum:
+      - TOP_RIGHT
+      - TOP_LEFT
+      - BOTTOM_RIGHT
+      - BOTTOM_LEFT
+      description: Available positions for the logo flare badge
+      title: LogoFlareBadgePosition
+    type_users_rewards_OffersResponseObject:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_users_rewards_OfferDataUnion'
+        links:
+          $ref: '#/components/schemas/type_commons_Links'
+        included:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_users_rewards_EligibilityOfferIncluded'
+        meta:
+          $ref: '#/components/schemas/type_users_rewards_OffersMeta'
+      required:
+      - data
+      - links
+      title: OffersResponseObject
+    type_users_rewards_ProgressBarSegmentPosition:
+      type: string
+      enum:
+      - LEFT
+      - RIGHT
+      - FULL_WIDTH
+      description: Supported segment positions
+      title: ProgressBarSegmentPosition
+    type_users_rewards_OffersMeta:
+      type: object
+      properties:
+        availableCategories:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_users_rewards_CategoryIncluded'
+          description: All distinct categories available across the entire filtered result set, not just the current page
+        placementName:
+          type: string
+          description: Display name of the placement, resolved server-side from its id. Populated only on the Get Placement Content endpoint; absent on the Get Offers By User endpoint.
+      description: Metadata about the full result set across all pages
+      title: OffersMeta
+    type_commons_OrganizationId:
+      type: string
+      description: Your issuer organization ID, provided by Kard
+      title: OrganizationId
+    type_commons_RelationshipMultiple:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_RelationshipData'
+      required:
+      - data
+      title: RelationshipMultiple
+    type_users_rewards_StandardOfferFields:
+      type: object
+      properties:
+        terms:
+          type: string
+          description: Terms and conditions on offer
+        maxRedemptions:
+          type: integer
+          description: Maximum times cardholder can redeem offer, if applicable
+        name:
+          type: string
+          description: Name of offer
+        purchaseChannel:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_PurchaseChannel'
+        userReward:
+          $ref: '#/components/schemas/type_users_rewards_Commission'
+        assets:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_users_rewards_Asset'
+          description: Assets associated with offer
+        startDate:
+          type: string
+          format: date-time
+          description: Beginning date of offer (UTC)
+        expirationDate:
+          type: string
+          format: date-time
+          description: Expiration date of offer if applicable (UTC)
+        isTargeted:
+          type: boolean
+          description: True returns only targeted offers, false returns only non-targeted offers
+        minTransactionAmount:
+          $ref: '#/components/schemas/type_users_rewards_Amount'
+          description: Minimum Transaction Amount required to redeem offer, if available on offer
+        maxTransactionAmount:
+          $ref: '#/components/schemas/type_users_rewards_Amount'
+          description: Maximum Transaction Amount allowed to redeem offer, if available on offer
+        minRewardAmount:
+          $ref: '#/components/schemas/type_users_rewards_Amount'
+          description: Minimum Reward Amount, if available on offer
+        maxRewardAmount:
+          $ref: '#/components/schemas/type_users_rewards_Amount'
+          description: Maximum Reward Amount, if available on offer
+        websiteUrl:
+          type: string
+          description: URL to the website of the offer provider
+        description:
+          type: string
+          description: Description of the offer
+        components:
+          $ref: '#/components/schemas/type_users_rewards_OfferComponents'
+          description: UI component data for the offer, returned when supportedComponents query parameter is provided
+      required:
+      - terms
+      - name
+      - purchaseChannel
+      - userReward
+      - assets
+      - startDate
+      - expirationDate
+      - isTargeted
+      title: StandardOfferFields
+    type_users_rewards_Asset:
+      type: object
+      properties:
+        type:
+          type: string
+        url:
+          type: string
+          description: URL of the asset containing an attribution token
+        alt:
+          type: string
+          description: Alt text of the asset
+      required:
+      - type
+      - url
+      - alt
+      title: Asset
+    type_users_rewards_EligibilityOfferRelationship:
+      oneOf:
+      - $ref: '#/components/schemas/type_users_rewards_CategoryRelationshipObject'
+      title: EligibilityOfferRelationship
+    type_users_rewards_LogoFlareBadge:
+      type: object
+      properties:
+        icon:
+          type: string
+          description: Icon identifier for the badge
+        position:
+          $ref: '#/components/schemas/type_users_rewards_LogoFlareBadgePosition'
+          description: Position of the badge on the logo
+      required:
+      - icon
+      - position
+      description: Badge configuration for logo flare
+      title: LogoFlareBadge
+    type_users_rewards_LogoFlare:
+      type: object
+      properties:
+        borderColor:
+          $ref: '#/components/schemas/type_users_rewards_LogoFlareBorderColor'
+          description: Border color style for the logo flare
+        badge:
+          $ref: '#/components/schemas/type_users_rewards_LogoFlareBadge'
+          description: Optional badge to display on the logo
+      required:
+      - borderColor
+      description: Logo flare configuration for offer display
+      title: LogoFlare
+    type_users_rewards_LocationPartnerId:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/type_users_rewards_LocationPartnerIdType'
+        id:
+          type: string
+      required:
+      - type
+      - id
+      title: LocationPartnerId
+    type_users_rewards_ProgressBarSegmentSeparator:
+      type: string
+      enum:
+      - LINE
+      description: Supported separator styles between segment nodes
+      title: ProgressBarSegmentSeparator
+    type_users_rewards_EligibilityLocationAddress:
+      type: object
+      properties:
+        street:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zipCode:
+          type: string
+      required:
+      - street
+      - city
+      - state
+      - zipCode
+      title: EligibilityLocationAddress
+    type_users_rewards_ProgressBar:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of redemptions allowed
+        currentProgress:
+          type: integer
+          description: Number of redemptions the user has completed
+        label:
+          type: string
+          description: Formatted label for the progress bar
+        segmented:
+          type: boolean
+          description: Whether the progress bar should be displayed as segmented
+        segments:
+          $ref: '#/components/schemas/type_users_rewards_ProgressBarSegments'
+          description: Segment configuration for the progress bar in different layouts
+        labels:
+          $ref: '#/components/schemas/type_users_rewards_ProgressBarLabels'
+          description: Labels to render around the progress bar in different layouts
+      required:
+      - total
+      - currentProgress
+      - label
+      - segmented
+      - labels
+      description: Progress bar component for tracking offer redemption progress
+      title: ProgressBar
+    type_users_rewards_ProgressBarLabels:
+      type: object
+      properties:
+        details:
+          $ref: '#/components/schemas/type_users_rewards_ProgressBarLabelPair'
+          description: Label configuration for the details view
+        default:
+          $ref: '#/components/schemas/type_users_rewards_ProgressBarLabelPair'
+          description: Label configuration for the default view
+      required:
+      - default
+      description: Labels to render around the progress bar in different layouts
+      title: ProgressBarLabels
   securitySchemes:
     OAuthScheme:
       type: http

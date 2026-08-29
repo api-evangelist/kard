@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: API Reference attributions users > uploads API
+  title: Reference users > uploads API
   version: 1.0.0
 servers:
 - url: https://rewards-api.getkard.com
@@ -27,7 +27,7 @@ paths:
         in: path
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:OrganizationId'
+          $ref: '#/components/schemas/type_commons_OrganizationId'
       - name: userId
         in: path
         description: The ID of the user as defined on the issuers system
@@ -46,30 +46,30 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_users/uploads:CreateUploadResponseObject'
+                $ref: '#/components/schemas/type_users_uploads_CreateUploadResponseObject'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '401':
           description: Error response with status 401
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '500':
           description: Error response with status 500
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/type_users/uploads:CreateUploadRequestObject'
+              $ref: '#/components/schemas/type_users_uploads_CreateUploadRequestObject'
   /v2/issuers/{organizationId}/users/{userId}/uploads/{uploadId}/parts:
     put:
       operationId: create-part
@@ -89,7 +89,7 @@ paths:
         in: path
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:OrganizationId'
+          $ref: '#/components/schemas/type_commons_OrganizationId'
       - name: userId
         in: path
         description: The ID of the user as defined on the issuers system
@@ -114,36 +114,36 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_users/uploads:CreateUploadPartResponseObject'
+                $ref: '#/components/schemas/type_users_uploads_CreateUploadPartResponseObject'
         '207':
           description: Error response with status 207
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_users/uploads:CreateUploadPartMultiStatusResponse'
+                $ref: '#/components/schemas/type_users_uploads_CreateUploadPartMultiStatusResponse'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '401':
           description: Error response with status 401
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '500':
           description: Error response with status 500
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/type_users/uploads:CreateUploadPartRequestObject'
+              $ref: '#/components/schemas/type_users_uploads_CreateUploadPartRequestObject'
   /v2/issuers/{organizationId}/users/{userId}/uploads/{uploadId}:
     put:
       operationId: update
@@ -161,7 +161,7 @@ paths:
         in: path
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:OrganizationId'
+          $ref: '#/components/schemas/type_commons_OrganizationId'
       - name: userId
         in: path
         description: The ID of the user as defined on the issuers system
@@ -186,52 +186,215 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_users/uploads:UpdateUploadResponseObject'
+                $ref: '#/components/schemas/type_users_uploads_UpdateUploadResponseObject'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '401':
           description: Error response with status 401
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '409':
           description: Error response with status 409
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '500':
           description: Error response with status 500
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/type_users/uploads:UpdateUploadRequestObject'
+              $ref: '#/components/schemas/type_users_uploads_UpdateUploadRequestObject'
 components:
   schemas:
-    type_commons:ErrorSource:
+    type_users_uploads_CreateUploadPartResponseDataUnion:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - historicalTransaction
+            description: 'Discriminator value: historicalTransaction'
+          id:
+            type: string
+            description: Id of the upload to add parts
+          attributes:
+            $ref: '#/components/schemas/type_commons_EmptyObject'
+        required:
+        - type
+        - id
+        - attributes
+      discriminator:
+        propertyName: type
+      title: CreateUploadPartResponseDataUnion
+    type_transactions_TransactionsAttributes:
       type: object
       properties:
-        pointer:
+        userId:
           type: string
-          description: A JSON pointer to the value in the request document that caused the error
-        parameter:
+          description: The ID of the user as defined on the issuers system
+        amount:
+          type: integer
+          description: Transaction amount in cents
+        subtotal:
+          type: integer
+          description: The base amount in cents excluding additional charges (such as tips, taxes, and other fees).
+        status:
+          $ref: '#/components/schemas/type_transactions_TransactionStatus'
+          description: Transaction status
+        currency:
           type: string
-          description: A string indicating which URI query parameter caused the error
-        header:
+          description: Currency of transaction
+        description:
           type: string
-          description: A string indicating the name of a single request header which caused the error
-      title: ErrorSource
-    type_commons:ErrorObject:
+          description: Description of transaction - usually includes merchant and other key details on transaction
+        description2:
+          type: string
+          description: Description2 of transaction — usually includes other merchant identifying information
+        mcc:
+          type: string
+          description: Merchant Category Code (usually a 4-digit numerical number). <b>Note, this field is REQUIRED for SOME national offers. We HIGHLY RECOMMEND sending this field as it will be required in the near future.</b>
+        coreProviderId:
+          type: string
+          description: Name of processor associated with transaction
+        transactionDate:
+          type: string
+          format: date-time
+          description: Timestamp for <b>REVERSED, RETURNED, DECLINED</b> transaction events; <b>REQUIRED</b> for transactions with <b>REVERSED, RETURNED, DECLINED</b> status. Date string should be in ISO 8601 format i.e.`'YYYY-MM-DDThh:mm:ss.sTZD'` where TZD = time zone designator (Z or +hh:mm or -hh:mm) i.e. `1994-11-05T08:15:30-05:00` OR `1994-11-05T08:15:30Z`
+        authorizationDate:
+          type: string
+          format: date-time
+          description: Timestamp for <b>APPROVED</b> transaction event; <b>REQUIRED</b> for transactions with <b>APPROVED</b> status, and <b>HIGHLY RECOMMENDED</b> to include for transactions with a <b>SETTLED</b> status. Date string should be in ISO 8601 format i.e.`'YYYY-MM-DDThh:mm:ss.sTZD'` where TZD = time zone designator (Z or +hh:mm or -hh:mm) i.e. `1994-11-05T08:15:30-05:00 OR 1994-11-05T08:15:30Z`
+        settledDate:
+          type: string
+          format: date-time
+          description: Timestamp for <b>SETTLED</b> transaction event, <b>REQUIRED</b> for transactions with <b>SETTLED</b> status. Date string should be in ISO 8601 format i.e.`'YYYY-MM-DDThh:mm:ss.sTZD'` where TZD = time zone designator (Z or +hh:mm or -hh:mm) i.e. `1994-11-05T08:15:30-05:00` OR `1994-11-05T08:15:30Z`
+        merchant:
+          $ref: '#/components/schemas/type_transactions_Merchant'
+          description: Merchant details
+        cardPresence:
+          type: string
+          description: Whether card was present at time of transaction
+        panEntryMode:
+          type: string
+          description: PAN entry mode
+        cardBIN:
+          type: string
+          description: Bank identification number (BIN). Must be a valid BIN of 6 digits. If over 6 digits, please send first 6.
+        cardLastFour:
+          type: string
+          description: Card last four digits.
+        authorizationCode:
+          type: string
+          description: Transaction approval code
+        retrievalReferenceNumber:
+          type: string
+          description: Retrieval Reference Number
+        systemTraceAuditNumber:
+          type: string
+          description: System Trace Audit Number
+        acquirerReferenceNumber:
+          type: string
+          description: Acquirer Reference Number
+        direction:
+          $ref: '#/components/schemas/type_transactions_DirectionType'
+          description: The direction in which the funds flow - DEBIT or CREDIT
+        paymentType:
+          $ref: '#/components/schemas/type_transactions_TransactionPaymentType'
+          description: The type of payment involved in the transaction.
+        cardNetwork:
+          $ref: '#/components/schemas/type_commons_CardNetwork'
+          description: The card network associated with the transaction
+        transactionId:
+          type: string
+          description: The transaction ID
+        cardProductId:
+          type: string
+          description: The card product ID associated with the transaction
+        userZipCode:
+          type: string
+          description: The zip code of the user who made the transaction
+        processorMids:
+          $ref: '#/components/schemas/type_transactions_ProcessorMid'
+          description: Network specific merchant IDs (MIDs) associated with the transaction
+        accountId:
+          type: string
+          description: An account identifier associated to transaction
+      required:
+      - userId
+      - amount
+      - status
+      - currency
+      - description
+      - cardBIN
+      - cardLastFour
+      - direction
+      - paymentType
+      - transactionId
+      title: TransactionsAttributes
+    type_users_uploads_CreateUploadRequestDataUnion:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - historicalTransactionStart
+            description: 'Discriminator value: historicalTransactionStart'
+          attributes:
+            $ref: '#/components/schemas/type_commons_EmptyObject'
+        required:
+        - type
+        - attributes
+      discriminator:
+        propertyName: type
+      title: CreateUploadRequestDataUnion
+    type_users_uploads_CreateUploadRequestObject:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_users_uploads_CreateUploadRequestDataUnion'
+      required:
+      - data
+      title: CreateUploadRequestObject
+    type_commons_EmptyObject:
+      type: object
+      properties: {}
+      title: EmptyObject
+    type_users_uploads_UpdateUploadRequestDataUnion:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - historicalTransactionComplete
+            description: 'Discriminator value: historicalTransactionComplete'
+          id:
+            type: string
+            description: Upload id the issuer can use in reference to the upload session
+          attributes:
+            $ref: '#/components/schemas/type_commons_EmptyObject'
+        required:
+        - type
+        - id
+        - attributes
+      discriminator:
+        propertyName: type
+      title: UpdateUploadRequestDataUnion
+    type_commons_ErrorObject:
       type: object
       properties:
         status:
@@ -244,7 +407,7 @@ components:
           type: string
           description: Description of the specific occurance of the error
         source:
-          $ref: '#/components/schemas/type_commons:ErrorSource'
+          $ref: '#/components/schemas/type_commons_ErrorSource'
           description: An object containing a reference to the primary source of the error
         id:
           type: string
@@ -254,20 +417,313 @@ components:
       - title
       - detail
       title: ErrorObject
-    type_commons:OrganizationId:
+    type_transactions_TransactionStatus:
       type: string
-      description: Your issuer organization ID, provided by Kard
-      title: OrganizationId
-    type_commons:ErrorResponse:
+      enum:
+      - APPROVED
+      - SETTLED
+      - REVERSED
+      - RETURNED
+      - DECLINED
+      title: TransactionStatus
+    type_users_uploads_CreateUploadPartRequestObject:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_users_uploads_CreateUploadPartDataUnion'
+      required:
+      - data
+      title: CreateUploadPartRequestObject
+    type_transactions_VisaMidDetails:
+      type: object
+      properties:
+        vmid:
+          type: string
+          description: Visa Merchant ID (VMID) associated with the transaction
+        vsid:
+          type: string
+          description: Visa Store ID (VSID) associated with the transaction
+      required:
+      - vmid
+      - vsid
+      title: VisaMidDetails
+    type_users_uploads_CreateUploadResponseDataUnion:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - historicalTransactionStart
+            description: 'Discriminator value: historicalTransactionStart'
+          id:
+            type: string
+            description: Upload id to reference in subsequent upload request
+          attributes:
+            $ref: '#/components/schemas/type_commons_EmptyObject'
+        required:
+        - type
+        - id
+        - attributes
+      discriminator:
+        propertyName: type
+      title: CreateUploadResponseDataUnion
+    type_transactions_Merchant:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Acquirer Merchant Identification Number (MID) — usually a 15 digit numerical identifier code. <b>Note, this field is REQUIRED for local offers. We HIGHLY RECOMMEND sending this field as it will be required in the near future.</b>
+        name:
+          type: string
+          description: Merchant name associated with transaction
+        addrStreet:
+          type: string
+          description: Merchant street address associated with transaction.
+        addrCity:
+          type: string
+          description: Merchant address city associated with transaction.
+        addrState:
+          $ref: '#/components/schemas/type_transactions_States'
+          description: Merchant address state associated with transaction.
+        addrZipcode:
+          type: string
+          description: Merchant address zip code associated with transaction.
+        addrCountry:
+          type: string
+          description: Merchant address country associated with transaction.
+        latitude:
+          type: string
+          description: Merchant latitude geocoordinate associated with transaction.
+        longitude:
+          type: string
+          description: Merchant longitude geocoordinate associated with transaction.
+        storeId:
+          type: string
+          description: Merchant store ID where transaction originated from
+      required:
+      - name
+      title: Merchant
+    type_users_uploads_UpdateUploadResponseDataUnion:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - historicalTransactionComplete
+            description: 'Discriminator value: historicalTransactionComplete'
+          id:
+            type: string
+            description: Upload id to reference in subsequent upload request
+          attributes:
+            $ref: '#/components/schemas/type_commons_EmptyObject'
+        required:
+        - type
+        - id
+        - attributes
+      discriminator:
+        propertyName: type
+      title: UpdateUploadResponseDataUnion
+    type_transactions_DirectionType:
+      type: string
+      enum:
+      - DEBIT
+      - CREDIT
+      title: DirectionType
+    type_commons_ErrorSource:
+      type: object
+      properties:
+        pointer:
+          type: string
+          description: A JSON pointer to the value in the request document that caused the error
+        parameter:
+          type: string
+          description: A string indicating which URI query parameter caused the error
+        header:
+          type: string
+          description: A string indicating the name of a single request header which caused the error
+      title: ErrorSource
+    type_users_uploads_UpdateUploadRequestObject:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_users_uploads_UpdateUploadRequestDataUnion'
+      required:
+      - data
+      title: UpdateUploadRequestObject
+    type_users_uploads_CreateUploadPartDataUnion:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - historicalTransaction
+            description: 'Discriminator value: historicalTransaction'
+          id:
+            type: string
+            description: Unique identifier for the transaction event. This <b>must</b> be unique for each distinct event sent to the API.
+          attributes:
+            $ref: '#/components/schemas/type_transactions_TransactionsAttributes'
+        required:
+        - type
+        - id
+        - attributes
+      discriminator:
+        propertyName: type
+      title: CreateUploadPartDataUnion
+    type_users_uploads_CreateUploadPartMultiStatusResponse:
       type: object
       properties:
         errors:
           type: array
           items:
-            $ref: '#/components/schemas/type_commons:ErrorObject'
+            $ref: '#/components/schemas/type_commons_ErrorObject'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_users_uploads_CreateUploadPartResponseDataUnion'
+      required:
+      - errors
+      title: CreateUploadPartMultiStatusResponse
+    type_transactions_States:
+      type: string
+      enum:
+      - AL
+      - AK
+      - AS
+      - AZ
+      - AR
+      - CA
+      - CO
+      - CT
+      - DE
+      - DC
+      - FM
+      - FL
+      - GA
+      - GU
+      - HI
+      - ID
+      - IL
+      - IN
+      - IA
+      - KS
+      - KY
+      - LA
+      - ME
+      - MH
+      - MD
+      - MA
+      - MI
+      - MN
+      - MS
+      - MO
+      - MT
+      - NE
+      - NV
+      - NH
+      - NJ
+      - NM
+      - NY
+      - NC
+      - ND
+      - MP
+      - OH
+      - OK
+      - OR
+      - PW
+      - PA
+      - PR
+      - RI
+      - SC
+      - SD
+      - TN
+      - TX
+      - UT
+      - VT
+      - VI
+      - VA
+      - WA
+      - WV
+      - WI
+      - WY
+      title: States
+    type_users_uploads_CreateUploadPartResponseObject:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_users_uploads_CreateUploadPartResponseDataUnion'
+      required:
+      - data
+      title: CreateUploadPartResponseObject
+    type_commons_ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_ErrorObject'
       required:
       - errors
       title: ErrorResponse
+    type_transactions_TransactionPaymentType:
+      type: string
+      enum:
+      - CARD
+      title: TransactionPaymentType
+    type_commons_OrganizationId:
+      type: string
+      description: Your issuer organization ID, provided by Kard
+      title: OrganizationId
+    type_users_uploads_UpdateUploadResponseObject:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_users_uploads_UpdateUploadResponseDataUnion'
+      required:
+      - data
+      title: UpdateUploadResponseObject
+    type_users_uploads_CreateUploadResponseObject:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_users_uploads_CreateUploadResponseDataUnion'
+      required:
+      - data
+      title: CreateUploadResponseObject
+    type_commons_CardNetwork:
+      type: string
+      enum:
+      - VISA
+      - MASTERCARD
+      - AMERICANEXPRESS
+      - DISCOVER
+      description: Supported card networks
+      title: CardNetwork
+    type_transactions_ProcessorMid:
+      oneOf:
+      - type: object
+        properties:
+          processor:
+            type: string
+            enum:
+            - VISA
+            description: 'Discriminator value: VISA'
+          mids:
+            $ref: '#/components/schemas/type_transactions_VisaMidDetails'
+            description: Merchant ID (MID) associated with the processor
+        required:
+        - processor
+        - mids
+      discriminator:
+        propertyName: processor
+      title: ProcessorMid
   securitySchemes:
     OAuthScheme:
       type: http

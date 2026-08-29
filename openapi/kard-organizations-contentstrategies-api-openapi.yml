@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: API Reference attributions Organizations > ContentStrategies API
+  title: Reference Organizations > ContentStrategies API
   version: 1.0.0
 servers:
 - url: https://rewards-api.getkard.com
@@ -36,49 +36,49 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_organizations/contentStrategies:ContentStrategyResponse'
+                $ref: '#/components/schemas/type_organizations_contentStrategies_ContentStrategyResponse'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '401':
           description: Error response with status 401
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '403':
           description: Error response with status 403
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '404':
           description: Error response with status 404
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '409':
           description: Error response with status 409
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '500':
           description: Error response with status 500
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
       requestBody:
         description: Content strategy data for creation
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/type_organizations/contentStrategies:CreateContentStrategyRequestBody'
+              $ref: '#/components/schemas/type_organizations_contentStrategies_CreateContentStrategyRequestBody'
     get:
       operationId: list
       summary: List
@@ -122,37 +122,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_organizations/contentStrategies:ContentStrategyListResponse'
+                $ref: '#/components/schemas/type_organizations_contentStrategies_ContentStrategyListResponse'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '401':
           description: Error response with status 401
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '403':
           description: Error response with status 403
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '404':
           description: Error response with status 404
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '500':
           description: Error response with status 500
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
   /v2/issuers/{organizationId}/contentStrategies/{contentStrategyId}:
     get:
       operationId: get
@@ -185,31 +185,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_organizations/contentStrategies:ContentStrategyResponse'
+                $ref: '#/components/schemas/type_organizations_contentStrategies_ContentStrategyResponse'
         '401':
           description: Error response with status 401
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '403':
           description: Error response with status 403
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '404':
           description: Error response with status 404
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '500':
           description: Error response with status 500
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
     put:
       operationId: update
       summary: Update
@@ -241,49 +241,49 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_organizations/contentStrategies:ContentStrategyResponse'
+                $ref: '#/components/schemas/type_organizations_contentStrategies_ContentStrategyResponse'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '401':
           description: Error response with status 401
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '403':
           description: Error response with status 403
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '404':
           description: Error response with status 404
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '409':
           description: Error response with status 409
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '500':
           description: Error response with status 500
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
       requestBody:
         description: Content strategy data for update
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/type_organizations/contentStrategies:UpdateContentStrategyRequestBody'
+              $ref: '#/components/schemas/type_organizations_contentStrategies_UpdateContentStrategyRequestBody'
     delete:
       operationId: delete
       summary: Delete
@@ -315,53 +315,163 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_internal-organizations:DeleteResourceResponse'
+                $ref: '#/components/schemas/type_internal-organizations_DeleteResourceResponse'
         '401':
           description: Error response with status 401
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '403':
           description: Error response with status 403
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '404':
           description: Error response with status 404
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '409':
           description: Error response with status 409
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '500':
           description: Error response with status 500
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
 components:
   schemas:
-    type_commons:ErrorSource:
+    type_organizations_contentStrategies_CreateContentStrategyRequestBody:
       type: object
       properties:
-        pointer:
+        data:
+          $ref: '#/components/schemas/type_organizations_contentStrategies_CreateContentStrategyRequestData'
+          description: Content strategy data for creation
+      required:
+      - data
+      description: Request body for creating a content strategy
+      title: CreateContentStrategyRequestBody
+    type_organizations_contentStrategies_CreateContentStrategyRequestData:
+      type: object
+      properties:
+        type:
           type: string
-          description: A JSON pointer to the value in the request document that caused the error
-        parameter:
+          enum:
+          - contentStrategy
+          description: Resource type identifier
+        attributes:
+          $ref: '#/components/schemas/type_organizations_contentStrategies_CreateContentStrategyAttributes'
+          description: Content strategy attributes for creation
+      required:
+      - type
+      - attributes
+      description: Content strategy data structure for creation
+      title: CreateContentStrategyRequestData
+    type_organizations_contentStrategies_UpdateContentStrategyAttributes:
+      type: object
+      properties:
+        name:
           type: string
-          description: A string indicating which URI query parameter caused the error
-        header:
+          description: Name of the content strategy (unique within an organization)
+        sort:
+          $ref: '#/components/schemas/type_organizations_contentStrategies_ContentStrategySort'
+          description: Sort applied when selecting offers for the strategy
+        filters:
+          $ref: '#/components/schemas/type_organizations_contentStrategies_ContentStrategyFilters'
+          description: Filters applied when selecting offers for the strategy
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_CategoryOption'
+          description: Merchant categories to include
+        categoryExclusions:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_CategoryOption'
+          description: Merchant categories to exclude
+        merchantExclusions:
+          type: array
+          items:
+            type: string
+          description: Merchant IDs to exclude
+      required:
+      - name
+      - filters
+      - categories
+      - categoryExclusions
+      - merchantExclusions
+      description: Attributes for updating a content strategy. All fields are required.
+      title: UpdateContentStrategyAttributes
+    type_internal-organizations_DeleteResourceResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_internal-organizations_DeleteResourceData'
+      required:
+      - data
+      description: Response returned after deleting a resource
+      title: DeleteResourceResponse
+    type_internal-organizations_DeleteResourceData:
+      type: object
+      properties:
+        type:
           type: string
-          description: A string indicating the name of a single request header which caused the error
-      title: ErrorSource
-    type_commons:ErrorObject:
+          description: Resource type identifier
+        id:
+          type: string
+          description: ID of the deleted resource
+        attributes:
+          $ref: '#/components/schemas/type_commons_EmptyObject'
+      required:
+      - type
+      - id
+      - attributes
+      description: Deleted resource stub
+      title: DeleteResourceData
+    type_commons_CategoryOption:
+      type: string
+      enum:
+      - Arts & Entertainment
+      - Baby, Kids & Toys
+      - Books & Digital Media
+      - Clothing, Shoes & Accessories
+      - Computers, Electronics & Software
+      - Convenience
+      - Gas
+      - Department Stores
+      - Food & Beverage
+      - Health & Beauty
+      - Home & Garden
+      - Miscellaneous
+      - Occasions & Gifts
+      - Pets
+      - Sports & Outdoors
+      - Supplies & Services
+      - Travel
+      description: Category of merchant. Please use URL Encode for non single word categories. (Food & Beverage should be Food%20%26%20Beverage)
+      title: CategoryOption
+    type_organizations_contentStrategies_UpdateContentStrategyRequestBody:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_organizations_contentStrategies_UpdateContentStrategyRequestData'
+          description: Content strategy data for update
+      required:
+      - data
+      description: Request body for updating a content strategy
+      title: UpdateContentStrategyRequestBody
+    type_commons_EmptyObject:
+      type: object
+      properties: {}
+      title: EmptyObject
+    type_commons_ErrorObject:
       type: object
       properties:
         status:
@@ -374,7 +484,7 @@ components:
           type: string
           description: Description of the specific occurance of the error
         source:
-          $ref: '#/components/schemas/type_commons:ErrorSource'
+          $ref: '#/components/schemas/type_commons_ErrorSource'
           description: An object containing a reference to the primary source of the error
         id:
           type: string
@@ -384,46 +494,222 @@ components:
       - title
       - detail
       title: ErrorObject
-    type_commons:EmptyObject:
-      type: object
-      properties: {}
-      title: EmptyObject
-    type_internal-organizations:DeleteResourceResponse:
+    type_internal-organizations_OrganizationPaginationMetadata:
       type: object
       properties:
-        data:
-          $ref: '#/components/schemas/type_internal-organizations:DeleteResourceData'
+        pageSize:
+          type: integer
+          description: Number of items per page
+        hasNextPage:
+          type: boolean
+          description: Whether more pages are available
       required:
-      - data
-      description: Response returned after deleting a resource
-      title: DeleteResourceResponse
-    type_internal-organizations:DeleteResourceData:
+      - pageSize
+      - hasNextPage
+      description: Pagination metadata for organization list responses
+      title: OrganizationPaginationMetadata
+    type_organizations_contentStrategies_CreateContentStrategyAttributes:
       type: object
       properties:
-        type:
+        name:
           type: string
-          description: Resource type identifier
-        id:
-          type: string
-          description: ID of the deleted resource
-        attributes:
-          $ref: '#/components/schemas/type_commons:EmptyObject'
+          description: Name of the content strategy (unique within an organization)
+        sort:
+          $ref: '#/components/schemas/type_organizations_contentStrategies_ContentStrategySort'
+          description: Sort applied when selecting offers for the strategy
+        filters:
+          $ref: '#/components/schemas/type_organizations_contentStrategies_ContentStrategyFilters'
+          description: Filters applied when selecting offers for the strategy
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_CategoryOption'
+          description: Merchant categories to include
+        categoryExclusions:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_CategoryOption'
+          description: Merchant categories to exclude
+        merchantExclusions:
+          type: array
+          items:
+            type: string
+          description: Merchant IDs to exclude
       required:
-      - type
-      - id
-      - attributes
-      description: Deleted resource stub
-      title: DeleteResourceData
-    type_commons:ErrorResponse:
+      - name
+      - filters
+      - categories
+      - categoryExclusions
+      - merchantExclusions
+      description: Attributes for creating a content strategy
+      title: CreateContentStrategyAttributes
+    type_commons_Links:
+      type: object
+      properties:
+        self:
+          type: string
+        prev:
+          type: string
+        next:
+          type: string
+      required:
+      - self
+      description: Related links to the API call
+      title: Links
+    type_organizations_contentStrategies_ContentStrategySort:
+      type: string
+      enum:
+      - NEWLY_LIVE
+      - EXPIRING_SOON
+      - HIGHEST_CASHBACK
+      - PERSONALIZED
+      - OFFERS_NEAR_YOU
+      description: Sort applied to the offers selected by a content strategy. A strategy may have at most one sort. The v1 starter set covers newly-live, expiring-soon, highest-cashback, personalized, and offers-near-you selections.
+      title: ContentStrategySort
+    type_organizations_contentStrategies_OfferFeatures:
+      type: string
+      enum:
+      - INTERACTIVE
+      description: Offer feature applied to the offers selected by a content strategy. A strategy may have any number of offer features.
+      title: OfferFeatures
+    type_commons_ErrorSource:
+      type: object
+      properties:
+        pointer:
+          type: string
+          description: A JSON pointer to the value in the request document that caused the error
+        parameter:
+          type: string
+          description: A string indicating which URI query parameter caused the error
+        header:
+          type: string
+          description: A string indicating the name of a single request header which caused the error
+      title: ErrorSource
+    type_organizations_contentStrategies_ContentStrategyFilters:
+      type: object
+      properties:
+        categories:
+          type: array
+          items:
+            type: string
+          description: Merchant categories to include
+        categoryExclusions:
+          type: array
+          items:
+            type: string
+          description: Merchant categories to exclude
+        merchantExclusions:
+          type: array
+          items:
+            type: string
+          description: Merchant IDs to exclude
+        offerFeatures:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_organizations_contentStrategies_OfferFeatures'
+          description: Offer features to filter by
+      description: Filters applied when selecting offers for a content strategy
+      title: ContentStrategyFilters
+    type_commons_ErrorResponse:
       type: object
       properties:
         errors:
           type: array
           items:
-            $ref: '#/components/schemas/type_commons:ErrorObject'
+            $ref: '#/components/schemas/type_commons_ErrorObject'
       required:
       - errors
       title: ErrorResponse
+    type_organizations_contentStrategies_ContentStrategyResponse:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - contentStrategy
+        id:
+          type: string
+          description: Unique identifier of the content strategy (UUID v7)
+        attributes:
+          $ref: '#/components/schemas/type_organizations_contentStrategies_ContentStrategyAttributes'
+      required:
+      - type
+      - id
+      - attributes
+      description: Content strategy resource response
+      title: ContentStrategyResponse
+    type_organizations_contentStrategies_ContentStrategyAttributes:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the content strategy (unique within an organization)
+        organizationId:
+          type: string
+          description: ID of the organization this content strategy belongs to
+        sort:
+          $ref: '#/components/schemas/type_organizations_contentStrategies_ContentStrategySort'
+          description: Sort applied when selecting offers for the strategy
+        filters:
+          $ref: '#/components/schemas/type_organizations_contentStrategies_ContentStrategyFilters'
+          description: Filters applied when selecting offers for the strategy
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_CategoryOption'
+          description: Merchant categories to include
+        categoryExclusions:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_CategoryOption'
+          description: Merchant categories to exclude
+        merchantExclusions:
+          type: array
+          items:
+            type: string
+          description: Merchant IDs to exclude
+      required:
+      - name
+      - organizationId
+      - filters
+      - categories
+      - categoryExclusions
+      - merchantExclusions
+      description: Attributes for a content strategy
+      title: ContentStrategyAttributes
+    type_organizations_contentStrategies_UpdateContentStrategyRequestData:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - contentStrategy
+          description: Resource type identifier
+        attributes:
+          $ref: '#/components/schemas/type_organizations_contentStrategies_UpdateContentStrategyAttributes'
+          description: Content strategy attributes for update
+      required:
+      - type
+      - attributes
+      description: Content strategy data structure for update
+      title: UpdateContentStrategyRequestData
+    type_organizations_contentStrategies_ContentStrategyListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_organizations_contentStrategies_ContentStrategyResponse'
+          description: Array of content strategy resources
+        links:
+          $ref: '#/components/schemas/type_commons_Links'
+        meta:
+          $ref: '#/components/schemas/type_internal-organizations_OrganizationPaginationMetadata'
+          description: Pagination metadata
+      required:
+      - data
+      description: Paginated list of content strategies
+      title: ContentStrategyListResponse
   securitySchemes:
     OAuthScheme:
       type: http

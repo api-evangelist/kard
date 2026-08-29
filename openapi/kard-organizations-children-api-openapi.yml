@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: API Reference attributions Organizations > Children API
+  title: Reference Organizations > Children API
   version: 1.0.0
 servers:
 - url: https://rewards-api.getkard.com
@@ -48,31 +48,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_organizations/children:ChildOrganizationListResponse'
+                $ref: '#/components/schemas/type_organizations_children_ChildOrganizationListResponse'
         '401':
           description: Error response with status 401
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '403':
           description: Error response with status 403
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '404':
           description: Error response with status 404
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '500':
           description: Error response with status 500
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
     post:
       operationId: create
       summary: Create
@@ -98,43 +98,43 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_organizations/children:ChildOrganizationResponse'
+                $ref: '#/components/schemas/type_organizations_children_ChildOrganizationResponse'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '401':
           description: Error response with status 401
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '403':
           description: Error response with status 403
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '409':
           description: Error response with status 409
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '500':
           description: Error response with status 500
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
       requestBody:
         description: Child organization data for creation
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/type_organizations/children:CreateChildRequestBody'
+              $ref: '#/components/schemas/type_organizations_children_CreateChildRequestBody'
   /v2/issuers/{organizationId}/children/{childId}:
     get:
       operationId: get
@@ -167,31 +167,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_organizations/children:ChildOrganizationResponse'
+                $ref: '#/components/schemas/type_organizations_children_ChildOrganizationResponse'
         '401':
           description: Error response with status 401
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '403':
           description: Error response with status 403
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '404':
           description: Error response with status 404
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '500':
           description: Error response with status 500
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
     patch:
       operationId: update
       summary: Update
@@ -223,43 +223,43 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_organizations/children:ChildOrganizationResponse'
+                $ref: '#/components/schemas/type_organizations_children_ChildOrganizationResponse'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '401':
           description: Error response with status 401
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '403':
           description: Error response with status 403
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '404':
           description: Error response with status 404
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '500':
           description: Error response with status 500
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
       requestBody:
         description: Child organization data for update
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/type_organizations/children:UpdateChildRequestBody'
+              $ref: '#/components/schemas/type_organizations_children_UpdateChildRequestBody'
     delete:
       operationId: delete
       summary: Delete
@@ -291,47 +291,104 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_internal-organizations:DeleteResourceResponse'
+                $ref: '#/components/schemas/type_internal-organizations_DeleteResourceResponse'
         '401':
           description: Error response with status 401
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '403':
           description: Error response with status 403
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '404':
           description: Error response with status 404
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '500':
           description: Error response with status 500
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
 components:
   schemas:
-    type_commons:ErrorSource:
+    type_commons_EmptyObject:
+      type: object
+      properties: {}
+      title: EmptyObject
+    type_organizations_children_CreateChildRequestData:
       type: object
       properties:
-        pointer:
+        type:
           type: string
-          description: A JSON pointer to the value in the request document that caused the error
-        parameter:
+          enum:
+          - organization
+          description: Resource type identifier
+        attributes:
+          $ref: '#/components/schemas/type_organizations_children_CreateChildAttributes'
+          description: Child organization attributes for creation
+      required:
+      - type
+      - attributes
+      description: Child organization data structure for creation
+      title: CreateChildRequestData
+    type_organizations_children_UpdateChildRequestData:
+      type: object
+      properties:
+        type:
           type: string
-          description: A string indicating which URI query parameter caused the error
-        header:
+          enum:
+          - organization
+          description: Resource type identifier
+        attributes:
+          $ref: '#/components/schemas/type_organizations_children_UpdateChildAttributes'
+          description: Child organization attributes for update
+      required:
+      - type
+      - attributes
+      description: Child organization data structure for update
+      title: UpdateChildRequestData
+    type_organizations_children_UpdateChildAttributes:
+      type: object
+      properties:
+        name:
           type: string
-          description: A string indicating the name of a single request header which caused the error
-      title: ErrorSource
-    type_commons:ErrorObject:
+          description: New name for the child organization (at least one letter; letters and spaces only)
+        externalId:
+          type: string
+          description: External identifier for the child organization
+        bins:
+          type: array
+          items:
+            type: string
+          description: Bank Identification Numbers for the child organization
+      description: Attributes for updating a child organization. All fields are optional; only provided fields are changed.
+      title: UpdateChildAttributes
+    type_organizations_children_CreateChildAttributes:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the child organization (at least one letter; letters and spaces only)
+        externalId:
+          type: string
+          description: External identifier for the child organization
+        bins:
+          type: array
+          items:
+            type: string
+          description: Bank Identification Numbers for the child organization
+      required:
+      - name
+      description: Attributes for creating a child organization. Only name is required. All other fields are optional and default to the parent organization's values.
+      title: CreateChildAttributes
+    type_commons_ErrorObject:
       type: object
       properties:
         status:
@@ -344,7 +401,7 @@ components:
           type: string
           description: Description of the specific occurance of the error
         source:
-          $ref: '#/components/schemas/type_commons:ErrorSource'
+          $ref: '#/components/schemas/type_commons_ErrorSource'
           description: An object containing a reference to the primary source of the error
         id:
           type: string
@@ -354,20 +411,108 @@ components:
       - title
       - detail
       title: ErrorObject
-    type_commons:EmptyObject:
-      type: object
-      properties: {}
-      title: EmptyObject
-    type_internal-organizations:DeleteResourceResponse:
+    type_organizations_children_ChildOrganizationListResponse:
       type: object
       properties:
         data:
-          $ref: '#/components/schemas/type_internal-organizations:DeleteResourceData'
+          type: array
+          items:
+            $ref: '#/components/schemas/type_organizations_children_ChildOrganizationResponse'
+          description: Array of child organization resources
+        links:
+          $ref: '#/components/schemas/type_commons_Links'
+        meta:
+          $ref: '#/components/schemas/type_internal-organizations_OrganizationPaginationMetadata'
+          description: Pagination metadata
+      required:
+      - data
+      description: Paginated list of child organizations
+      title: ChildOrganizationListResponse
+    type_internal-organizations_OrganizationPaginationMetadata:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          description: Number of items per page
+        hasNextPage:
+          type: boolean
+          description: Whether more pages are available
+      required:
+      - pageSize
+      - hasNextPage
+      description: Pagination metadata for organization list responses
+      title: OrganizationPaginationMetadata
+    type_organizations_children_ChildOrganizationResponse:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - organization
+        id:
+          type: string
+          description: Unique identifier of the child organization
+        attributes:
+          $ref: '#/components/schemas/type_organizations_children_ChildOrganizationAttributes'
+      required:
+      - type
+      - id
+      - attributes
+      description: Child organization resource response
+      title: ChildOrganizationResponse
+    type_commons_ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_ErrorObject'
+      required:
+      - errors
+      title: ErrorResponse
+    type_organizations_children_CreateChildRequestBody:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_organizations_children_CreateChildRequestData'
+          description: Child organization data for creation
+      required:
+      - data
+      description: Request body for creating a child organization
+      title: CreateChildRequestBody
+    type_commons_Links:
+      type: object
+      properties:
+        self:
+          type: string
+        prev:
+          type: string
+        next:
+          type: string
+      required:
+      - self
+      description: Related links to the API call
+      title: Links
+    type_organizations_children_UpdateChildRequestBody:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_organizations_children_UpdateChildRequestData'
+          description: Child organization data for update
+      required:
+      - data
+      description: Request body for updating a child organization
+      title: UpdateChildRequestBody
+    type_internal-organizations_DeleteResourceResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_internal-organizations_DeleteResourceData'
       required:
       - data
       description: Response returned after deleting a resource
       title: DeleteResourceResponse
-    type_internal-organizations:DeleteResourceData:
+    type_internal-organizations_DeleteResourceData:
       type: object
       properties:
         type:
@@ -377,23 +522,45 @@ components:
           type: string
           description: ID of the deleted resource
         attributes:
-          $ref: '#/components/schemas/type_commons:EmptyObject'
+          $ref: '#/components/schemas/type_commons_EmptyObject'
       required:
       - type
       - id
       - attributes
       description: Deleted resource stub
       title: DeleteResourceData
-    type_commons:ErrorResponse:
+    type_organizations_children_ChildOrganizationAttributes:
       type: object
       properties:
-        errors:
+        name:
+          type: string
+          description: Name of the child organization (at least one letter; letters and spaces only)
+        externalId:
+          type: string
+          description: External identifier for the child organization
+        bins:
           type: array
           items:
-            $ref: '#/components/schemas/type_commons:ErrorObject'
+            type: string
+          description: Bank Identification Numbers for the child organization
       required:
-      - errors
-      title: ErrorResponse
+      - name
+      - bins
+      description: Limited set of child organization attributes exposed to external consumers
+      title: ChildOrganizationAttributes
+    type_commons_ErrorSource:
+      type: object
+      properties:
+        pointer:
+          type: string
+          description: A JSON pointer to the value in the request document that caused the error
+        parameter:
+          type: string
+          description: A string indicating which URI query parameter caused the error
+        header:
+          type: string
+          description: A string indicating the name of a single request header which caused the error
+      title: ErrorSource
   securitySchemes:
     OAuthScheme:
       type: http

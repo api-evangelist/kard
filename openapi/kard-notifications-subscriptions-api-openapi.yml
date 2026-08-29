@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: API Reference attributions notifications > Subscriptions API
+  title: Reference notifications > Subscriptions API
   version: 1.0.0
 servers:
 - url: https://rewards-api.getkard.com
@@ -24,12 +24,12 @@ paths:
         in: path
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:OrganizationId'
+          $ref: '#/components/schemas/type_commons_OrganizationId'
       - name: filter[eventName]
         in: query
         required: false
         schema:
-          $ref: '#/components/schemas/type_commons:NotificationType'
+          $ref: '#/components/schemas/type_commons_NotificationType'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -42,25 +42,25 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_notifications/subscriptions:SubscriptionsResponseObject'
+                $ref: '#/components/schemas/type_notifications_subscriptions_SubscriptionsResponseObject'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '401':
           description: Error response with status 401
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '500':
           description: Error response with status 500
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
     post:
       operationId: create
       summary: Create Subscription
@@ -74,7 +74,7 @@ paths:
         in: path
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:OrganizationId'
+          $ref: '#/components/schemas/type_commons_OrganizationId'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -87,36 +87,36 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_notifications/subscriptions:CreateSubscriptionsResponseObject'
+                $ref: '#/components/schemas/type_notifications_subscriptions_CreateSubscriptionsResponseObject'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '401':
           description: Error response with status 401
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '409':
           description: Error response with status 409
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '500':
           description: Error response with status 500
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/type_notifications/subscriptions:SubscriptionRequestBody'
+              $ref: '#/components/schemas/type_notifications_subscriptions_SubscriptionRequestBody'
   /v2/issuers/{organizationId}/subscriptions/{subscriptionId}:
     patch:
       operationId: update
@@ -131,12 +131,12 @@ paths:
         in: path
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:OrganizationId'
+          $ref: '#/components/schemas/type_commons_OrganizationId'
       - name: subscriptionId
         in: path
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:SubscriptionId'
+          $ref: '#/components/schemas/type_commons_SubscriptionId'
       - name: Authorization
         in: header
         description: Bearer authentication
@@ -149,39 +149,193 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_notifications/subscriptions:UpdateSubscriptionsResponseObject'
+                $ref: '#/components/schemas/type_notifications_subscriptions_UpdateSubscriptionsResponseObject'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '401':
           description: Error response with status 401
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '404':
           description: Error response with status 404
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '500':
           description: Error response with status 500
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/type_notifications/subscriptions:UpdateSubscriptionRequestBody'
+              $ref: '#/components/schemas/type_notifications_subscriptions_UpdateSubscriptionRequestBody'
 components:
   schemas:
-    type_commons:ErrorSource:
+    type_notifications_subscriptions_SubscriptionAttributes:
+      type: object
+      properties:
+        eventName:
+          $ref: '#/components/schemas/type_commons_NotificationType'
+          description: The name of the event
+        webhookUrl:
+          type: string
+          description: The URL to which notifications will be sent
+        enabled:
+          type: boolean
+          description: Indicates whether the subscription is active
+      required:
+      - eventName
+      - webhookUrl
+      - enabled
+      title: SubscriptionAttributes
+    type_commons_ErrorObject:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Status code returned from the request
+        title:
+          type: string
+          description: Name of error
+        detail:
+          type: string
+          description: Description of the specific occurance of the error
+        source:
+          $ref: '#/components/schemas/type_commons_ErrorSource'
+          description: An object containing a reference to the primary source of the error
+        id:
+          type: string
+          description: The id of the resource which caused the error. Always returned for multi-status errors.
+      required:
+      - status
+      - title
+      - detail
+      title: ErrorObject
+    type_notifications_subscriptions_UpdateSubscriptionsResponseObject:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_notifications_subscriptions_CreateSubscriptionUnion'
+      required:
+      - data
+      title: UpdateSubscriptionsResponseObject
+    type_notifications_subscriptions_UpdateSubscriptionRequestBody:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_notifications_subscriptions_UpdateSubscriptionRequestUnion'
+      required:
+      - data
+      title: UpdateSubscriptionRequestBody
+    type_notifications_subscriptions_SubscriptionRequestUnion:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - subscription
+            description: 'Discriminator value: subscription'
+          attributes:
+            $ref: '#/components/schemas/type_notifications_subscriptions_SubscriptionRequestAttributes'
+        required:
+        - type
+        - attributes
+      discriminator:
+        propertyName: type
+      title: SubscriptionRequestUnion
+    type_commons_SubscriptionId:
+      type: string
+      description: The ID of the subscription
+      title: SubscriptionId
+    type_notifications_subscriptions_CreateSubscriptionsResponseObject:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_notifications_subscriptions_CreateSubscriptionUnion'
+      required:
+      - data
+      title: CreateSubscriptionsResponseObject
+    type_notifications_subscriptions_SubscriptionRequestAttributes:
+      type: object
+      properties:
+        eventName:
+          $ref: '#/components/schemas/type_commons_NotificationType'
+          description: The name of the event for the subscription
+        webhookUrl:
+          type: string
+          description: The URL where notifications will be delivered
+        enabled:
+          type: boolean
+          description: Indicates whether the subscription is active
+      required:
+      - eventName
+      - webhookUrl
+      - enabled
+      title: SubscriptionRequestAttributes
+    type_notifications_subscriptions_SubscriptionsResponseObject:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_notifications_subscriptions_SubscriptionUnion'
+      required:
+      - data
+      title: SubscriptionsResponseObject
+    type_commons_ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_ErrorObject'
+      required:
+      - errors
+      title: ErrorResponse
+    type_notifications_subscriptions_UpdateSubscriptionRequestUnion:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - subscription
+            description: 'Discriminator value: subscription'
+          attributes:
+            $ref: '#/components/schemas/type_notifications_subscriptions_UpdateSubscriptionRequestAttributes'
+        required:
+        - type
+        - attributes
+      discriminator:
+        propertyName: type
+      title: UpdateSubscriptionRequestUnion
+    type_notifications_subscriptions_UpdateSubscriptionRequestAttributes:
+      type: object
+      properties:
+        eventName:
+          $ref: '#/components/schemas/type_commons_NotificationType'
+          description: The name of the event for the subscription
+        webhookUrl:
+          type: string
+          description: The URL where notifications will be delivered
+        enabled:
+          type: boolean
+          description: Indicates whether the subscription is active
+      title: UpdateSubscriptionRequestAttributes
+    type_commons_ErrorSource:
       type: object
       properties:
         pointer:
@@ -194,15 +348,28 @@ components:
           type: string
           description: A string indicating the name of a single request header which caused the error
       title: ErrorSource
-    type_commons:SubscriptionId:
-      type: string
-      description: The ID of the subscription
-      title: SubscriptionId
-    type_commons:OrganizationId:
-      type: string
-      description: Your issuer organization ID, provided by Kard
-      title: OrganizationId
-    type_commons:NotificationType:
+    type_notifications_subscriptions_SubscriptionUnion:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - subscription
+            description: 'Discriminator value: subscription'
+          id:
+            type: string
+            description: The ID of the subscription
+          attributes:
+            $ref: '#/components/schemas/type_notifications_subscriptions_SubscriptionAttributes'
+        required:
+        - type
+        - id
+        - attributes
+      discriminator:
+        propertyName: type
+      title: SubscriptionUnion
+    type_commons_NotificationType:
       type: string
       enum:
       - earnedRewardApproved
@@ -216,39 +383,41 @@ components:
       - pushNotificationPlacementFile
       - emailNotificationPlacementFile
       title: NotificationType
-    type_commons:ErrorObject:
+    type_commons_OrganizationId:
+      type: string
+      description: Your issuer organization ID, provided by Kard
+      title: OrganizationId
+    type_notifications_subscriptions_SubscriptionRequestBody:
       type: object
       properties:
-        status:
-          type: string
-          description: Status code returned from the request
-        title:
-          type: string
-          description: Name of error
-        detail:
-          type: string
-          description: Description of the specific occurance of the error
-        source:
-          $ref: '#/components/schemas/type_commons:ErrorSource'
-          description: An object containing a reference to the primary source of the error
-        id:
-          type: string
-          description: The id of the resource which caused the error. Always returned for multi-status errors.
-      required:
-      - status
-      - title
-      - detail
-      title: ErrorObject
-    type_commons:ErrorResponse:
-      type: object
-      properties:
-        errors:
+        data:
           type: array
           items:
-            $ref: '#/components/schemas/type_commons:ErrorObject'
+            $ref: '#/components/schemas/type_notifications_subscriptions_SubscriptionRequestUnion'
       required:
-      - errors
-      title: ErrorResponse
+      - data
+      title: SubscriptionRequestBody
+    type_notifications_subscriptions_CreateSubscriptionUnion:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - subscription
+            description: 'Discriminator value: subscription'
+          attributes:
+            $ref: '#/components/schemas/type_notifications_subscriptions_SubscriptionRequestAttributes'
+          id:
+            type: string
+            description: The ID of the subscription
+        required:
+        - type
+        - attributes
+        - id
+      discriminator:
+        propertyName: type
+      title: CreateSubscriptionUnion
   securitySchemes:
     OAuthScheme:
       type: http

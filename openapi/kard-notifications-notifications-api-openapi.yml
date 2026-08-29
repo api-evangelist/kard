@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: API Reference attributions notifications > Notifications API
+  title: Reference notifications > Notifications API
   version: 1.0.0
 servers:
 - url: https://rewards-api.getkard.com
@@ -31,7 +31,7 @@ paths:
         in: path
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:OrganizationId'
+          $ref: '#/components/schemas/type_commons_OrganizationId'
       - name: page[after]
         in: query
         description: Represents a cursor value, and if provided, returns the next page of results
@@ -55,13 +55,13 @@ paths:
         description: Return only notifications for this event name.
         required: false
         schema:
-          $ref: '#/components/schemas/type_commons:NotificationType'
+          $ref: '#/components/schemas/type_commons_NotificationType'
       - name: filter[status]
         in: query
         description: Return only notifications with this delivery status.
         required: false
         schema:
-          $ref: '#/components/schemas/type_notifications/notifications:DeliveryStatus'
+          $ref: '#/components/schemas/type_notifications_notifications_DeliveryStatus'
       - name: filter[after]
         in: query
         description: Return only notifications created strictly after this timestamp (ISO 8601).
@@ -88,25 +88,25 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_notifications/notifications:NotificationsListResponse'
+                $ref: '#/components/schemas/type_notifications_notifications_NotificationsListResponse'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '401':
           description: Error response with status 401
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '500':
           description: Error response with status 500
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
   /v2/issuers/{organizationId}/notifications/{eventId}/replay:
     post:
       operationId: replay
@@ -125,7 +125,7 @@ paths:
         in: path
         required: true
         schema:
-          $ref: '#/components/schemas/type_commons:OrganizationId'
+          $ref: '#/components/schemas/type_commons_OrganizationId'
       - name: eventId
         in: path
         description: The event ID of the notification to replay.
@@ -145,57 +145,199 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_notifications/notifications:ReplayNotificationResponse'
+                $ref: '#/components/schemas/type_notifications_notifications_ReplayNotificationResponse'
         '400':
           description: Error response with status 400
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '401':
           description: Error response with status 401
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '404':
           description: Error response with status 404
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '409':
           description: Error response with status 409
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
         '500':
           description: Error response with status 500
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_commons:ErrorResponse'
+                $ref: '#/components/schemas/type_commons_ErrorResponse'
 components:
   schemas:
-    type_commons:ErrorSource:
+    type_notifications_notifications_NotificationUnion:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - notification
+            description: 'Discriminator value: notification'
+          id:
+            type: string
+            description: The event ID of the notification; the value the replay endpoint consumes.
+          attributes:
+            $ref: '#/components/schemas/type_notifications_notifications_NotificationAttributes'
+        required:
+        - type
+        - id
+        - attributes
+      discriminator:
+        propertyName: type
+      title: NotificationUnion
+    type_notifications_notifications_NotificationAttributes:
       type: object
       properties:
-        pointer:
+        eventId:
           type: string
-          description: A JSON pointer to the value in the request document that caused the error
-        parameter:
+          description: The event ID of the notification.
+        eventName:
+          $ref: '#/components/schemas/type_commons_NotificationType'
+          description: The name of the event.
+        timestamp:
           type: string
-          description: A string indicating which URI query parameter caused the error
-        header:
+          format: date-time
+          description: When the notification was created.
+        lastAttemptAt:
           type: string
-          description: A string indicating the name of a single request header which caused the error
-      title: ErrorSource
-    type_commons:OrganizationId:
-      type: string
-      description: Your issuer organization ID, provided by Kard
-      title: OrganizationId
-    type_commons:NotificationType:
+          format: date-time
+          description: When the most recent delivery attempt was recorded.
+        status:
+          $ref: '#/components/schemas/type_notifications_notifications_DeliveryStatus'
+          description: The delivery status of the notification.
+        attempts:
+          type: integer
+          description: The number of delivery attempts recorded for this notification.
+        statusCode:
+          type: integer
+          description: The HTTP status code returned by the issuer's webhook on the last delivery attempt, when available.
+        errorMessage:
+          type: string
+          description: The error recorded on the last delivery attempt, when delivery failed.
+      required:
+      - eventId
+      - eventName
+      - timestamp
+      - lastAttemptAt
+      - status
+      - attempts
+      title: NotificationAttributes
+    type_notifications_notifications_NotificationsListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_notifications_notifications_NotificationUnion'
+        meta:
+          $ref: '#/components/schemas/type_notifications_notifications_PaginationMetadata'
+          description: Metadata about the pagination status.
+        links:
+          $ref: '#/components/schemas/type_commons_Links'
+          description: Links to the current, next, and previous pages.
+      required:
+      - data
+      - meta
+      title: NotificationsListResponse
+    type_commons_ErrorObject:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Status code returned from the request
+        title:
+          type: string
+          description: Name of error
+        detail:
+          type: string
+          description: Description of the specific occurance of the error
+        source:
+          $ref: '#/components/schemas/type_commons_ErrorSource'
+          description: An object containing a reference to the primary source of the error
+        id:
+          type: string
+          description: The id of the resource which caused the error. Always returned for multi-status errors.
+      required:
+      - status
+      - title
+      - detail
+      title: ErrorObject
+    type_notifications_notifications_ReplayAcceptedNotification:
+      type: object
+      properties:
+        eventId:
+          type: string
+          format: uuid
+          description: The event ID accepted for replay and queued for delivery.
+      required:
+      - eventId
+      title: ReplayAcceptedNotification
+    type_notifications_notifications_PaginationMetadata:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          description: Number of items per page.
+        hasNextPage:
+          type: boolean
+          description: Indicates if there are more pages available after the current one.
+        total:
+          type: integer
+          description: Total number of records matching the query (for offset-based pagination).
+        page:
+          type: integer
+          description: Current page number (for offset-based pagination).
+      required:
+      - pageSize
+      - hasNextPage
+      description: Response metadata.
+      title: PaginationMetadata
+    type_notifications_notifications_ReplayNotificationResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_notifications_notifications_ReplayAcceptedNotification'
+      required:
+      - data
+      title: ReplayNotificationResponse
+    type_commons_ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_ErrorObject'
+      required:
+      - errors
+      title: ErrorResponse
+    type_commons_Links:
+      type: object
+      properties:
+        self:
+          type: string
+        prev:
+          type: string
+        next:
+          type: string
+      required:
+      - self
+      description: Related links to the API call
+      title: Links
+    type_commons_NotificationType:
       type: string
       enum:
       - earnedRewardApproved
@@ -209,39 +351,31 @@ components:
       - pushNotificationPlacementFile
       - emailNotificationPlacementFile
       title: NotificationType
-    type_commons:ErrorObject:
+    type_commons_OrganizationId:
+      type: string
+      description: Your issuer organization ID, provided by Kard
+      title: OrganizationId
+    type_commons_ErrorSource:
       type: object
       properties:
-        status:
+        pointer:
           type: string
-          description: Status code returned from the request
-        title:
+          description: A JSON pointer to the value in the request document that caused the error
+        parameter:
           type: string
-          description: Name of error
-        detail:
+          description: A string indicating which URI query parameter caused the error
+        header:
           type: string
-          description: Description of the specific occurance of the error
-        source:
-          $ref: '#/components/schemas/type_commons:ErrorSource'
-          description: An object containing a reference to the primary source of the error
-        id:
-          type: string
-          description: The id of the resource which caused the error. Always returned for multi-status errors.
-      required:
-      - status
-      - title
-      - detail
-      title: ErrorObject
-    type_commons:ErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons:ErrorObject'
-      required:
-      - errors
-      title: ErrorResponse
+          description: A string indicating the name of a single request header which caused the error
+      title: ErrorSource
+    type_notifications_notifications_DeliveryStatus:
+      type: string
+      enum:
+      - pending
+      - delivered
+      - delivery_failed
+      description: The delivery status of a notification.
+      title: DeliveryStatus
   securitySchemes:
     OAuthScheme:
       type: http

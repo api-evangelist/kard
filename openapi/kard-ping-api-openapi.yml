@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: API Reference attributions Ping API
+  title: Reference Ping API
   version: 1.0.0
 servers:
 - url: https://rewards-api.getkard.com
@@ -23,16 +23,26 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_ping:PingResponseObject'
+                $ref: '#/components/schemas/type_ping_PingResponseObject'
         '403':
           description: If the network is blocked and the service cannot be reached.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/type_ping:NetworkBlockedErrorBody'
+                $ref: '#/components/schemas/type_ping_NetworkBlockedErrorBody'
 components:
   schemas:
-    type_ping:PingResponseObject:
+    type_ping_NetworkBlockedErrorBody:
+      type: object
+      properties:
+        message:
+          type: string
+          description: A message indicating that the network is blocked.
+      required:
+      - message
+      description: Error response indicating that the network is blocked.
+      title: NetworkBlockedErrorBody
+    type_ping_PingResponseObject:
       type: object
       properties:
         message:
@@ -50,16 +60,6 @@ components:
       - timestamp
       description: Response indicating the status of the ping.
       title: PingResponseObject
-    type_ping:NetworkBlockedErrorBody:
-      type: object
-      properties:
-        message:
-          type: string
-          description: A message indicating that the network is blocked.
-      required:
-      - message
-      description: Error response indicating that the network is blocked.
-      title: NetworkBlockedErrorBody
   securitySchemes:
     OAuthScheme:
       type: http
