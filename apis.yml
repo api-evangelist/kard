@@ -69,7 +69,7 @@ apis:
   humanURL: https://docs.getkard.com/home
   baseURL: https://rewards-api.getkard.com
   tags:
-  - Attributions
+  - attributions
   tags_raw:
   - attributions
   properties:
