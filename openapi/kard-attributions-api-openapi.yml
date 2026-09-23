@@ -8,17 +8,18 @@ servers:
 - url: https://test-rewards-api.getkard.com
   description: Sandbox
 tags:
-- name: attributions
+- name: Attributions
 paths:
   /issuers/{organizationId}/attributions:
     post:
       operationId: create-attribution-events
       summary: Create Attribution Events
-      description: 'Call this endpoint to send all attribution events made by all enrolled users in your rewards program. These attribution events will be processed by the Kard system.<br/>
+      description: 'Call this endpoint to send all attribution events made by all enrolled users in your rewards program. These attribution events will be processed by the Kard system.
 
-        <b>Required scopes:</b> `attributions.write`'
+
+        Required scopes: `attributions.write`'
       tags:
-      - attributions
+      - Attributions
       parameters:
       - name: organizationId
         in: path
@@ -68,34 +69,19 @@ paths:
               $ref: '#/components/schemas/type_attributions_CreateAttributionRequestBody'
 components:
   schemas:
-    type_attributions_CreateAttributionRequestBody:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_attributions_CreateAttributesRequest'
-          description: Data and attributes related to the attribution event.
-      required:
-      - data
-      title: CreateAttributionRequestBody
-    type_attributions_UserId:
-      type: string
-      description: The referring partner user ID associated with the attribution event.
-      title: UserId
-    type_attributions_OrganizationId:
-      type: string
-      description: Your organization ID, provided by Kard.
-      title: OrganizationId
-    type_attributions_Medium:
+    type_attributions_ObjectType:
       type: string
       enum:
-      - BROWSE
-      - MAP
-      - SEARCH
-      - PUSH
-      description: Where the attribution event is taking place in your rewards experience.
-      title: Medium
+      - attribution
+      title: ObjectType
+    type_commons_UnauthorizedErrorBody:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: UnauthorizedErrorBody
     type_attributions_CreateAttributesRequest:
       type: object
       properties:
@@ -114,23 +100,6 @@ components:
       - NOTIFICATION
       description: What the attribution event is on.
       title: Type
-    type_commons_UnauthorizedErrorBody:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-      title: UnauthorizedErrorBody
-    type_attributions_ObjectType:
-      type: string
-      enum:
-      - attribution
-      title: ObjectType
-    type_attributions_TypeId:
-      type: string
-      description: The ID in Kard’s system associated with what the attribution event is on. If `type` is `OFFER`, `typeId` should be the associated offer ID in Kard’s system.
-      title: TypeId
     type_attributions_Subtype:
       type: string
       enum:
@@ -138,11 +107,25 @@ components:
       - VIEW
       description: The type of attribution event.
       title: Subtype
-    type_commons_InvalidRequestUnion:
-      oneOf:
-      - $ref: '#/components/schemas/type_commons_RequestValidationErrorResponse'
-      - type: string
-      title: InvalidRequestUnion
+    type_attributions_UserId:
+      type: string
+      description: The referring partner user ID associated with the attribution event.
+      title: UserId
+    type_attributions_OrganizationId:
+      type: string
+      description: Your organization ID, provided by Kard.
+      title: OrganizationId
+    type_attributions_CreateAttributionRequestBody:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_attributions_CreateAttributesRequest'
+          description: Data and attributes related to the attribution event.
+      required:
+      - data
+      title: CreateAttributionRequestBody
     type_attributions_Attributes:
       type: object
       properties:
@@ -162,6 +145,20 @@ components:
       - subtype
       - typeId
       title: Attributes
+    type_commons_InvalidRequestUnion:
+      oneOf:
+      - $ref: '#/components/schemas/type_commons_RequestValidationErrorResponse'
+      - type: string
+      title: InvalidRequestUnion
+    type_attributions_Medium:
+      type: string
+      enum:
+      - BROWSE
+      - MAP
+      - SEARCH
+      - PUSH
+      description: Where the attribution event is taking place in your rewards experience.
+      title: Medium
     type_commons_RequestValidationErrorResponse:
       type: object
       properties:
@@ -172,6 +169,10 @@ components:
       required:
       - errors
       title: RequestValidationErrorResponse
+    type_attributions_TypeId:
+      type: string
+      description: The ID in Kard’s system associated with what the attribution event is on. If `type` is `OFFER`, `typeId` should be the associated offer ID in Kard’s system.
+      title: TypeId
   securitySchemes:
     bearer:
       type: http

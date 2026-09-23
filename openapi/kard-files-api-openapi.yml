@@ -15,7 +15,13 @@ paths:
     get:
       operationId: get-metadata
       summary: Get Files
-      description: "Retrieves metadata for files associated with a specific issuer/organization.\nThis endpoint supports pagination and sorting options to efficiently navigate \nthrough potentially large sets of file metadata.\n<b>Required scopes:</b> `files.read`"
+      description: 'Retrieves metadata for files associated with a specific issuer/organization.
+
+        This endpoint supports pagination and sorting options to efficiently navigate
+
+        through potentially large sets of file metadata.
+
+        Required scopes: `files.read`'
       tags:
       - Files
       parameters:
@@ -112,9 +118,10 @@ paths:
     get:
       operationId: list
       summary: List
-      description: 'Retrieve file information for users eligibility and reconciliation files, along with file download URL links.<br/>
+      description: 'Retrieve file information for users eligibility and reconciliation files, along with file download URL links.
 
-        <b>Required scopes:</b> `files.read`'
+
+        Required scopes: `files.read`'
       tags:
       - Files
       parameters:
@@ -203,6 +210,94 @@ components:
       - attributes
       - id
       title: FileMetadataWithURL
+    type_files_PaginationMeta:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          description: Number of items per page.
+        hasNextPage:
+          type: boolean
+          description: Indicates if there are more pages available after the current one.
+      required:
+      - pageSize
+      - hasNextPage
+      title: PaginationMeta
+    type_commons_Links:
+      type: object
+      properties:
+        self:
+          type: string
+        prev:
+          type: string
+        next:
+          type: string
+      required:
+      - self
+      description: Related links to the API call
+      title: Links
+    type_files_FilesMetadataSortOptions:
+      type: string
+      enum:
+      - sentDate
+      - -sentDate
+      title: FilesMetadataSortOptions
+    type_commons_ErrorSource:
+      type: object
+      properties:
+        pointer:
+          type: string
+          description: A JSON pointer to the value in the request document that caused the error
+        parameter:
+          type: string
+          description: A string indicating which URI query parameter caused the error
+        header:
+          type: string
+          description: A string indicating the name of a single request header which caused the error
+      title: ErrorSource
+    type_commons_OrganizationId:
+      type: string
+      description: Your issuer organization ID, provided by Kard
+      title: OrganizationId
+    type_files_FileMetadataAttribute:
+      type: object
+      properties:
+        fileName:
+          type: string
+          description: The name of the file.
+        sentAt:
+          type: string
+          description: ISO 8601 timestamp (ISO8601) when the file was originally sent/created.
+        lastModified:
+          type: string
+          description: ISO 8601 timestamp (ISO8601) when the file was last modified.
+        downloadUrl:
+          type: string
+          description: Temporary URL that provides direct access to download the file for 30 minutes.
+      required:
+      - fileName
+      - sentAt
+      - lastModified
+      - downloadUrl
+      title: FileMetadataAttribute
+    type_files_FileType:
+      type: string
+      enum:
+      - earnedRewardApprovedDailyReconciliationFile
+      - earnedRewardSettledDailyReconciliationFile
+      - validatedTransactionDailyReconciliationFile
+      - monthlyReconciliationFile
+      title: FileType
+    type_commons_ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_ErrorObject'
+      required:
+      - errors
+      title: ErrorResponse
     type_commons_ErrorObject:
       type: object
       properties:
@@ -226,81 +321,6 @@ components:
       - title
       - detail
       title: ErrorObject
-    type_files_FilesMetadataSortOptions:
-      type: string
-      enum:
-      - sentDate
-      - -sentDate
-      title: FilesMetadataSortOptions
-    type_commons_ErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_ErrorObject'
-      required:
-      - errors
-      title: ErrorResponse
-    type_files_FileType:
-      type: string
-      enum:
-      - earnedRewardApprovedDailyReconciliationFile
-      - earnedRewardSettledDailyReconciliationFile
-      - validatedTransactionDailyReconciliationFile
-      - monthlyReconciliationFile
-      title: FileType
-    type_commons_Links:
-      type: object
-      properties:
-        self:
-          type: string
-        prev:
-          type: string
-        next:
-          type: string
-      required:
-      - self
-      description: Related links to the API call
-      title: Links
-    type_files_FileMetadataAttribute:
-      type: object
-      properties:
-        fileName:
-          type: string
-          description: The name of the file.
-        sentAt:
-          type: string
-          description: ISO 8601 timestamp (ISO8601) when the file was originally sent/created.
-        lastModified:
-          type: string
-          description: ISO 8601 timestamp (ISO8601) when the file was last modified.
-        downloadUrl:
-          type: string
-          description: Temporary URL that provides direct access to download the file for 30 minutes.
-      required:
-      - fileName
-      - sentAt
-      - lastModified
-      - downloadUrl
-      title: FileMetadataAttribute
-    type_files_PaginationMeta:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-          description: Number of items per page.
-        hasNextPage:
-          type: boolean
-          description: Indicates if there are more pages available after the current one.
-      required:
-      - pageSize
-      - hasNextPage
-      title: PaginationMeta
-    type_commons_OrganizationId:
-      type: string
-      description: Your issuer organization ID, provided by Kard
-      title: OrganizationId
     type_files_GetFilesMetadataResponse:
       type: object
       properties:
@@ -320,36 +340,6 @@ components:
       - links
       - meta
       title: GetFilesMetadataResponse
-    type_commons_ErrorSource:
-      type: object
-      properties:
-        pointer:
-          type: string
-          description: A JSON pointer to the value in the request document that caused the error
-        parameter:
-          type: string
-          description: A string indicating which URI query parameter caused the error
-        header:
-          type: string
-          description: A string indicating the name of a single request header which caused the error
-      title: ErrorSource
-    type_files_PaginationLinks:
-      type: object
-      properties:
-        self:
-          type: string
-          description: The self link. Will point to the current URL.
-        next:
-          type: string
-          description: The URL to get the next page of results.
-        first:
-          type: string
-          description: The URL to get the first page of results.
-      required:
-      - self
-      - first
-      description: Related pagination links to the API call.
-      title: PaginationLinks
     type_commons_UnauthorizedErrorBody:
       type: object
       properties:
@@ -358,13 +348,6 @@ components:
       required:
       - message
       title: UnauthorizedErrorBody
-    type_files_FileType_2:
-      type: string
-      enum:
-      - usersEligibilityFile
-      - dailyReconciliationFile
-      - monthlyReconciliationFile
-      title: FileType
     type_files_Files:
       type: object
       properties:
@@ -384,28 +367,30 @@ components:
       - meta
       - links
       title: Files
-    type_files_FileAttributes:
+    type_files_PaginationLinks:
       type: object
       properties:
-        fileName:
+        self:
           type: string
-          description: The name of the file to download.
-        lastModified:
+          description: The self link. Will point to the current URL.
+        next:
           type: string
-          format: date-time
-          description: The last time this document was modified (ISO 8601).
-        contentType:
+          description: The URL to get the next page of results.
+        first:
           type: string
-          description: The content type of the file.
-        downloadUrl:
-          type: string
-          description: The download link of the file. Use this to download the associated file. These are ephemeral links with an expiration time of 1 hour.
+          description: The URL to get the first page of results.
       required:
-      - fileName
-      - lastModified
-      - contentType
-      - downloadUrl
-      title: FileAttributes
+      - self
+      - first
+      description: Related pagination links to the API call.
+      title: PaginationLinks
+    type_files_FileType_2:
+      type: string
+      enum:
+      - usersEligibilityFile
+      - dailyReconciliationFile
+      - monthlyReconciliationFile
+      title: FileType
     type_files_File:
       oneOf:
       - type: object
@@ -465,15 +450,6 @@ components:
       - $ref: '#/components/schemas/type_commons_RequestValidationErrorResponse'
       - type: string
       title: InvalidRequestUnion
-    type_files_FilesMeta:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-          description: The number of records returned in API call.
-      required:
-      - pageSize
-      title: FilesMeta
     type_commons_RequestValidationErrorResponse:
       type: object
       properties:
@@ -484,6 +460,37 @@ components:
       required:
       - errors
       title: RequestValidationErrorResponse
+    type_files_FileAttributes:
+      type: object
+      properties:
+        fileName:
+          type: string
+          description: The name of the file to download.
+        lastModified:
+          type: string
+          format: date-time
+          description: The last time this document was modified (ISO 8601).
+        contentType:
+          type: string
+          description: The content type of the file.
+        downloadUrl:
+          type: string
+          description: The download link of the file. Use this to download the associated file. These are ephemeral links with an expiration time of 1 hour.
+      required:
+      - fileName
+      - lastModified
+      - contentType
+      - downloadUrl
+      title: FileAttributes
+    type_files_FilesMeta:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          description: The number of records returned in API call.
+      required:
+      - pageSize
+      title: FilesMeta
   securitySchemes:
     OAuthScheme:
       type: http

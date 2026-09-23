@@ -99,9 +99,11 @@
     "tag 'API Reference' spans 2 source specs (kard-api-reference-openapi.yaml, kard-legacy-openapi.yaml): per-path servers applied",
     "tag 'Files' spans 2 source specs (kard-api-reference-openapi.yaml, kard-legacy-openapi.yaml): per-path servers applied",
     "tag 'transactions' spans 2 source specs (kard-api-reference-openapi.yaml, kard-legacy-openapi.yaml): per-path servers applied",
-    "tag 'users' spans 2 source specs (kard-api-reference-openapi.yaml, kard-legacy-openapi.yaml): per-path servers applied"
+    "tag 'users' spans 2 source specs (kard-api-reference-openapi.yaml, kard-legacy-openapi.yaml): per-path servers applied",
+    "apis.yml register: already-registered"
   ],
   "skipped": [
+    "kard-api-reference-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "kard-attributions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "kard-files-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "kard-notifications-notifications-api-openapi.yml: previously refined output, superseded by openapi/_original/",

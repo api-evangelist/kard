@@ -55,29 +55,23 @@ paths:
                 $ref: '#/components/schemas/type_commons_ErrorResponse'
 components:
   schemas:
-    type_commons_ErrorObject:
+    type_commons_OrganizationId:
+      type: string
+      description: Your issuer organization ID, provided by Kard
+      title: OrganizationId
+    type_commons_ErrorSource:
       type: object
       properties:
-        status:
+        pointer:
           type: string
-          description: Status code returned from the request
-        title:
+          description: A JSON pointer to the value in the request document that caused the error
+        parameter:
           type: string
-          description: Name of error
-        detail:
+          description: A string indicating which URI query parameter caused the error
+        header:
           type: string
-          description: Description of the specific occurance of the error
-        source:
-          $ref: '#/components/schemas/type_commons_ErrorSource'
-          description: An object containing a reference to the primary source of the error
-        id:
-          type: string
-          description: The id of the resource which caused the error. Always returned for multi-status errors.
-      required:
-      - status
-      - title
-      - detail
-      title: ErrorObject
+          description: A string indicating the name of a single request header which caused the error
+      title: ErrorSource
     type_users_auth_WebViewTokenResponse:
       type: object
       properties:
@@ -107,23 +101,29 @@ components:
       type: string
       description: The ID of the user as defined on the issuers system
       title: UserId
-    type_commons_OrganizationId:
-      type: string
-      description: Your issuer organization ID, provided by Kard
-      title: OrganizationId
-    type_commons_ErrorSource:
+    type_commons_ErrorObject:
       type: object
       properties:
-        pointer:
+        status:
           type: string
-          description: A JSON pointer to the value in the request document that caused the error
-        parameter:
+          description: Status code returned from the request
+        title:
           type: string
-          description: A string indicating which URI query parameter caused the error
-        header:
+          description: Name of error
+        detail:
           type: string
-          description: A string indicating the name of a single request header which caused the error
-      title: ErrorSource
+          description: Description of the specific occurance of the error
+        source:
+          $ref: '#/components/schemas/type_commons_ErrorSource'
+          description: An object containing a reference to the primary source of the error
+        id:
+          type: string
+          description: The id of the resource which caused the error. Always returned for multi-status errors.
+      required:
+      - status
+      - title
+      - detail
+      title: ErrorObject
   securitySchemes:
     OAuthScheme:
       type: http

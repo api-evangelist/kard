@@ -354,36 +354,35 @@ paths:
                 $ref: '#/components/schemas/type_commons_ErrorResponse'
 components:
   schemas:
-    type_organizations_placements_ToManyRelationship:
+    type_organizations_placements_UpdateBatchActivationAttributes:
       type: object
       properties:
-        data:
+        name:
+          type: string
+          description: Name of the placement
+        refreshInterval:
+          type: string
+          description: ISO-8601 duration controlling how often the activation cohort refreshes
+        slots:
           type: array
           items:
-            $ref: '#/components/schemas/type_organizations_placements_ResourceIdentifier'
-          description: The linked resource identifiers.
+            $ref: '#/components/schemas/type_organizations_placements_UpdateBatchActivationSlot'
+          description: Slots that make up the activation cohort. Slots present in the prior state but absent from this list are removed.
       required:
-      - data
-      description: A JSON:API to-many relationship payload.
-      title: ToManyRelationship
-    type_organizations_placements_CreateBatchActivationSlot:
+      - name
+      - refreshInterval
+      - slots
+      description: Attributes for updating a batch-activation placement. All fields are required.
+      title: UpdateBatchActivationAttributes
+    type_organizations_placements_PlacementRelationships:
       type: object
       properties:
-        placementId:
-          type: string
-          description: ID of another placement that fills this slot. The referenced placement provides both the content strategy and the limit on the number of offers available to the slot.
-        alias:
-          type: string
-          description: Customer-defined alias for the slot, unique within the placement
-        shortDescription:
-          type: string
-          description: Optional short description of the slot, limited to 50 characters
-      required:
-      - placementId
-      - alias
-      description: A slot in a batch-activation or group placement at creation time
-      title: CreateBatchActivationSlot
-    type_organizations_placements_PushNotificationPlacementAttributes:
+        contentStrategy:
+          $ref: '#/components/schemas/type_organizations_placements_ToOneRelationship'
+          description: Relationship to the content strategy that powers this placement. Present whenever the placement has been linked to a content strategy (`data.id` will be set). Omitted entirely when no content strategy is linked.
+      description: Relationship block for non-batch placements. Mirrors the `contentStrategyId` attribute so JSON:API clients can walk the graph.
+      title: PlacementRelationships
+    type_organizations_placements_EmailPlacementAttributes:
       type: object
       properties:
         name:
@@ -392,188 +391,62 @@ components:
         organizationId:
           type: string
           description: ID of the organization this placement belongs to
+        availableSlots:
+          type: integer
+          description: Number of available slots
         cadence:
           $ref: '#/components/schemas/type_organizations_placements_Cadence'
-          description: Delivery cadence for the notification
+          description: Delivery cadence for the email
         contentStrategyId:
           type: string
           description: ID of the content strategy linked to this placement, if any. Retained alongside `relationships.contentStrategy` for backward compatibility.
       required:
       - name
       - organizationId
-      - cadence
-      description: Attributes for a push-notification placement
-      title: PushNotificationPlacementAttributes
-    type_organizations_placements_UpdatePushNotificationAttributes:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the placement
-        cadence:
-          $ref: '#/components/schemas/type_organizations_placements_Cadence'
-          description: Delivery cadence for the notification
-        contentStrategyId:
-          type: string
-          description: ID of the content strategy to link this placement to. Omit to clear any existing link (PUT requires the full attribute set, so a missing value unlinks the placement).
-      required:
-      - name
-      - cadence
-      description: Attributes for updating a push-notification placement. All fields are required.
-      title: UpdatePushNotificationAttributes
-    type_organizations_placements_CreateEmailAttributes:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the placement
-        availableSlots:
-          type: integer
-          description: Number of available slots (minimum 1)
-        cadence:
-          $ref: '#/components/schemas/type_organizations_placements_Cadence'
-          description: Delivery cadence for the email
-        contentStrategyId:
-          type: string
-          description: ID of the content strategy to link this placement to
-      required:
-      - name
       - availableSlots
       - cadence
-      description: Attributes for creating an email placement
-      title: CreateEmailAttributes
-    type_internal-organizations_DeleteResourceResponse:
+      description: Attributes for an email placement
+      title: EmailPlacementAttributes
+    type_organizations_placements_BatchActivationPlacementAttributes:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the placement
+        organizationId:
+          type: string
+          description: ID of the organization this placement belongs to
+        refreshInterval:
+          type: string
+          description: ISO-8601 duration that controls how often the activation cohort refreshes (e.g. "P7D" for weekly).
+      required:
+      - name
+      - organizationId
+      - refreshInterval
+      description: Attributes for a batch-activation placement. Slot detail is exposed via `relationships.slots` (resource identifiers) and the `batchActivationSlot` entries in `included`; request `?include=slots` (or a deeper path) to get the slot details.
+      title: BatchActivationPlacementAttributes
+    type_organizations_placements_CreatePlacementRequestBody:
       type: object
       properties:
         data:
-          $ref: '#/components/schemas/type_internal-organizations_DeleteResourceData'
+          $ref: '#/components/schemas/type_organizations_placements_CreatePlacementDataUnion'
+          description: Placement data for creation
       required:
       - data
-      description: Response returned after deleting a resource
-      title: DeleteResourceResponse
-    type_organizations_placements_BatchActivationSlotAttributes:
-      type: object
-      properties:
-        alias:
-          type: string
-          description: Customer-defined alias for the slot, unique within the placement.
-        shortDescription:
-          type: string
-          description: Optional short description of the slot, limited to 50 characters.
-      required:
-      - alias
-      description: Attributes block for a `batchActivationSlot` resource.
-      title: BatchActivationSlotAttributes
-    type_organizations_placements_CreatePlacementDataUnion:
-      oneOf:
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - placement
-            description: 'Discriminator value: placement'
-          attributes:
-            $ref: '#/components/schemas/type_organizations_placements_CreateStandardAttributes'
-            description: Standard placement attributes for creation
-        required:
-        - type
-        - attributes
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - placementPushNotification
-            description: 'Discriminator value: placementPushNotification'
-          attributes:
-            $ref: '#/components/schemas/type_organizations_placements_CreatePushNotificationAttributes'
-            description: Push-notification placement attributes for creation
-        required:
-        - type
-        - attributes
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - placementEmail
-            description: 'Discriminator value: placementEmail'
-          attributes:
-            $ref: '#/components/schemas/type_organizations_placements_CreateEmailAttributes'
-            description: Email placement attributes for creation
-        required:
-        - type
-        - attributes
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - placementBatchActivation
-            description: 'Discriminator value: placementBatchActivation'
-          attributes:
-            $ref: '#/components/schemas/type_organizations_placements_CreateBatchActivationAttributes'
-            description: Batch-activation placement attributes for creation
-        required:
-        - type
-        - attributes
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - placementGroup
-            description: 'Discriminator value: placementGroup'
-          attributes:
-            $ref: '#/components/schemas/type_organizations_placements_CreateGroupAttributes'
-            description: Group placement attributes for creation
-        required:
-        - type
-        - attributes
-      discriminator:
-        propertyName: type
-      description: Discriminated union for creating a placement
-      title: CreatePlacementDataUnion
-    type_internal-organizations_DeleteResourceData:
-      type: object
-      properties:
-        type:
-          type: string
-          description: Resource type identifier
-        id:
-          type: string
-          description: ID of the deleted resource
-        attributes:
-          $ref: '#/components/schemas/type_commons_EmptyObject'
-      required:
-      - type
-      - id
-      - attributes
-      description: Deleted resource stub
-      title: DeleteResourceData
-    type_commons_CategoryOption:
+      description: Request body for creating a placement
+      title: CreatePlacementRequestBody
+    type_organizations_placements_DayOfWeek:
       type: string
       enum:
-      - Arts & Entertainment
-      - Baby, Kids & Toys
-      - Books & Digital Media
-      - Clothing, Shoes & Accessories
-      - Computers, Electronics & Software
-      - Convenience
-      - Gas
-      - Department Stores
-      - Food & Beverage
-      - Health & Beauty
-      - Home & Garden
-      - Miscellaneous
-      - Occasions & Gifts
-      - Pets
-      - Sports & Outdoors
-      - Supplies & Services
-      - Travel
-      description: Category of merchant. Please use URL Encode for non single word categories. (Food & Beverage should be Food%20%26%20Beverage)
-      title: CategoryOption
+      - MON
+      - TUE
+      - WED
+      - THU
+      - FRI
+      - SAT
+      - SUN
+      description: Day of the week (used when frequency is WEEKLY)
+      title: DayOfWeek
     type_organizations_placements_PlacementAttributes:
       type: object
       properties:
@@ -595,261 +468,27 @@ components:
       - availableSlots
       description: Attributes for a standard placement
       title: PlacementAttributes
-    type_organizations_placements_SlottedPlacementRelationships:
-      type: object
-      properties:
-        slots:
-          $ref: '#/components/schemas/type_organizations_placements_ToManyRelationship'
-          description: Resource identifiers for the slots that make up the placement. Each entry corresponds to a `batchActivationSlot` resource that appears in `included` when the request asks for `slots` (or any deeper path that implies it).
-      required:
-      - slots
-      description: Relationship block for a batch-activation or group placement.
-      title: SlottedPlacementRelationships
-    type_commons_EmptyObject:
-      type: object
-      properties: {}
-      title: EmptyObject
-    type_commons_ErrorObject:
-      type: object
-      properties:
-        status:
-          type: string
-          description: Status code returned from the request
-        title:
-          type: string
-          description: Name of error
-        detail:
-          type: string
-          description: Description of the specific occurance of the error
-        source:
-          $ref: '#/components/schemas/type_commons_ErrorSource'
-          description: An object containing a reference to the primary source of the error
-        id:
-          type: string
-          description: The id of the resource which caused the error. Always returned for multi-status errors.
-      required:
-      - status
-      - title
-      - detail
-      title: ErrorObject
-    type_internal-organizations_OrganizationPaginationMetadata:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-          description: Number of items per page
-        hasNextPage:
-          type: boolean
-          description: Whether more pages are available
-      required:
-      - pageSize
-      - hasNextPage
-      description: Pagination metadata for organization list responses
-      title: OrganizationPaginationMetadata
-    type_organizations_placements_CreateGroupAttributes:
+    type_organizations_placements_PushNotificationPlacementAttributes:
       type: object
       properties:
         name:
           type: string
           description: Name of the placement
-        slots:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_organizations_placements_CreateBatchActivationSlot'
-          description: Slots that make up the group
-      required:
-      - name
-      - slots
-      description: Attributes for creating a group placement
-      title: CreateGroupAttributes
-    type_organizations_placements_CadenceFrequency:
-      type: string
-      enum:
-      - DAILY
-      - WEEKLY
-      - MONTHLY
-      description: How often a push notification or email placement delivers
-      title: CadenceFrequency
-    type_commons_Links:
-      type: object
-      properties:
-        self:
+        organizationId:
           type: string
-        prev:
-          type: string
-        next:
-          type: string
-      required:
-      - self
-      description: Related links to the API call
-      title: Links
-    type_organizations_placements_BatchActivationSlotRelationships:
-      type: object
-      properties:
-        placement:
-          $ref: '#/components/schemas/type_organizations_placements_ToOneRelationship'
-          description: Reference to the placement that fills this slot. The referenced placement provides the slot's content strategy and offer-count cap; request `?include=slots.placement` to embed it in `included`.
-      required:
-      - placement
-      description: Relationship block for a `batchActivationSlot` resource.
-      title: BatchActivationSlotRelationships
-    type_organizations_placements_UpdatePlacementDataUnion:
-      oneOf:
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - placement
-            description: 'Discriminator value: placement'
-          attributes:
-            $ref: '#/components/schemas/type_organizations_placements_UpdateStandardAttributes'
-            description: Standard placement attributes for update
-        required:
-        - type
-        - attributes
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - placementPushNotification
-            description: 'Discriminator value: placementPushNotification'
-          attributes:
-            $ref: '#/components/schemas/type_organizations_placements_UpdatePushNotificationAttributes'
-            description: Push-notification placement attributes for update
-        required:
-        - type
-        - attributes
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - placementEmail
-            description: 'Discriminator value: placementEmail'
-          attributes:
-            $ref: '#/components/schemas/type_organizations_placements_UpdateEmailAttributes'
-            description: Email placement attributes for update
-        required:
-        - type
-        - attributes
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - placementBatchActivation
-            description: 'Discriminator value: placementBatchActivation'
-          attributes:
-            $ref: '#/components/schemas/type_organizations_placements_UpdateBatchActivationAttributes'
-            description: Batch-activation placement attributes for update
-        required:
-        - type
-        - attributes
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - placementGroup
-            description: 'Discriminator value: placementGroup'
-          attributes:
-            $ref: '#/components/schemas/type_organizations_placements_UpdateGroupAttributes'
-            description: Group placement attributes for update
-        required:
-        - type
-        - attributes
-      discriminator:
-        propertyName: type
-      description: Discriminated union for updating a placement
-      title: UpdatePlacementDataUnion
-    type_organizations_placements_UpdateBatchActivationSlot:
-      type: object
-      properties:
-        slotId:
-          type: string
-          description: Existing slot identifier. Echo the value from a prior GET to keep the slot stable; omit to mint a fresh slot. If the placementId changes, the slotId is regenerated regardless of what was echoed.
-        placementId:
-          type: string
-          description: ID of another placement that fills this slot. The referenced placement provides both the content strategy and the limit on the number of offers available to the slot.
-        alias:
-          type: string
-          description: Customer-defined alias for the slot, unique within the placement
-        shortDescription:
-          type: string
-          description: Optional short description of the slot, limited to 50 characters
-      required:
-      - placementId
-      - alias
-      description: A slot in a batch-activation or group placement at update time
-      title: UpdateBatchActivationSlot
-    type_organizations_placements_CreateBatchActivationAttributes:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the placement
-        refreshInterval:
-          type: string
-          description: ISO-8601 duration controlling how often the activation cohort refreshes
-        slots:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_organizations_placements_CreateBatchActivationSlot'
-          description: Slots that make up the activation cohort
-      required:
-      - name
-      - refreshInterval
-      - slots
-      description: Attributes for creating a batch-activation placement
-      title: CreateBatchActivationAttributes
-    type_organizations_contentStrategies_ContentStrategySort:
-      type: string
-      enum:
-      - NEWLY_LIVE
-      - EXPIRING_SOON
-      - HIGHEST_CASHBACK
-      - PERSONALIZED
-      - OFFERS_NEAR_YOU
-      description: Sort applied to the offers selected by a content strategy. A strategy may have at most one sort. The v1 starter set covers newly-live, expiring-soon, highest-cashback, personalized, and offers-near-you selections.
-      title: ContentStrategySort
-    type_organizations_contentStrategies_OfferFeatures:
-      type: string
-      enum:
-      - INTERACTIVE
-      description: Offer feature applied to the offers selected by a content strategy. A strategy may have any number of offer features.
-      title: OfferFeatures
-    type_commons_ErrorSource:
-      type: object
-      properties:
-        pointer:
-          type: string
-          description: A JSON pointer to the value in the request document that caused the error
-        parameter:
-          type: string
-          description: A string indicating which URI query parameter caused the error
-        header:
-          type: string
-          description: A string indicating the name of a single request header which caused the error
-      title: ErrorSource
-    type_organizations_placements_UpdateStandardAttributes:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the placement
-        availableSlots:
-          type: integer
-          description: Number of available slots (minimum 1)
+          description: ID of the organization this placement belongs to
+        cadence:
+          $ref: '#/components/schemas/type_organizations_placements_Cadence'
+          description: Delivery cadence for the notification
         contentStrategyId:
           type: string
-          description: ID of the content strategy to link this placement to. Omit to clear any existing link (PUT requires the full attribute set, so a missing value unlinks the placement).
+          description: ID of the content strategy linked to this placement, if any. Retained alongside `relationships.contentStrategy` for backward compatibility.
       required:
       - name
-      - availableSlots
-      description: Attributes for updating a standard placement. All fields are required.
-      title: UpdateStandardAttributes
+      - organizationId
+      - cadence
+      description: Attributes for a push-notification placement
+      title: PushNotificationPlacementAttributes
     type_organizations_contentStrategies_ContentStrategyFilters:
       type: object
       properties:
@@ -875,91 +514,6 @@ components:
           description: Offer features to filter by
       description: Filters applied when selecting offers for a content strategy
       title: ContentStrategyFilters
-    type_organizations_placements_DayOfWeek:
-      type: string
-      enum:
-      - MON
-      - TUE
-      - WED
-      - THU
-      - FRI
-      - SAT
-      - SUN
-      description: Day of the week (used when frequency is WEEKLY)
-      title: DayOfWeek
-    type_organizations_placements_UpdateBatchActivationAttributes:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the placement
-        refreshInterval:
-          type: string
-          description: ISO-8601 duration controlling how often the activation cohort refreshes
-        slots:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_organizations_placements_UpdateBatchActivationSlot'
-          description: Slots that make up the activation cohort. Slots present in the prior state but absent from this list are removed.
-      required:
-      - name
-      - refreshInterval
-      - slots
-      description: Attributes for updating a batch-activation placement. All fields are required.
-      title: UpdateBatchActivationAttributes
-    type_commons_ErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_ErrorObject'
-      required:
-      - errors
-      title: ErrorResponse
-    type_organizations_placements_UpdateGroupAttributes:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the placement
-        slots:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_organizations_placements_UpdateBatchActivationSlot'
-          description: Slots that make up the group. Slots present in the prior state but absent from this list are removed.
-      required:
-      - name
-      - slots
-      description: Attributes for updating a group placement. All fields are required.
-      title: UpdateGroupAttributes
-    type_organizations_placements_UpdatePlacementRequestBody:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_organizations_placements_UpdatePlacementDataUnion'
-          description: Placement data for update
-      required:
-      - data
-      description: Request body for updating a placement
-      title: UpdatePlacementRequestBody
-    type_organizations_placements_CreateStandardAttributes:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the placement
-        availableSlots:
-          type: integer
-          description: Number of available slots (minimum 1)
-        contentStrategyId:
-          type: string
-          description: ID of the content strategy to link this placement to
-      required:
-      - name
-      - availableSlots
-      description: Attributes for creating a standard placement
-      title: CreateStandardAttributes
     type_organizations_placements_ToOneRelationship:
       type: object
       properties:
@@ -968,178 +522,7 @@ components:
           description: The linked resource identifier, or null when the relationship is present but unlinked.
       description: A JSON:API to-one relationship payload.
       title: ToOneRelationship
-    type_organizations_placements_ResourceIdentifier:
-      type: object
-      properties:
-        type:
-          type: string
-          description: Discriminant of the referenced resource (e.g. `contentStrategy`).
-        id:
-          type: string
-          description: Identifier of the referenced resource.
-      required:
-      - type
-      - id
-      description: A reference to another resource by type and id.
-      title: ResourceIdentifier
-    type_organizations_placements_IncludedResource:
-      oneOf:
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - contentStrategy
-            description: 'Discriminator value: contentStrategy'
-          id:
-            type: string
-          attributes:
-            $ref: '#/components/schemas/type_organizations_contentStrategies_ContentStrategyAttributes'
-        required:
-        - type
-        - id
-        - attributes
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - batchActivationSlot
-            description: 'Discriminator value: batchActivationSlot'
-          id:
-            type: string
-          attributes:
-            $ref: '#/components/schemas/type_organizations_placements_BatchActivationSlotAttributes'
-          relationships:
-            $ref: '#/components/schemas/type_organizations_placements_BatchActivationSlotRelationships'
-        required:
-        - type
-        - id
-        - attributes
-        - relationships
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - placement
-            description: 'Discriminator value: placement'
-          id:
-            type: string
-            description: Unique identifier of the placement (UUID v7)
-          attributes:
-            $ref: '#/components/schemas/type_organizations_placements_PlacementAttributes'
-          relationships:
-            $ref: '#/components/schemas/type_organizations_placements_PlacementRelationships'
-            description: JSON:API relationships for the placement. Omitted entirely when the placement has no linked resources.
-        required:
-        - type
-        - id
-        - attributes
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - placementPushNotification
-            description: 'Discriminator value: placementPushNotification'
-          id:
-            type: string
-            description: Unique identifier of the placement (UUID v7)
-          attributes:
-            $ref: '#/components/schemas/type_organizations_placements_PushNotificationPlacementAttributes'
-          relationships:
-            $ref: '#/components/schemas/type_organizations_placements_PlacementRelationships'
-            description: JSON:API relationships for the placement. Omitted entirely when the placement has no linked resources.
-        required:
-        - type
-        - id
-        - attributes
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - placementEmail
-            description: 'Discriminator value: placementEmail'
-          id:
-            type: string
-            description: Unique identifier of the placement (UUID v7)
-          attributes:
-            $ref: '#/components/schemas/type_organizations_placements_EmailPlacementAttributes'
-          relationships:
-            $ref: '#/components/schemas/type_organizations_placements_PlacementRelationships'
-            description: JSON:API relationships for the placement. Omitted entirely when the placement has no linked resources.
-        required:
-        - type
-        - id
-        - attributes
-      discriminator:
-        propertyName: type
-      description: Discriminated union of every resource type that can appear in the `included` array. The shape of each branch matches the corresponding primary-data resource (same attributes and relationships), keyed on the JSON:API `type` discriminant.
-      title: IncludedResource
-    type_organizations_placements_GroupPlacementAttributes:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the placement
-        organizationId:
-          type: string
-          description: ID of the organization this placement belongs to
-      required:
-      - name
-      - organizationId
-      description: Attributes for a group placement. A group is configured like a batch-activation placement but has no refreshInterval. Slot detail is exposed via `relationships.slots` (resource identifiers) and the `batchActivationSlot` entries in `included`; request `?include=slots` (or a deeper path) to get the slot details.
-      title: GroupPlacementAttributes
-    type_organizations_contentStrategies_ContentStrategyAttributes:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the content strategy (unique within an organization)
-        organizationId:
-          type: string
-          description: ID of the organization this content strategy belongs to
-        sort:
-          $ref: '#/components/schemas/type_organizations_contentStrategies_ContentStrategySort'
-          description: Sort applied when selecting offers for the strategy
-        filters:
-          $ref: '#/components/schemas/type_organizations_contentStrategies_ContentStrategyFilters'
-          description: Filters applied when selecting offers for the strategy
-        categories:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_CategoryOption'
-          description: Merchant categories to include
-        categoryExclusions:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_CategoryOption'
-          description: Merchant categories to exclude
-        merchantExclusions:
-          type: array
-          items:
-            type: string
-          description: Merchant IDs to exclude
-      required:
-      - name
-      - organizationId
-      - filters
-      - categories
-      - categoryExclusions
-      - merchantExclusions
-      description: Attributes for a content strategy
-      title: ContentStrategyAttributes
-    type_organizations_placements_PlacementRelationships:
-      type: object
-      properties:
-        contentStrategy:
-          $ref: '#/components/schemas/type_organizations_placements_ToOneRelationship'
-          description: Relationship to the content strategy that powers this placement. Present whenever the placement has been linked to a content strategy (`data.id` will be set). Omitted entirely when no content strategy is linked.
-      description: Relationship block for non-batch placements. Mirrors the `contentStrategyId` attribute so JSON:API clients can walk the graph.
-      title: PlacementRelationships
-    type_organizations_placements_UpdateEmailAttributes:
+    type_organizations_placements_CreateEmailAttributes:
       type: object
       properties:
         name:
@@ -1153,23 +536,110 @@ components:
           description: Delivery cadence for the email
         contentStrategyId:
           type: string
-          description: ID of the content strategy to link this placement to. Omit to clear any existing link (PUT requires the full attribute set, so a missing value unlinks the placement).
+          description: ID of the content strategy to link this placement to
       required:
       - name
       - availableSlots
       - cadence
-      description: Attributes for updating an email placement. All fields are required.
-      title: UpdateEmailAttributes
-    type_organizations_placements_CreatePlacementRequestBody:
+      description: Attributes for creating an email placement
+      title: CreateEmailAttributes
+    type_organizations_placements_CadenceFrequency:
+      type: string
+      enum:
+      - DAILY
+      - WEEKLY
+      - MONTHLY
+      description: How often a push notification or email placement delivers
+      title: CadenceFrequency
+    type_commons_EmptyObject:
+      type: object
+      properties: {}
+      title: EmptyObject
+    type_organizations_placements_PlacementTypeFilter:
+      type: string
+      enum:
+      - placement
+      - placementPushNotification
+      - placementEmail
+      - placementBatchActivation
+      - placementGroup
+      description: Placement type discriminator used as a list filter
+      title: PlacementTypeFilter
+    type_internal-organizations_OrganizationPaginationMetadata:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          description: Number of items per page
+        hasNextPage:
+          type: boolean
+          description: Whether more pages are available
+      required:
+      - pageSize
+      - hasNextPage
+      description: Pagination metadata for organization list responses
+      title: OrganizationPaginationMetadata
+    type_organizations_placements_BatchActivationSlotAttributes:
+      type: object
+      properties:
+        alias:
+          type: string
+          description: Customer-defined alias for the slot, unique within the placement.
+        shortDescription:
+          type: string
+          description: Optional short description of the slot, limited to 50 characters.
+      required:
+      - alias
+      description: Attributes block for a `batchActivationSlot` resource.
+      title: BatchActivationSlotAttributes
+    type_organizations_contentStrategies_OfferFeatures:
+      type: string
+      enum:
+      - INTERACTIVE
+      description: Offer feature applied to the offers selected by a content strategy. A strategy may have any number of offer features.
+      title: OfferFeatures
+    type_organizations_placements_PlacementResource:
       type: object
       properties:
         data:
-          $ref: '#/components/schemas/type_organizations_placements_CreatePlacementDataUnion'
-          description: Placement data for creation
+          $ref: '#/components/schemas/type_organizations_placements_PlacementFormatUnion'
+          description: Placement resource
+        included:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_organizations_placements_IncludedResource'
+          description: Related resources requested via the `include` query parameter. Each entry is keyed by its `type` discriminant (`contentStrategy`, `batchActivationSlot`, `placement`, `placementPushNotification`, `placementEmail`).
       required:
       - data
-      description: Request body for creating a placement
-      title: CreatePlacementRequestBody
+      description: Single placement document, optionally with embedded related resources
+      title: PlacementResource
+    type_organizations_placements_BatchActivationSlotRelationships:
+      type: object
+      properties:
+        placement:
+          $ref: '#/components/schemas/type_organizations_placements_ToOneRelationship'
+          description: Reference to the placement that fills this slot. The referenced placement provides the slot's content strategy and offer-count cap; request `?include=slots.placement` to embed it in `included`.
+      required:
+      - placement
+      description: Relationship block for a `batchActivationSlot` resource.
+      title: BatchActivationSlotRelationships
+    type_organizations_placements_UpdateStandardAttributes:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the placement
+        availableSlots:
+          type: integer
+          description: Number of available slots (minimum 1)
+        contentStrategyId:
+          type: string
+          description: ID of the content strategy to link this placement to. Omit to clear any existing link (PUT requires the full attribute set, so a missing value unlinks the placement).
+      required:
+      - name
+      - availableSlots
+      description: Attributes for updating a standard placement. All fields are required.
+      title: UpdateStandardAttributes
     type_organizations_placements_PlacementFormatUnion:
       oneOf:
       - type: object
@@ -1273,50 +743,17 @@ components:
         propertyName: type
       description: Discriminated union for placement resources keyed on type
       title: PlacementFormatUnion
-    type_organizations_placements_PlacementTypeFilter:
+    type_organizations_contentStrategies_ContentStrategySort:
       type: string
       enum:
-      - placement
-      - placementPushNotification
-      - placementEmail
-      - placementBatchActivation
-      - placementGroup
-      description: Placement type discriminator used as a list filter
-      title: PlacementTypeFilter
-    type_organizations_placements_BatchActivationPlacementAttributes:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the placement
-        organizationId:
-          type: string
-          description: ID of the organization this placement belongs to
-        refreshInterval:
-          type: string
-          description: ISO-8601 duration that controls how often the activation cohort refreshes (e.g. "P7D" for weekly).
-      required:
-      - name
-      - organizationId
-      - refreshInterval
-      description: Attributes for a batch-activation placement. Slot detail is exposed via `relationships.slots` (resource identifiers) and the `batchActivationSlot` entries in `included`; request `?include=slots` (or a deeper path) to get the slot details.
-      title: BatchActivationPlacementAttributes
-    type_organizations_placements_PlacementResource:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_organizations_placements_PlacementFormatUnion'
-          description: Placement resource
-        included:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_organizations_placements_IncludedResource'
-          description: Related resources requested via the `include` query parameter. Each entry is keyed by its `type` discriminant (`contentStrategy`, `batchActivationSlot`, `placement`, `placementPushNotification`, `placementEmail`).
-      required:
-      - data
-      description: Single placement document, optionally with embedded related resources
-      title: PlacementResource
-    type_organizations_placements_CreatePushNotificationAttributes:
+      - NEWLY_LIVE
+      - EXPIRING_SOON
+      - HIGHEST_CASHBACK
+      - PERSONALIZED
+      - OFFERS_NEAR_YOU
+      description: Sort applied to the offers selected by a content strategy. A strategy may have at most one sort. The v1 starter set covers newly-live, expiring-soon, highest-cashback, personalized, and offers-near-you selections.
+      title: ContentStrategySort
+    type_organizations_placements_UpdatePushNotificationAttributes:
       type: object
       properties:
         name:
@@ -1327,31 +764,243 @@ components:
           description: Delivery cadence for the notification
         contentStrategyId:
           type: string
-          description: ID of the content strategy to link this placement to
+          description: ID of the content strategy to link this placement to. Omit to clear any existing link (PUT requires the full attribute set, so a missing value unlinks the placement).
       required:
       - name
       - cadence
-      description: Attributes for creating a push-notification placement
-      title: CreatePushNotificationAttributes
-    type_organizations_placements_Cadence:
+      description: Attributes for updating a push-notification placement. All fields are required.
+      title: UpdatePushNotificationAttributes
+    type_organizations_placements_CreateGroupAttributes:
       type: object
       properties:
-        frequency:
-          $ref: '#/components/schemas/type_organizations_placements_CadenceFrequency'
-          description: Delivery frequency
-        timeOfDay:
+        name:
           type: string
-          description: Optional time of day in HH:mm format (24-hour, UTC)
-        dayOfWeek:
-          $ref: '#/components/schemas/type_organizations_placements_DayOfWeek'
-          description: Day of the week to deliver (used when frequency is WEEKLY, defaults to MON)
-        dayOfMonth:
-          type: integer
-          description: Day of the month to deliver, 1-31 (used when frequency is MONTHLY, defaults to 1)
+          description: Name of the placement
+        slots:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_organizations_placements_CreateBatchActivationSlot'
+          description: Slots that make up the group
       required:
-      - frequency
-      description: Cadence schedule for push notification and email placements
-      title: Cadence
+      - name
+      - slots
+      description: Attributes for creating a group placement
+      title: CreateGroupAttributes
+    type_organizations_placements_UpdatePlacementDataUnion:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - placement
+            description: 'Discriminator value: placement'
+          attributes:
+            $ref: '#/components/schemas/type_organizations_placements_UpdateStandardAttributes'
+            description: Standard placement attributes for update
+        required:
+        - type
+        - attributes
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - placementPushNotification
+            description: 'Discriminator value: placementPushNotification'
+          attributes:
+            $ref: '#/components/schemas/type_organizations_placements_UpdatePushNotificationAttributes'
+            description: Push-notification placement attributes for update
+        required:
+        - type
+        - attributes
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - placementEmail
+            description: 'Discriminator value: placementEmail'
+          attributes:
+            $ref: '#/components/schemas/type_organizations_placements_UpdateEmailAttributes'
+            description: Email placement attributes for update
+        required:
+        - type
+        - attributes
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - placementBatchActivation
+            description: 'Discriminator value: placementBatchActivation'
+          attributes:
+            $ref: '#/components/schemas/type_organizations_placements_UpdateBatchActivationAttributes'
+            description: Batch-activation placement attributes for update
+        required:
+        - type
+        - attributes
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - placementGroup
+            description: 'Discriminator value: placementGroup'
+          attributes:
+            $ref: '#/components/schemas/type_organizations_placements_UpdateGroupAttributes'
+            description: Group placement attributes for update
+        required:
+        - type
+        - attributes
+      discriminator:
+        propertyName: type
+      description: Discriminated union for updating a placement
+      title: UpdatePlacementDataUnion
+    type_organizations_placements_UpdateGroupAttributes:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the placement
+        slots:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_organizations_placements_UpdateBatchActivationSlot'
+          description: Slots that make up the group. Slots present in the prior state but absent from this list are removed.
+      required:
+      - name
+      - slots
+      description: Attributes for updating a group placement. All fields are required.
+      title: UpdateGroupAttributes
+    type_organizations_placements_GroupPlacementAttributes:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the placement
+        organizationId:
+          type: string
+          description: ID of the organization this placement belongs to
+      required:
+      - name
+      - organizationId
+      description: Attributes for a group placement. A group is configured like a batch-activation placement but has no refreshInterval. Slot detail is exposed via `relationships.slots` (resource identifiers) and the `batchActivationSlot` entries in `included`; request `?include=slots` (or a deeper path) to get the slot details.
+      title: GroupPlacementAttributes
+    type_internal-organizations_DeleteResourceResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_internal-organizations_DeleteResourceData'
+      required:
+      - data
+      description: Response returned after deleting a resource
+      title: DeleteResourceResponse
+    type_organizations_placements_ToManyRelationship:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_organizations_placements_ResourceIdentifier'
+          description: The linked resource identifiers.
+      required:
+      - data
+      description: A JSON:API to-many relationship payload.
+      title: ToManyRelationship
+    type_commons_CategoryOption:
+      type: string
+      enum:
+      - Arts & Entertainment
+      - Baby, Kids & Toys
+      - Books & Digital Media
+      - Clothing, Shoes & Accessories
+      - Computers, Electronics & Software
+      - Convenience
+      - Gas
+      - Department Stores
+      - Food & Beverage
+      - Health & Beauty
+      - Home & Garden
+      - Miscellaneous
+      - Occasions & Gifts
+      - Pets
+      - Sports & Outdoors
+      - Supplies & Services
+      - Travel
+      description: Category of merchant. Please use URL Encode for non single word categories. (Food & Beverage should be Food%20%26%20Beverage)
+      title: CategoryOption
+    type_organizations_placements_CreatePlacementDataUnion:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - placement
+            description: 'Discriminator value: placement'
+          attributes:
+            $ref: '#/components/schemas/type_organizations_placements_CreateStandardAttributes'
+            description: Standard placement attributes for creation
+        required:
+        - type
+        - attributes
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - placementPushNotification
+            description: 'Discriminator value: placementPushNotification'
+          attributes:
+            $ref: '#/components/schemas/type_organizations_placements_CreatePushNotificationAttributes'
+            description: Push-notification placement attributes for creation
+        required:
+        - type
+        - attributes
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - placementEmail
+            description: 'Discriminator value: placementEmail'
+          attributes:
+            $ref: '#/components/schemas/type_organizations_placements_CreateEmailAttributes'
+            description: Email placement attributes for creation
+        required:
+        - type
+        - attributes
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - placementBatchActivation
+            description: 'Discriminator value: placementBatchActivation'
+          attributes:
+            $ref: '#/components/schemas/type_organizations_placements_CreateBatchActivationAttributes'
+            description: Batch-activation placement attributes for creation
+        required:
+        - type
+        - attributes
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - placementGroup
+            description: 'Discriminator value: placementGroup'
+          attributes:
+            $ref: '#/components/schemas/type_organizations_placements_CreateGroupAttributes'
+            description: Group placement attributes for creation
+        required:
+        - type
+        - attributes
+      discriminator:
+        propertyName: type
+      description: Discriminated union for creating a placement
+      title: CreatePlacementDataUnion
     type_organizations_placements_PlacementListResponse:
       type: object
       properties:
@@ -1374,31 +1023,382 @@ components:
       - data
       description: Paginated list of placements
       title: PlacementListResponse
-    type_organizations_placements_EmailPlacementAttributes:
+    type_commons_ErrorSource:
+      type: object
+      properties:
+        pointer:
+          type: string
+          description: A JSON pointer to the value in the request document that caused the error
+        parameter:
+          type: string
+          description: A string indicating which URI query parameter caused the error
+        header:
+          type: string
+          description: A string indicating the name of a single request header which caused the error
+      title: ErrorSource
+    type_organizations_placements_SlottedPlacementRelationships:
+      type: object
+      properties:
+        slots:
+          $ref: '#/components/schemas/type_organizations_placements_ToManyRelationship'
+          description: Resource identifiers for the slots that make up the placement. Each entry corresponds to a `batchActivationSlot` resource that appears in `included` when the request asks for `slots` (or any deeper path that implies it).
+      required:
+      - slots
+      description: Relationship block for a batch-activation or group placement.
+      title: SlottedPlacementRelationships
+    type_organizations_contentStrategies_ContentStrategyAttributes:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the content strategy (unique within an organization)
+        organizationId:
+          type: string
+          description: ID of the organization this content strategy belongs to
+        sort:
+          $ref: '#/components/schemas/type_organizations_contentStrategies_ContentStrategySort'
+          description: Sort applied when selecting offers for the strategy
+        filters:
+          $ref: '#/components/schemas/type_organizations_contentStrategies_ContentStrategyFilters'
+          description: Filters applied when selecting offers for the strategy
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_CategoryOption'
+          description: Merchant categories to include
+        categoryExclusions:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_CategoryOption'
+          description: Merchant categories to exclude
+        merchantExclusions:
+          type: array
+          items:
+            type: string
+          description: Merchant IDs to exclude
+      required:
+      - name
+      - organizationId
+      - filters
+      - categories
+      - categoryExclusions
+      - merchantExclusions
+      description: Attributes for a content strategy
+      title: ContentStrategyAttributes
+    type_organizations_placements_CreateBatchActivationSlot:
+      type: object
+      properties:
+        placementId:
+          type: string
+          description: ID of another placement that fills this slot. The referenced placement provides both the content strategy and the limit on the number of offers available to the slot.
+        alias:
+          type: string
+          description: Customer-defined alias for the slot, unique within the placement
+        shortDescription:
+          type: string
+          description: Optional short description of the slot, limited to 50 characters
+      required:
+      - placementId
+      - alias
+      description: A slot in a batch-activation or group placement at creation time
+      title: CreateBatchActivationSlot
+    type_commons_ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_ErrorObject'
+      required:
+      - errors
+      title: ErrorResponse
+    type_organizations_placements_Cadence:
+      type: object
+      properties:
+        frequency:
+          $ref: '#/components/schemas/type_organizations_placements_CadenceFrequency'
+          description: Delivery frequency
+        timeOfDay:
+          type: string
+          description: Optional time of day in HH:mm format (24-hour, UTC)
+        dayOfWeek:
+          $ref: '#/components/schemas/type_organizations_placements_DayOfWeek'
+          description: Day of the week to deliver (used when frequency is WEEKLY, defaults to MON)
+        dayOfMonth:
+          type: integer
+          description: Day of the month to deliver, 1-31 (used when frequency is MONTHLY, defaults to 1)
+      required:
+      - frequency
+      description: Cadence schedule for push notification and email placements
+      title: Cadence
+    type_organizations_placements_CreateStandardAttributes:
       type: object
       properties:
         name:
           type: string
           description: Name of the placement
-        organizationId:
-          type: string
-          description: ID of the organization this placement belongs to
         availableSlots:
           type: integer
-          description: Number of available slots
+          description: Number of available slots (minimum 1)
+        contentStrategyId:
+          type: string
+          description: ID of the content strategy to link this placement to
+      required:
+      - name
+      - availableSlots
+      description: Attributes for creating a standard placement
+      title: CreateStandardAttributes
+    type_internal-organizations_DeleteResourceData:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Resource type identifier
+        id:
+          type: string
+          description: ID of the deleted resource
+        attributes:
+          $ref: '#/components/schemas/type_commons_EmptyObject'
+      required:
+      - type
+      - id
+      - attributes
+      description: Deleted resource stub
+      title: DeleteResourceData
+    type_organizations_placements_UpdateBatchActivationSlot:
+      type: object
+      properties:
+        slotId:
+          type: string
+          description: Existing slot identifier. Echo the value from a prior GET to keep the slot stable; omit to mint a fresh slot. If the placementId changes, the slotId is regenerated regardless of what was echoed.
+        placementId:
+          type: string
+          description: ID of another placement that fills this slot. The referenced placement provides both the content strategy and the limit on the number of offers available to the slot.
+        alias:
+          type: string
+          description: Customer-defined alias for the slot, unique within the placement
+        shortDescription:
+          type: string
+          description: Optional short description of the slot, limited to 50 characters
+      required:
+      - placementId
+      - alias
+      description: A slot in a batch-activation or group placement at update time
+      title: UpdateBatchActivationSlot
+    type_organizations_placements_CreateBatchActivationAttributes:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the placement
+        refreshInterval:
+          type: string
+          description: ISO-8601 duration controlling how often the activation cohort refreshes
+        slots:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_organizations_placements_CreateBatchActivationSlot'
+          description: Slots that make up the activation cohort
+      required:
+      - name
+      - refreshInterval
+      - slots
+      description: Attributes for creating a batch-activation placement
+      title: CreateBatchActivationAttributes
+    type_organizations_placements_CreatePushNotificationAttributes:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the placement
+        cadence:
+          $ref: '#/components/schemas/type_organizations_placements_Cadence'
+          description: Delivery cadence for the notification
+        contentStrategyId:
+          type: string
+          description: ID of the content strategy to link this placement to
+      required:
+      - name
+      - cadence
+      description: Attributes for creating a push-notification placement
+      title: CreatePushNotificationAttributes
+    type_commons_Links:
+      type: object
+      properties:
+        self:
+          type: string
+        prev:
+          type: string
+        next:
+          type: string
+      required:
+      - self
+      description: Related links to the API call
+      title: Links
+    type_organizations_placements_IncludedResource:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - contentStrategy
+            description: 'Discriminator value: contentStrategy'
+          id:
+            type: string
+          attributes:
+            $ref: '#/components/schemas/type_organizations_contentStrategies_ContentStrategyAttributes'
+        required:
+        - type
+        - id
+        - attributes
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - batchActivationSlot
+            description: 'Discriminator value: batchActivationSlot'
+          id:
+            type: string
+          attributes:
+            $ref: '#/components/schemas/type_organizations_placements_BatchActivationSlotAttributes'
+          relationships:
+            $ref: '#/components/schemas/type_organizations_placements_BatchActivationSlotRelationships'
+        required:
+        - type
+        - id
+        - attributes
+        - relationships
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - placement
+            description: 'Discriminator value: placement'
+          id:
+            type: string
+            description: Unique identifier of the placement (UUID v7)
+          attributes:
+            $ref: '#/components/schemas/type_organizations_placements_PlacementAttributes'
+          relationships:
+            $ref: '#/components/schemas/type_organizations_placements_PlacementRelationships'
+            description: JSON:API relationships for the placement. Omitted entirely when the placement has no linked resources.
+        required:
+        - type
+        - id
+        - attributes
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - placementPushNotification
+            description: 'Discriminator value: placementPushNotification'
+          id:
+            type: string
+            description: Unique identifier of the placement (UUID v7)
+          attributes:
+            $ref: '#/components/schemas/type_organizations_placements_PushNotificationPlacementAttributes'
+          relationships:
+            $ref: '#/components/schemas/type_organizations_placements_PlacementRelationships'
+            description: JSON:API relationships for the placement. Omitted entirely when the placement has no linked resources.
+        required:
+        - type
+        - id
+        - attributes
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - placementEmail
+            description: 'Discriminator value: placementEmail'
+          id:
+            type: string
+            description: Unique identifier of the placement (UUID v7)
+          attributes:
+            $ref: '#/components/schemas/type_organizations_placements_EmailPlacementAttributes'
+          relationships:
+            $ref: '#/components/schemas/type_organizations_placements_PlacementRelationships'
+            description: JSON:API relationships for the placement. Omitted entirely when the placement has no linked resources.
+        required:
+        - type
+        - id
+        - attributes
+      discriminator:
+        propertyName: type
+      description: Discriminated union of every resource type that can appear in the `included` array. The shape of each branch matches the corresponding primary-data resource (same attributes and relationships), keyed on the JSON:API `type` discriminant.
+      title: IncludedResource
+    type_organizations_placements_UpdatePlacementRequestBody:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_organizations_placements_UpdatePlacementDataUnion'
+          description: Placement data for update
+      required:
+      - data
+      description: Request body for updating a placement
+      title: UpdatePlacementRequestBody
+    type_commons_ErrorObject:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Status code returned from the request
+        title:
+          type: string
+          description: Name of error
+        detail:
+          type: string
+          description: Description of the specific occurance of the error
+        source:
+          $ref: '#/components/schemas/type_commons_ErrorSource'
+          description: An object containing a reference to the primary source of the error
+        id:
+          type: string
+          description: The id of the resource which caused the error. Always returned for multi-status errors.
+      required:
+      - status
+      - title
+      - detail
+      title: ErrorObject
+    type_organizations_placements_ResourceIdentifier:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Discriminant of the referenced resource (e.g. `contentStrategy`).
+        id:
+          type: string
+          description: Identifier of the referenced resource.
+      required:
+      - type
+      - id
+      description: A reference to another resource by type and id.
+      title: ResourceIdentifier
+    type_organizations_placements_UpdateEmailAttributes:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the placement
+        availableSlots:
+          type: integer
+          description: Number of available slots (minimum 1)
         cadence:
           $ref: '#/components/schemas/type_organizations_placements_Cadence'
           description: Delivery cadence for the email
         contentStrategyId:
           type: string
-          description: ID of the content strategy linked to this placement, if any. Retained alongside `relationships.contentStrategy` for backward compatibility.
+          description: ID of the content strategy to link this placement to. Omit to clear any existing link (PUT requires the full attribute set, so a missing value unlinks the placement).
       required:
       - name
-      - organizationId
       - availableSlots
       - cadence
-      description: Attributes for an email placement
-      title: EmailPlacementAttributes
+      description: Attributes for updating an email placement. All fields are required.
+      title: UpdateEmailAttributes
   securitySchemes:
     OAuthScheme:
       type: http

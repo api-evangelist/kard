@@ -14,9 +14,10 @@ paths:
     get:
       operationId: get
       summary: Get Subscriptions
-      description: 'Call this endpoint to fetch the subscriptions of the provided issuer.<br/>
+      description: 'Call this endpoint to fetch the subscriptions of the provided issuer.
 
-        <b>Required scopes:</b> `notifications:read`'
+
+        Required scopes: `notifications:read`'
       tags:
       - notifications > Subscriptions
       parameters:
@@ -64,9 +65,10 @@ paths:
     post:
       operationId: create
       summary: Create Subscription
-      description: 'Call this endpoint to subscribe to notification events.<br/>
+      description: 'Call this endpoint to subscribe to notification events.
 
-        <b>Required scopes:</b> `notifications:write`'
+
+        Required scopes: `notifications:write`'
       tags:
       - notifications > Subscriptions
       parameters:
@@ -121,9 +123,10 @@ paths:
     patch:
       operationId: update
       summary: Update Subscription
-      description: 'Call this endpoint to update existing notification subscriptions.<br/>
+      description: 'Call this endpoint to update existing notification subscriptions.
 
-        <b>Required scopes:</b> `notifications:write`'
+
+        Required scopes: `notifications:write`'
       tags:
       - notifications > Subscriptions
       parameters:
@@ -181,63 +184,7 @@ paths:
               $ref: '#/components/schemas/type_notifications_subscriptions_UpdateSubscriptionRequestBody'
 components:
   schemas:
-    type_notifications_subscriptions_SubscriptionAttributes:
-      type: object
-      properties:
-        eventName:
-          $ref: '#/components/schemas/type_commons_NotificationType'
-          description: The name of the event
-        webhookUrl:
-          type: string
-          description: The URL to which notifications will be sent
-        enabled:
-          type: boolean
-          description: Indicates whether the subscription is active
-      required:
-      - eventName
-      - webhookUrl
-      - enabled
-      title: SubscriptionAttributes
-    type_commons_ErrorObject:
-      type: object
-      properties:
-        status:
-          type: string
-          description: Status code returned from the request
-        title:
-          type: string
-          description: Name of error
-        detail:
-          type: string
-          description: Description of the specific occurance of the error
-        source:
-          $ref: '#/components/schemas/type_commons_ErrorSource'
-          description: An object containing a reference to the primary source of the error
-        id:
-          type: string
-          description: The id of the resource which caused the error. Always returned for multi-status errors.
-      required:
-      - status
-      - title
-      - detail
-      title: ErrorObject
-    type_notifications_subscriptions_UpdateSubscriptionsResponseObject:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_notifications_subscriptions_CreateSubscriptionUnion'
-      required:
-      - data
-      title: UpdateSubscriptionsResponseObject
-    type_notifications_subscriptions_UpdateSubscriptionRequestBody:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_notifications_subscriptions_UpdateSubscriptionRequestUnion'
-      required:
-      - data
-      title: UpdateSubscriptionRequestBody
-    type_notifications_subscriptions_SubscriptionRequestUnion:
+    type_notifications_subscriptions_CreateSubscriptionUnion:
       oneOf:
       - type: object
         properties:
@@ -248,63 +195,30 @@ components:
             description: 'Discriminator value: subscription'
           attributes:
             $ref: '#/components/schemas/type_notifications_subscriptions_SubscriptionRequestAttributes'
+          id:
+            type: string
+            description: The ID of the subscription
         required:
         - type
         - attributes
+        - id
       discriminator:
         propertyName: type
-      title: SubscriptionRequestUnion
-    type_commons_SubscriptionId:
+      title: CreateSubscriptionUnion
+    type_commons_NotificationType:
       type: string
-      description: The ID of the subscription
-      title: SubscriptionId
-    type_notifications_subscriptions_CreateSubscriptionsResponseObject:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_notifications_subscriptions_CreateSubscriptionUnion'
-      required:
-      - data
-      title: CreateSubscriptionsResponseObject
-    type_notifications_subscriptions_SubscriptionRequestAttributes:
-      type: object
-      properties:
-        eventName:
-          $ref: '#/components/schemas/type_commons_NotificationType'
-          description: The name of the event for the subscription
-        webhookUrl:
-          type: string
-          description: The URL where notifications will be delivered
-        enabled:
-          type: boolean
-          description: Indicates whether the subscription is active
-      required:
-      - eventName
-      - webhookUrl
-      - enabled
-      title: SubscriptionRequestAttributes
-    type_notifications_subscriptions_SubscriptionsResponseObject:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_notifications_subscriptions_SubscriptionUnion'
-      required:
-      - data
-      title: SubscriptionsResponseObject
-    type_commons_ErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_ErrorObject'
-      required:
-      - errors
-      title: ErrorResponse
+      enum:
+      - earnedRewardApproved
+      - earnedRewardSettled
+      - earnedRewardRejected
+      - validTransaction
+      - failedTransaction
+      - clawback
+      - auditUpdate
+      - fileProcessingResult
+      - pushNotificationPlacementFile
+      - emailNotificationPlacementFile
+      title: NotificationType
     type_notifications_subscriptions_UpdateSubscriptionRequestUnion:
       oneOf:
       - type: object
@@ -322,6 +236,16 @@ components:
       discriminator:
         propertyName: type
       title: UpdateSubscriptionRequestUnion
+    type_notifications_subscriptions_SubscriptionsResponseObject:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_notifications_subscriptions_SubscriptionUnion'
+      required:
+      - data
+      title: SubscriptionsResponseObject
     type_notifications_subscriptions_UpdateSubscriptionRequestAttributes:
       type: object
       properties:
@@ -335,6 +259,31 @@ components:
           type: boolean
           description: Indicates whether the subscription is active
       title: UpdateSubscriptionRequestAttributes
+    type_notifications_subscriptions_SubscriptionRequestAttributes:
+      type: object
+      properties:
+        eventName:
+          $ref: '#/components/schemas/type_commons_NotificationType'
+          description: The name of the event for the subscription
+        webhookUrl:
+          type: string
+          description: The URL where notifications will be delivered
+        enabled:
+          type: boolean
+          description: Indicates whether the subscription is active
+      required:
+      - eventName
+      - webhookUrl
+      - enabled
+      title: SubscriptionRequestAttributes
+    type_notifications_subscriptions_UpdateSubscriptionsResponseObject:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_notifications_subscriptions_CreateSubscriptionUnion'
+      required:
+      - data
+      title: UpdateSubscriptionsResponseObject
     type_commons_ErrorSource:
       type: object
       properties:
@@ -369,35 +318,75 @@ components:
       discriminator:
         propertyName: type
       title: SubscriptionUnion
-    type_commons_NotificationType:
+    type_commons_SubscriptionId:
       type: string
-      enum:
-      - earnedRewardApproved
-      - earnedRewardSettled
-      - earnedRewardRejected
-      - validTransaction
-      - failedTransaction
-      - clawback
-      - auditUpdate
-      - fileProcessingResult
-      - pushNotificationPlacementFile
-      - emailNotificationPlacementFile
-      title: NotificationType
+      description: The ID of the subscription
+      title: SubscriptionId
     type_commons_OrganizationId:
       type: string
       description: Your issuer organization ID, provided by Kard
       title: OrganizationId
-    type_notifications_subscriptions_SubscriptionRequestBody:
+    type_notifications_subscriptions_SubscriptionAttributes:
+      type: object
+      properties:
+        eventName:
+          $ref: '#/components/schemas/type_commons_NotificationType'
+          description: The name of the event
+        webhookUrl:
+          type: string
+          description: The URL to which notifications will be sent
+        enabled:
+          type: boolean
+          description: Indicates whether the subscription is active
+      required:
+      - eventName
+      - webhookUrl
+      - enabled
+      title: SubscriptionAttributes
+    type_commons_ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_ErrorObject'
+      required:
+      - errors
+      title: ErrorResponse
+    type_notifications_subscriptions_CreateSubscriptionsResponseObject:
       type: object
       properties:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/type_notifications_subscriptions_SubscriptionRequestUnion'
+            $ref: '#/components/schemas/type_notifications_subscriptions_CreateSubscriptionUnion'
       required:
       - data
-      title: SubscriptionRequestBody
-    type_notifications_subscriptions_CreateSubscriptionUnion:
+      title: CreateSubscriptionsResponseObject
+    type_commons_ErrorObject:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Status code returned from the request
+        title:
+          type: string
+          description: Name of error
+        detail:
+          type: string
+          description: Description of the specific occurance of the error
+        source:
+          $ref: '#/components/schemas/type_commons_ErrorSource'
+          description: An object containing a reference to the primary source of the error
+        id:
+          type: string
+          description: The id of the resource which caused the error. Always returned for multi-status errors.
+      required:
+      - status
+      - title
+      - detail
+      title: ErrorObject
+    type_notifications_subscriptions_SubscriptionRequestUnion:
       oneOf:
       - type: object
         properties:
@@ -408,16 +397,30 @@ components:
             description: 'Discriminator value: subscription'
           attributes:
             $ref: '#/components/schemas/type_notifications_subscriptions_SubscriptionRequestAttributes'
-          id:
-            type: string
-            description: The ID of the subscription
         required:
         - type
         - attributes
-        - id
       discriminator:
         propertyName: type
-      title: CreateSubscriptionUnion
+      title: SubscriptionRequestUnion
+    type_notifications_subscriptions_SubscriptionRequestBody:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_notifications_subscriptions_SubscriptionRequestUnion'
+      required:
+      - data
+      title: SubscriptionRequestBody
+    type_notifications_subscriptions_UpdateSubscriptionRequestBody:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_notifications_subscriptions_UpdateSubscriptionRequestUnion'
+      required:
+      - data
+      title: UpdateSubscriptionRequestBody
   securitySchemes:
     OAuthScheme:
       type: http

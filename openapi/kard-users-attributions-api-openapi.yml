@@ -17,7 +17,7 @@ paths:
       description: 'Call this endpoint to send attribution events made by a single enrolled user for processing. A maximum of 100 events can be included in a single request.
 
 
-        <b>Required scopes:</b> `attributions:write`'
+        Required scopes: `attributions:write`'
       tags:
       - users > attributions
       parameters:
@@ -222,7 +222,7 @@ paths:
         the placement content.
 
 
-        <b>Required scopes:</b> `attributions:write`'
+        Required scopes: `attributions:write`'
       tags:
       - users > attributions
       parameters:
@@ -281,92 +281,80 @@ paths:
                 $ref: '#/components/schemas/type_commons_ErrorResponse'
 components:
   schemas:
-    type_users_attributions_PlacementSlotAttributionAttributes:
+    type_users_attributions_BoostOfferResponseAttributes:
       type: object
       properties:
         entityId:
           type: string
-          description: The slot ID (matches `state.slotId`)
         eventCode:
-          $ref: '#/components/schemas/type_users_attributions_EventCode'
+          type: string
         medium:
-          $ref: '#/components/schemas/type_users_attributions_PlacementSlotMedium'
+          type: string
         eventDate:
           type: string
           format: date-time
-          description: 'The timestamp of the attribution event.
-
-            Must be in ISO 8601 format (e.g., "2025-01-01T00:00:00Z").'
-        state:
-          $ref: '#/components/schemas/type_users_attributions_AttributionState'
-          description: Placement context for the attribution event
       required:
       - entityId
       - eventCode
       - medium
       - eventDate
-      description: 'Attributes for a slot-level activation event on a batch-activation placement.
-
-        A slot activation also writes per-offer `offerAttribution` ACTIVATE events for
-
-        every offer resolved by the slot''s content strategy (see `ActivatePlacementSlot`).'
-      title: PlacementSlotAttributionAttributes
-    type_users_rewards_ProgressBarSegments:
+      title: BoostOfferResponseAttributes
+    type_users_rewards_CategoryFields:
       type: object
       properties:
-        details:
-          $ref: '#/components/schemas/type_users_rewards_ProgressBarSegment'
-          description: Segment configuration for the details view
-        default:
-          $ref: '#/components/schemas/type_users_rewards_ProgressBarSegment'
-          description: Segment configuration for the default view
-        progress:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_users_rewards_ProgressBarSegmentProgress'
-          description: 'Per-segment fill state: one entry per segment node, index-aligned with the nodes (length equals the progress bar total). Reached nodes report 1 of 1 and not-yet-reached nodes 0 of 1; for a punch-card offer the in-progress node reports qualifying-purchase progress toward the next reward (Q mod N of N).'
+        name:
+          $ref: '#/components/schemas/type_commons_CategoryOption'
+          description: Name of the category
       required:
-      - default
-      - progress
-      description: Segment configuration for the progress bar in different layouts
-      title: ProgressBarSegments
-    type_users_attributions_CreateAttributionResponse:
+      - name
+      title: CategoryFields
+    type_users_rewards_CtaAction:
+      type: object
+      properties:
+        url:
+          type: string
+          description: URL endpoint to call when button is clicked
+        method:
+          type: string
+          description: HTTP method to use (e.g., POST)
+      required:
+      - url
+      - method
+      description: Action configuration for CTA button
+      title: CtaAction
+    type_users_rewards_LogoFlareBadgePosition:
+      type: string
+      enum:
+      - TOP_RIGHT
+      - TOP_LEFT
+      - BOTTOM_RIGHT
+      - BOTTOM_LEFT
+      description: Available positions for the logo flare badge
+      title: LogoFlareBadgePosition
+    type_users_rewards_Commission:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/type_commons_CommissionType'
+        value:
+          type: number
+          format: double
+      required:
+      - type
+      - value
+      title: Commission
+    type_users_attributions_BoostOfferResponse:
       type: object
       properties:
         data:
-          $ref: '#/components/schemas/type_commons_JobResponse'
-      required:
-      - data
-      title: CreateAttributionResponse
-    type_commons_ResourceType:
-      type: string
-      description: Type of document returned
-      title: ResourceType
-    type_users_attributions_AttributionState:
-      type: object
-      properties:
-        rank:
-          type: integer
-          description: The position of the offer in the list shown to the user (1-indexed)
-        filters:
+          $ref: '#/components/schemas/type_users_attributions_BoostOfferResponseData'
+        included:
           type: array
           items:
-            $ref: '#/components/schemas/type_users_attributions_AttributionFilter'
-          description: The active filters when the user saw the offer
-        placementId:
-          type: string
-          description: Unique identifier of the placement the attribution event originated from
-        slotId:
-          type: string
-          description: Stable identifier for the slot within the placement
-      title: AttributionState
-    type_commons_PurchaseChannel:
-      type: string
-      enum:
-      - INSTORE
-      - ONLINE
-      description: Purchase channel of offer
-      title: PurchaseChannel
+            $ref: '#/components/schemas/type_users_attributions_BoostOfferIncluded'
+      required:
+      - data
+      title: BoostOfferResponse
     type_users_attributions_AttributionFilter:
       type: object
       properties:
@@ -378,169 +366,6 @@ components:
       - name
       - value
       title: AttributionFilter
-    type_users_rewards_CategoryFields:
-      type: object
-      properties:
-        name:
-          $ref: '#/components/schemas/type_commons_CategoryOption'
-          description: Name of the category
-      required:
-      - name
-      title: CategoryFields
-    type_users_rewards_CategoryData:
-      type: object
-      properties:
-        id:
-          type: string
-          description: id of the category
-        type:
-          type: string
-          enum:
-          - category
-      required:
-      - id
-      - type
-      title: CategoryData
-    type_users_rewards_ProgressBarSegmentSelection:
-      type: string
-      enum:
-      - CURRENT
-      - CURRENT_AND_BELOW
-      description: 'Supported selection strategies for highlighting segment nodes.
-
-        - CURRENT: select only the segment at currentProgress
-
-        - CURRENT_AND_BELOW: select the segment at currentProgress and all segments below it'
-      title: ProgressBarSegmentSelection
-    type_users_rewards_AmountType:
-      type: string
-      enum:
-      - CENTS
-      title: AmountType
-    type_commons_CategoryOption:
-      type: string
-      enum:
-      - Arts & Entertainment
-      - Baby, Kids & Toys
-      - Books & Digital Media
-      - Clothing, Shoes & Accessories
-      - Computers, Electronics & Software
-      - Convenience
-      - Gas
-      - Department Stores
-      - Food & Beverage
-      - Health & Beauty
-      - Home & Garden
-      - Miscellaneous
-      - Occasions & Gifts
-      - Pets
-      - Sports & Outdoors
-      - Supplies & Services
-      - Travel
-      description: Category of merchant. Please use URL Encode for non single word categories. (Food & Beverage should be Food%20%26%20Beverage)
-      title: CategoryOption
-    type_users_rewards_CategoryRelationship:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_users_rewards_CategoryData'
-      required:
-      - data
-      title: CategoryRelationship
-    type_users_rewards_ProgressBarSegmentProgress:
-      type: object
-      properties:
-        completed:
-          type: integer
-          description: Units completed within the current segment.
-        total:
-          type: integer
-          description: Total units required to complete the current segment.
-      required:
-      - completed
-      - total
-      description: Fill state of a single segment node, expressed as completed of total.
-      title: ProgressBarSegmentProgress
-    type_users_rewards_LogoFlareBorderColor:
-      type: string
-      enum:
-      - PRIMARY
-      - SECONDARY
-      description: Available border color options for logo flare
-      title: LogoFlareBorderColor
-    type_commons_MongoId:
-      type: string
-      description: The unique identifier for a document in the database
-      title: MongoId
-    type_users_attributions_ActivateOfferResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_users_attributions_ActivateOfferResponseData'
-        included:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_users_attributions_ActivateOfferIncluded'
-      required:
-      - data
-      title: ActivateOfferResponse
-    type_commons_ErrorObject:
-      type: object
-      properties:
-        status:
-          type: string
-          description: Status code returned from the request
-        title:
-          type: string
-          description: Name of error
-        detail:
-          type: string
-          description: Description of the specific occurance of the error
-        source:
-          $ref: '#/components/schemas/type_commons_ErrorSource'
-          description: An object containing a reference to the primary source of the error
-        id:
-          type: string
-          description: The id of the resource which caused the error. Always returned for multi-status errors.
-      required:
-      - status
-      - title
-      - detail
-      title: ErrorObject
-    type_users_rewards_Amount:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/type_users_rewards_AmountType'
-        value:
-          type: integer
-      required:
-      - type
-      - value
-      title: Amount
-    type_users_attributions_ActivateOfferIncludeOption:
-      type: string
-      enum:
-      - offer
-      description: Options for what to include in the activate offer response
-      title: ActivateOfferIncludeOption
-    type_commons_JobResponse:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/type_commons_ResourceType'
-        id:
-          type: string
-          description: The request id of the pending job
-        attributes:
-          $ref: '#/components/schemas/type_commons_Job'
-      required:
-      - type
-      - id
-      - attributes
-      title: JobResponse
     type_users_attributions_NotificationAttributionAttributes:
       type: object
       properties:
@@ -566,83 +391,100 @@ components:
       - medium
       - eventDate
       title: NotificationAttributionAttributes
-    type_users_attributions_ActivateOfferResponseData:
+    type_commons_PurchaseChannel:
+      type: string
+      enum:
+      - INSTORE
+      - ONLINE
+      description: Purchase channel of offer
+      title: PurchaseChannel
+    type_users_rewards_LogoFlareBadge:
+      type: object
+      properties:
+        icon:
+          type: string
+          description: Icon identifier for the badge
+        position:
+          $ref: '#/components/schemas/type_users_rewards_LogoFlareBadgePosition'
+          description: Position of the badge on the logo
+      required:
+      - icon
+      - position
+      description: Badge configuration for logo flare
+      title: LogoFlareBadge
+    type_users_rewards_LogoFlareBorderColor:
+      type: string
+      enum:
+      - PRIMARY
+      - SECONDARY
+      description: Available border color options for logo flare
+      title: LogoFlareBorderColor
+    type_users_rewards_LogoFlare:
+      type: object
+      properties:
+        borderColor:
+          $ref: '#/components/schemas/type_users_rewards_LogoFlareBorderColor'
+          description: Border color style for the logo flare
+        badge:
+          $ref: '#/components/schemas/type_users_rewards_LogoFlareBadge'
+          description: Optional badge to display on the logo
+      required:
+      - borderColor
+      description: Logo flare configuration for offer display
+      title: LogoFlare
+    type_users_attributions_CreateAttributionRequestObject:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_users_attributions_CreateAttributionRequestUnion'
+          description: 'Discriminated union representing the request body for submitting attribution events.
+
+            Use `type` to distinguish between the two:
+
+            - `offerAttribution`: Events related to viewing or interacting with an offer.
+
+            - `notificationAttribution`: Events related to viewing or interacting with a notification.'
+      required:
+      - data
+      title: CreateAttributionRequestObject
+    type_users_rewards_Asset:
       type: object
       properties:
         type:
           type: string
-        id:
+        url:
           type: string
-        attributes:
-          $ref: '#/components/schemas/type_users_attributions_ActivateOfferResponseAttributes'
+          description: URL of the asset containing an attribution token
+        alt:
+          type: string
+          description: Alt text of the asset
       required:
       - type
-      - id
-      - attributes
-      title: ActivateOfferResponseData
-    type_users_attributions_OfferAttributionAttributes:
-      type: object
-      properties:
-        entityId:
-          type: string
-          description: The offer ID
-        eventCode:
-          $ref: '#/components/schemas/type_users_attributions_EventCode'
-        medium:
-          $ref: '#/components/schemas/type_users_attributions_OfferMedium'
-        eventDate:
-          type: string
-          format: date-time
-          description: 'The timestamp of the attribution event.
-
-            Must be in ISO 8601 format (e.g., "2025-01-01T00:00:00Z").'
-        state:
-          $ref: '#/components/schemas/type_users_attributions_AttributionState'
-          description: Placement context for the attribution event
-      required:
-      - entityId
-      - eventCode
-      - medium
-      - eventDate
-      title: OfferAttributionAttributes
-    type_users_rewards_CtaComponent:
-      type: object
-      properties:
-        buttonText:
-          type: string
-          description: Text to display on the button
-        buttonStyle:
-          $ref: '#/components/schemas/type_users_rewards_ButtonStyle'
-          description: Style of the button
-        action:
-          $ref: '#/components/schemas/type_users_rewards_CtaAction'
-          description: Action to perform when the button is clicked
-        startIcon:
-          type: string
-          description: Icon identifier to display on the button
-      required:
-      - buttonText
-      - buttonStyle
-      description: Call-to-action button component for offers
-      title: CtaComponent
+      - url
+      - alt
+      title: Asset
     type_commons_JobStatus:
       type: string
       enum:
       - queued
       description: Status of the job
       title: JobStatus
-    type_commons_Job:
+    type_users_attributions_ActivateOfferIncludeOption:
+      type: string
+      enum:
+      - offer
+      description: Options for what to include in the activate offer response
+      title: ActivateOfferIncludeOption
+    type_users_attributions_CreateAttributionResponse:
       type: object
       properties:
-        status:
-          $ref: '#/components/schemas/type_commons_JobStatus'
-        message:
-          type: string
-          description: Message regarding the status of the job request
+        data:
+          $ref: '#/components/schemas/type_commons_JobResponse'
       required:
-      - status
-      - message
-      title: Job
+      - data
+      title: CreateAttributionResponse
     type_users_rewards_OfferComponents:
       type: object
       properties:
@@ -679,6 +521,76 @@ components:
           description: Progress bar component for tracking offer redemptions
       description: UI component data for rendering offer details
       title: OfferComponents
+    type_users_attributions_BoostOfferIncluded:
+      oneOf:
+      - $ref: '#/components/schemas/type_users_rewards_OfferDataUnion'
+      - $ref: '#/components/schemas/type_users_rewards_CategoryIncluded'
+      title: BoostOfferIncluded
+    type_users_rewards_ProgressBarSegmentPosition:
+      type: string
+      enum:
+      - LEFT
+      - RIGHT
+      - FULL_WIDTH
+      description: Supported segment positions
+      title: ProgressBarSegmentPosition
+    type_commons_MongoId:
+      type: string
+      description: The unique identifier for a document in the database
+      title: MongoId
+    type_users_attributions_ActivatePlacementSlotResponseAttributes:
+      type: object
+      properties:
+        placementId:
+          type: string
+          description: Unique identifier of the placement
+        slotId:
+          type: string
+          description: Stable identifier for the slot within the placement
+        eventCode:
+          type: string
+        medium:
+          type: string
+        eventDate:
+          type: string
+          format: date-time
+        offerIds:
+          type: array
+          items:
+            type: string
+          description: 'All offer IDs that resolved under the slot''s content strategy and had
+
+            per-offer `offerAttribution` ACTIVATE events written. The partner can use
+
+            this to render the batch immediately without an extra round-trip.'
+      required:
+      - placementId
+      - slotId
+      - eventCode
+      - medium
+      - eventDate
+      - offerIds
+      title: ActivatePlacementSlotResponseAttributes
+    type_users_attributions_BoostOfferIncludeOption:
+      type: string
+      enum:
+      - offer
+      description: Options for what to include in the boost offer response
+      title: BoostOfferIncludeOption
+    type_users_attributions_BoostOfferResponseData:
+      type: object
+      properties:
+        type:
+          type: string
+        id:
+          type: string
+        attributes:
+          $ref: '#/components/schemas/type_users_attributions_BoostOfferResponseAttributes'
+      required:
+      - type
+      - id
+      - attributes
+      title: BoostOfferResponseData
     type_users_rewards_CategoryRelationshipObject:
       type: object
       properties:
@@ -687,38 +599,54 @@ components:
       required:
       - category
       title: CategoryRelationshipObject
-    type_users_rewards_Commission:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/type_commons_CommissionType'
-        value:
-          type: number
-          format: double
-      required:
-      - type
-      - value
-      title: Commission
-    type_commons_ErrorSource:
-      type: object
-      properties:
-        pointer:
-          type: string
-          description: A JSON pointer to the value in the request document that caused the error
-        parameter:
-          type: string
-          description: A string indicating which URI query parameter caused the error
-        header:
-          type: string
-          description: A string indicating the name of a single request header which caused the error
-      title: ErrorSource
-    type_commons_CommissionType:
+    type_users_attributions_NotificationMedium:
       type: string
       enum:
-      - FLAT
-      - PERCENT
-      description: Type of commission on offer (% or a flat $)
-      title: CommissionType
+      - PUSH
+      description: Where the notification attribution event is taking place in your rewards experience.
+      title: NotificationMedium
+    type_users_rewards_EligibilityOfferRelationship:
+      oneOf:
+      - $ref: '#/components/schemas/type_users_rewards_CategoryRelationshipObject'
+      title: EligibilityOfferRelationship
+    type_users_rewards_AmountType:
+      type: string
+      enum:
+      - CENTS
+      title: AmountType
+    type_users_rewards_ButtonStyle:
+      type: string
+      enum:
+      - PRIMARY
+      - SECONDARY
+      - DISABLED
+      description: Available button styles for CTA components
+      title: ButtonStyle
+    type_users_attributions_OfferAttributionAttributes:
+      type: object
+      properties:
+        entityId:
+          type: string
+          description: The offer ID
+        eventCode:
+          $ref: '#/components/schemas/type_users_attributions_EventCode'
+        medium:
+          $ref: '#/components/schemas/type_users_attributions_OfferMedium'
+        eventDate:
+          type: string
+          format: date-time
+          description: 'The timestamp of the attribution event.
+
+            Must be in ISO 8601 format (e.g., "2025-01-01T00:00:00Z").'
+        state:
+          $ref: '#/components/schemas/type_users_attributions_AttributionState'
+          description: Placement context for the attribution event
+      required:
+      - entityId
+      - eventCode
+      - medium
+      - eventDate
+      title: OfferAttributionAttributes
     type_users_attributions_CreateAttributionRequestUnion:
       oneOf:
       - type: object
@@ -760,65 +688,104 @@ components:
       discriminator:
         propertyName: type
       title: CreateAttributionRequestUnion
-    type_users_attributions_NotificationMedium:
+    type_users_attributions_PlacementSlotAttributionAttributes:
+      type: object
+      properties:
+        entityId:
+          type: string
+          description: The slot ID (matches `state.slotId`)
+        eventCode:
+          $ref: '#/components/schemas/type_users_attributions_EventCode'
+        medium:
+          $ref: '#/components/schemas/type_users_attributions_PlacementSlotMedium'
+        eventDate:
+          type: string
+          format: date-time
+          description: 'The timestamp of the attribution event.
+
+            Must be in ISO 8601 format (e.g., "2025-01-01T00:00:00Z").'
+        state:
+          $ref: '#/components/schemas/type_users_attributions_AttributionState'
+          description: Placement context for the attribution event
+      required:
+      - entityId
+      - eventCode
+      - medium
+      - eventDate
+      description: 'Attributes for a slot-level activation event on a batch-activation placement.
+
+        A slot activation also writes per-offer `offerAttribution` ACTIVATE events for
+
+        every offer resolved by the slot''s content strategy (see `ActivatePlacementSlot`).'
+      title: PlacementSlotAttributionAttributes
+    type_commons_CategoryOption:
       type: string
       enum:
-      - PUSH
-      description: Where the notification attribution event is taking place in your rewards experience.
-      title: NotificationMedium
-    type_users_attributions_BoostOfferResponse:
+      - Arts & Entertainment
+      - Baby, Kids & Toys
+      - Books & Digital Media
+      - Clothing, Shoes & Accessories
+      - Computers, Electronics & Software
+      - Convenience
+      - Gas
+      - Department Stores
+      - Food & Beverage
+      - Health & Beauty
+      - Home & Garden
+      - Miscellaneous
+      - Occasions & Gifts
+      - Pets
+      - Sports & Outdoors
+      - Supplies & Services
+      - Travel
+      description: Category of merchant. Please use URL Encode for non single word categories. (Food & Beverage should be Food%20%26%20Beverage)
+      title: CategoryOption
+    type_users_attributions_PlacementSlotMedium:
+      type: string
+      enum:
+      - CTA
+      description: Where the placement-slot attribution event is taking place in your rewards experience.
+      title: PlacementSlotMedium
+    type_users_rewards_ProgressBarSegmentProgress:
       type: object
       properties:
-        data:
-          $ref: '#/components/schemas/type_users_attributions_BoostOfferResponseData'
-        included:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_users_attributions_BoostOfferIncluded'
+        completed:
+          type: integer
+          description: Units completed within the current segment.
+        total:
+          type: integer
+          description: Total units required to complete the current segment.
       required:
-      - data
-      title: BoostOfferResponse
-    type_users_rewards_CategoryIncluded:
+      - completed
+      - total
+      description: Fill state of a single segment node, expressed as completed of total.
+      title: ProgressBarSegmentProgress
+    type_users_rewards_ComponentType:
+      type: string
+      enum:
+      - shortDescription
+      - longDescription
+      - baseReward
+      - boostedReward
+      - cta
+      - tags
+      - detailTags
+      - logoFlare
+      - progressBar
+      description: Available UI component types for offers
+      title: ComponentType
+    type_commons_Job:
       type: object
       properties:
-        id:
+        status:
+          $ref: '#/components/schemas/type_commons_JobStatus'
+        message:
           type: string
-          description: id of the category
-        type:
-          type: string
-          enum:
-          - category
-        attributes:
-          $ref: '#/components/schemas/type_users_rewards_CategoryFields'
+          description: Message regarding the status of the job request
       required:
-      - id
-      - type
-      - attributes
-      title: CategoryIncluded
-    type_users_rewards_ProgressBarSegment:
-      type: object
-      properties:
-        icon:
-          type: string
-          description: SVG icon to use for each segment
-        position:
-          $ref: '#/components/schemas/type_users_rewards_ProgressBarSegmentPosition'
-          description: Position of the segment within the layout
-        separator:
-          $ref: '#/components/schemas/type_users_rewards_ProgressBarSegmentSeparator'
-          description: Separator style to render between segment nodes
-        labels:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_users_rewards_ProgressBarSegmentLabel'
-          description: Label configuration for each node in the segment
-        selection:
-          $ref: '#/components/schemas/type_users_rewards_ProgressBarSegmentSelection'
-          description: Which segment nodes the UI should render as selected based on currentProgress
-      required:
-      - position
-      description: Segment configuration for a specific layout
-      title: ProgressBarSegment
+      - status
+      - message
+      title: Job
     type_users_rewards_ProgressBar:
       type: object
       properties:
@@ -848,56 +815,65 @@ components:
       - labels
       description: Progress bar component for tracking offer redemption progress
       title: ProgressBar
-    type_users_rewards_ButtonStyle:
-      type: string
-      enum:
-      - PRIMARY
-      - SECONDARY
-      - DISABLED
-      description: Available button styles for CTA components
-      title: ButtonStyle
-    type_users_attributions_BoostOfferResponseAttributes:
+    type_users_rewards_ProgressBarLabels:
       type: object
       properties:
-        entityId:
-          type: string
-        eventCode:
-          type: string
-        medium:
-          type: string
-        eventDate:
-          type: string
-          format: date-time
+        details:
+          $ref: '#/components/schemas/type_users_rewards_ProgressBarLabelPair'
+          description: Label configuration for the details view
+        default:
+          $ref: '#/components/schemas/type_users_rewards_ProgressBarLabelPair'
+          description: Label configuration for the default view
       required:
-      - entityId
-      - eventCode
-      - medium
-      - eventDate
-      title: BoostOfferResponseAttributes
-    type_users_rewards_ComponentType:
+      - default
+      description: Labels to render around the progress bar in different layouts
+      title: ProgressBarLabels
+    type_users_rewards_CategoryData:
+      type: object
+      properties:
+        id:
+          type: string
+          description: id of the category
+        type:
+          type: string
+          enum:
+          - category
+      required:
+      - id
+      - type
+      title: CategoryData
+    type_users_attributions_EventCode:
       type: string
       enum:
-      - shortDescription
-      - longDescription
-      - baseReward
-      - boostedReward
-      - cta
-      - tags
-      - detailTags
-      - logoFlare
-      - progressBar
-      description: Available UI component types for offers
-      title: ComponentType
-    type_users_attributions_BoostOfferIncluded:
-      oneOf:
-      - $ref: '#/components/schemas/type_users_rewards_OfferDataUnion'
-      - $ref: '#/components/schemas/type_users_rewards_CategoryIncluded'
-      title: BoostOfferIncluded
-    type_users_attributions_ActivateOfferIncluded:
-      oneOf:
-      - $ref: '#/components/schemas/type_users_rewards_OfferDataUnion'
-      - $ref: '#/components/schemas/type_users_rewards_CategoryIncluded'
-      title: ActivateOfferIncluded
+      - IMPRESSION
+      - VIEW
+      - ACTIVATE
+      - BOOST
+      description: The event code of attribution event.
+      title: EventCode
+    type_commons_ErrorSource:
+      type: object
+      properties:
+        pointer:
+          type: string
+          description: A JSON pointer to the value in the request document that caused the error
+        parameter:
+          type: string
+          description: A string indicating which URI query parameter caused the error
+        header:
+          type: string
+          description: A string indicating the name of a single request header which caused the error
+      title: ErrorSource
+    type_commons_UserId:
+      type: string
+      description: The ID of the user as defined on the issuers system
+      title: UserId
+    type_users_rewards_ProgressBarSegmentSeparator:
+      type: string
+      enum:
+      - LINE
+      description: Supported separator styles between segment nodes
+      title: ProgressBarSegmentSeparator
     type_commons_ErrorResponse:
       type: object
       properties:
@@ -908,72 +884,21 @@ components:
       required:
       - errors
       title: ErrorResponse
-    type_users_rewards_ProgressBarLabelPair:
-      type: object
-      properties:
-        left:
-          type: string
-          description: Text content for the left label
-        right:
-          type: string
-          description: Text content for the right label
-      description: Left and right label configuration for a specific layout
-      title: ProgressBarLabelPair
-    type_users_attributions_BoostOfferResponseData:
+    type_commons_JobResponse:
       type: object
       properties:
         type:
-          type: string
+          $ref: '#/components/schemas/type_commons_ResourceType'
         id:
           type: string
+          description: The request id of the pending job
         attributes:
-          $ref: '#/components/schemas/type_users_attributions_BoostOfferResponseAttributes'
+          $ref: '#/components/schemas/type_commons_Job'
       required:
       - type
       - id
       - attributes
-      title: BoostOfferResponseData
-    type_commons_UserId:
-      type: string
-      description: The ID of the user as defined on the issuers system
-      title: UserId
-    type_users_rewards_OfferDataUnion:
-      oneOf:
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - standardOffer
-            description: 'Discriminator value: standardOffer'
-          id:
-            $ref: '#/components/schemas/type_commons_MongoId'
-            description: Offer ID in Kard's system
-          attributes:
-            $ref: '#/components/schemas/type_users_rewards_StandardOfferFields'
-          relationships:
-            $ref: '#/components/schemas/type_users_rewards_EligibilityOfferRelationship'
-        required:
-        - type
-        - id
-        - attributes
-      discriminator:
-        propertyName: type
-      title: OfferDataUnion
-    type_users_rewards_ProgressBarSegmentLabel:
-      type: object
-      properties:
-        title:
-          type: string
-          description: Title text for the segment node
-        description:
-          type: string
-          description: Description text for the segment node
-      required:
-      - title
-      - description
-      description: Label configuration for a single node within a segment
-      title: ProgressBarSegmentLabel
+      title: JobResponse
     type_users_attributions_OfferMedium:
       type: string
       enum:
@@ -985,65 +910,93 @@ components:
       - PUSH
       description: Where the offer attribution event is taking place in your rewards experience.
       title: OfferMedium
-    type_commons_OrganizationId:
-      type: string
-      description: Your issuer organization ID, provided by Kard
-      title: OrganizationId
-    type_users_rewards_ProgressBarSegmentPosition:
-      type: string
-      enum:
-      - LEFT
-      - RIGHT
-      - FULL_WIDTH
-      description: Supported segment positions
-      title: ProgressBarSegmentPosition
-    type_users_attributions_BoostOfferIncludeOption:
-      type: string
-      enum:
-      - offer
-      description: Options for what to include in the boost offer response
-      title: BoostOfferIncludeOption
-    type_users_rewards_CtaAction:
+    type_users_rewards_CtaComponent:
       type: object
       properties:
-        url:
+        buttonText:
           type: string
-          description: URL endpoint to call when button is clicked
-        method:
+          description: Text to display on the button
+        buttonStyle:
+          $ref: '#/components/schemas/type_users_rewards_ButtonStyle'
+          description: Style of the button
+        action:
+          $ref: '#/components/schemas/type_users_rewards_CtaAction'
+          description: Action to perform when the button is clicked
+        startIcon:
           type: string
-          description: HTTP method to use (e.g., POST)
+          description: Icon identifier to display on the button
       required:
-      - url
-      - method
-      description: Action configuration for CTA button
-      title: CtaAction
-    type_users_rewards_LogoFlareBadgePosition:
-      type: string
-      enum:
-      - TOP_RIGHT
-      - TOP_LEFT
-      - BOTTOM_RIGHT
-      - BOTTOM_LEFT
-      description: Available positions for the logo flare badge
-      title: LogoFlareBadgePosition
-    type_users_attributions_ActivateOfferResponseAttributes:
+      - buttonText
+      - buttonStyle
+      description: Call-to-action button component for offers
+      title: CtaComponent
+    type_users_attributions_ActivateOfferResponse:
       type: object
       properties:
-        entityId:
-          type: string
-        eventCode:
-          type: string
-        medium:
-          type: string
-        eventDate:
-          type: string
-          format: date-time
+        data:
+          $ref: '#/components/schemas/type_users_attributions_ActivateOfferResponseData'
+        included:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_users_attributions_ActivateOfferIncluded'
       required:
-      - entityId
-      - eventCode
-      - medium
-      - eventDate
-      title: ActivateOfferResponseAttributes
+      - data
+      title: ActivateOfferResponse
+    type_users_rewards_ProgressBarSegments:
+      type: object
+      properties:
+        details:
+          $ref: '#/components/schemas/type_users_rewards_ProgressBarSegment'
+          description: Segment configuration for the details view
+        default:
+          $ref: '#/components/schemas/type_users_rewards_ProgressBarSegment'
+          description: Segment configuration for the default view
+        progress:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_users_rewards_ProgressBarSegmentProgress'
+          description: 'Per-segment fill state: one entry per segment node, index-aligned with the nodes (length equals the progress bar total). Reached nodes report 1 of 1 and not-yet-reached nodes 0 of 1; for a punch-card offer the in-progress node reports qualifying-purchase progress toward the next reward (Q mod N of N).'
+      required:
+      - default
+      - progress
+      description: Segment configuration for the progress bar in different layouts
+      title: ProgressBarSegments
+    type_users_rewards_CategoryRelationship:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_users_rewards_CategoryData'
+      required:
+      - data
+      title: CategoryRelationship
+    type_users_attributions_ActivateOfferIncluded:
+      oneOf:
+      - $ref: '#/components/schemas/type_users_rewards_OfferDataUnion'
+      - $ref: '#/components/schemas/type_users_rewards_CategoryIncluded'
+      title: ActivateOfferIncluded
+    type_users_rewards_CategoryIncluded:
+      type: object
+      properties:
+        id:
+          type: string
+          description: id of the category
+        type:
+          type: string
+          enum:
+          - category
+        attributes:
+          $ref: '#/components/schemas/type_users_rewards_CategoryFields'
+      required:
+      - id
+      - type
+      - attributes
+      title: CategoryIncluded
+    type_commons_ResourceType:
+      type: string
+      description: Type of document returned
+      title: ResourceType
     type_users_rewards_StandardOfferFields:
       type: object
       properties:
@@ -1109,94 +1062,112 @@ components:
       - expirationDate
       - isTargeted
       title: StandardOfferFields
-    type_users_rewards_Asset:
-      type: object
-      properties:
-        type:
-          type: string
-        url:
-          type: string
-          description: URL of the asset containing an attribution token
-        alt:
-          type: string
-          description: Alt text of the asset
-      required:
-      - type
-      - url
-      - alt
-      title: Asset
-    type_users_rewards_EligibilityOfferRelationship:
-      oneOf:
-      - $ref: '#/components/schemas/type_users_rewards_CategoryRelationshipObject'
-      title: EligibilityOfferRelationship
-    type_users_attributions_ActivatePlacementSlotResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_users_attributions_ActivatePlacementSlotResponseData'
-      required:
-      - data
-      description: Ack payload for a slot activation request.
-      title: ActivatePlacementSlotResponse
-    type_users_rewards_LogoFlareBadge:
+    type_users_rewards_ProgressBarSegment:
       type: object
       properties:
         icon:
           type: string
-          description: Icon identifier for the badge
+          description: SVG icon to use for each segment
         position:
-          $ref: '#/components/schemas/type_users_rewards_LogoFlareBadgePosition'
-          description: Position of the badge on the logo
-      required:
-      - icon
-      - position
-      description: Badge configuration for logo flare
-      title: LogoFlareBadge
-    type_users_rewards_LogoFlare:
-      type: object
-      properties:
-        borderColor:
-          $ref: '#/components/schemas/type_users_rewards_LogoFlareBorderColor'
-          description: Border color style for the logo flare
-        badge:
-          $ref: '#/components/schemas/type_users_rewards_LogoFlareBadge'
-          description: Optional badge to display on the logo
-      required:
-      - borderColor
-      description: Logo flare configuration for offer display
-      title: LogoFlare
-    type_users_attributions_CreateAttributionRequestObject:
-      type: object
-      properties:
-        data:
+          $ref: '#/components/schemas/type_users_rewards_ProgressBarSegmentPosition'
+          description: Position of the segment within the layout
+        separator:
+          $ref: '#/components/schemas/type_users_rewards_ProgressBarSegmentSeparator'
+          description: Separator style to render between segment nodes
+        labels:
           type: array
           items:
-            $ref: '#/components/schemas/type_users_attributions_CreateAttributionRequestUnion'
-          description: 'Discriminated union representing the request body for submitting attribution events.
-
-            Use `type` to distinguish between the two:
-
-            - `offerAttribution`: Events related to viewing or interacting with an offer.
-
-            - `notificationAttribution`: Events related to viewing or interacting with a notification.'
+            $ref: '#/components/schemas/type_users_rewards_ProgressBarSegmentLabel'
+          description: Label configuration for each node in the segment
+        selection:
+          $ref: '#/components/schemas/type_users_rewards_ProgressBarSegmentSelection'
+          description: Which segment nodes the UI should render as selected based on currentProgress
       required:
-      - data
-      title: CreateAttributionRequestObject
-    type_users_attributions_PlacementSlotMedium:
-      type: string
-      enum:
-      - CTA
-      description: Where the placement-slot attribution event is taking place in your rewards experience.
-      title: PlacementSlotMedium
-    type_users_attributions_ActivatePlacementSlotResponseAttributes:
+      - position
+      description: Segment configuration for a specific layout
+      title: ProgressBarSegment
+    type_users_attributions_AttributionState:
       type: object
       properties:
+        rank:
+          type: integer
+          description: The position of the offer in the list shown to the user (1-indexed)
+        filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_users_attributions_AttributionFilter'
+          description: The active filters when the user saw the offer
         placementId:
           type: string
-          description: Unique identifier of the placement
+          description: Unique identifier of the placement the attribution event originated from
         slotId:
           type: string
           description: Stable identifier for the slot within the placement
+      title: AttributionState
+    type_users_rewards_ProgressBarSegmentSelection:
+      type: string
+      enum:
+      - CURRENT
+      - CURRENT_AND_BELOW
+      description: 'Supported selection strategies for highlighting segment nodes.
+
+        - CURRENT: select only the segment at currentProgress
+
+        - CURRENT_AND_BELOW: select the segment at currentProgress and all segments below it'
+      title: ProgressBarSegmentSelection
+    type_commons_CommissionType:
+      type: string
+      enum:
+      - FLAT
+      - PERCENT
+      description: Type of commission on offer (% or a flat $)
+      title: CommissionType
+    type_users_rewards_ProgressBarSegmentLabel:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Title text for the segment node
+        description:
+          type: string
+          description: Description text for the segment node
+      required:
+      - title
+      - description
+      description: Label configuration for a single node within a segment
+      title: ProgressBarSegmentLabel
+    type_users_rewards_OfferDataUnion:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - standardOffer
+            description: 'Discriminator value: standardOffer'
+          id:
+            $ref: '#/components/schemas/type_commons_MongoId'
+            description: Offer ID in Kard's system
+          attributes:
+            $ref: '#/components/schemas/type_users_rewards_StandardOfferFields'
+          relationships:
+            $ref: '#/components/schemas/type_users_rewards_EligibilityOfferRelationship'
+        required:
+        - type
+        - id
+        - attributes
+      discriminator:
+        propertyName: type
+      title: OfferDataUnion
+    type_commons_OrganizationId:
+      type: string
+      description: Your issuer organization ID, provided by Kard
+      title: OrganizationId
+    type_users_attributions_ActivateOfferResponseAttributes:
+      type: object
+      properties:
+        entityId:
+          type: string
         eventCode:
           type: string
         medium:
@@ -1204,23 +1175,12 @@ components:
         eventDate:
           type: string
           format: date-time
-        offerIds:
-          type: array
-          items:
-            type: string
-          description: 'All offer IDs that resolved under the slot''s content strategy and had
-
-            per-offer `offerAttribution` ACTIVATE events written. The partner can use
-
-            this to render the batch immediately without an extra round-trip.'
       required:
-      - placementId
-      - slotId
+      - entityId
       - eventCode
       - medium
       - eventDate
-      - offerIds
-      title: ActivatePlacementSlotResponseAttributes
+      title: ActivateOfferResponseAttributes
     type_users_attributions_ActivatePlacementSlotResponseData:
       type: object
       properties:
@@ -1236,34 +1196,74 @@ components:
       - id
       - attributes
       title: ActivatePlacementSlotResponseData
-    type_users_rewards_ProgressBarSegmentSeparator:
-      type: string
-      enum:
-      - LINE
-      description: Supported separator styles between segment nodes
-      title: ProgressBarSegmentSeparator
-    type_users_attributions_EventCode:
-      type: string
-      enum:
-      - IMPRESSION
-      - VIEW
-      - ACTIVATE
-      - BOOST
-      description: The event code of attribution event.
-      title: EventCode
-    type_users_rewards_ProgressBarLabels:
+    type_users_rewards_Amount:
       type: object
       properties:
-        details:
-          $ref: '#/components/schemas/type_users_rewards_ProgressBarLabelPair'
-          description: Label configuration for the details view
-        default:
-          $ref: '#/components/schemas/type_users_rewards_ProgressBarLabelPair'
-          description: Label configuration for the default view
+        type:
+          $ref: '#/components/schemas/type_users_rewards_AmountType'
+        value:
+          type: integer
       required:
-      - default
-      description: Labels to render around the progress bar in different layouts
-      title: ProgressBarLabels
+      - type
+      - value
+      title: Amount
+    type_commons_ErrorObject:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Status code returned from the request
+        title:
+          type: string
+          description: Name of error
+        detail:
+          type: string
+          description: Description of the specific occurance of the error
+        source:
+          $ref: '#/components/schemas/type_commons_ErrorSource'
+          description: An object containing a reference to the primary source of the error
+        id:
+          type: string
+          description: The id of the resource which caused the error. Always returned for multi-status errors.
+      required:
+      - status
+      - title
+      - detail
+      title: ErrorObject
+    type_users_attributions_ActivatePlacementSlotResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_users_attributions_ActivatePlacementSlotResponseData'
+      required:
+      - data
+      description: Ack payload for a slot activation request.
+      title: ActivatePlacementSlotResponse
+    type_users_rewards_ProgressBarLabelPair:
+      type: object
+      properties:
+        left:
+          type: string
+          description: Text content for the left label
+        right:
+          type: string
+          description: Text content for the right label
+      description: Left and right label configuration for a specific layout
+      title: ProgressBarLabelPair
+    type_users_attributions_ActivateOfferResponseData:
+      type: object
+      properties:
+        type:
+          type: string
+        id:
+          type: string
+        attributes:
+          $ref: '#/components/schemas/type_users_attributions_ActivateOfferResponseAttributes'
+      required:
+      - type
+      - id
+      - attributes
+      title: ActivateOfferResponseData
   securitySchemes:
     OAuthScheme:
       type: http
