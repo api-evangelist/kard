@@ -193,23 +193,29 @@ paths:
       description: Sandbox
 components:
   schemas:
-    type_files_FileMetadataWithURL:
+    type_files_GetFilesMetadataResponse:
       type: object
       properties:
-        type:
-          $ref: '#/components/schemas/type_files_FileType'
-          description: The type of the generated file.
-        attributes:
-          $ref: '#/components/schemas/type_files_FileMetadataAttribute'
-          description: Attributes of the filetype
-        id:
-          type: string
-          description: The File ID in Kard’s system
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_files_FileMetadataWithURL'
+          description: List of file metadata objects with their pre-signed URLs.
+        links:
+          $ref: '#/components/schemas/type_commons_Links'
+          description: Navigation links for paginated results.
+        meta:
+          $ref: '#/components/schemas/type_files_PaginationMeta'
+          description: Metadata about the pagination status.
       required:
-      - type
-      - attributes
-      - id
-      title: FileMetadataWithURL
+      - data
+      - links
+      - meta
+      title: GetFilesMetadataResponse
+    type_commons_OrganizationId:
+      type: string
+      description: Your issuer organization ID, provided by Kard
+      title: OrganizationId
     type_files_PaginationMeta:
       type: object
       properties:
@@ -236,29 +242,6 @@ components:
       - self
       description: Related links to the API call
       title: Links
-    type_files_FilesMetadataSortOptions:
-      type: string
-      enum:
-      - sentDate
-      - -sentDate
-      title: FilesMetadataSortOptions
-    type_commons_ErrorSource:
-      type: object
-      properties:
-        pointer:
-          type: string
-          description: A JSON pointer to the value in the request document that caused the error
-        parameter:
-          type: string
-          description: A string indicating which URI query parameter caused the error
-        header:
-          type: string
-          description: A string indicating the name of a single request header which caused the error
-      title: ErrorSource
-    type_commons_OrganizationId:
-      type: string
-      description: Your issuer organization ID, provided by Kard
-      title: OrganizationId
     type_files_FileMetadataAttribute:
       type: object
       properties:
@@ -280,6 +263,42 @@ components:
       - lastModified
       - downloadUrl
       title: FileMetadataAttribute
+    type_commons_ErrorSource:
+      type: object
+      properties:
+        pointer:
+          type: string
+          description: A JSON pointer to the value in the request document that caused the error
+        parameter:
+          type: string
+          description: A string indicating which URI query parameter caused the error
+        header:
+          type: string
+          description: A string indicating the name of a single request header which caused the error
+      title: ErrorSource
+    type_files_FilesMetadataSortOptions:
+      type: string
+      enum:
+      - sentDate
+      - -sentDate
+      title: FilesMetadataSortOptions
+    type_files_FileMetadataWithURL:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/type_files_FileType'
+          description: The type of the generated file.
+        attributes:
+          $ref: '#/components/schemas/type_files_FileMetadataAttribute'
+          description: Attributes of the filetype
+        id:
+          type: string
+          description: The File ID in Kard’s system
+      required:
+      - type
+      - attributes
+      - id
+      title: FileMetadataWithURL
     type_files_FileType:
       type: string
       enum:
@@ -321,33 +340,6 @@ components:
       - title
       - detail
       title: ErrorObject
-    type_files_GetFilesMetadataResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_files_FileMetadataWithURL'
-          description: List of file metadata objects with their pre-signed URLs.
-        links:
-          $ref: '#/components/schemas/type_commons_Links'
-          description: Navigation links for paginated results.
-        meta:
-          $ref: '#/components/schemas/type_files_PaginationMeta'
-          description: Metadata about the pagination status.
-      required:
-      - data
-      - links
-      - meta
-      title: GetFilesMetadataResponse
-    type_commons_UnauthorizedErrorBody:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-      title: UnauthorizedErrorBody
     type_files_Files:
       type: object
       properties:
@@ -367,6 +359,36 @@ components:
       - meta
       - links
       title: Files
+    type_files_FileAttributes:
+      type: object
+      properties:
+        fileName:
+          type: string
+          description: The name of the file to download.
+        lastModified:
+          type: string
+          format: date-time
+          description: The last time this document was modified (ISO 8601).
+        contentType:
+          type: string
+          description: The content type of the file.
+        downloadUrl:
+          type: string
+          description: The download link of the file. Use this to download the associated file. These are ephemeral links with an expiration time of 1 hour.
+      required:
+      - fileName
+      - lastModified
+      - contentType
+      - downloadUrl
+      title: FileAttributes
+    type_commons_UnauthorizedErrorBody:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: UnauthorizedErrorBody
     type_files_PaginationLinks:
       type: object
       properties:
@@ -384,13 +406,25 @@ components:
       - first
       description: Related pagination links to the API call.
       title: PaginationLinks
-    type_files_FileType_2:
-      type: string
-      enum:
-      - usersEligibilityFile
-      - dailyReconciliationFile
-      - monthlyReconciliationFile
-      title: FileType
+    type_files_FilesMeta:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          description: The number of records returned in API call.
+      required:
+      - pageSize
+      title: FilesMeta
+    type_commons_RequestValidationErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: string
+      required:
+      - errors
+      title: RequestValidationErrorResponse
     type_files_File:
       oneOf:
       - type: object
@@ -450,47 +484,13 @@ components:
       - $ref: '#/components/schemas/type_commons_RequestValidationErrorResponse'
       - type: string
       title: InvalidRequestUnion
-    type_commons_RequestValidationErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            type: string
-      required:
-      - errors
-      title: RequestValidationErrorResponse
-    type_files_FileAttributes:
-      type: object
-      properties:
-        fileName:
-          type: string
-          description: The name of the file to download.
-        lastModified:
-          type: string
-          format: date-time
-          description: The last time this document was modified (ISO 8601).
-        contentType:
-          type: string
-          description: The content type of the file.
-        downloadUrl:
-          type: string
-          description: The download link of the file. Use this to download the associated file. These are ephemeral links with an expiration time of 1 hour.
-      required:
-      - fileName
-      - lastModified
-      - contentType
-      - downloadUrl
-      title: FileAttributes
-    type_files_FilesMeta:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-          description: The number of records returned in API call.
-      required:
-      - pageSize
-      title: FilesMeta
+    type_files_FileType_2:
+      type: string
+      enum:
+      - usersEligibilityFile
+      - dailyReconciliationFile
+      - monthlyReconciliationFile
+      title: FileType
   securitySchemes:
     OAuthScheme:
       type: http

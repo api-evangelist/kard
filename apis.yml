@@ -51,6 +51,7 @@ tags:
 - Transaction
 - Cashback
 - Webhook
+- Loyalty & Incentives
 tags_raw:
 - Company
 - Rewards
@@ -62,9 +63,10 @@ tags_raw:
 - Transactions
 - Cashback
 - Webhooks
+- Loyalty & Incentives
 apis:
 - aid: kard:kard-attributions-api
-  name: Kard attributions API
+  name: Kard Attributions API
   description: The attributions API from Kard — 1 operation(s) for attributions.
   humanURL: https://docs.getkard.com/home
   baseURL: https://rewards-api.getkard.com
@@ -327,7 +329,7 @@ apis:
   - type: AgenticAccess
     url: agentic-access/kard-agentic-access.yml
 - aid: kard:kard-rewards-api
-  name: Kard rewards API
+  name: Kard Rewards API
   description: The rewards API from Kard — 9 operation(s) for rewards.
   humanURL: https://docs.getkard.com/home
   baseURL: https://rewards-api.getkard.com
@@ -357,7 +359,7 @@ apis:
   - type: AgenticAccess
     url: agentic-access/kard-agentic-access.yml
 - aid: kard:kard-transactions-api
-  name: Kard transactions API
+  name: Kard Transactions API
   description: The transactions API from Kard — 7 operation(s) for transactions.
   humanURL: https://docs.getkard.com/home
   baseURL: https://rewards-api.getkard.com
@@ -387,7 +389,7 @@ apis:
   - type: AgenticAccess
     url: agentic-access/kard-agentic-access.yml
 - aid: kard:kard-users-api
-  name: Kard users API
+  name: Kard Users API
   description: The users API from Kard — 5 operation(s) for users.
   humanURL: https://docs.getkard.com/home
   baseURL: https://rewards-api.getkard.com

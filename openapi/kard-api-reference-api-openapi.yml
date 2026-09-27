@@ -58,33 +58,27 @@ webhooks:
       description: Sandbox
 components:
   schemas:
-    type_transactions_AuditStatus:
-      type: string
-      enum:
-      - NEW
-      - IN_PROGRESS
-      - CLOSED
-      title: AuditStatus
-    type_notifications_FailedTransactionAttributes:
+    type_notifications_PushNotificationPlacementFileAttributes:
       type: object
       properties:
-        message:
+        placementName:
           type: string
-          description: The display message associated to the notification
-        reason:
+          description: The display name of the placement
+        availableSlots:
+          type: integer
+          description: The number of offer slots available in the placement
+        cadence:
           type: string
-          description: The reason for the transaction failure
-        name:
+          description: The delivery cadence of the placement (e.g. WEEKLY)
+        downloadUrl:
           type: string
-          description: The name of the merchant
-        cardProductId:
-          type: string
-          description: The ID of the card product
+          description: Presigned URL to download the generated placement file (gzipped JSONL)
       required:
-      - message
-      - reason
-      - name
-      title: FailedTransactionAttributes
+      - placementName
+      - availableSlots
+      - cadence
+      - downloadUrl
+      title: PushNotificationPlacementFileAttributes
     type_notifications_EarnedRewardNotificationAttributes:
       type: object
       properties:
@@ -140,16 +134,83 @@ components:
       - transactionId
       - transactionAmountInCents
       title: EarnedRewardNotificationAttributes
-    type_notifications_PushNotificationPlacementFileRelationships:
+    type_notifications_FailedTransactionAttributes:
       type: object
       properties:
-        placement:
+        message:
+          type: string
+          description: The display message associated to the notification
+        reason:
+          type: string
+          description: The reason for the transaction failure
+        name:
+          type: string
+          description: The name of the merchant
+        cardProductId:
+          type: string
+          description: The ID of the card product
+      required:
+      - message
+      - reason
+      - name
+      title: FailedTransactionAttributes
+    type_notifications_EmailNotificationPlacementFileAttributes:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The display name of the placement
+        organizationId:
+          type: string
+          description: The issuer organization ID the placement belongs to
+        availableSlots:
+          type: integer
+          description: The number of offer slots available in the placement
+        cadence:
+          type: string
+          description: The delivery cadence of the placement (e.g. MONTHLY)
+        downloadUrl:
+          type: string
+          description: Presigned URL to download the generated placement file (gzipped JSONL)
+      required:
+      - name
+      - organizationId
+      - availableSlots
+      - cadence
+      - downloadUrl
+      title: EmailNotificationPlacementFileAttributes
+    type_commons_ResourceType:
+      type: string
+      description: Type of document returned
+      title: ResourceType
+    type_notifications_ValidTransactionCommissionEarned:
+      type: object
+      properties:
+        issuer:
+          $ref: '#/components/schemas/type_commons_CommissionValue'
+        user:
+          $ref: '#/components/schemas/type_commons_CommissionValue'
+      required:
+      - issuer
+      - user
+      title: ValidTransactionCommissionEarned
+    type_transactions_MerchantAssetType:
+      type: string
+      enum:
+      - IMG_VIEW
+      - BANNER_VIEW
+      title: MerchantAssetType
+    type_notifications_RejectedTransactionRelationships:
+      type: object
+      properties:
+        user:
           $ref: '#/components/schemas/type_commons_RelationshipSingle'
-        contentStrategy:
+        transaction:
           $ref: '#/components/schemas/type_commons_RelationshipSingle'
       required:
-      - placement
-      title: PushNotificationPlacementFileRelationships
+      - user
+      - transaction
+      title: RejectedTransactionRelationships
     type_commons_CommissionValue:
       type: object
       properties:
@@ -163,42 +224,6 @@ components:
       - type
       - value
       title: CommissionValue
-    type_commons_PurchaseChannel:
-      type: string
-      enum:
-      - INSTORE
-      - ONLINE
-      description: Purchase channel of offer
-      title: PurchaseChannel
-    type_files_FileMetadataAttribute:
-      type: object
-      properties:
-        fileName:
-          type: string
-          description: The name of the file.
-        sentAt:
-          type: string
-          description: ISO 8601 timestamp (ISO8601) when the file was originally sent/created.
-        lastModified:
-          type: string
-          description: ISO 8601 timestamp (ISO8601) when the file was last modified.
-        downloadUrl:
-          type: string
-          description: Temporary URL that provides direct access to download the file for 30 minutes.
-      required:
-      - fileName
-      - sentAt
-      - lastModified
-      - downloadUrl
-      title: FileMetadataAttribute
-    type_commons_RelationshipSingle:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_commons_RelationshipData'
-      required:
-      - data
-      title: RelationshipSingle
     type_notifications_AuditUpdateAttributes:
       type: object
       properties:
@@ -234,71 +259,34 @@ components:
       - auditDescription
       - transactionId
       title: AuditUpdateAttributes
-    type_notifications_RejectedTransactionRelationships:
+    type_files_FileMetadataAttribute:
       type: object
       properties:
-        user:
-          $ref: '#/components/schemas/type_commons_RelationshipSingle'
-        transaction:
-          $ref: '#/components/schemas/type_commons_RelationshipSingle'
-      required:
-      - user
-      - transaction
-      title: RejectedTransactionRelationships
-    type_transactions_MerchantAssetType:
-      type: string
-      enum:
-      - IMG_VIEW
-      - BANNER_VIEW
-      title: MerchantAssetType
-    type_notifications_EmailNotificationPlacementFileAttributes:
-      type: object
-      properties:
-        name:
+        fileName:
           type: string
-          description: The display name of the placement
-        organizationId:
+          description: The name of the file.
+        sentAt:
           type: string
-          description: The issuer organization ID the placement belongs to
-        availableSlots:
-          type: integer
-          description: The number of offer slots available in the placement
-        cadence:
+          description: ISO 8601 timestamp (ISO8601) when the file was originally sent/created.
+        lastModified:
           type: string
-          description: The delivery cadence of the placement (e.g. MONTHLY)
+          description: ISO 8601 timestamp (ISO8601) when the file was last modified.
         downloadUrl:
           type: string
-          description: Presigned URL to download the generated placement file (gzipped JSONL)
+          description: Temporary URL that provides direct access to download the file for 30 minutes.
       required:
-      - name
-      - organizationId
-      - availableSlots
-      - cadence
+      - fileName
+      - sentAt
+      - lastModified
       - downloadUrl
-      title: EmailNotificationPlacementFileAttributes
-    type_commons_RelationshipData:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/type_commons_ResourceType'
-        id:
-          type: string
-          description: The ID of the related resource
-      required:
-      - type
-      - id
-      title: RelationshipData
-    type_notifications_ValidTransactionCommissionEarned:
-      type: object
-      properties:
-        issuer:
-          $ref: '#/components/schemas/type_commons_CommissionValue'
-        user:
-          $ref: '#/components/schemas/type_commons_CommissionValue'
-      required:
-      - issuer
-      - user
-      title: ValidTransactionCommissionEarned
+      title: FileMetadataAttribute
+    type_commons_PurchaseChannel:
+      type: string
+      enum:
+      - INSTORE
+      - ONLINE
+      description: Purchase channel of offer
+      title: PurchaseChannel
     type_notifications_NotificationDataUnion:
       oneOf:
       - type: object
@@ -491,38 +479,84 @@ components:
       discriminator:
         propertyName: type
       title: NotificationDataUnion
-    type_notifications_PushNotificationPlacementFileAttributes:
+    type_commons_RelationshipSingle:
       type: object
       properties:
-        placementName:
-          type: string
-          description: The display name of the placement
-        availableSlots:
-          type: integer
-          description: The number of offer slots available in the placement
-        cadence:
-          type: string
-          description: The delivery cadence of the placement (e.g. WEEKLY)
-        downloadUrl:
-          type: string
-          description: Presigned URL to download the generated placement file (gzipped JSONL)
+        data:
+          $ref: '#/components/schemas/type_commons_RelationshipData'
       required:
-      - placementName
-      - availableSlots
-      - cadence
-      - downloadUrl
-      title: PushNotificationPlacementFileAttributes
-    type_notifications_NotificationMetadata:
+      - data
+      title: RelationshipSingle
+    type_commons_CommissionType:
+      type: string
+      enum:
+      - FLAT
+      - PERCENT
+      description: Type of commission on offer (% or a flat $)
+      title: CommissionType
+    type_commons_ErrorObject:
       type: object
       properties:
-        issuerId:
+        status:
           type: string
-        issuerName:
+          description: Status code returned from the request
+        title:
           type: string
+          description: Name of error
+        detail:
+          type: string
+          description: Description of the specific occurance of the error
+        source:
+          $ref: '#/components/schemas/type_commons_ErrorSource'
+          description: An object containing a reference to the primary source of the error
+        id:
+          type: string
+          description: The id of the resource which caused the error. Always returned for multi-status errors.
       required:
-      - issuerId
-      - issuerName
-      title: NotificationMetadata
+      - status
+      - title
+      - detail
+      title: ErrorObject
+    type_transactions_AuditStatus:
+      type: string
+      enum:
+      - NEW
+      - IN_PROGRESS
+      - CLOSED
+      title: AuditStatus
+    type_notifications_EmailNotificationPlacementFileRelationships:
+      type: object
+      properties:
+        placement:
+          $ref: '#/components/schemas/type_commons_RelationshipSingle'
+        contentStrategy:
+          $ref: '#/components/schemas/type_commons_RelationshipSingle'
+      required:
+      - placement
+      title: EmailNotificationPlacementFileRelationships
+    type_notifications_PushNotificationPlacementFileRelationships:
+      type: object
+      properties:
+        placement:
+          $ref: '#/components/schemas/type_commons_RelationshipSingle'
+        contentStrategy:
+          $ref: '#/components/schemas/type_commons_RelationshipSingle'
+      required:
+      - placement
+      title: PushNotificationPlacementFileRelationships
+    type_commons_ErrorSource:
+      type: object
+      properties:
+        pointer:
+          type: string
+          description: A JSON pointer to the value in the request document that caused the error
+        parameter:
+          type: string
+          description: A string indicating which URI query parameter caused the error
+        header:
+          type: string
+          description: A string indicating the name of a single request header which caused the error
+      title: ErrorSource
     type_notifications_ValidTransactionAttributes:
       type: object
       properties:
@@ -561,39 +595,102 @@ components:
       - transactionAmountInCents
       - commissionEarned
       title: ValidTransactionAttributes
-    type_notifications_NotificationPayload:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_notifications_NotificationDataUnion'
-        meta:
-          $ref: '#/components/schemas/type_notifications_NotificationMetadata'
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_ErrorObject'
-      required:
-      - data
-      title: NotificationPayload
-    type_commons_ErrorSource:
-      type: object
-      properties:
-        pointer:
-          type: string
-          description: A JSON pointer to the value in the request document that caused the error
-        parameter:
-          type: string
-          description: A string indicating which URI query parameter caused the error
-        header:
-          type: string
-          description: A string indicating the name of a single request header which caused the error
-      title: ErrorSource
     type_commons_CommissionValueType:
       type: string
       enum:
       - cents
       description: The type of commission value
       title: CommissionValueType
+    type_commons_RelationshipData:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/type_commons_ResourceType'
+        id:
+          type: string
+          description: The ID of the related resource
+      required:
+      - type
+      - id
+      title: RelationshipData
+    type_notifications_EarnedRewardRejectedAttributes:
+      type: object
+      properties:
+        reason:
+          type: string
+          description: The reason code for why the transaction did not result in a reward
+        message:
+          type: string
+          description: The display message associated to the notification
+        transactionId:
+          type: string
+          description: The transaction ID
+        transactionAmountInCents:
+          type: integer
+          description: The amount of the originating transaction in cents
+        transactionTimestamp:
+          type: string
+          format: date-time
+          description: The timestamp of the originating transaction in ISO format
+      required:
+      - reason
+      - message
+      - transactionId
+      - transactionAmountInCents
+      title: EarnedRewardRejectedAttributes
+    type_notifications_TransactionRelationships:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/type_commons_RelationshipSingle'
+        offer:
+          $ref: '#/components/schemas/type_commons_RelationshipSingle'
+        transaction:
+          $ref: '#/components/schemas/type_commons_RelationshipSingle'
+      required:
+      - user
+      - offer
+      - transaction
+      title: TransactionRelationships
+    type_notifications_AuditUpdateRelationships:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/type_commons_RelationshipSingle'
+        audit:
+          $ref: '#/components/schemas/type_commons_RelationshipSingle'
+      required:
+      - user
+      - audit
+      title: AuditUpdateRelationships
+    type_notifications_FailedTransactionRelationships:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/type_commons_RelationshipSingle'
+        offer:
+          $ref: '#/components/schemas/type_commons_RelationshipSingle'
+        transaction:
+          $ref: '#/components/schemas/type_commons_RelationshipSingle'
+      required:
+      - user
+      - offer
+      - transaction
+      title: FailedTransactionRelationships
+    type_notifications_EarnedRewardRelationships:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/type_commons_RelationshipSingle'
+        offer:
+          $ref: '#/components/schemas/type_commons_RelationshipSingle'
+        transaction:
+          $ref: '#/components/schemas/type_commons_RelationshipSingle'
+      required:
+      - user
+      - offer
+      - transaction
+      title: EarnedRewardRelationships
     type_notifications_EarnedRewardSettledAttributes:
       type: object
       properties:
@@ -652,10 +749,20 @@ components:
       - transactionAmountInCents
       - commissionEarned
       title: EarnedRewardSettledAttributes
-    type_commons_ResourceType:
-      type: string
-      description: Type of document returned
-      title: ResourceType
+    type_notifications_UserReward:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/type_commons_CommissionType'
+          description: The type of reward (% or a flat $)
+        value:
+          type: number
+          format: double
+          description: The reward value
+      required:
+      - type
+      - value
+      title: UserReward
     type_transactions_MerchantAsset:
       type: object
       properties:
@@ -672,138 +779,79 @@ components:
       - type
       - url
       title: MerchantAsset
-    type_notifications_EmailNotificationPlacementFileRelationships:
+    type_notifications_NotificationMetadata:
       type: object
       properties:
-        placement:
-          $ref: '#/components/schemas/type_commons_RelationshipSingle'
-        contentStrategy:
-          $ref: '#/components/schemas/type_commons_RelationshipSingle'
+        issuerId:
+          type: string
+        issuerName:
+          type: string
       required:
-      - placement
-      title: EmailNotificationPlacementFileRelationships
-    type_notifications_AuditUpdateRelationships:
+      - issuerId
+      - issuerName
+      title: NotificationMetadata
+    type_notifications_NotificationPayload:
       type: object
       properties:
-        user:
-          $ref: '#/components/schemas/type_commons_RelationshipSingle'
-        audit:
-          $ref: '#/components/schemas/type_commons_RelationshipSingle'
+        data:
+          $ref: '#/components/schemas/type_notifications_NotificationDataUnion'
+        meta:
+          $ref: '#/components/schemas/type_notifications_NotificationMetadata'
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_ErrorObject'
       required:
-      - user
-      - audit
-      title: AuditUpdateRelationships
-    type_commons_CommissionType:
+      - data
+      title: NotificationPayload
+    type_commons_Network:
       type: string
       enum:
-      - FLAT
-      - PERCENT
-      description: Type of commission on offer (% or a flat $)
-      title: CommissionType
-    type_notifications_EarnedRewardRejectedAttributes:
+      - VISA
+      - MASTERCARD
+      - AMERICAN EXPRESS
+      - DISCOVER
+      title: Network
+    type_webhooks_CommissionSplit:
       type: object
       properties:
-        reason:
-          type: string
-          description: The reason code for why the transaction did not result in a reward
-        message:
-          type: string
-          description: The display message associated to the notification
-        transactionId:
-          type: string
-          description: The transaction ID
-        transactionAmountInCents:
+        issuersCommissionInCents:
           type: integer
-          description: The amount of the originating transaction in cents
-        transactionTimestamp:
-          type: string
-          format: date-time
-          description: The timestamp of the originating transaction in ISO format
+          description: Issuer's Commission In Cents
+        usersCommissionInCents:
+          type: integer
+          description: User's Commission In Cents
       required:
-      - reason
-      - message
-      - transactionId
-      - transactionAmountInCents
-      title: EarnedRewardRejectedAttributes
-    type_commons_ErrorObject:
-      type: object
-      properties:
-        status:
-          type: string
-          description: Status code returned from the request
-        title:
-          type: string
-          description: Name of error
-        detail:
-          type: string
-          description: Description of the specific occurance of the error
-        source:
-          $ref: '#/components/schemas/type_commons_ErrorSource'
-          description: An object containing a reference to the primary source of the error
-        id:
-          type: string
-          description: The id of the resource which caused the error. Always returned for multi-status errors.
-      required:
-      - status
-      - title
-      - detail
-      title: ErrorObject
-    type_notifications_FailedTransactionRelationships:
+      - issuersCommissionInCents
+      - usersCommissionInCents
+      title: CommissionSplit
+    type_webhooks_IssuerEarnedRewardWebhookPayload:
       type: object
       properties:
         user:
-          $ref: '#/components/schemas/type_commons_RelationshipSingle'
-        offer:
-          $ref: '#/components/schemas/type_commons_RelationshipSingle'
+          $ref: '#/components/schemas/type_webhooks_User'
+          description: Information about user that is earning reward
+        card:
+          $ref: '#/components/schemas/type_webhooks_Card'
+          description: Information about card associated with transaction that is earning reward
+        reward:
+          $ref: '#/components/schemas/type_webhooks_Reward'
+          description: Information about reward earned
         transaction:
-          $ref: '#/components/schemas/type_commons_RelationshipSingle'
+          $ref: '#/components/schemas/type_webhooks_Transaction'
+          description: Information about transaction that is earning reward
+        postDineInLinkURL:
+          type: string
+          description: Post Dine In Survey Link URL, if available. This will be present for rewards associated with local offers
+        error:
+          type: string
+          description: Error, if available
       required:
       - user
-      - offer
+      - card
+      - reward
       - transaction
-      title: FailedTransactionRelationships
-    type_notifications_UserReward:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/type_commons_CommissionType'
-          description: The type of reward (% or a flat $)
-        value:
-          type: number
-          format: double
-          description: The reward value
-      required:
-      - type
-      - value
-      title: UserReward
-    type_notifications_EarnedRewardRelationships:
-      type: object
-      properties:
-        user:
-          $ref: '#/components/schemas/type_commons_RelationshipSingle'
-        offer:
-          $ref: '#/components/schemas/type_commons_RelationshipSingle'
-        transaction:
-          $ref: '#/components/schemas/type_commons_RelationshipSingle'
-      required:
-      - user
-      - offer
-      - transaction
-      title: EarnedRewardRelationships
-    type_notifications_TransactionRelationships:
-      type: object
-      properties:
-        user:
-          $ref: '#/components/schemas/type_commons_RelationshipSingle'
-        offer:
-          $ref: '#/components/schemas/type_commons_RelationshipSingle'
-        transaction:
-          $ref: '#/components/schemas/type_commons_RelationshipSingle'
-      required:
-      - user
-      - offer
-      - transaction
-      title: TransactionRelationships
+      title: IssuerEarnedRewardWebhookPayload
     type_webhooks_User:
       type: object
       properties:
@@ -813,14 +861,35 @@ components:
       required:
       - referringPartnerUserId
       title: User
-    type_commons_Network:
-      type: string
-      enum:
-      - VISA
-      - MASTERCARD
-      - AMERICAN EXPRESS
-      - DISCOVER
-      title: Network
+    type_webhooks_Reward:
+      type: object
+      properties:
+        merchantId:
+          type: string
+          description: Merchant ID in Kard's system associated to reward
+        name:
+          type: string
+          description: Merchant Name
+        commissionToIssuer:
+          type: integer
+          description: Commission going to issuer and user summed up in cents
+        commissionSplit:
+          $ref: '#/components/schemas/type_webhooks_CommissionSplit'
+          description: Split of commission going to issuer and user in cents
+        status:
+          type: string
+          description: Status of reward. Note, this will always be **“APPROVED"**
+        type:
+          type: string
+          description: Type of reward. Note, this will always be **“CARDLINKED”**
+      required:
+      - merchantId
+      - name
+      - commissionToIssuer
+      - commissionSplit
+      - status
+      - type
+      title: Reward
     type_webhooks_Transaction:
       type: object
       properties:
@@ -859,75 +928,6 @@ components:
       - last4
       - network
       title: Card
-    type_webhooks_IssuerEarnedRewardWebhookPayload:
-      type: object
-      properties:
-        user:
-          $ref: '#/components/schemas/type_webhooks_User'
-          description: Information about user that is earning reward
-        card:
-          $ref: '#/components/schemas/type_webhooks_Card'
-          description: Information about card associated with transaction that is earning reward
-        reward:
-          $ref: '#/components/schemas/type_webhooks_Reward'
-          description: Information about reward earned
-        transaction:
-          $ref: '#/components/schemas/type_webhooks_Transaction'
-          description: Information about transaction that is earning reward
-        postDineInLinkURL:
-          type: string
-          description: Post Dine In Survey Link URL, if available. This will be present for rewards associated with local offers
-        error:
-          type: string
-          description: Error, if available
-      required:
-      - user
-      - card
-      - reward
-      - transaction
-      title: IssuerEarnedRewardWebhookPayload
-    type_webhooks_CommissionSplit:
-      type: object
-      properties:
-        issuersCommissionInCents:
-          type: integer
-          description: Issuer's Commission In Cents
-        usersCommissionInCents:
-          type: integer
-          description: User's Commission In Cents
-      required:
-      - issuersCommissionInCents
-      - usersCommissionInCents
-      title: CommissionSplit
-    type_webhooks_Reward:
-      type: object
-      properties:
-        merchantId:
-          type: string
-          description: Merchant ID in Kard's system associated to reward
-        name:
-          type: string
-          description: Merchant Name
-        commissionToIssuer:
-          type: integer
-          description: Commission going to issuer and user summed up in cents
-        commissionSplit:
-          $ref: '#/components/schemas/type_webhooks_CommissionSplit'
-          description: Split of commission going to issuer and user in cents
-        status:
-          type: string
-          description: Status of reward. Note, this will always be **“APPROVED"**
-        type:
-          type: string
-          description: Type of reward. Note, this will always be **“CARDLINKED”**
-      required:
-      - merchantId
-      - name
-      - commissionToIssuer
-      - commissionSplit
-      - status
-      - type
-      title: Reward
   securitySchemes:
     OAuthScheme:
       type: http

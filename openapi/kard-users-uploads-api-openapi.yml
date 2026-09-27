@@ -218,6 +218,38 @@ paths:
               $ref: '#/components/schemas/type_users_uploads_UpdateUploadRequestObject'
 components:
   schemas:
+    type_transactions_ProcessorMid:
+      oneOf:
+      - type: object
+        properties:
+          processor:
+            type: string
+            enum:
+            - VISA
+            description: 'Discriminator value: VISA'
+          mids:
+            $ref: '#/components/schemas/type_transactions_VisaMidDetails'
+            description: Merchant ID (MID) associated with the processor
+        required:
+        - processor
+        - mids
+      discriminator:
+        propertyName: processor
+      title: ProcessorMid
+    type_users_uploads_CreateUploadPartMultiStatusResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_ErrorObject'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_users_uploads_CreateUploadPartResponseDataUnion'
+      required:
+      - errors
+      title: CreateUploadPartMultiStatusResponse
     type_users_uploads_CreateUploadResponseDataUnion:
       oneOf:
       - type: object
@@ -239,69 +271,6 @@ components:
       discriminator:
         propertyName: type
       title: CreateUploadResponseDataUnion
-    type_transactions_States:
-      type: string
-      enum:
-      - AL
-      - AK
-      - AS
-      - AZ
-      - AR
-      - CA
-      - CO
-      - CT
-      - DE
-      - DC
-      - FM
-      - FL
-      - GA
-      - GU
-      - HI
-      - ID
-      - IL
-      - IN
-      - IA
-      - KS
-      - KY
-      - LA
-      - ME
-      - MH
-      - MD
-      - MA
-      - MI
-      - MN
-      - MS
-      - MO
-      - MT
-      - NE
-      - NV
-      - NH
-      - NJ
-      - NM
-      - NY
-      - NC
-      - ND
-      - MP
-      - OH
-      - OK
-      - OR
-      - PW
-      - PA
-      - PR
-      - RI
-      - SC
-      - SD
-      - TN
-      - TX
-      - UT
-      - VT
-      - VI
-      - VA
-      - WA
-      - WV
-      - WI
-      - WY
-      title: States
     type_transactions_TransactionsAttributes:
       type: object
       properties:
@@ -407,14 +376,168 @@ components:
       - paymentType
       - transactionId
       title: TransactionsAttributes
-    type_users_uploads_UpdateUploadResponseObject:
+    type_users_uploads_UpdateUploadRequestDataUnion:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - historicalTransactionComplete
+            description: 'Discriminator value: historicalTransactionComplete'
+          id:
+            type: string
+            description: Upload id the issuer can use in reference to the upload session
+          attributes:
+            $ref: '#/components/schemas/type_commons_EmptyObject'
+        required:
+        - type
+        - id
+        - attributes
+      discriminator:
+        propertyName: type
+      title: UpdateUploadRequestDataUnion
+    type_transactions_TransactionStatus:
+      type: string
+      enum:
+      - APPROVED
+      - SETTLED
+      - REVERSED
+      - RETURNED
+      - DECLINED
+      title: TransactionStatus
+    type_users_uploads_CreateUploadPartRequestObject:
       type: object
       properties:
         data:
-          $ref: '#/components/schemas/type_users_uploads_UpdateUploadResponseDataUnion'
+          type: array
+          items:
+            $ref: '#/components/schemas/type_users_uploads_CreateUploadPartDataUnion'
       required:
       - data
-      title: UpdateUploadResponseObject
+      title: CreateUploadPartRequestObject
+    type_commons_CardNetwork:
+      type: string
+      enum:
+      - VISA
+      - MASTERCARD
+      - AMERICANEXPRESS
+      - DISCOVER
+      description: Supported card networks
+      title: CardNetwork
+    type_users_uploads_UpdateUploadRequestObject:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_users_uploads_UpdateUploadRequestDataUnion'
+      required:
+      - data
+      title: UpdateUploadRequestObject
+    type_transactions_States:
+      type: string
+      enum:
+      - AL
+      - AK
+      - AS
+      - AZ
+      - AR
+      - CA
+      - CO
+      - CT
+      - DE
+      - DC
+      - FM
+      - FL
+      - GA
+      - GU
+      - HI
+      - ID
+      - IL
+      - IN
+      - IA
+      - KS
+      - KY
+      - LA
+      - ME
+      - MH
+      - MD
+      - MA
+      - MI
+      - MN
+      - MS
+      - MO
+      - MT
+      - NE
+      - NV
+      - NH
+      - NJ
+      - NM
+      - NY
+      - NC
+      - ND
+      - MP
+      - OH
+      - OK
+      - OR
+      - PW
+      - PA
+      - PR
+      - RI
+      - SC
+      - SD
+      - TN
+      - TX
+      - UT
+      - VT
+      - VI
+      - VA
+      - WA
+      - WV
+      - WI
+      - WY
+      title: States
+    type_users_uploads_CreateUploadPartDataUnion:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - historicalTransaction
+            description: 'Discriminator value: historicalTransaction'
+          id:
+            type: string
+            description: Unique identifier for the transaction event. This <b>must</b> be unique for each distinct event sent to the API.
+          attributes:
+            $ref: '#/components/schemas/type_transactions_TransactionsAttributes'
+        required:
+        - type
+        - id
+        - attributes
+      discriminator:
+        propertyName: type
+      title: CreateUploadPartDataUnion
+    type_users_uploads_CreateUploadPartResponseDataUnion:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - historicalTransaction
+            description: 'Discriminator value: historicalTransaction'
+          id:
+            type: string
+            description: Id of the upload to add parts
+          attributes:
+            $ref: '#/components/schemas/type_commons_EmptyObject'
+        required:
+        - type
+        - id
+        - attributes
+      discriminator:
+        propertyName: type
+      title: CreateUploadPartResponseDataUnion
     type_users_uploads_UpdateUploadResponseDataUnion:
       oneOf:
       - type: object
@@ -436,24 +559,98 @@ components:
       discriminator:
         propertyName: type
       title: UpdateUploadResponseDataUnion
-    type_users_uploads_CreateUploadResponseObject:
+    type_users_uploads_CreateUploadRequestDataUnion:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - historicalTransactionStart
+            description: 'Discriminator value: historicalTransactionStart'
+          attributes:
+            $ref: '#/components/schemas/type_commons_EmptyObject'
+        required:
+        - type
+        - attributes
+      discriminator:
+        propertyName: type
+      title: CreateUploadRequestDataUnion
+    type_users_uploads_UpdateUploadResponseObject:
       type: object
       properties:
         data:
-          $ref: '#/components/schemas/type_users_uploads_CreateUploadResponseDataUnion'
+          $ref: '#/components/schemas/type_users_uploads_UpdateUploadResponseDataUnion'
       required:
       - data
-      title: CreateUploadResponseObject
+      title: UpdateUploadResponseObject
+    type_commons_ErrorObject:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Status code returned from the request
+        title:
+          type: string
+          description: Name of error
+        detail:
+          type: string
+          description: Description of the specific occurance of the error
+        source:
+          $ref: '#/components/schemas/type_commons_ErrorSource'
+          description: An object containing a reference to the primary source of the error
+        id:
+          type: string
+          description: The id of the resource which caused the error. Always returned for multi-status errors.
+      required:
+      - status
+      - title
+      - detail
+      title: ErrorObject
+    type_commons_OrganizationId:
+      type: string
+      description: Your issuer organization ID, provided by Kard
+      title: OrganizationId
+    type_transactions_VisaMidDetails:
+      type: object
+      properties:
+        vmid:
+          type: string
+          description: Visa Merchant ID (VMID) associated with the transaction
+        vsid:
+          type: string
+          description: Visa Store ID (VSID) associated with the transaction
+      required:
+      - vmid
+      - vsid
+      title: VisaMidDetails
     type_transactions_DirectionType:
       type: string
       enum:
       - DEBIT
       - CREDIT
       title: DirectionType
-    type_commons_EmptyObject:
+    type_users_uploads_CreateUploadRequestObject:
       type: object
-      properties: {}
-      title: EmptyObject
+      properties:
+        data:
+          $ref: '#/components/schemas/type_users_uploads_CreateUploadRequestDataUnion'
+      required:
+      - data
+      title: CreateUploadRequestObject
+    type_commons_ErrorSource:
+      type: object
+      properties:
+        pointer:
+          type: string
+          description: A JSON pointer to the value in the request document that caused the error
+        parameter:
+          type: string
+          description: A string indicating which URI query parameter caused the error
+        header:
+          type: string
+          description: A string indicating the name of a single request header which caused the error
+      title: ErrorSource
     type_transactions_Merchant:
       type: object
       properties:
@@ -490,75 +687,23 @@ components:
       required:
       - name
       title: Merchant
-    type_transactions_ProcessorMid:
-      oneOf:
-      - type: object
-        properties:
-          processor:
-            type: string
-            enum:
-            - VISA
-            description: 'Discriminator value: VISA'
-          mids:
-            $ref: '#/components/schemas/type_transactions_VisaMidDetails'
-            description: Merchant ID (MID) associated with the processor
-        required:
-        - processor
-        - mids
-      discriminator:
-        propertyName: processor
-      title: ProcessorMid
+    type_users_uploads_CreateUploadResponseObject:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_users_uploads_CreateUploadResponseDataUnion'
+      required:
+      - data
+      title: CreateUploadResponseObject
+    type_commons_EmptyObject:
+      type: object
+      properties: {}
+      title: EmptyObject
     type_transactions_TransactionPaymentType:
       type: string
       enum:
       - CARD
       title: TransactionPaymentType
-    type_commons_CardNetwork:
-      type: string
-      enum:
-      - VISA
-      - MASTERCARD
-      - AMERICANEXPRESS
-      - DISCOVER
-      description: Supported card networks
-      title: CardNetwork
-    type_commons_ErrorSource:
-      type: object
-      properties:
-        pointer:
-          type: string
-          description: A JSON pointer to the value in the request document that caused the error
-        parameter:
-          type: string
-          description: A string indicating which URI query parameter caused the error
-        header:
-          type: string
-          description: A string indicating the name of a single request header which caused the error
-      title: ErrorSource
-    type_users_uploads_CreateUploadPartMultiStatusResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_ErrorObject'
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_users_uploads_CreateUploadPartResponseDataUnion'
-      required:
-      - errors
-      title: CreateUploadPartMultiStatusResponse
-    type_users_uploads_CreateUploadPartResponseObject:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_users_uploads_CreateUploadPartResponseDataUnion'
-      required:
-      - data
-      title: CreateUploadPartResponseObject
     type_commons_ErrorResponse:
       type: object
       properties:
@@ -569,161 +714,16 @@ components:
       required:
       - errors
       title: ErrorResponse
-    type_users_uploads_CreateUploadPartRequestObject:
+    type_users_uploads_CreateUploadPartResponseObject:
       type: object
       properties:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/type_users_uploads_CreateUploadPartDataUnion'
+            $ref: '#/components/schemas/type_users_uploads_CreateUploadPartResponseDataUnion'
       required:
       - data
-      title: CreateUploadPartRequestObject
-    type_users_uploads_CreateUploadPartDataUnion:
-      oneOf:
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - historicalTransaction
-            description: 'Discriminator value: historicalTransaction'
-          id:
-            type: string
-            description: Unique identifier for the transaction event. This <b>must</b> be unique for each distinct event sent to the API.
-          attributes:
-            $ref: '#/components/schemas/type_transactions_TransactionsAttributes'
-        required:
-        - type
-        - id
-        - attributes
-      discriminator:
-        propertyName: type
-      title: CreateUploadPartDataUnion
-    type_users_uploads_CreateUploadRequestDataUnion:
-      oneOf:
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - historicalTransactionStart
-            description: 'Discriminator value: historicalTransactionStart'
-          attributes:
-            $ref: '#/components/schemas/type_commons_EmptyObject'
-        required:
-        - type
-        - attributes
-      discriminator:
-        propertyName: type
-      title: CreateUploadRequestDataUnion
-    type_users_uploads_UpdateUploadRequestObject:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_users_uploads_UpdateUploadRequestDataUnion'
-      required:
-      - data
-      title: UpdateUploadRequestObject
-    type_users_uploads_CreateUploadRequestObject:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_users_uploads_CreateUploadRequestDataUnion'
-      required:
-      - data
-      title: CreateUploadRequestObject
-    type_commons_OrganizationId:
-      type: string
-      description: Your issuer organization ID, provided by Kard
-      title: OrganizationId
-    type_transactions_TransactionStatus:
-      type: string
-      enum:
-      - APPROVED
-      - SETTLED
-      - REVERSED
-      - RETURNED
-      - DECLINED
-      title: TransactionStatus
-    type_commons_ErrorObject:
-      type: object
-      properties:
-        status:
-          type: string
-          description: Status code returned from the request
-        title:
-          type: string
-          description: Name of error
-        detail:
-          type: string
-          description: Description of the specific occurance of the error
-        source:
-          $ref: '#/components/schemas/type_commons_ErrorSource'
-          description: An object containing a reference to the primary source of the error
-        id:
-          type: string
-          description: The id of the resource which caused the error. Always returned for multi-status errors.
-      required:
-      - status
-      - title
-      - detail
-      title: ErrorObject
-    type_users_uploads_CreateUploadPartResponseDataUnion:
-      oneOf:
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - historicalTransaction
-            description: 'Discriminator value: historicalTransaction'
-          id:
-            type: string
-            description: Id of the upload to add parts
-          attributes:
-            $ref: '#/components/schemas/type_commons_EmptyObject'
-        required:
-        - type
-        - id
-        - attributes
-      discriminator:
-        propertyName: type
-      title: CreateUploadPartResponseDataUnion
-    type_transactions_VisaMidDetails:
-      type: object
-      properties:
-        vmid:
-          type: string
-          description: Visa Merchant ID (VMID) associated with the transaction
-        vsid:
-          type: string
-          description: Visa Store ID (VSID) associated with the transaction
-      required:
-      - vmid
-      - vsid
-      title: VisaMidDetails
-    type_users_uploads_UpdateUploadRequestDataUnion:
-      oneOf:
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - historicalTransactionComplete
-            description: 'Discriminator value: historicalTransactionComplete'
-          id:
-            type: string
-            description: Upload id the issuer can use in reference to the upload session
-          attributes:
-            $ref: '#/components/schemas/type_commons_EmptyObject'
-        required:
-        - type
-        - id
-        - attributes
-      discriminator:
-        propertyName: type
-      title: UpdateUploadRequestDataUnion
+      title: CreateUploadPartResponseObject
   securitySchemes:
     OAuthScheme:
       type: http

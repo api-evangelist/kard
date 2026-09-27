@@ -59,19 +59,6 @@ components:
       type: string
       description: Your issuer organization ID, provided by Kard
       title: OrganizationId
-    type_commons_ErrorSource:
-      type: object
-      properties:
-        pointer:
-          type: string
-          description: A JSON pointer to the value in the request document that caused the error
-        parameter:
-          type: string
-          description: A string indicating which URI query parameter caused the error
-        header:
-          type: string
-          description: A string indicating the name of a single request header which caused the error
-      title: ErrorSource
     type_users_auth_WebViewTokenResponse:
       type: object
       properties:
@@ -87,6 +74,23 @@ components:
       - token_type
       description: An OAuth token response.
       title: WebViewTokenResponse
+    type_commons_UserId:
+      type: string
+      description: The ID of the user as defined on the issuers system
+      title: UserId
+    type_commons_ErrorSource:
+      type: object
+      properties:
+        pointer:
+          type: string
+          description: A JSON pointer to the value in the request document that caused the error
+        parameter:
+          type: string
+          description: A string indicating which URI query parameter caused the error
+        header:
+          type: string
+          description: A string indicating the name of a single request header which caused the error
+      title: ErrorSource
     type_commons_ErrorResponse:
       type: object
       properties:
@@ -97,10 +101,6 @@ components:
       required:
       - errors
       title: ErrorResponse
-    type_commons_UserId:
-      type: string
-      description: The ID of the user as defined on the issuers system
-      title: UserId
     type_commons_ErrorObject:
       type: object
       properties:

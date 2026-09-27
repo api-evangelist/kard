@@ -894,104 +894,6 @@ paths:
                 type: string
 components:
   schemas:
-    type_rewards_OfferMerchant:
-      type: object
-      properties:
-        _id:
-          $ref: '#/components/schemas/type_commons_MongoId'
-          description: Merchant ID in Kard's system
-        name:
-          type: string
-          description: Name of merchant
-        description:
-          type: string
-          description: Description of merchant
-        type:
-          $ref: '#/components/schemas/type_commons_EnrolledRewardsType'
-          description: Type of merchant
-        websiteURL:
-          type: string
-          description: Website URL of merchant
-        category:
-          $ref: '#/components/schemas/type_commons_CategoryOption'
-          description: Category of merchant
-        acceptedCards:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_AcceptedCards'
-        imgUrl:
-          type: string
-          description: Merchant image asset URL
-        bannerImgUrl:
-          type: string
-          description: Merchant banner image asset URL
-      required:
-      - _id
-      - name
-      - description
-      - type
-      - websiteURL
-      - category
-      - acceptedCards
-      - imgUrl
-      description: Merchant associated with the offer
-      title: OfferMerchant
-    type_commons_GeoLocation:
-      type: object
-      properties:
-        longitude:
-          type: number
-          format: double
-          description: Longitude of location
-        latitude:
-          type: number
-          format: double
-          description: Latitude of location
-      required:
-      - longitude
-      - latitude
-      title: GeoLocation
-    type_rewards_LocationsMerchant:
-      type: object
-      properties:
-        _id:
-          $ref: '#/components/schemas/type_commons_MongoId'
-          description: Merchant ID in Kard's system
-        name:
-          type: string
-          description: Name of merchant
-        description:
-          type: string
-          description: Description of merchant
-        websiteURL:
-          type: string
-          description: Website URL associated with merchant
-        type:
-          $ref: '#/components/schemas/type_commons_EnrolledRewardsType'
-          description: Merchant type
-        category:
-          $ref: '#/components/schemas/type_commons_CategoryOption'
-          description: Category of merchant
-        acceptedCards:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_AcceptedCards'
-        imgUrl:
-          type: string
-          description: Merchant image asset URL
-        bannerImgUrl:
-          type: string
-          description: Merchant banner image asset URL
-      required:
-      - _id
-      - name
-      - description
-      - websiteURL
-      - type
-      - category
-      - acceptedCards
-      - imgUrl
-      title: LocationsMerchant
     type_commons_State:
       type: string
       enum:
@@ -1055,17 +957,418 @@ components:
       - WI
       - WY
       title: State
+    type_commons_OfferType:
+      type: string
+      enum:
+      - INSTORE
+      - ONLINE
+      description: Type of offer (whether it is run online or in-store)
+      title: OfferType
+    type_rewards_LocationWithFullOffer:
+      type: object
+      properties:
+        _id:
+          $ref: '#/components/schemas/type_commons_MongoId'
+          description: Location ID in Kard's system
+        merchantId:
+          type: string
+          description: Merchant ID in Kard's system associated to location
+        name:
+          type: string
+          description: Name of the location
+        locationType:
+          $ref: '#/components/schemas/type_rewards_LocationType'
+          description: Type of offer associated to location, will always be in INSTORE
+        address:
+          $ref: '#/components/schemas/type_commons_Address'
+          description: Address of location
+        geoLocation:
+          $ref: '#/components/schemas/type_commons_GeoLocation'
+          description: Geo-coordinates of location
+        phone:
+          type: string
+          description: Phone number for location
+        operationHours:
+          $ref: '#/components/schemas/type_commons_OperatingHours'
+          description: Hours of operation for location
+        googleId:
+          type: string
+          description: GoogleId of location
+        createdDate:
+          type: string
+          format: date-time
+          description: Created date of location in Kard's system (UTC)
+        lastModified:
+          type: string
+          format: date-time
+          description: Last modified date of location in Kard's system (UTC)
+        source:
+          $ref: '#/components/schemas/type_commons_Source'
+        category:
+          $ref: '#/components/schemas/type_commons_CategoryOption'
+          description: Category of merchant associated with location
+        offers:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_rewards_FullLocationsOffer'
+          description: Offers associated to the location
+        merchant:
+          $ref: '#/components/schemas/type_rewards_LocationsMerchantWithAttribution'
+          description: Merchant object associated with location
+      required:
+      - _id
+      - merchantId
+      - name
+      - locationType
+      - address
+      - geoLocation
+      - phone
+      - createdDate
+      - lastModified
+      - source
+      - category
+      - offers
+      - merchant
+      title: LocationWithFullOffer
+    type_rewards_LocationsOffer:
+      type: object
+      properties:
+        _id:
+          $ref: '#/components/schemas/type_commons_MongoId'
+          description: Offer Id in Kard's system
+        totalCommission:
+          type: number
+          format: double
+          description: Commission going to issuer and cardholder
+        commissionType:
+          $ref: '#/components/schemas/type_commons_CommissionType'
+        startDate:
+          type: string
+          format: date-time
+          description: Beginning date of offer (UTC)
+        expirationDate:
+          type: string
+          format: date-time
+          description: Expiration date of offer if applicable (UTC)
+        minTransactionAmount:
+          type: integer
+          description: Min Transaction Amount for Offer, if available
+        maxTransactionAmount:
+          type: integer
+          description: Max Transaction Amount for Offer, if available
+        minRewardAmount:
+          type: integer
+          description: Min Reward Amount for Offer, if available
+        maxRewardAmount:
+          type: integer
+          description: Max Reward Amount for Offer, if available
+        issuersCommission:
+          type: number
+          format: double
+          description: Commission going to the issuer
+        usersCommission:
+          type: number
+          format: double
+          description: Commission going to user
+      required:
+      - _id
+      - totalCommission
+      - commissionType
+      - startDate
+      - expirationDate
+      title: LocationsOffer
     type_commons_SortOptions:
       type: string
       enum:
       - '1'
       - '-1'
       title: SortOptions
+    type_commons_OperatingHours:
+      type: object
+      properties:
+        SUNDAY:
+          type: string
+        MONDAY:
+          type: string
+        TUESDAY:
+          type: string
+        WEDNESDAY:
+          type: string
+        THURSDAY:
+          type: string
+        FRIDAY:
+          type: string
+        SATURDAY:
+          type: string
+      title: OperatingHours
+    type_rewards_FullLocationsOffer:
+      type: object
+      properties:
+        _id:
+          $ref: '#/components/schemas/type_commons_MongoId'
+          description: Offer Id in Kard's system
+        totalCommission:
+          type: number
+          format: double
+          description: Commission going to issuer and cardholder
+        commissionType:
+          $ref: '#/components/schemas/type_commons_CommissionType'
+        startDate:
+          type: string
+          format: date-time
+          description: Beginning date of offer (UTC)
+        expirationDate:
+          type: string
+          format: date-time
+          description: Expiration date of offer if applicable (UTC)
+        minTransactionAmount:
+          type: integer
+          description: Min Transaction Amount for Offer, if available
+        maxTransactionAmount:
+          type: integer
+          description: Max Transaction Amount for Offer, if available
+        minRewardAmount:
+          type: integer
+          description: Min Reward Amount for Offer, if available
+        maxRewardAmount:
+          type: integer
+          description: Max Reward Amount for Offer, if available
+        issuersCommission:
+          type: number
+          format: double
+          description: Commission going to the issuer
+        usersCommission:
+          type: number
+          format: double
+          description: Commission going to user
+        terms:
+          type: string
+          description: Terms and conditions on offer
+        redeemableOnce:
+          type: boolean
+          description: Is the offer redeemable once
+        name:
+          type: string
+          description: Name of offer
+        offerType:
+          $ref: '#/components/schemas/type_commons_OfferType'
+        isTargeted:
+          type: boolean
+          description: True returns targeted offers, false returns targeted and non-targeted offers
+        createdDate:
+          type: string
+          format: date-time
+          description: Create date of offer (UTC)
+        lastModified:
+          type: string
+          format: date-time
+          description: Last modified date of offer (UTC)
+        isLocationSpecific:
+          type: boolean
+          description: Is offer location specific
+        imgUrl:
+          type: string
+          description: Image URL asset containing attribution tokens
+        bannerImgUrl:
+          type: string
+          description: Banner image URL asset containing attribution tokens
+        source:
+          $ref: '#/components/schemas/type_commons_Source'
+          description: Source of merchant associated to the offer
+        category:
+          $ref: '#/components/schemas/type_commons_CategoryOption'
+          description: Category of merchant associated with offer
+      required:
+      - _id
+      - totalCommission
+      - commissionType
+      - startDate
+      - expirationDate
+      - terms
+      - redeemableOnce
+      - name
+      - offerType
+      - isTargeted
+      - createdDate
+      - lastModified
+      - isLocationSpecific
+      - source
+      title: FullLocationsOffer
+    type_commons_Address:
+      type: object
+      properties:
+        street:
+          type: string
+        city:
+          type: string
+        state:
+          $ref: '#/components/schemas/type_commons_State'
+        zipCode:
+          type: string
+      required:
+      - street
+      - city
+      - state
+      - zipCode
+      title: Address
     type_rewards_LocationType:
       type: string
       enum:
       - INSTORE
       title: LocationType
+    type_rewards_LocationWithPartialOffer:
+      type: object
+      properties:
+        _id:
+          $ref: '#/components/schemas/type_commons_MongoId'
+          description: Location ID in Kard's system
+        merchantId:
+          type: string
+          description: Merchant ID in Kard's system associated to location
+        name:
+          type: string
+          description: Name of the location
+        locationType:
+          $ref: '#/components/schemas/type_rewards_LocationType'
+          description: Type of offer associated to location, will always be in INSTORE
+        address:
+          $ref: '#/components/schemas/type_commons_Address'
+          description: Address of location
+        geoLocation:
+          $ref: '#/components/schemas/type_commons_GeoLocation'
+          description: Geo-coordinates of location
+        phone:
+          type: string
+          description: Phone number for location
+        operationHours:
+          $ref: '#/components/schemas/type_commons_OperatingHours'
+          description: Hours of operation for location
+        googleId:
+          type: string
+          description: GoogleId of location
+        createdDate:
+          type: string
+          format: date-time
+          description: Created date of location in Kard's system (UTC)
+        lastModified:
+          type: string
+          format: date-time
+          description: Last modified date of location in Kard's system (UTC)
+        source:
+          $ref: '#/components/schemas/type_commons_Source'
+        category:
+          $ref: '#/components/schemas/type_commons_CategoryOption'
+          description: Category of merchant associated with location
+        offers:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_rewards_LocationsOffer'
+          description: Offers associated to the location
+        merchant:
+          $ref: '#/components/schemas/type_rewards_LocationsMerchant'
+          description: Merchant object associated with location
+      required:
+      - _id
+      - merchantId
+      - name
+      - locationType
+      - address
+      - geoLocation
+      - phone
+      - createdDate
+      - lastModified
+      - source
+      - category
+      - offers
+      - merchant
+      title: LocationWithPartialOffer
+    type_commons_GeoLocation:
+      type: object
+      properties:
+        longitude:
+          type: number
+          format: double
+          description: Longitude of location
+        latitude:
+          type: number
+          format: double
+          description: Latitude of location
+      required:
+      - longitude
+      - latitude
+      title: GeoLocation
+    type_commons_MongoId:
+      type: string
+      description: The unique identifier for a document in the database
+      title: MongoId
+    type_commons_CommissionType:
+      type: string
+      enum:
+      - FLAT
+      - PERCENT
+      description: Type of commission on offer (% or a flat $)
+      title: CommissionType
+    type_rewards_Location:
+      type: object
+      properties:
+        _id:
+          $ref: '#/components/schemas/type_commons_MongoId'
+          description: Location ID in Kard's system
+        merchantId:
+          type: string
+          description: Merchant ID in Kard's system associated to location
+        name:
+          type: string
+          description: Name of the location
+        locationType:
+          $ref: '#/components/schemas/type_rewards_LocationType'
+          description: Type of offer associated to location, will always be in INSTORE
+        address:
+          $ref: '#/components/schemas/type_commons_Address'
+          description: Address of location
+        geoLocation:
+          $ref: '#/components/schemas/type_commons_GeoLocation'
+          description: Geo-coordinates of location
+        phone:
+          type: string
+          description: Phone number for location
+        operationHours:
+          $ref: '#/components/schemas/type_commons_OperatingHours'
+          description: Hours of operation for location
+        googleId:
+          type: string
+          description: GoogleId of location
+        createdDate:
+          type: string
+          format: date-time
+          description: Created date of location in Kard's system (UTC)
+        lastModified:
+          type: string
+          format: date-time
+          description: Last modified date of location in Kard's system (UTC)
+        source:
+          $ref: '#/components/schemas/type_commons_Source'
+        category:
+          $ref: '#/components/schemas/type_commons_CategoryOption'
+          description: Category of merchant associated with location
+      required:
+      - _id
+      - merchantId
+      - name
+      - locationType
+      - address
+      - geoLocation
+      - phone
+      - createdDate
+      - lastModified
+      - source
+      - category
+      title: Location
+    type_rewards_GetMerchantByIdResponse:
+      oneOf:
+      - $ref: '#/components/schemas/type_rewards_Merchant'
+      - type: string
+      title: GetMerchantByIdResponse
     type_rewards_MerchantOffer:
       type: object
       properties:
@@ -1163,89 +1466,145 @@ components:
       - optInRequired
       - status
       title: MerchantOffer
-    type_commons_Address:
-      type: object
-      properties:
-        street:
-          type: string
-        city:
-          type: string
-        state:
-          $ref: '#/components/schemas/type_commons_State'
-        zipCode:
-          type: string
-      required:
-      - street
-      - city
-      - state
-      - zipCode
-      title: Address
-    type_rewards_LocationWithPartialOffer:
+    type_rewards_OfferMerchantWithAttribution:
       type: object
       properties:
         _id:
           $ref: '#/components/schemas/type_commons_MongoId'
-          description: Location ID in Kard's system
-        merchantId:
-          type: string
-          description: Merchant ID in Kard's system associated to location
+          description: Merchant ID in Kard's system
         name:
           type: string
-          description: Name of the location
-        locationType:
-          $ref: '#/components/schemas/type_rewards_LocationType'
-          description: Type of offer associated to location, will always be in INSTORE
-        address:
-          $ref: '#/components/schemas/type_commons_Address'
-          description: Address of location
-        geoLocation:
-          $ref: '#/components/schemas/type_commons_GeoLocation'
-          description: Geo-coordinates of location
-        phone:
+          description: Name of merchant
+        description:
           type: string
-          description: Phone number for location
-        operationHours:
-          $ref: '#/components/schemas/type_commons_OperatingHours'
-          description: Hours of operation for location
-        googleId:
+          description: Description of merchant
+        type:
+          $ref: '#/components/schemas/type_commons_EnrolledRewardsType'
+          description: Type of merchant
+        websiteURL:
           type: string
-          description: GoogleId of location
+          description: Website URL of merchant
+        category:
+          $ref: '#/components/schemas/type_commons_CategoryOption'
+          description: Category of merchant
+        acceptedCards:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_AcceptedCards'
+        imgUrl:
+          type: string
+          description: '[Deprecated — Please use imgUrl on the offer object which contain attribution tokens]'
+        bannerImgUrl:
+          type: string
+          description: '[Deprecated — Please use bannerImgUrl on the offer object which contain attribution tokens]'
+      required:
+      - _id
+      - name
+      - description
+      - type
+      - websiteURL
+      - category
+      - acceptedCards
+      - imgUrl
+      title: OfferMerchantWithAttribution
+    type_rewards_MerchantWithAttribution:
+      type: object
+      properties:
+        _id:
+          $ref: '#/components/schemas/type_commons_MongoId'
+          description: Merchant ID in Kard's system
+        name:
+          type: string
+          description: Merchant name
+        description:
+          type: string
+          description: Merchant description - usually a blurb outlining more details about the merchant
+        websiteURL:
+          type: string
+          description: Merchant's URL website
+        category:
+          $ref: '#/components/schemas/type_commons_CategoryOption'
+          description: Category of merchant
+        acceptedCards:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_AcceptedCards'
+        source:
+          $ref: '#/components/schemas/type_commons_Source'
+          description: Merchant source
         createdDate:
           type: string
           format: date-time
-          description: Created date of location in Kard's system (UTC)
+          description: Created date of merchant in Kard's system (UTC)
         lastModified:
           type: string
           format: date-time
-          description: Last modified date of location in Kard's system (UTC)
-        source:
-          $ref: '#/components/schemas/type_commons_Source'
-        category:
-          $ref: '#/components/schemas/type_commons_CategoryOption'
-          description: Category of merchant associated with location
+          description: Last modified date of merchant in Kard's system (UTC)
         offers:
           type: array
           items:
-            $ref: '#/components/schemas/type_rewards_LocationsOffer'
-          description: Offers associated to the location
-        merchant:
-          $ref: '#/components/schemas/type_rewards_LocationsMerchant'
-          description: Merchant object associated with location
+            $ref: '#/components/schemas/type_rewards_MerchantOfferWithAttribution'
+          description: Offers associated to the merchant
+        imgUrl:
+          type: string
+          description: <b>[Deprecated — Please use imgUrl on the offer object which contain attribution tokens]</b>. Merchant image asset URL
+        bannerImgUrl:
+          type: string
+          description: <b>[Deprecated — Please use bannerImgUrl on the offer object which contain attribution tokens]</b>. Merchant banner image asset URL
       required:
       - _id
-      - merchantId
       - name
-      - locationType
-      - address
-      - geoLocation
-      - phone
+      - description
+      - websiteURL
+      - category
+      - acceptedCards
+      - source
       - createdDate
       - lastModified
-      - source
-      - category
       - offers
-      - merchant
-      title: LocationWithPartialOffer
+      - imgUrl
+      title: MerchantWithAttribution
+    type_rewards_LocationsMerchant:
+      type: object
+      properties:
+        _id:
+          $ref: '#/components/schemas/type_commons_MongoId'
+          description: Merchant ID in Kard's system
+        name:
+          type: string
+          description: Name of merchant
+        description:
+          type: string
+          description: Description of merchant
+        websiteURL:
+          type: string
+          description: Website URL associated with merchant
+        type:
+          $ref: '#/components/schemas/type_commons_EnrolledRewardsType'
+          description: Merchant type
+        category:
+          $ref: '#/components/schemas/type_commons_CategoryOption'
+          description: Category of merchant
+        acceptedCards:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_AcceptedCards'
+        imgUrl:
+          type: string
+          description: Merchant image asset URL
+        bannerImgUrl:
+          type: string
+          description: Merchant banner image asset URL
+      required:
+      - _id
+      - name
+      - description
+      - websiteURL
+      - type
+      - category
+      - acceptedCards
+      - imgUrl
+      title: LocationsMerchant
     type_rewards_OfferWithAttribution:
       type: object
       properties:
@@ -1343,257 +1702,27 @@ components:
       - category
       - merchant
       title: OfferWithAttribution
-    type_commons_OfferType:
+    type_commons_Source:
       type: string
       enum:
-      - INSTORE
-      - ONLINE
-      description: Type of offer (whether it is run online or in-store)
-      title: OfferType
-    type_commons_MongoId:
-      type: string
-      description: The unique identifier for a document in the database
-      title: MongoId
-    type_rewards_LocationsOffer:
-      type: object
-      properties:
-        _id:
-          $ref: '#/components/schemas/type_commons_MongoId'
-          description: Offer Id in Kard's system
-        totalCommission:
-          type: number
-          format: double
-          description: Commission going to issuer and cardholder
-        commissionType:
-          $ref: '#/components/schemas/type_commons_CommissionType'
-        startDate:
-          type: string
-          format: date-time
-          description: Beginning date of offer (UTC)
-        expirationDate:
-          type: string
-          format: date-time
-          description: Expiration date of offer if applicable (UTC)
-        minTransactionAmount:
-          type: integer
-          description: Min Transaction Amount for Offer, if available
-        maxTransactionAmount:
-          type: integer
-          description: Max Transaction Amount for Offer, if available
-        minRewardAmount:
-          type: integer
-          description: Min Reward Amount for Offer, if available
-        maxRewardAmount:
-          type: integer
-          description: Max Reward Amount for Offer, if available
-        issuersCommission:
-          type: number
-          format: double
-          description: Commission going to the issuer
-        usersCommission:
-          type: number
-          format: double
-          description: Commission going to user
-      required:
-      - _id
-      - totalCommission
-      - commissionType
-      - startDate
-      - expirationDate
-      title: LocationsOffer
-    type_commons_RequestValidationErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            type: string
-      required:
-      - errors
-      title: RequestValidationErrorResponse
-    type_commons_InvalidRequestUnion:
-      oneOf:
-      - $ref: '#/components/schemas/type_commons_RequestValidationErrorResponse'
-      - type: string
-      title: InvalidRequestUnion
-    type_rewards_MerchantWithAttribution:
-      type: object
-      properties:
-        _id:
-          $ref: '#/components/schemas/type_commons_MongoId'
-          description: Merchant ID in Kard's system
-        name:
-          type: string
-          description: Merchant name
-        description:
-          type: string
-          description: Merchant description - usually a blurb outlining more details about the merchant
-        websiteURL:
-          type: string
-          description: Merchant's URL website
-        category:
-          $ref: '#/components/schemas/type_commons_CategoryOption'
-          description: Category of merchant
-        acceptedCards:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_AcceptedCards'
-        source:
-          $ref: '#/components/schemas/type_commons_Source'
-          description: Merchant source
-        createdDate:
-          type: string
-          format: date-time
-          description: Created date of merchant in Kard's system (UTC)
-        lastModified:
-          type: string
-          format: date-time
-          description: Last modified date of merchant in Kard's system (UTC)
-        offers:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_rewards_MerchantOfferWithAttribution'
-          description: Offers associated to the merchant
-        imgUrl:
-          type: string
-          description: <b>[Deprecated — Please use imgUrl on the offer object which contain attribution tokens]</b>. Merchant image asset URL
-        bannerImgUrl:
-          type: string
-          description: <b>[Deprecated — Please use bannerImgUrl on the offer object which contain attribution tokens]</b>. Merchant banner image asset URL
-      required:
-      - _id
-      - name
-      - description
-      - websiteURL
-      - category
-      - acceptedCards
-      - source
-      - createdDate
-      - lastModified
-      - offers
-      - imgUrl
-      title: MerchantWithAttribution
-    type_commons_UnauthorizedErrorBody:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-      title: UnauthorizedErrorBody
-    type_rewards_Offer:
-      type: object
-      properties:
-        _id:
-          $ref: '#/components/schemas/type_commons_MongoId'
-          description: Offer ID in Kard's system
-        terms:
-          type: string
-          description: Terms and conditions on offer
-        redeemableOnce:
-          type: boolean
-          description: True if offer is redeemable only once, false if not
-        name:
-          type: string
-          description: Name of offer
-        offerType:
-          $ref: '#/components/schemas/type_commons_OfferType'
-        commissionType:
-          $ref: '#/components/schemas/type_commons_CommissionType'
-        startDate:
-          type: string
-          format: date-time
-          description: Beginning date of offer (UTC)
-        expirationDate:
-          type: string
-          format: date-time
-          description: Expiration date of offer if applicable (UTC)
-        isTargeted:
-          type: boolean
-          description: True returns targeted offers, false returns targeted and non-targeted offers
-        createdDate:
-          type: string
-          format: date-time
-          description: Created date of offer in Kard's system (UTC)
-        lastModified:
-          type: string
-          format: date-time
-          description: Last modified date in Kard's system (UTC)
-        totalCommission:
-          type: number
-          format: double
-          description: Offer commission going to issuer and user summed up
-        isLocationSpecific:
-          type: boolean
-          description: True if offer is valid only for specific locations, false if valid for all locations. Note, this field is usually false
-        issuersCommission:
-          type: number
-          format: double
-          description: Commission going to the issuer
-        usersCommission:
-          type: number
-          format: double
-          description: Commission going to user
-        minTransactionAmount:
-          type: integer
-          description: Minimum Transaction Amount required to redeem offer, if available on offer
-        maxTransactionAmount:
-          type: integer
-          description: Maximum Transaction Amount allowed to redeem offer, if available on offer
-        minRewardAmount:
-          type: integer
-          description: Minimum Reward Amount, if available on offer
-        maxRewardAmount:
-          type: integer
-          description: Maximum Reward Amount, if available on offer
-        source:
-          $ref: '#/components/schemas/type_commons_Source'
-          description: Source of merchant associated with offer
-        category:
-          $ref: '#/components/schemas/type_commons_CategoryOption'
-          description: Category of merchant associated with offer
-        merchant:
-          $ref: '#/components/schemas/type_rewards_OfferMerchant'
-      required:
-      - _id
-      - terms
-      - redeemableOnce
-      - name
-      - offerType
-      - commissionType
-      - startDate
-      - expirationDate
-      - isTargeted
-      - createdDate
-      - lastModified
-      - totalCommission
-      - isLocationSpecific
-      - source
-      - category
-      - merchant
-      title: Offer
-    type_commons_CategoryOption:
+      - NATIONAL
+      - LOCAL
+      description: Source of the merchant associated to the location
+      title: Source
+    type_rewards_ComponentType:
       type: string
       enum:
-      - Arts & Entertainment
-      - Baby, Kids & Toys
-      - Books & Digital Media
-      - Clothing, Shoes & Accessories
-      - Computers, Electronics & Software
-      - Convenience
-      - Gas
-      - Department Stores
-      - Food & Beverage
-      - Health & Beauty
-      - Home & Garden
-      - Miscellaneous
-      - Occasions & Gifts
-      - Pets
-      - Sports & Outdoors
-      - Supplies & Services
-      - Travel
-      description: Category of merchant. Please use URL Encode for non single word categories. (Food & Beverage should be Food%20%26%20Beverage)
-      title: CategoryOption
+      - shortDescription
+      - longDescription
+      - baseReward
+      - boostedReward
+      - cta
+      - tags
+      - detailTags
+      - logoFlare
+      - progressBar
+      description: Available UI component types for offers
+      title: ComponentType
     type_rewards_Merchant:
       type: object
       properties:
@@ -1651,103 +1780,6 @@ components:
       - offers
       - imgUrl
       title: Merchant
-    type_commons_AcceptedCards:
-      type: string
-      enum:
-      - VISA
-      - MASTERCARD
-      - AMERICAN EXPRESS
-      - DISCOVER
-      description: Card types accepted by merchant
-      title: AcceptedCards
-    type_rewards_ComponentType:
-      type: string
-      enum:
-      - shortDescription
-      - longDescription
-      - baseReward
-      - boostedReward
-      - cta
-      - tags
-      - detailTags
-      - logoFlare
-      - progressBar
-      description: Available UI component types for offers
-      title: ComponentType
-    type_commons_OperatingHours:
-      type: object
-      properties:
-        SUNDAY:
-          type: string
-        MONDAY:
-          type: string
-        TUESDAY:
-          type: string
-        WEDNESDAY:
-          type: string
-        THURSDAY:
-          type: string
-        FRIDAY:
-          type: string
-        SATURDAY:
-          type: string
-      title: OperatingHours
-    type_rewards_Location:
-      type: object
-      properties:
-        _id:
-          $ref: '#/components/schemas/type_commons_MongoId'
-          description: Location ID in Kard's system
-        merchantId:
-          type: string
-          description: Merchant ID in Kard's system associated to location
-        name:
-          type: string
-          description: Name of the location
-        locationType:
-          $ref: '#/components/schemas/type_rewards_LocationType'
-          description: Type of offer associated to location, will always be in INSTORE
-        address:
-          $ref: '#/components/schemas/type_commons_Address'
-          description: Address of location
-        geoLocation:
-          $ref: '#/components/schemas/type_commons_GeoLocation'
-          description: Geo-coordinates of location
-        phone:
-          type: string
-          description: Phone number for location
-        operationHours:
-          $ref: '#/components/schemas/type_commons_OperatingHours'
-          description: Hours of operation for location
-        googleId:
-          type: string
-          description: GoogleId of location
-        createdDate:
-          type: string
-          format: date-time
-          description: Created date of location in Kard's system (UTC)
-        lastModified:
-          type: string
-          format: date-time
-          description: Last modified date of location in Kard's system (UTC)
-        source:
-          $ref: '#/components/schemas/type_commons_Source'
-        category:
-          $ref: '#/components/schemas/type_commons_CategoryOption'
-          description: Category of merchant associated with location
-      required:
-      - _id
-      - merchantId
-      - name
-      - locationType
-      - address
-      - geoLocation
-      - phone
-      - createdDate
-      - lastModified
-      - source
-      - category
-      title: Location
     type_rewards_MerchantOfferWithAttribution:
       type: object
       properties:
@@ -1847,73 +1879,98 @@ components:
       - merchantId
       - optInRequired
       title: MerchantOfferWithAttribution
-    type_rewards_LocationWithFullOffer:
+    type_rewards_Offer:
       type: object
       properties:
         _id:
           $ref: '#/components/schemas/type_commons_MongoId'
-          description: Location ID in Kard's system
-        merchantId:
+          description: Offer ID in Kard's system
+        terms:
           type: string
-          description: Merchant ID in Kard's system associated to location
+          description: Terms and conditions on offer
+        redeemableOnce:
+          type: boolean
+          description: True if offer is redeemable only once, false if not
         name:
           type: string
-          description: Name of the location
-        locationType:
-          $ref: '#/components/schemas/type_rewards_LocationType'
-          description: Type of offer associated to location, will always be in INSTORE
-        address:
-          $ref: '#/components/schemas/type_commons_Address'
-          description: Address of location
-        geoLocation:
-          $ref: '#/components/schemas/type_commons_GeoLocation'
-          description: Geo-coordinates of location
-        phone:
+          description: Name of offer
+        offerType:
+          $ref: '#/components/schemas/type_commons_OfferType'
+        commissionType:
+          $ref: '#/components/schemas/type_commons_CommissionType'
+        startDate:
           type: string
-          description: Phone number for location
-        operationHours:
-          $ref: '#/components/schemas/type_commons_OperatingHours'
-          description: Hours of operation for location
-        googleId:
+          format: date-time
+          description: Beginning date of offer (UTC)
+        expirationDate:
           type: string
-          description: GoogleId of location
+          format: date-time
+          description: Expiration date of offer if applicable (UTC)
+        isTargeted:
+          type: boolean
+          description: True returns targeted offers, false returns targeted and non-targeted offers
         createdDate:
           type: string
           format: date-time
-          description: Created date of location in Kard's system (UTC)
+          description: Created date of offer in Kard's system (UTC)
         lastModified:
           type: string
           format: date-time
-          description: Last modified date of location in Kard's system (UTC)
+          description: Last modified date in Kard's system (UTC)
+        totalCommission:
+          type: number
+          format: double
+          description: Offer commission going to issuer and user summed up
+        isLocationSpecific:
+          type: boolean
+          description: True if offer is valid only for specific locations, false if valid for all locations. Note, this field is usually false
+        issuersCommission:
+          type: number
+          format: double
+          description: Commission going to the issuer
+        usersCommission:
+          type: number
+          format: double
+          description: Commission going to user
+        minTransactionAmount:
+          type: integer
+          description: Minimum Transaction Amount required to redeem offer, if available on offer
+        maxTransactionAmount:
+          type: integer
+          description: Maximum Transaction Amount allowed to redeem offer, if available on offer
+        minRewardAmount:
+          type: integer
+          description: Minimum Reward Amount, if available on offer
+        maxRewardAmount:
+          type: integer
+          description: Maximum Reward Amount, if available on offer
         source:
           $ref: '#/components/schemas/type_commons_Source'
+          description: Source of merchant associated with offer
         category:
           $ref: '#/components/schemas/type_commons_CategoryOption'
-          description: Category of merchant associated with location
-        offers:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_rewards_FullLocationsOffer'
-          description: Offers associated to the location
+          description: Category of merchant associated with offer
         merchant:
-          $ref: '#/components/schemas/type_rewards_LocationsMerchantWithAttribution'
-          description: Merchant object associated with location
+          $ref: '#/components/schemas/type_rewards_OfferMerchant'
       required:
       - _id
-      - merchantId
+      - terms
+      - redeemableOnce
       - name
-      - locationType
-      - address
-      - geoLocation
-      - phone
+      - offerType
+      - commissionType
+      - startDate
+      - expirationDate
+      - isTargeted
       - createdDate
       - lastModified
+      - totalCommission
+      - isLocationSpecific
       - source
       - category
-      - offers
       - merchant
-      title: LocationWithFullOffer
-    type_rewards_OfferMerchantWithAttribution:
+      title: Offer
+    type_rewards_OfferMerchant:
       type: object
       properties:
         _id:
@@ -1940,10 +1997,10 @@ components:
             $ref: '#/components/schemas/type_commons_AcceptedCards'
         imgUrl:
           type: string
-          description: '[Deprecated — Please use imgUrl on the offer object which contain attribution tokens]'
+          description: Merchant image asset URL
         bannerImgUrl:
           type: string
-          description: '[Deprecated — Please use bannerImgUrl on the offer object which contain attribution tokens]'
+          description: Merchant banner image asset URL
       required:
       - _id
       - name
@@ -1953,119 +2010,8 @@ components:
       - category
       - acceptedCards
       - imgUrl
-      title: OfferMerchantWithAttribution
-    type_rewards_GetMerchantByIdResponse:
-      oneOf:
-      - $ref: '#/components/schemas/type_rewards_Merchant'
-      - type: string
-      title: GetMerchantByIdResponse
-    type_commons_Source:
-      type: string
-      enum:
-      - NATIONAL
-      - LOCAL
-      description: Source of the merchant associated to the location
-      title: Source
-    type_commons_CommissionType:
-      type: string
-      enum:
-      - FLAT
-      - PERCENT
-      description: Type of commission on offer (% or a flat $)
-      title: CommissionType
-    type_rewards_FullLocationsOffer:
-      type: object
-      properties:
-        _id:
-          $ref: '#/components/schemas/type_commons_MongoId'
-          description: Offer Id in Kard's system
-        totalCommission:
-          type: number
-          format: double
-          description: Commission going to issuer and cardholder
-        commissionType:
-          $ref: '#/components/schemas/type_commons_CommissionType'
-        startDate:
-          type: string
-          format: date-time
-          description: Beginning date of offer (UTC)
-        expirationDate:
-          type: string
-          format: date-time
-          description: Expiration date of offer if applicable (UTC)
-        minTransactionAmount:
-          type: integer
-          description: Min Transaction Amount for Offer, if available
-        maxTransactionAmount:
-          type: integer
-          description: Max Transaction Amount for Offer, if available
-        minRewardAmount:
-          type: integer
-          description: Min Reward Amount for Offer, if available
-        maxRewardAmount:
-          type: integer
-          description: Max Reward Amount for Offer, if available
-        issuersCommission:
-          type: number
-          format: double
-          description: Commission going to the issuer
-        usersCommission:
-          type: number
-          format: double
-          description: Commission going to user
-        terms:
-          type: string
-          description: Terms and conditions on offer
-        redeemableOnce:
-          type: boolean
-          description: Is the offer redeemable once
-        name:
-          type: string
-          description: Name of offer
-        offerType:
-          $ref: '#/components/schemas/type_commons_OfferType'
-        isTargeted:
-          type: boolean
-          description: True returns targeted offers, false returns targeted and non-targeted offers
-        createdDate:
-          type: string
-          format: date-time
-          description: Create date of offer (UTC)
-        lastModified:
-          type: string
-          format: date-time
-          description: Last modified date of offer (UTC)
-        isLocationSpecific:
-          type: boolean
-          description: Is offer location specific
-        imgUrl:
-          type: string
-          description: Image URL asset containing attribution tokens
-        bannerImgUrl:
-          type: string
-          description: Banner image URL asset containing attribution tokens
-        source:
-          $ref: '#/components/schemas/type_commons_Source'
-          description: Source of merchant associated to the offer
-        category:
-          $ref: '#/components/schemas/type_commons_CategoryOption'
-          description: Category of merchant associated with offer
-      required:
-      - _id
-      - totalCommission
-      - commissionType
-      - startDate
-      - expirationDate
-      - terms
-      - redeemableOnce
-      - name
-      - offerType
-      - isTargeted
-      - createdDate
-      - lastModified
-      - isLocationSpecific
-      - source
-      title: FullLocationsOffer
+      description: Merchant associated with the offer
+      title: OfferMerchant
     type_rewards_LocationsMerchantWithAttribution:
       type: object
       properties:
@@ -2107,6 +2053,14 @@ components:
       - acceptedCards
       - imgUrl
       title: LocationsMerchantWithAttribution
+    type_commons_UnauthorizedErrorBody:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      title: UnauthorizedErrorBody
     type_commons_EnrolledRewardsType:
       type: string
       enum:
@@ -2114,6 +2068,52 @@ components:
       - AFFILIATE
       description: Enrolled Rewards
       title: EnrolledRewardsType
+    type_commons_RequestValidationErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: string
+      required:
+      - errors
+      title: RequestValidationErrorResponse
+    type_commons_AcceptedCards:
+      type: string
+      enum:
+      - VISA
+      - MASTERCARD
+      - AMERICAN EXPRESS
+      - DISCOVER
+      description: Card types accepted by merchant
+      title: AcceptedCards
+    type_commons_CategoryOption:
+      type: string
+      enum:
+      - Arts & Entertainment
+      - Baby, Kids & Toys
+      - Books & Digital Media
+      - Clothing, Shoes & Accessories
+      - Computers, Electronics & Software
+      - Convenience
+      - Gas
+      - Department Stores
+      - Food & Beverage
+      - Health & Beauty
+      - Home & Garden
+      - Miscellaneous
+      - Occasions & Gifts
+      - Pets
+      - Sports & Outdoors
+      - Supplies & Services
+      - Travel
+      description: Category of merchant. Please use URL Encode for non single word categories. (Food & Beverage should be Food%20%26%20Beverage)
+      title: CategoryOption
+    type_commons_InvalidRequestUnion:
+      oneOf:
+      - $ref: '#/components/schemas/type_commons_RequestValidationErrorResponse'
+      - type: string
+      title: InvalidRequestUnion
   securitySchemes:
     bearer:
       type: http
