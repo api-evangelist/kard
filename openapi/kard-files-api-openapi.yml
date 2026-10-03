@@ -193,130 +193,6 @@ paths:
       description: Sandbox
 components:
   schemas:
-    type_files_GetFilesMetadataResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_files_FileMetadataWithURL'
-          description: List of file metadata objects with their pre-signed URLs.
-        links:
-          $ref: '#/components/schemas/type_commons_Links'
-          description: Navigation links for paginated results.
-        meta:
-          $ref: '#/components/schemas/type_files_PaginationMeta'
-          description: Metadata about the pagination status.
-      required:
-      - data
-      - links
-      - meta
-      title: GetFilesMetadataResponse
-    type_commons_OrganizationId:
-      type: string
-      description: Your issuer organization ID, provided by Kard
-      title: OrganizationId
-    type_files_PaginationMeta:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-          description: Number of items per page.
-        hasNextPage:
-          type: boolean
-          description: Indicates if there are more pages available after the current one.
-      required:
-      - pageSize
-      - hasNextPage
-      title: PaginationMeta
-    type_commons_Links:
-      type: object
-      properties:
-        self:
-          type: string
-        prev:
-          type: string
-        next:
-          type: string
-      required:
-      - self
-      description: Related links to the API call
-      title: Links
-    type_files_FileMetadataAttribute:
-      type: object
-      properties:
-        fileName:
-          type: string
-          description: The name of the file.
-        sentAt:
-          type: string
-          description: ISO 8601 timestamp (ISO8601) when the file was originally sent/created.
-        lastModified:
-          type: string
-          description: ISO 8601 timestamp (ISO8601) when the file was last modified.
-        downloadUrl:
-          type: string
-          description: Temporary URL that provides direct access to download the file for 30 minutes.
-      required:
-      - fileName
-      - sentAt
-      - lastModified
-      - downloadUrl
-      title: FileMetadataAttribute
-    type_commons_ErrorSource:
-      type: object
-      properties:
-        pointer:
-          type: string
-          description: A JSON pointer to the value in the request document that caused the error
-        parameter:
-          type: string
-          description: A string indicating which URI query parameter caused the error
-        header:
-          type: string
-          description: A string indicating the name of a single request header which caused the error
-      title: ErrorSource
-    type_files_FilesMetadataSortOptions:
-      type: string
-      enum:
-      - sentDate
-      - -sentDate
-      title: FilesMetadataSortOptions
-    type_files_FileMetadataWithURL:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/type_files_FileType'
-          description: The type of the generated file.
-        attributes:
-          $ref: '#/components/schemas/type_files_FileMetadataAttribute'
-          description: Attributes of the filetype
-        id:
-          type: string
-          description: The File ID in Kard’s system
-      required:
-      - type
-      - attributes
-      - id
-      title: FileMetadataWithURL
-    type_files_FileType:
-      type: string
-      enum:
-      - earnedRewardApprovedDailyReconciliationFile
-      - earnedRewardSettledDailyReconciliationFile
-      - validatedTransactionDailyReconciliationFile
-      - monthlyReconciliationFile
-      title: FileType
-    type_commons_ErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_ErrorObject'
-      required:
-      - errors
-      title: ErrorResponse
     type_commons_ErrorObject:
       type: object
       properties:
@@ -340,25 +216,135 @@ components:
       - title
       - detail
       title: ErrorObject
-    type_files_Files:
+    type_files_FilesMetadataSortOptions:
+      type: string
+      enum:
+      - sentDate
+      - -sentDate
+      title: FilesMetadataSortOptions
+    type_files_GetFilesMetadataResponse:
       type: object
       properties:
         data:
           type: array
           items:
-            $ref: '#/components/schemas/type_files_File'
-          description: Data and attributes related to files
-        meta:
-          $ref: '#/components/schemas/type_files_FilesMeta'
-          description: Meta information about the API call
+            $ref: '#/components/schemas/type_files_FileMetadataWithURL'
+          description: List of file metadata objects with their pre-signed URLs.
         links:
-          $ref: '#/components/schemas/type_files_PaginationLinks'
-          description: Related pagination links to the API call
+          $ref: '#/components/schemas/type_commons_Links'
+          description: Navigation links for paginated results.
+        meta:
+          $ref: '#/components/schemas/type_files_PaginationMeta'
+          description: Metadata about the pagination status.
       required:
       - data
-      - meta
       - links
-      title: Files
+      - meta
+      title: GetFilesMetadataResponse
+    type_files_FileType:
+      type: string
+      enum:
+      - earnedRewardApprovedDailyReconciliationFile
+      - earnedRewardSettledDailyReconciliationFile
+      - validatedTransactionDailyReconciliationFile
+      - monthlyReconciliationFile
+      title: FileType
+    type_files_FileMetadataWithURL:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/type_files_FileType'
+          description: The type of the generated file.
+        attributes:
+          $ref: '#/components/schemas/type_files_FileMetadataAttribute'
+          description: Attributes of the filetype
+        id:
+          type: string
+          description: The File ID in Kard’s system
+      required:
+      - type
+      - attributes
+      - id
+      title: FileMetadataWithURL
+    type_files_PaginationMeta:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          description: Number of items per page.
+        hasNextPage:
+          type: boolean
+          description: Indicates if there are more pages available after the current one.
+      required:
+      - pageSize
+      - hasNextPage
+      title: PaginationMeta
+    type_commons_ErrorSource:
+      type: object
+      properties:
+        pointer:
+          type: string
+          description: A JSON pointer to the value in the request document that caused the error
+        parameter:
+          type: string
+          description: A string indicating which URI query parameter caused the error
+        header:
+          type: string
+          description: A string indicating the name of a single request header which caused the error
+      title: ErrorSource
+    type_commons_ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_ErrorObject'
+      required:
+      - errors
+      title: ErrorResponse
+    type_files_FileMetadataAttribute:
+      type: object
+      properties:
+        fileName:
+          type: string
+          description: The name of the file.
+        sentAt:
+          type: string
+          description: ISO 8601 timestamp (ISO8601) when the file was originally sent/created.
+        lastModified:
+          type: string
+          description: ISO 8601 timestamp (ISO8601) when the file was last modified.
+        downloadUrl:
+          type: string
+          description: Temporary URL that provides direct access to download the file for 30 minutes.
+      required:
+      - fileName
+      - sentAt
+      - lastModified
+      - downloadUrl
+      title: FileMetadataAttribute
+    type_commons_Links:
+      type: object
+      properties:
+        self:
+          type: string
+        prev:
+          type: string
+        next:
+          type: string
+      required:
+      - self
+      description: Related links to the API call
+      title: Links
+    type_commons_OrganizationId:
+      type: string
+      description: Your issuer organization ID, provided by Kard
+      title: OrganizationId
+    type_commons_InvalidRequestUnion:
+      oneOf:
+      - $ref: '#/components/schemas/type_commons_RequestValidationErrorResponse'
+      - type: string
+      title: InvalidRequestUnion
     type_files_FileAttributes:
       type: object
       properties:
@@ -389,23 +375,6 @@ components:
       required:
       - message
       title: UnauthorizedErrorBody
-    type_files_PaginationLinks:
-      type: object
-      properties:
-        self:
-          type: string
-          description: The self link. Will point to the current URL.
-        next:
-          type: string
-          description: The URL to get the next page of results.
-        first:
-          type: string
-          description: The URL to get the first page of results.
-      required:
-      - self
-      - first
-      description: Related pagination links to the API call.
-      title: PaginationLinks
     type_files_FilesMeta:
       type: object
       properties:
@@ -415,6 +384,32 @@ components:
       required:
       - pageSize
       title: FilesMeta
+    type_files_Files:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_files_File'
+          description: Data and attributes related to files
+        meta:
+          $ref: '#/components/schemas/type_files_FilesMeta'
+          description: Meta information about the API call
+        links:
+          $ref: '#/components/schemas/type_files_PaginationLinks'
+          description: Related pagination links to the API call
+      required:
+      - data
+      - meta
+      - links
+      title: Files
+    type_files_FileType_2:
+      type: string
+      enum:
+      - usersEligibilityFile
+      - dailyReconciliationFile
+      - monthlyReconciliationFile
+      title: FileType
     type_commons_RequestValidationErrorResponse:
       type: object
       properties:
@@ -479,18 +474,23 @@ components:
         propertyName: type
       description: Type of document returned. Will always be type file
       title: File
-    type_commons_InvalidRequestUnion:
-      oneOf:
-      - $ref: '#/components/schemas/type_commons_RequestValidationErrorResponse'
-      - type: string
-      title: InvalidRequestUnion
-    type_files_FileType_2:
-      type: string
-      enum:
-      - usersEligibilityFile
-      - dailyReconciliationFile
-      - monthlyReconciliationFile
-      title: FileType
+    type_files_PaginationLinks:
+      type: object
+      properties:
+        self:
+          type: string
+          description: The self link. Will point to the current URL.
+        next:
+          type: string
+          description: The URL to get the next page of results.
+        first:
+          type: string
+          description: The URL to get the first page of results.
+      required:
+      - self
+      - first
+      description: Related pagination links to the API call.
+      title: PaginationLinks
   securitySchemes:
     OAuthScheme:
       type: http

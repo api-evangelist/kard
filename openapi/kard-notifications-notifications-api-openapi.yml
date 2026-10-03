@@ -180,23 +180,109 @@ paths:
                 $ref: '#/components/schemas/type_commons_ErrorResponse'
 components:
   schemas:
+    type_notifications_notifications_NotificationUnion:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - notification
+            description: 'Discriminator value: notification'
+          id:
+            type: string
+            description: The event ID of the notification; the value the replay endpoint consumes.
+          attributes:
+            $ref: '#/components/schemas/type_notifications_notifications_NotificationAttributes'
+        required:
+        - type
+        - id
+        - attributes
+      discriminator:
+        propertyName: type
+      title: NotificationUnion
+    type_commons_ErrorObject:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Status code returned from the request
+        title:
+          type: string
+          description: Name of error
+        detail:
+          type: string
+          description: Description of the specific occurance of the error
+        source:
+          $ref: '#/components/schemas/type_commons_ErrorSource'
+          description: An object containing a reference to the primary source of the error
+        id:
+          type: string
+          description: The id of the resource which caused the error. Always returned for multi-status errors.
+      required:
+      - status
+      - title
+      - detail
+      title: ErrorObject
+    type_notifications_notifications_NotificationsListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_notifications_notifications_NotificationUnion'
+        meta:
+          $ref: '#/components/schemas/type_notifications_notifications_PaginationMetadata'
+          description: Metadata about the pagination status.
+        links:
+          $ref: '#/components/schemas/type_commons_Links'
+          description: Links to the current, next, and previous pages.
+      required:
+      - data
+      - meta
+      title: NotificationsListResponse
     type_commons_OrganizationId:
       type: string
       description: Your issuer organization ID, provided by Kard
       title: OrganizationId
-    type_commons_Links:
+    type_notifications_notifications_ReplayNotificationResponse:
       type: object
       properties:
-        self:
-          type: string
-        prev:
-          type: string
-        next:
-          type: string
+        data:
+          $ref: '#/components/schemas/type_notifications_notifications_ReplayAcceptedNotification'
       required:
-      - self
-      description: Related links to the API call
-      title: Links
+      - data
+      title: ReplayNotificationResponse
+    type_notifications_notifications_PaginationMetadata:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          description: Number of items per page.
+        hasNextPage:
+          type: boolean
+          description: Indicates if there are more pages available after the current one.
+        total:
+          type: integer
+          description: Total number of records matching the query (for offset-based pagination).
+        page:
+          type: integer
+          description: Current page number (for offset-based pagination).
+      required:
+      - pageSize
+      - hasNextPage
+      description: Response metadata.
+      title: PaginationMetadata
+    type_notifications_notifications_ReplayAcceptedNotification:
+      type: object
+      properties:
+        eventId:
+          type: string
+          format: uuid
+          description: The event ID accepted for replay and queued for delivery.
+      required:
+      - eventId
+      title: ReplayAcceptedNotification
     type_commons_ErrorSource:
       type: object
       properties:
@@ -210,6 +296,29 @@ components:
           type: string
           description: A string indicating the name of a single request header which caused the error
       title: ErrorSource
+    type_commons_ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_ErrorObject'
+      required:
+      - errors
+      title: ErrorResponse
+    type_commons_Links:
+      type: object
+      properties:
+        self:
+          type: string
+        prev:
+          type: string
+        next:
+          type: string
+      required:
+      - self
+      description: Related links to the API call
+      title: Links
     type_notifications_notifications_NotificationAttributes:
       type: object
       properties:
@@ -247,61 +356,6 @@ components:
       - status
       - attempts
       title: NotificationAttributes
-    type_notifications_notifications_ReplayNotificationResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_notifications_notifications_ReplayAcceptedNotification'
-      required:
-      - data
-      title: ReplayNotificationResponse
-    type_notifications_notifications_ReplayAcceptedNotification:
-      type: object
-      properties:
-        eventId:
-          type: string
-          format: uuid
-          description: The event ID accepted for replay and queued for delivery.
-      required:
-      - eventId
-      title: ReplayAcceptedNotification
-    type_notifications_notifications_NotificationsListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_notifications_notifications_NotificationUnion'
-        meta:
-          $ref: '#/components/schemas/type_notifications_notifications_PaginationMetadata'
-          description: Metadata about the pagination status.
-        links:
-          $ref: '#/components/schemas/type_commons_Links'
-          description: Links to the current, next, and previous pages.
-      required:
-      - data
-      - meta
-      title: NotificationsListResponse
-    type_notifications_notifications_PaginationMetadata:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-          description: Number of items per page.
-        hasNextPage:
-          type: boolean
-          description: Indicates if there are more pages available after the current one.
-        total:
-          type: integer
-          description: Total number of records matching the query (for offset-based pagination).
-        page:
-          type: integer
-          description: Current page number (for offset-based pagination).
-      required:
-      - pageSize
-      - hasNextPage
-      description: Response metadata.
-      title: PaginationMetadata
     type_notifications_notifications_DeliveryStatus:
       type: string
       enum:
@@ -310,27 +364,6 @@ components:
       - delivery_failed
       description: The delivery status of a notification.
       title: DeliveryStatus
-    type_notifications_notifications_NotificationUnion:
-      oneOf:
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - notification
-            description: 'Discriminator value: notification'
-          id:
-            type: string
-            description: The event ID of the notification; the value the replay endpoint consumes.
-          attributes:
-            $ref: '#/components/schemas/type_notifications_notifications_NotificationAttributes'
-        required:
-        - type
-        - id
-        - attributes
-      discriminator:
-        propertyName: type
-      title: NotificationUnion
     type_commons_NotificationType:
       type: string
       enum:
@@ -345,39 +378,6 @@ components:
       - pushNotificationPlacementFile
       - emailNotificationPlacementFile
       title: NotificationType
-    type_commons_ErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_ErrorObject'
-      required:
-      - errors
-      title: ErrorResponse
-    type_commons_ErrorObject:
-      type: object
-      properties:
-        status:
-          type: string
-          description: Status code returned from the request
-        title:
-          type: string
-          description: Name of error
-        detail:
-          type: string
-          description: Description of the specific occurance of the error
-        source:
-          $ref: '#/components/schemas/type_commons_ErrorSource'
-          description: An object containing a reference to the primary source of the error
-        id:
-          type: string
-          description: The id of the resource which caused the error. Always returned for multi-status errors.
-      required:
-      - status
-      - title
-      - detail
-      title: ErrorObject
   securitySchemes:
     OAuthScheme:
       type: http
