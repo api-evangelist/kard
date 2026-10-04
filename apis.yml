@@ -40,6 +40,10 @@ x-tier-reason: real-openapi-and-artifacts
 specificationVersion: '0.23'
 created: '2026-07-17'
 modified: '2026-07-19'
+x-docs-platform: fern
+x-docs-platform-confidence: medium
+x-docs-platform-checked: 2026-10-03
+x-docs-hosting: vercel
 tags:
 - Company
 - Rewards
@@ -546,6 +550,9 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: CapabilityMap
+  url: capabilities/kard-capability-edges.yml
+  name: Kard Business Capability Map
 - type: Overlay
   url: overlays/kard-api-reference-overlay.yaml
 - type: Website
