@@ -57,45 +57,6 @@ paths:
                 $ref: '#/components/schemas/type_commons_ErrorResponse'
 components:
   schemas:
-    type_commons_ErrorObject:
-      type: object
-      properties:
-        status:
-          type: string
-          description: Status code returned from the request
-        title:
-          type: string
-          description: Name of error
-        detail:
-          type: string
-          description: Description of the specific occurance of the error
-        source:
-          $ref: '#/components/schemas/type_commons_ErrorSource'
-          description: An object containing a reference to the primary source of the error
-        id:
-          type: string
-          description: The id of the resource which caused the error. Always returned for multi-status errors.
-      required:
-      - status
-      - title
-      - detail
-      title: ErrorObject
-    type_commons_CardNetwork:
-      type: string
-      enum:
-      - VISA
-      - MASTERCARD
-      - AMERICANEXPRESS
-      - DISCOVER
-      description: Supported card networks
-      title: CardNetwork
-    type_internal-organizations_EnrolledReward:
-      type: string
-      enum:
-      - CARDLINKED
-      - AFFILIATE
-      description: Rewards programs an organization is enrolled in
-      title: EnrolledReward
     type_organizations_ExternalOrganizationResponse:
       type: object
       properties:
@@ -127,6 +88,22 @@ components:
           type: string
           description: A string indicating the name of a single request header which caused the error
       title: ErrorSource
+    type_commons_CardNetwork:
+      type: string
+      enum:
+      - VISA
+      - MASTERCARD
+      - AMERICANEXPRESS
+      - DISCOVER
+      description: Supported card networks
+      title: CardNetwork
+    type_internal-organizations_EnrolledReward:
+      type: string
+      enum:
+      - CARDLINKED
+      - AFFILIATE
+      description: Rewards programs an organization is enrolled in
+      title: EnrolledReward
     type_commons_ErrorResponse:
       type: object
       properties:
@@ -180,6 +157,29 @@ components:
       - cardlinkedUserCommissionSplit
       description: Limited set of organization attributes exposed to external consumers
       title: ExternalOrganizationAttributes
+    type_commons_ErrorObject:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Status code returned from the request
+        title:
+          type: string
+          description: Name of error
+        detail:
+          type: string
+          description: Description of the specific occurance of the error
+        source:
+          $ref: '#/components/schemas/type_commons_ErrorSource'
+          description: An object containing a reference to the primary source of the error
+        id:
+          type: string
+          description: The id of the resource which caused the error. Always returned for multi-status errors.
+      required:
+      - status
+      - title
+      - detail
+      title: ErrorObject
   securitySchemes:
     OAuthScheme:
       type: http

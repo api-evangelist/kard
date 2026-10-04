@@ -184,6 +184,23 @@ paths:
               $ref: '#/components/schemas/type_notifications_subscriptions_UpdateSubscriptionRequestBody'
 components:
   schemas:
+    type_notifications_subscriptions_UpdateSubscriptionRequestUnion:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - subscription
+            description: 'Discriminator value: subscription'
+          attributes:
+            $ref: '#/components/schemas/type_notifications_subscriptions_UpdateSubscriptionRequestAttributes'
+        required:
+        - type
+        - attributes
+      discriminator:
+        propertyName: type
+      title: UpdateSubscriptionRequestUnion
     type_notifications_subscriptions_SubscriptionsResponseObject:
       type: object
       properties:
@@ -194,6 +211,176 @@ components:
       required:
       - data
       title: SubscriptionsResponseObject
+    type_notifications_subscriptions_SubscriptionUnion:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - subscription
+            description: 'Discriminator value: subscription'
+          id:
+            type: string
+            description: The ID of the subscription
+          attributes:
+            $ref: '#/components/schemas/type_notifications_subscriptions_SubscriptionAttributes'
+        required:
+        - type
+        - id
+        - attributes
+      discriminator:
+        propertyName: type
+      title: SubscriptionUnion
+    type_notifications_subscriptions_CreateSubscriptionUnion:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - subscription
+            description: 'Discriminator value: subscription'
+          attributes:
+            $ref: '#/components/schemas/type_notifications_subscriptions_SubscriptionRequestAttributes'
+          id:
+            type: string
+            description: The ID of the subscription
+        required:
+        - type
+        - attributes
+        - id
+      discriminator:
+        propertyName: type
+      title: CreateSubscriptionUnion
+    type_commons_ErrorSource:
+      type: object
+      properties:
+        pointer:
+          type: string
+          description: A JSON pointer to the value in the request document that caused the error
+        parameter:
+          type: string
+          description: A string indicating which URI query parameter caused the error
+        header:
+          type: string
+          description: A string indicating the name of a single request header which caused the error
+      title: ErrorSource
+    type_notifications_subscriptions_SubscriptionRequestUnion:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - subscription
+            description: 'Discriminator value: subscription'
+          attributes:
+            $ref: '#/components/schemas/type_notifications_subscriptions_SubscriptionRequestAttributes'
+        required:
+        - type
+        - attributes
+      discriminator:
+        propertyName: type
+      title: SubscriptionRequestUnion
+    type_notifications_subscriptions_SubscriptionRequestBody:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_notifications_subscriptions_SubscriptionRequestUnion'
+      required:
+      - data
+      title: SubscriptionRequestBody
+    type_notifications_subscriptions_SubscriptionRequestAttributes:
+      type: object
+      properties:
+        eventName:
+          $ref: '#/components/schemas/type_commons_NotificationType'
+          description: The name of the event for the subscription
+        webhookUrl:
+          type: string
+          description: The URL where notifications will be delivered
+        enabled:
+          type: boolean
+          description: Indicates whether the subscription is active
+      required:
+      - eventName
+      - webhookUrl
+      - enabled
+      title: SubscriptionRequestAttributes
+    type_commons_NotificationType:
+      type: string
+      enum:
+      - earnedRewardApproved
+      - earnedRewardSettled
+      - earnedRewardRejected
+      - validTransaction
+      - failedTransaction
+      - clawback
+      - auditUpdate
+      - fileProcessingResult
+      - pushNotificationPlacementFile
+      - emailNotificationPlacementFile
+      title: NotificationType
+    type_notifications_subscriptions_UpdateSubscriptionRequestAttributes:
+      type: object
+      properties:
+        eventName:
+          $ref: '#/components/schemas/type_commons_NotificationType'
+          description: The name of the event for the subscription
+        webhookUrl:
+          type: string
+          description: The URL where notifications will be delivered
+        enabled:
+          type: boolean
+          description: Indicates whether the subscription is active
+      title: UpdateSubscriptionRequestAttributes
+    type_commons_SubscriptionId:
+      type: string
+      description: The ID of the subscription
+      title: SubscriptionId
+    type_notifications_subscriptions_UpdateSubscriptionRequestBody:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_notifications_subscriptions_UpdateSubscriptionRequestUnion'
+      required:
+      - data
+      title: UpdateSubscriptionRequestBody
+    type_notifications_subscriptions_UpdateSubscriptionsResponseObject:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_notifications_subscriptions_CreateSubscriptionUnion'
+      required:
+      - data
+      title: UpdateSubscriptionsResponseObject
+    type_notifications_subscriptions_CreateSubscriptionsResponseObject:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_notifications_subscriptions_CreateSubscriptionUnion'
+      required:
+      - data
+      title: CreateSubscriptionsResponseObject
+    type_commons_ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_ErrorObject'
+      required:
+      - errors
+      title: ErrorResponse
+    type_commons_OrganizationId:
+      type: string
+      description: Your issuer organization ID, provided by Kard
+      title: OrganizationId
     type_commons_ErrorObject:
       type: object
       properties:
@@ -217,72 +404,6 @@ components:
       - title
       - detail
       title: ErrorObject
-    type_notifications_subscriptions_UpdateSubscriptionRequestUnion:
-      oneOf:
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - subscription
-            description: 'Discriminator value: subscription'
-          attributes:
-            $ref: '#/components/schemas/type_notifications_subscriptions_UpdateSubscriptionRequestAttributes'
-        required:
-        - type
-        - attributes
-      discriminator:
-        propertyName: type
-      title: UpdateSubscriptionRequestUnion
-    type_commons_SubscriptionId:
-      type: string
-      description: The ID of the subscription
-      title: SubscriptionId
-    type_notifications_subscriptions_SubscriptionUnion:
-      oneOf:
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - subscription
-            description: 'Discriminator value: subscription'
-          id:
-            type: string
-            description: The ID of the subscription
-          attributes:
-            $ref: '#/components/schemas/type_notifications_subscriptions_SubscriptionAttributes'
-        required:
-        - type
-        - id
-        - attributes
-      discriminator:
-        propertyName: type
-      title: SubscriptionUnion
-    type_commons_NotificationType:
-      type: string
-      enum:
-      - earnedRewardApproved
-      - earnedRewardSettled
-      - earnedRewardRejected
-      - validTransaction
-      - failedTransaction
-      - clawback
-      - auditUpdate
-      - fileProcessingResult
-      - pushNotificationPlacementFile
-      - emailNotificationPlacementFile
-      title: NotificationType
-    type_notifications_subscriptions_SubscriptionRequestBody:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_notifications_subscriptions_SubscriptionRequestUnion'
-      required:
-      - data
-      title: SubscriptionRequestBody
     type_notifications_subscriptions_SubscriptionAttributes:
       type: object
       properties:
@@ -300,127 +421,6 @@ components:
       - webhookUrl
       - enabled
       title: SubscriptionAttributes
-    type_notifications_subscriptions_UpdateSubscriptionRequestBody:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_notifications_subscriptions_UpdateSubscriptionRequestUnion'
-      required:
-      - data
-      title: UpdateSubscriptionRequestBody
-    type_commons_ErrorSource:
-      type: object
-      properties:
-        pointer:
-          type: string
-          description: A JSON pointer to the value in the request document that caused the error
-        parameter:
-          type: string
-          description: A string indicating which URI query parameter caused the error
-        header:
-          type: string
-          description: A string indicating the name of a single request header which caused the error
-      title: ErrorSource
-    type_notifications_subscriptions_CreateSubscriptionsResponseObject:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_notifications_subscriptions_CreateSubscriptionUnion'
-      required:
-      - data
-      title: CreateSubscriptionsResponseObject
-    type_notifications_subscriptions_CreateSubscriptionUnion:
-      oneOf:
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - subscription
-            description: 'Discriminator value: subscription'
-          attributes:
-            $ref: '#/components/schemas/type_notifications_subscriptions_SubscriptionRequestAttributes'
-          id:
-            type: string
-            description: The ID of the subscription
-        required:
-        - type
-        - attributes
-        - id
-      discriminator:
-        propertyName: type
-      title: CreateSubscriptionUnion
-    type_commons_ErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_ErrorObject'
-      required:
-      - errors
-      title: ErrorResponse
-    type_notifications_subscriptions_UpdateSubscriptionRequestAttributes:
-      type: object
-      properties:
-        eventName:
-          $ref: '#/components/schemas/type_commons_NotificationType'
-          description: The name of the event for the subscription
-        webhookUrl:
-          type: string
-          description: The URL where notifications will be delivered
-        enabled:
-          type: boolean
-          description: Indicates whether the subscription is active
-      title: UpdateSubscriptionRequestAttributes
-    type_notifications_subscriptions_SubscriptionRequestUnion:
-      oneOf:
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - subscription
-            description: 'Discriminator value: subscription'
-          attributes:
-            $ref: '#/components/schemas/type_notifications_subscriptions_SubscriptionRequestAttributes'
-        required:
-        - type
-        - attributes
-      discriminator:
-        propertyName: type
-      title: SubscriptionRequestUnion
-    type_notifications_subscriptions_UpdateSubscriptionsResponseObject:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_notifications_subscriptions_CreateSubscriptionUnion'
-      required:
-      - data
-      title: UpdateSubscriptionsResponseObject
-    type_commons_OrganizationId:
-      type: string
-      description: Your issuer organization ID, provided by Kard
-      title: OrganizationId
-    type_notifications_subscriptions_SubscriptionRequestAttributes:
-      type: object
-      properties:
-        eventName:
-          $ref: '#/components/schemas/type_commons_NotificationType'
-          description: The name of the event for the subscription
-        webhookUrl:
-          type: string
-          description: The URL where notifications will be delivered
-        enabled:
-          type: boolean
-          description: Indicates whether the subscription is active
-      required:
-      - eventName
-      - webhookUrl
-      - enabled
-      title: SubscriptionRequestAttributes
   securitySchemes:
     OAuthScheme:
       type: http

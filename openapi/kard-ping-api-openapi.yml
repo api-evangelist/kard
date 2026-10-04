@@ -32,6 +32,16 @@ paths:
                 $ref: '#/components/schemas/type_ping_NetworkBlockedErrorBody'
 components:
   schemas:
+    type_ping_NetworkBlockedErrorBody:
+      type: object
+      properties:
+        message:
+          type: string
+          description: A message indicating that the network is blocked.
+      required:
+      - message
+      description: Error response indicating that the network is blocked.
+      title: NetworkBlockedErrorBody
     type_ping_PingResponseObject:
       type: object
       properties:
@@ -50,16 +60,6 @@ components:
       - timestamp
       description: Response indicating the status of the ping.
       title: PingResponseObject
-    type_ping_NetworkBlockedErrorBody:
-      type: object
-      properties:
-        message:
-          type: string
-          description: A message indicating that the network is blocked.
-      required:
-      - message
-      description: Error response indicating that the network is blocked.
-      title: NetworkBlockedErrorBody
   securitySchemes:
     OAuthScheme:
       type: http

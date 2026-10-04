@@ -512,76 +512,54 @@ paths:
       description: Sandbox
 components:
   schemas:
-    type_commons_ErrorObject:
-      type: object
-      properties:
-        status:
-          type: string
-          description: Status code returned from the request
-        title:
-          type: string
-          description: Name of error
-        detail:
-          type: string
-          description: Description of the specific occurance of the error
-        source:
-          $ref: '#/components/schemas/type_commons_ErrorSource'
-          description: An object containing a reference to the primary source of the error
-        id:
-          type: string
-          description: The id of the resource which caused the error. Always returned for multi-status errors.
-      required:
-      - status
-      - title
-      - detail
-      title: ErrorObject
-    type_users_UserResponseObject:
+    type_users_UpdateUserRequestDataUnion:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - user
+            description: 'Discriminator value: user'
+          id:
+            $ref: '#/components/schemas/type_commons_UserId'
+          attributes:
+            $ref: '#/components/schemas/type_users_UpdateUserRequestAttributes'
+        required:
+        - type
+        - id
+        - attributes
+      discriminator:
+        propertyName: type
+      title: UpdateUserRequestDataUnion
+    type_users_DeleteUserResponseObject:
       type: object
       properties:
         data:
-          $ref: '#/components/schemas/type_users_UserRequestDataUnion'
+          $ref: '#/components/schemas/type_users_UserResponseUnionNoData'
       required:
       - data
-      title: UserResponseObject
-    type_users_CreateUsersObject:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_users_UserRequestDataUnion'
-      required:
-      - data
-      title: CreateUsersObject
-    type_users_UserRequestAttributes:
-      type: object
-      properties:
-        enrolledRewards:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_EnrolledRewardsType'
-          description: Rewards programs to enroll the user in. If an empty array is supplied, the user will not be enrolled in any programs.
-        zipCode:
-          type: string
-          description: Zipcode of user
-        email:
-          type: string
-          description: Email address of user
-        hashedEmail:
-          type: string
-          description: Hashed email address of user (using SHA-256)
-        phoneNumber:
-          type: string
-          description: Phone number of user in E.164 format
-        birthYear:
-          type: string
-          description: Birth year of user
-        historicalTransactionsSent:
-          type: boolean
-          description: Indicates whether historical transactions have been sent for this user
-      required:
-      - enrolledRewards
-      title: UserRequestAttributes
+      title: DeleteUserResponseObject
+    type_users_UserResponseUnionNoData:
+      oneOf:
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - user
+            description: 'Discriminator value: user'
+          id:
+            $ref: '#/components/schemas/type_commons_UserId'
+          attributes:
+            $ref: '#/components/schemas/type_commons_EmptyObject'
+        required:
+        - type
+        - id
+        - attributes
+      discriminator:
+        propertyName: type
+      title: UserResponseUnionNoData
     type_users_CreateUsersMultiStatusResponse:
       type: object
       properties:
@@ -604,54 +582,6 @@ components:
       required:
       - data
       title: UpdateUserObject
-    type_users_UserResponseUnionNoData:
-      oneOf:
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - user
-            description: 'Discriminator value: user'
-          id:
-            $ref: '#/components/schemas/type_commons_UserId'
-          attributes:
-            $ref: '#/components/schemas/type_commons_EmptyObject'
-        required:
-        - type
-        - id
-        - attributes
-      discriminator:
-        propertyName: type
-      title: UserResponseUnionNoData
-    type_users_DeleteUserResponseObject:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_users_UserResponseUnionNoData'
-      required:
-      - data
-      title: DeleteUserResponseObject
-    type_users_UpdateUserRequestDataUnion:
-      oneOf:
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - user
-            description: 'Discriminator value: user'
-          id:
-            $ref: '#/components/schemas/type_commons_UserId'
-          attributes:
-            $ref: '#/components/schemas/type_users_UpdateUserRequestAttributes'
-        required:
-        - type
-        - id
-        - attributes
-      discriminator:
-        propertyName: type
-      title: UpdateUserRequestDataUnion
     type_users_UpdateUserRequestAttributes:
       type: object
       properties:
@@ -694,6 +624,34 @@ components:
           type: string
           description: A string indicating the name of a single request header which caused the error
       title: ErrorSource
+    type_commons_EnrolledRewardsType:
+      type: string
+      enum:
+      - CARDLINKED
+      description: Enrolled Rewards
+      title: EnrolledRewardsType
+    type_commons_OrganizationId:
+      type: string
+      description: Your issuer organization ID, provided by Kard
+      title: OrganizationId
+    type_commons_UserId:
+      type: string
+      description: The ID of the user as defined on the issuers system
+      title: UserId
+    type_commons_EmptyObject:
+      type: object
+      properties: {}
+      title: EmptyObject
+    type_users_CreateUsersObject:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_users_UserRequestDataUnion'
+      required:
+      - data
+      title: CreateUsersObject
     type_commons_ErrorResponse:
       type: object
       properties:
@@ -704,10 +662,37 @@ components:
       required:
       - errors
       title: ErrorResponse
-    type_commons_EmptyObject:
+    type_users_UserResponseObject:
       type: object
-      properties: {}
-      title: EmptyObject
+      properties:
+        data:
+          $ref: '#/components/schemas/type_users_UserRequestDataUnion'
+      required:
+      - data
+      title: UserResponseObject
+    type_commons_ErrorObject:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Status code returned from the request
+        title:
+          type: string
+          description: Name of error
+        detail:
+          type: string
+          description: Description of the specific occurance of the error
+        source:
+          $ref: '#/components/schemas/type_commons_ErrorSource'
+          description: An object containing a reference to the primary source of the error
+        id:
+          type: string
+          description: The id of the resource which caused the error. Always returned for multi-status errors.
+      required:
+      - status
+      - title
+      - detail
+      title: ErrorObject
     type_users_UserRequestDataUnion:
       oneOf:
       - type: object
@@ -728,20 +713,35 @@ components:
       discriminator:
         propertyName: type
       title: UserRequestDataUnion
-    type_commons_EnrolledRewardsType:
-      type: string
-      enum:
-      - CARDLINKED
-      description: Enrolled Rewards
-      title: EnrolledRewardsType
-    type_commons_UserId:
-      type: string
-      description: The ID of the user as defined on the issuers system
-      title: UserId
-    type_commons_OrganizationId:
-      type: string
-      description: Your issuer organization ID, provided by Kard
-      title: OrganizationId
+    type_users_UserRequestAttributes:
+      type: object
+      properties:
+        enrolledRewards:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_EnrolledRewardsType'
+          description: Rewards programs to enroll the user in. If an empty array is supplied, the user will not be enrolled in any programs.
+        zipCode:
+          type: string
+          description: Zipcode of user
+        email:
+          type: string
+          description: Email address of user
+        hashedEmail:
+          type: string
+          description: Hashed email address of user (using SHA-256)
+        phoneNumber:
+          type: string
+          description: Phone number of user in E.164 format
+        birthYear:
+          type: string
+          description: Birth year of user
+        historicalTransactionsSent:
+          type: boolean
+          description: Indicates whether historical transactions have been sent for this user
+      required:
+      - enrolledRewards
+      title: UserRequestAttributes
     type_users_CardInfoRequest:
       type: object
       properties:
@@ -772,11 +772,83 @@ components:
       - issuer
       - network
       title: CardInfoRequest
-    type_commons_InvalidRequestUnion:
-      oneOf:
-      - $ref: '#/components/schemas/type_commons_RequestValidationErrorResponse'
-      - type: string
-      title: InvalidRequestUnion
+    type_commons_Network:
+      type: string
+      enum:
+      - VISA
+      - MASTERCARD
+      - AMERICAN EXPRESS
+      - DISCOVER
+      title: Network
+    type_users_CreateUserRequestBody:
+      type: object
+      properties:
+        email:
+          type: string
+          description: Email of user; <b>AT LEAST one of email or userName is REQUIRED. We HIGHLY RECOMMEND sending both.</b>
+        hashedEmail:
+          type: string
+          description: Hashed email address of user (using SHA-256)
+        phoneNumber:
+          type: string
+          description: Phone number of user in E.164 format
+        birthYear:
+          type: string
+          description: Birth year of user
+        userName:
+          type: string
+          description: Username of user from issuer; <b>AT LEAST one of email or userName is REQUIRED. We HIGHLY RECOMMEND sending both.</b>
+        firstName:
+          type: string
+          description: First name of user. <b>We HIGHLY RECOMMEND sending this field.</b>
+        lastName:
+          type: string
+          description: Last name of user. <b>We HIGHLY RECOMMEND sending this field.</b>
+        zipCode:
+          type: string
+          description: Zipcode of user. <b>We HIGHLY RECOMMEND sending this field as it may be required in the near future.</b>
+        referringPartnerUserId:
+          type: string
+          description: Referring partner user ID of user from issuer. Must be a unique identifier across users
+        externalPartnerUserId:
+          type: string
+          description: Partner unique user id, might be equal to referringPartnerUserId
+        enrolledRewards:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_EnrolledRewardsType_2'
+          description: If field is not supplied, user will be automatically enrolled in all programs. Note, <b>please do not send AFFILIATE</b> as this field has been deprecated.
+        cards:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_users_CardInfoRequest'
+          description: List of User Cards Information. <b>This is REQUIRED for matching purposes.</b>
+        cardInfo:
+          $ref: '#/components/schemas/type_users_CardInfoRequest'
+          description: <b>[Deprecated — please use 'cards' field]</b> User Card Information
+        referringPartner:
+          type: string
+          description: Issuer name
+      required:
+      - referringPartnerUserId
+      title: CreateUserRequestBody
+    type_users_CreateUserCardRequestBody:
+      type: object
+      properties:
+        referringPartnerUserId:
+          type: string
+          description: Referring partner user ID from issuer
+        cards:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_users_CardInfoRequest'
+          description: List of User Cards Information to add
+        cardInfo:
+          $ref: '#/components/schemas/type_users_CardInfoRequest'
+          description: <b>[Deprecated -- please use "cards" field]</b> User Card Information
+      required:
+      - referringPartnerUserId
+      title: CreateUserCardRequestBody
     type_users_UpdateUserResponse:
       type: object
       properties:
@@ -828,6 +900,29 @@ components:
       required:
       - message
       title: UnauthorizedErrorBody
+    type_commons_RequestValidationErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: string
+      required:
+      - errors
+      title: RequestValidationErrorResponse
+    type_commons_EnrolledRewardsType_2:
+      type: string
+      enum:
+      - CARDLINKED
+      - AFFILIATE
+      description: Enrolled Rewards
+      title: EnrolledRewardsType
+    type_users_CardStatus:
+      type: string
+      enum:
+      - ENABLED
+      - DISABLED
+      title: CardStatus
     type_users_CreateUserCardResponse:
       type: object
       properties:
@@ -901,81 +996,6 @@ components:
       type: string
       description: The unique identifier for a document in the database
       title: MongoId
-    type_commons_EnrolledRewardsType_2:
-      type: string
-      enum:
-      - CARDLINKED
-      - AFFILIATE
-      description: Enrolled Rewards
-      title: EnrolledRewardsType
-    type_users_CreateUserRequestBody:
-      type: object
-      properties:
-        email:
-          type: string
-          description: Email of user; <b>AT LEAST one of email or userName is REQUIRED. We HIGHLY RECOMMEND sending both.</b>
-        hashedEmail:
-          type: string
-          description: Hashed email address of user (using SHA-256)
-        phoneNumber:
-          type: string
-          description: Phone number of user in E.164 format
-        birthYear:
-          type: string
-          description: Birth year of user
-        userName:
-          type: string
-          description: Username of user from issuer; <b>AT LEAST one of email or userName is REQUIRED. We HIGHLY RECOMMEND sending both.</b>
-        firstName:
-          type: string
-          description: First name of user. <b>We HIGHLY RECOMMEND sending this field.</b>
-        lastName:
-          type: string
-          description: Last name of user. <b>We HIGHLY RECOMMEND sending this field.</b>
-        zipCode:
-          type: string
-          description: Zipcode of user. <b>We HIGHLY RECOMMEND sending this field as it may be required in the near future.</b>
-        referringPartnerUserId:
-          type: string
-          description: Referring partner user ID of user from issuer. Must be a unique identifier across users
-        externalPartnerUserId:
-          type: string
-          description: Partner unique user id, might be equal to referringPartnerUserId
-        enrolledRewards:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_EnrolledRewardsType_2'
-          description: If field is not supplied, user will be automatically enrolled in all programs. Note, <b>please do not send AFFILIATE</b> as this field has been deprecated.
-        cards:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_users_CardInfoRequest'
-          description: List of User Cards Information. <b>This is REQUIRED for matching purposes.</b>
-        cardInfo:
-          $ref: '#/components/schemas/type_users_CardInfoRequest'
-          description: <b>[Deprecated — please use 'cards' field]</b> User Card Information
-        referringPartner:
-          type: string
-          description: Issuer name
-      required:
-      - referringPartnerUserId
-      title: CreateUserRequestBody
-    type_commons_RequestValidationErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            type: string
-      required:
-      - errors
-      title: RequestValidationErrorResponse
-    type_users_CardStatus:
-      type: string
-      enum:
-      - ENABLED
-      - DISABLED
-      title: CardStatus
     type_users_UserRequestBody:
       type: object
       properties:
@@ -1017,31 +1037,6 @@ components:
       required:
       - referringPartnerUserId
       title: UserRequestBody
-    type_commons_Network:
-      type: string
-      enum:
-      - VISA
-      - MASTERCARD
-      - AMERICAN EXPRESS
-      - DISCOVER
-      title: Network
-    type_users_CreateUserCardRequestBody:
-      type: object
-      properties:
-        referringPartnerUserId:
-          type: string
-          description: Referring partner user ID from issuer
-        cards:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_users_CardInfoRequest'
-          description: List of User Cards Information to add
-        cardInfo:
-          $ref: '#/components/schemas/type_users_CardInfoRequest'
-          description: <b>[Deprecated -- please use "cards" field]</b> User Card Information
-      required:
-      - referringPartnerUserId
-      title: CreateUserCardRequestBody
     type_users_CardInfoResponse:
       type: object
       properties:
@@ -1078,6 +1073,11 @@ components:
       - status
       description: Credit Card Information
       title: CardInfoResponse
+    type_commons_InvalidRequestUnion:
+      oneOf:
+      - $ref: '#/components/schemas/type_commons_RequestValidationErrorResponse'
+      - type: string
+      title: InvalidRequestUnion
   securitySchemes:
     OAuthScheme:
       type: http

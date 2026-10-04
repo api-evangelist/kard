@@ -318,6 +318,69 @@ paths:
                 $ref: '#/components/schemas/type_commons_ErrorResponse'
 components:
   schemas:
+    type_organizations_children_CreateChildAttributes:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the child organization (at least one letter; letters and spaces only)
+        externalId:
+          type: string
+          description: External identifier for the child organization
+        bins:
+          type: array
+          items:
+            type: string
+          description: Bank Identification Numbers for the child organization
+      required:
+      - name
+      description: Attributes for creating a child organization. Only name is required. All other fields are optional and default to the parent organization's values.
+      title: CreateChildAttributes
+    type_commons_ErrorSource:
+      type: object
+      properties:
+        pointer:
+          type: string
+          description: A JSON pointer to the value in the request document that caused the error
+        parameter:
+          type: string
+          description: A string indicating which URI query parameter caused the error
+        header:
+          type: string
+          description: A string indicating the name of a single request header which caused the error
+      title: ErrorSource
+    type_organizations_children_CreateChildRequestData:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - organization
+          description: Resource type identifier
+        attributes:
+          $ref: '#/components/schemas/type_organizations_children_CreateChildAttributes'
+          description: Child organization attributes for creation
+      required:
+      - type
+      - attributes
+      description: Child organization data structure for creation
+      title: CreateChildRequestData
+    type_organizations_children_UpdateChildRequestData:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - organization
+          description: Resource type identifier
+        attributes:
+          $ref: '#/components/schemas/type_organizations_children_UpdateChildAttributes'
+          description: Child organization attributes for update
+      required:
+      - type
+      - attributes
+      description: Child organization data structure for update
+      title: UpdateChildRequestData
     type_internal-organizations_DeleteResourceResponse:
       type: object
       properties:
@@ -327,6 +390,66 @@ components:
       - data
       description: Response returned after deleting a resource
       title: DeleteResourceResponse
+    type_organizations_children_UpdateChildRequestBody:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_organizations_children_UpdateChildRequestData'
+          description: Child organization data for update
+      required:
+      - data
+      description: Request body for updating a child organization
+      title: UpdateChildRequestBody
+    type_organizations_children_CreateChildRequestBody:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_organizations_children_CreateChildRequestData'
+          description: Child organization data for creation
+      required:
+      - data
+      description: Request body for creating a child organization
+      title: CreateChildRequestBody
+    type_commons_EmptyObject:
+      type: object
+      properties: {}
+      title: EmptyObject
+    type_internal-organizations_DeleteResourceData:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Resource type identifier
+        id:
+          type: string
+          description: ID of the deleted resource
+        attributes:
+          $ref: '#/components/schemas/type_commons_EmptyObject'
+      required:
+      - type
+      - id
+      - attributes
+      description: Deleted resource stub
+      title: DeleteResourceData
+    type_organizations_children_ChildOrganizationAttributes:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the child organization (at least one letter; letters and spaces only)
+        externalId:
+          type: string
+          description: External identifier for the child organization
+        bins:
+          type: array
+          items:
+            type: string
+          description: Bank Identification Numbers for the child organization
+      required:
+      - name
+      - bins
+      description: Limited set of child organization attributes exposed to external consumers
+      title: ChildOrganizationAttributes
     type_organizations_children_ChildOrganizationListResponse:
       type: object
       properties:
@@ -344,6 +467,47 @@ components:
       - data
       description: Paginated list of child organizations
       title: ChildOrganizationListResponse
+    type_commons_ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_ErrorObject'
+      required:
+      - errors
+      title: ErrorResponse
+    type_organizations_children_ChildOrganizationResponse:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - organization
+        id:
+          type: string
+          description: Unique identifier of the child organization
+        attributes:
+          $ref: '#/components/schemas/type_organizations_children_ChildOrganizationAttributes'
+      required:
+      - type
+      - id
+      - attributes
+      description: Child organization resource response
+      title: ChildOrganizationResponse
+    type_commons_Links:
+      type: object
+      properties:
+        self:
+          type: string
+        prev:
+          type: string
+        next:
+          type: string
+      required:
+      - self
+      description: Related links to the API call
+      title: Links
     type_commons_ErrorObject:
       type: object
       properties:
@@ -367,19 +531,20 @@ components:
       - title
       - detail
       title: ErrorObject
-    type_commons_Links:
+    type_internal-organizations_OrganizationPaginationMetadata:
       type: object
       properties:
-        self:
-          type: string
-        prev:
-          type: string
-        next:
-          type: string
+        pageSize:
+          type: integer
+          description: Number of items per page
+        hasNextPage:
+          type: boolean
+          description: Whether more pages are available
       required:
-      - self
-      description: Related links to the API call
-      title: Links
+      - pageSize
+      - hasNextPage
+      description: Pagination metadata for organization list responses
+      title: OrganizationPaginationMetadata
     type_organizations_children_UpdateChildAttributes:
       type: object
       properties:
@@ -396,171 +561,6 @@ components:
           description: Bank Identification Numbers for the child organization
       description: Attributes for updating a child organization. All fields are optional; only provided fields are changed.
       title: UpdateChildAttributes
-    type_organizations_children_ChildOrganizationResponse:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - organization
-        id:
-          type: string
-          description: Unique identifier of the child organization
-        attributes:
-          $ref: '#/components/schemas/type_organizations_children_ChildOrganizationAttributes'
-      required:
-      - type
-      - id
-      - attributes
-      description: Child organization resource response
-      title: ChildOrganizationResponse
-    type_commons_EmptyObject:
-      type: object
-      properties: {}
-      title: EmptyObject
-    type_commons_ErrorSource:
-      type: object
-      properties:
-        pointer:
-          type: string
-          description: A JSON pointer to the value in the request document that caused the error
-        parameter:
-          type: string
-          description: A string indicating which URI query parameter caused the error
-        header:
-          type: string
-          description: A string indicating the name of a single request header which caused the error
-      title: ErrorSource
-    type_commons_ErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_ErrorObject'
-      required:
-      - errors
-      title: ErrorResponse
-    type_organizations_children_ChildOrganizationAttributes:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the child organization (at least one letter; letters and spaces only)
-        externalId:
-          type: string
-          description: External identifier for the child organization
-        bins:
-          type: array
-          items:
-            type: string
-          description: Bank Identification Numbers for the child organization
-      required:
-      - name
-      - bins
-      description: Limited set of child organization attributes exposed to external consumers
-      title: ChildOrganizationAttributes
-    type_organizations_children_UpdateChildRequestData:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - organization
-          description: Resource type identifier
-        attributes:
-          $ref: '#/components/schemas/type_organizations_children_UpdateChildAttributes'
-          description: Child organization attributes for update
-      required:
-      - type
-      - attributes
-      description: Child organization data structure for update
-      title: UpdateChildRequestData
-    type_organizations_children_CreateChildAttributes:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the child organization (at least one letter; letters and spaces only)
-        externalId:
-          type: string
-          description: External identifier for the child organization
-        bins:
-          type: array
-          items:
-            type: string
-          description: Bank Identification Numbers for the child organization
-      required:
-      - name
-      description: Attributes for creating a child organization. Only name is required. All other fields are optional and default to the parent organization's values.
-      title: CreateChildAttributes
-    type_internal-organizations_DeleteResourceData:
-      type: object
-      properties:
-        type:
-          type: string
-          description: Resource type identifier
-        id:
-          type: string
-          description: ID of the deleted resource
-        attributes:
-          $ref: '#/components/schemas/type_commons_EmptyObject'
-      required:
-      - type
-      - id
-      - attributes
-      description: Deleted resource stub
-      title: DeleteResourceData
-    type_organizations_children_CreateChildRequestBody:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_organizations_children_CreateChildRequestData'
-          description: Child organization data for creation
-      required:
-      - data
-      description: Request body for creating a child organization
-      title: CreateChildRequestBody
-    type_organizations_children_CreateChildRequestData:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - organization
-          description: Resource type identifier
-        attributes:
-          $ref: '#/components/schemas/type_organizations_children_CreateChildAttributes'
-          description: Child organization attributes for creation
-      required:
-      - type
-      - attributes
-      description: Child organization data structure for creation
-      title: CreateChildRequestData
-    type_internal-organizations_OrganizationPaginationMetadata:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-          description: Number of items per page
-        hasNextPage:
-          type: boolean
-          description: Whether more pages are available
-      required:
-      - pageSize
-      - hasNextPage
-      description: Pagination metadata for organization list responses
-      title: OrganizationPaginationMetadata
-    type_organizations_children_UpdateChildRequestBody:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_organizations_children_UpdateChildRequestData'
-          description: Child organization data for update
-      required:
-      - data
-      description: Request body for updating a child organization
-      title: UpdateChildRequestBody
   securitySchemes:
     OAuthScheme:
       type: http
