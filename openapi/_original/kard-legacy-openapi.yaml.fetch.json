@@ -1,0 +1,12 @@
+{
+ "url": "https://docs.getkard.com/openapi/api-reference-2.yaml",
+ "requested_url": "https://docs.getkard.com/openapi/api-reference-2.yaml",
+ "status": 200,
+ "content_type": "application/x-yaml; charset=utf-8",
+ "bytes": 121722,
+ "sha256": "e4b6b0e585c88c87993734217c8535306b1f6824802c9cba720ccc21bce5fa2e",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 0.9), but the bytes differ, so the archive is an earlier or reformatted copy."
+}
