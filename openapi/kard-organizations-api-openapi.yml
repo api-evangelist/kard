@@ -57,6 +57,36 @@ paths:
                 $ref: '#/components/schemas/type_commons_ErrorResponse'
 components:
   schemas:
+    type_internal-organizations_EnrolledReward:
+      type: string
+      enum:
+      - CARDLINKED
+      - AFFILIATE
+      description: Rewards programs an organization is enrolled in
+      title: EnrolledReward
+    type_commons_ErrorObject:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Status code returned from the request
+        title:
+          type: string
+          description: Name of error
+        detail:
+          type: string
+          description: Description of the specific occurance of the error
+        source:
+          $ref: '#/components/schemas/type_commons_ErrorSource'
+          description: An object containing a reference to the primary source of the error
+        id:
+          type: string
+          description: The id of the resource which caused the error. Always returned for multi-status errors.
+      required:
+      - status
+      - title
+      - detail
+      title: ErrorObject
     type_organizations_ExternalOrganizationResponse:
       type: object
       properties:
@@ -75,19 +105,6 @@ components:
       - attributes
       description: External organization resource response
       title: ExternalOrganizationResponse
-    type_commons_ErrorSource:
-      type: object
-      properties:
-        pointer:
-          type: string
-          description: A JSON pointer to the value in the request document that caused the error
-        parameter:
-          type: string
-          description: A string indicating which URI query parameter caused the error
-        header:
-          type: string
-          description: A string indicating the name of a single request header which caused the error
-      title: ErrorSource
     type_commons_CardNetwork:
       type: string
       enum:
@@ -97,23 +114,6 @@ components:
       - DISCOVER
       description: Supported card networks
       title: CardNetwork
-    type_internal-organizations_EnrolledReward:
-      type: string
-      enum:
-      - CARDLINKED
-      - AFFILIATE
-      description: Rewards programs an organization is enrolled in
-      title: EnrolledReward
-    type_commons_ErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_ErrorObject'
-      required:
-      - errors
-      title: ErrorResponse
     type_organizations_ExternalOrganizationAttributes:
       type: object
       properties:
@@ -157,29 +157,29 @@ components:
       - cardlinkedUserCommissionSplit
       description: Limited set of organization attributes exposed to external consumers
       title: ExternalOrganizationAttributes
-    type_commons_ErrorObject:
+    type_commons_ErrorResponse:
       type: object
       properties:
-        status:
-          type: string
-          description: Status code returned from the request
-        title:
-          type: string
-          description: Name of error
-        detail:
-          type: string
-          description: Description of the specific occurance of the error
-        source:
-          $ref: '#/components/schemas/type_commons_ErrorSource'
-          description: An object containing a reference to the primary source of the error
-        id:
-          type: string
-          description: The id of the resource which caused the error. Always returned for multi-status errors.
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_ErrorObject'
       required:
-      - status
-      - title
-      - detail
-      title: ErrorObject
+      - errors
+      title: ErrorResponse
+    type_commons_ErrorSource:
+      type: object
+      properties:
+        pointer:
+          type: string
+          description: A JSON pointer to the value in the request document that caused the error
+        parameter:
+          type: string
+          description: A string indicating which URI query parameter caused the error
+        header:
+          type: string
+          description: A string indicating the name of a single request header which caused the error
+      title: ErrorSource
   securitySchemes:
     OAuthScheme:
       type: http

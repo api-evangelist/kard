@@ -348,62 +348,6 @@ paths:
                 $ref: '#/components/schemas/type_commons_ErrorResponse'
 components:
   schemas:
-    type_commons_CategoryOption:
-      type: string
-      enum:
-      - Arts & Entertainment
-      - Baby, Kids & Toys
-      - Books & Digital Media
-      - Clothing, Shoes & Accessories
-      - Computers, Electronics & Software
-      - Convenience
-      - Gas
-      - Department Stores
-      - Food & Beverage
-      - Health & Beauty
-      - Home & Garden
-      - Miscellaneous
-      - Occasions & Gifts
-      - Pets
-      - Sports & Outdoors
-      - Supplies & Services
-      - Travel
-      description: Category of merchant. Please use URL Encode for non single word categories. (Food & Beverage should be Food%20%26%20Beverage)
-      title: CategoryOption
-    type_commons_ErrorSource:
-      type: object
-      properties:
-        pointer:
-          type: string
-          description: A JSON pointer to the value in the request document that caused the error
-        parameter:
-          type: string
-          description: A string indicating which URI query parameter caused the error
-        header:
-          type: string
-          description: A string indicating the name of a single request header which caused the error
-      title: ErrorSource
-    type_commons_EmptyObject:
-      type: object
-      properties: {}
-      title: EmptyObject
-    type_internal-organizations_DeleteResourceData:
-      type: object
-      properties:
-        type:
-          type: string
-          description: Resource type identifier
-        id:
-          type: string
-          description: ID of the deleted resource
-        attributes:
-          $ref: '#/components/schemas/type_commons_EmptyObject'
-      required:
-      - type
-      - id
-      - attributes
-      description: Deleted resource stub
-      title: DeleteResourceData
     type_organizations_contentStrategies_ContentStrategyResponse:
       type: object
       properties:
@@ -422,60 +366,6 @@ components:
       - attributes
       description: Content strategy resource response
       title: ContentStrategyResponse
-    type_organizations_contentStrategies_OfferFeatures:
-      type: string
-      enum:
-      - INTERACTIVE
-      description: Offer feature applied to the offers selected by a content strategy. A strategy may have any number of offer features.
-      title: OfferFeatures
-    type_commons_Links:
-      type: object
-      properties:
-        self:
-          type: string
-        prev:
-          type: string
-        next:
-          type: string
-      required:
-      - self
-      description: Related links to the API call
-      title: Links
-    type_organizations_contentStrategies_UpdateContentStrategyAttributes:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the content strategy (unique within an organization)
-        sort:
-          $ref: '#/components/schemas/type_organizations_contentStrategies_ContentStrategySort'
-          description: Sort applied when selecting offers for the strategy
-        filters:
-          $ref: '#/components/schemas/type_organizations_contentStrategies_ContentStrategyFilters'
-          description: Filters applied when selecting offers for the strategy
-        categories:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_CategoryOption'
-          description: Merchant categories to include
-        categoryExclusions:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_CategoryOption'
-          description: Merchant categories to exclude
-        merchantExclusions:
-          type: array
-          items:
-            type: string
-          description: Merchant IDs to exclude
-      required:
-      - name
-      - filters
-      - categories
-      - categoryExclusions
-      - merchantExclusions
-      description: Attributes for updating a content strategy. All fields are required.
-      title: UpdateContentStrategyAttributes
     type_organizations_contentStrategies_ContentStrategySort:
       type: string
       enum:
@@ -486,41 +376,6 @@ components:
       - OFFERS_NEAR_YOU
       description: Sort applied to the offers selected by a content strategy. A strategy may have at most one sort. The v1 starter set covers newly-live, expiring-soon, highest-cashback, personalized, and offers-near-you selections.
       title: ContentStrategySort
-    type_commons_ErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_ErrorObject'
-      required:
-      - errors
-      title: ErrorResponse
-    type_organizations_contentStrategies_ContentStrategyFilters:
-      type: object
-      properties:
-        categories:
-          type: array
-          items:
-            type: string
-          description: Merchant categories to include
-        categoryExclusions:
-          type: array
-          items:
-            type: string
-          description: Merchant categories to exclude
-        merchantExclusions:
-          type: array
-          items:
-            type: string
-          description: Merchant IDs to exclude
-        offerFeatures:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_organizations_contentStrategies_OfferFeatures'
-          description: Offer features to filter by
-      description: Filters applied when selecting offers for a content strategy
-      title: ContentStrategyFilters
     type_commons_ErrorObject:
       type: object
       properties:
@@ -544,97 +399,6 @@ components:
       - title
       - detail
       title: ErrorObject
-    type_internal-organizations_OrganizationPaginationMetadata:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-          description: Number of items per page
-        hasNextPage:
-          type: boolean
-          description: Whether more pages are available
-      required:
-      - pageSize
-      - hasNextPage
-      description: Pagination metadata for organization list responses
-      title: OrganizationPaginationMetadata
-    type_organizations_contentStrategies_CreateContentStrategyRequestData:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - contentStrategy
-          description: Resource type identifier
-        attributes:
-          $ref: '#/components/schemas/type_organizations_contentStrategies_CreateContentStrategyAttributes'
-          description: Content strategy attributes for creation
-      required:
-      - type
-      - attributes
-      description: Content strategy data structure for creation
-      title: CreateContentStrategyRequestData
-    type_organizations_contentStrategies_CreateContentStrategyAttributes:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the content strategy (unique within an organization)
-        sort:
-          $ref: '#/components/schemas/type_organizations_contentStrategies_ContentStrategySort'
-          description: Sort applied when selecting offers for the strategy
-        filters:
-          $ref: '#/components/schemas/type_organizations_contentStrategies_ContentStrategyFilters'
-          description: Filters applied when selecting offers for the strategy
-        categories:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_CategoryOption'
-          description: Merchant categories to include
-        categoryExclusions:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_commons_CategoryOption'
-          description: Merchant categories to exclude
-        merchantExclusions:
-          type: array
-          items:
-            type: string
-          description: Merchant IDs to exclude
-      required:
-      - name
-      - filters
-      - categories
-      - categoryExclusions
-      - merchantExclusions
-      description: Attributes for creating a content strategy
-      title: CreateContentStrategyAttributes
-    type_internal-organizations_DeleteResourceResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/type_internal-organizations_DeleteResourceData'
-      required:
-      - data
-      description: Response returned after deleting a resource
-      title: DeleteResourceResponse
-    type_organizations_contentStrategies_ContentStrategyListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/type_organizations_contentStrategies_ContentStrategyResponse'
-          description: Array of content strategy resources
-        links:
-          $ref: '#/components/schemas/type_commons_Links'
-        meta:
-          $ref: '#/components/schemas/type_internal-organizations_OrganizationPaginationMetadata'
-          description: Pagination metadata
-      required:
-      - data
-      description: Paginated list of content strategies
-      title: ContentStrategyListResponse
     type_organizations_contentStrategies_ContentStrategyAttributes:
       type: object
       properties:
@@ -674,16 +438,63 @@ components:
       - merchantExclusions
       description: Attributes for a content strategy
       title: ContentStrategyAttributes
-    type_organizations_contentStrategies_UpdateContentStrategyRequestBody:
+    type_commons_CategoryOption:
+      type: string
+      enum:
+      - Arts & Entertainment
+      - Baby, Kids & Toys
+      - Books & Digital Media
+      - Clothing, Shoes & Accessories
+      - Computers, Electronics & Software
+      - Convenience
+      - Gas
+      - Department Stores
+      - Food & Beverage
+      - Health & Beauty
+      - Home & Garden
+      - Miscellaneous
+      - Occasions & Gifts
+      - Pets
+      - Sports & Outdoors
+      - Supplies & Services
+      - Travel
+      description: Category of merchant. Please use URL Encode for non single word categories. (Food & Beverage should be Food%20%26%20Beverage)
+      title: CategoryOption
+    type_organizations_contentStrategies_UpdateContentStrategyAttributes:
       type: object
       properties:
-        data:
-          $ref: '#/components/schemas/type_organizations_contentStrategies_UpdateContentStrategyRequestData'
-          description: Content strategy data for update
+        name:
+          type: string
+          description: Name of the content strategy (unique within an organization)
+        sort:
+          $ref: '#/components/schemas/type_organizations_contentStrategies_ContentStrategySort'
+          description: Sort applied when selecting offers for the strategy
+        filters:
+          $ref: '#/components/schemas/type_organizations_contentStrategies_ContentStrategyFilters'
+          description: Filters applied when selecting offers for the strategy
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_CategoryOption'
+          description: Merchant categories to include
+        categoryExclusions:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_CategoryOption'
+          description: Merchant categories to exclude
+        merchantExclusions:
+          type: array
+          items:
+            type: string
+          description: Merchant IDs to exclude
       required:
-      - data
-      description: Request body for updating a content strategy
-      title: UpdateContentStrategyRequestBody
+      - name
+      - filters
+      - categories
+      - categoryExclusions
+      - merchantExclusions
+      description: Attributes for updating a content strategy. All fields are required.
+      title: UpdateContentStrategyAttributes
     type_organizations_contentStrategies_UpdateContentStrategyRequestData:
       type: object
       properties:
@@ -700,6 +511,19 @@ components:
       - attributes
       description: Content strategy data structure for update
       title: UpdateContentStrategyRequestData
+    type_commons_Links:
+      type: object
+      properties:
+        self:
+          type: string
+        prev:
+          type: string
+        next:
+          type: string
+      required:
+      - self
+      description: Related links to the API call
+      title: Links
     type_organizations_contentStrategies_CreateContentStrategyRequestBody:
       type: object
       properties:
@@ -710,6 +534,182 @@ components:
       - data
       description: Request body for creating a content strategy
       title: CreateContentStrategyRequestBody
+    type_organizations_contentStrategies_CreateContentStrategyAttributes:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the content strategy (unique within an organization)
+        sort:
+          $ref: '#/components/schemas/type_organizations_contentStrategies_ContentStrategySort'
+          description: Sort applied when selecting offers for the strategy
+        filters:
+          $ref: '#/components/schemas/type_organizations_contentStrategies_ContentStrategyFilters'
+          description: Filters applied when selecting offers for the strategy
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_CategoryOption'
+          description: Merchant categories to include
+        categoryExclusions:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_CategoryOption'
+          description: Merchant categories to exclude
+        merchantExclusions:
+          type: array
+          items:
+            type: string
+          description: Merchant IDs to exclude
+      required:
+      - name
+      - filters
+      - categories
+      - categoryExclusions
+      - merchantExclusions
+      description: Attributes for creating a content strategy
+      title: CreateContentStrategyAttributes
+    type_commons_ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_commons_ErrorObject'
+      required:
+      - errors
+      title: ErrorResponse
+    type_organizations_contentStrategies_ContentStrategyListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_organizations_contentStrategies_ContentStrategyResponse'
+          description: Array of content strategy resources
+        links:
+          $ref: '#/components/schemas/type_commons_Links'
+        meta:
+          $ref: '#/components/schemas/type_internal-organizations_OrganizationPaginationMetadata'
+          description: Pagination metadata
+      required:
+      - data
+      description: Paginated list of content strategies
+      title: ContentStrategyListResponse
+    type_organizations_contentStrategies_ContentStrategyFilters:
+      type: object
+      properties:
+        categories:
+          type: array
+          items:
+            type: string
+          description: Merchant categories to include
+        categoryExclusions:
+          type: array
+          items:
+            type: string
+          description: Merchant categories to exclude
+        merchantExclusions:
+          type: array
+          items:
+            type: string
+          description: Merchant IDs to exclude
+        offerFeatures:
+          type: array
+          items:
+            $ref: '#/components/schemas/type_organizations_contentStrategies_OfferFeatures'
+          description: Offer features to filter by
+      description: Filters applied when selecting offers for a content strategy
+      title: ContentStrategyFilters
+    type_organizations_contentStrategies_CreateContentStrategyRequestData:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - contentStrategy
+          description: Resource type identifier
+        attributes:
+          $ref: '#/components/schemas/type_organizations_contentStrategies_CreateContentStrategyAttributes'
+          description: Content strategy attributes for creation
+      required:
+      - type
+      - attributes
+      description: Content strategy data structure for creation
+      title: CreateContentStrategyRequestData
+    type_commons_EmptyObject:
+      type: object
+      properties: {}
+      title: EmptyObject
+    type_internal-organizations_OrganizationPaginationMetadata:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          description: Number of items per page
+        hasNextPage:
+          type: boolean
+          description: Whether more pages are available
+      required:
+      - pageSize
+      - hasNextPage
+      description: Pagination metadata for organization list responses
+      title: OrganizationPaginationMetadata
+    type_internal-organizations_DeleteResourceData:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Resource type identifier
+        id:
+          type: string
+          description: ID of the deleted resource
+        attributes:
+          $ref: '#/components/schemas/type_commons_EmptyObject'
+      required:
+      - type
+      - id
+      - attributes
+      description: Deleted resource stub
+      title: DeleteResourceData
+    type_organizations_contentStrategies_OfferFeatures:
+      type: string
+      enum:
+      - INTERACTIVE
+      description: Offer feature applied to the offers selected by a content strategy. A strategy may have any number of offer features.
+      title: OfferFeatures
+    type_organizations_contentStrategies_UpdateContentStrategyRequestBody:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_organizations_contentStrategies_UpdateContentStrategyRequestData'
+          description: Content strategy data for update
+      required:
+      - data
+      description: Request body for updating a content strategy
+      title: UpdateContentStrategyRequestBody
+    type_internal-organizations_DeleteResourceResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/type_internal-organizations_DeleteResourceData'
+      required:
+      - data
+      description: Response returned after deleting a resource
+      title: DeleteResourceResponse
+    type_commons_ErrorSource:
+      type: object
+      properties:
+        pointer:
+          type: string
+          description: A JSON pointer to the value in the request document that caused the error
+        parameter:
+          type: string
+          description: A string indicating which URI query parameter caused the error
+        header:
+          type: string
+          description: A string indicating the name of a single request header which caused the error
+      title: ErrorSource
   securitySchemes:
     OAuthScheme:
       type: http
